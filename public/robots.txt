@@ -1,0 +1,25 @@
+Sitemap: https://agustindiazcano.com/sitemap-index.xml
+
+# Group 1: High-Priority Bots (Search Engines)
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: Applebot
+Allow: /
+# Disallow: /admin/  # Uncomment if you ever add a private admin panel
+
+# Group 2: AI Agents (Ensure LLMs can find your professional data)
+# This helps AI answer questions about you correctly
+User-agent: GPTBot
+User-agent: ChatGPT-User
+User-agent: Google-Extended
+User-agent: anthropic-ai
+User-agent: ClaudeBot
+User-agent: PerplexityBot
+Allow: /
+
+# Group 3: Global Default
+User-agent: *
+Allow: /
+
+# Link to your Sitemap (The map you just verified)
+Sitemap: https://agustindiazcano.com/sitemap-index.xml

@@ -1,25 +1,15 @@
 # Agustín Díaz Cano - Quantitative Systems Engineer
 
-## Profile Summary
-Quantitative Systems Engineer and MSc Candidate specializing in Low Latency Systems, Algorithmic Trading Engines, and High-Performance Computing. 
-Experienced in C++, Python, and WebAssembly. Runs ultra-marathons (42k Finisher).
+## Summary
+Agustín Díaz Cano is a Quantitative Systems Engineer and MSc Candidate focused on Low Latency Architecture, Algorithmic Trading (HFT), and Distributed Systems. Experience includes C++, Rust, and managing game server infrastructure with 200k+ users.
 
-## Technical Stack
-- **Languages**: C++, Python, Rust, TypeScript, GLSL
-- **Systems**: Linux (Kernel tuning), Docker, Kubernetes
-- **Finance**: Market Microstructure, Order Book Dynamics, Alpha Generation
-- **Web**: Astro, React, Tailwind CSS, WebGL/WebGPU
+## Full Context
+For a comprehensive analysis of my academic background (financial math, thesis status), detailed tech stack, and specific project "war stories", please refer to the full profile:
 
-## Projects
-1. **Algorithmic Trading Engine**: Low-latency execution, genetic algorithms for strategy optimization. C++ & Python.
-2. **Zombie Mod 5**: Game development project with 200,000+ active users. Complex state management.
-3. **High-Performance Rendering**: Custom C++ game engine ported to WebAssembly.
+**[Full Profile / System Context](/llms-full.txt)**
 
-## Research
-- "Fuzzy Logic in Markets": Analysis of non-binary decision making in HFT.
-- "EV Disruption Analysis": Quantitative modeling of electric vehicle market penetration.
-
-## Contact
-- GitHub: https://github.com/agustindiazcano
-- LinkedIn: https://linkedin.com/in/agustindiazcano
-- ResearchGate: https://researchgate.net/profile/Agustin-Diaz-Cano
+## Quick Links
+- **Portfolio**: https://agustindiazcano.com
+- **GitHub**: https://github.com/agustindiazcano
+- **LinkedIn**: https://linkedin.com/in/agustindiazcano
+- **Writing**: https://agustindiazcano.com/writing
