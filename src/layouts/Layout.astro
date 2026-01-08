@@ -1,0 +1,27 @@
+---
+import '../styles/global.css';
+import '@fontsource/inter';
+import '@fontsource/jetbrains-mono';
+import SEO from '../components/SEO.astro';
+
+interface Props {
+	title: string;
+    description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+        <SEO title={title} description={description} />
+	</head>
+	<body class="bg-background text-foreground antialiased selection:bg-success selection:text-white">
+		<slot />
+	</body>
+</html>

@@ -1,0 +1,93 @@
+---
+export interface Props {
+    title: string;
+    description?: string;
+    image?: string;
+}
+
+const { 
+    title, 
+    description = "Quantitative Systems Engineer & MSc Candidate focused on HFT, C++ Architecture and Distributed Systems.", 
+    image = "/images/agustin-diaz-cano-software-engineer-1.png" 
+} = Astro.props;
+
+// URL Schema
+const siteUrl = Astro.site ? Astro.site.toString() : "https://agustindiazcano.com";
+const imageUrl = new URL(image, siteUrl).toString();
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Agustin Diaz Cano",
+  "url": siteUrl,
+  "image": imageUrl, // ¡Importante para que Google asocie tu cara!
+  "jobTitle": "Quantitative Systems Engineer",
+  "description": description,
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Universidad Tecnológica Nacional"
+  },
+  "knowsAbout": [
+  // CORE ENGINEERING
+      "C++",
+      "Python",
+      "High-Frequency Trading",
+      "Distributed Systems",
+      "Low Latency Architecture",
+
+      // GAME DEV & GRAPHICS
+      "Game Engine Architecture",
+      "Physics Simulation",
+      "Performance Optimization",
+
+      // DATA & AI
+      "Artificial Intelligence",
+      "Genetic Algorithms",
+      "Fuzzy Logic",
+      "Data Mining",
+
+      // QA & RELIABILITY
+      "Test Automation",
+      "SDET",
+      "Digital Forensics",
+      "System Reliability",
+
+      // FINANCIAL DOMAIN
+      "Financial Engineering",
+      "Quantitative Finance",
+      "Corporate Finance",
+      "Algorithmic Trading",
+      "Statistics",
+      "Calculus"
+  ],
+  "sameAs": [
+    "https://github.com/agustindiazcano",
+    "https://linkedin.com/in/agustindiazcano",
+    "https://orcid.org/0009-0001-4336-490X",
+    "https://www.moddb.com/members/heroagastin",
+    "https://x.com/adiazcano_",
+    "https://steamcommunity.com/id/agustindiazcano/",
+    "https://www.strava.com/athletes/186219723",
+    "https://www.labolsavirtual.com/marcelogallardiola",
+    "https://www.researchgate.net/profile/Agustin-Diaz-Cano"
+  ]
+};
+---
+
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<link rel="canonical" href={new URL(Astro.url.pathname, siteUrl)} />
+
+<meta property="og:type" content="profile" /> <meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={imageUrl} />
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={imageUrl} />
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />

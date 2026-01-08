@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+import ProjectGrid from '../components/ProjectGrid.jsx';
+
+// Reusing the same grid for now, but in full page context
+---
+
+<Layout title="Projects | Agustín Díaz Cano">
+  <main class="min-h-screen max-w-[1200px] mx-auto px-6 py-20">
+    <header class="mb-20">
+        <a href="/" class="text-[#666] hover:text-white transition-colors text-sm mb-8 block">← Back to Home</a>
+        <h1 class="text-4xl font-bold tracking-tight text-white mb-4">Projects</h1>
+        <p class="text-[#888]">Engineering portfolio: High-frequency trading, game development, and distributed systems.</p>
+    </header>
+
+    <ProjectGrid client:load />
+
+    <div class="mt-32">
+        <Footer />
+    </div>
+  </main>
+</Layout>

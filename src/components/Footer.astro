@@ -1,0 +1,25 @@
+---
+const links = [
+    { name: "LinkedIn", href: "https://linkedin.com/in/agustindiazcano" },
+    { name: "GitHub", href: "https://github.com/agustindiazcano" },
+    { name: "ModDB", href: "https://www.moddb.com/members/heroagastin" },
+    { name: "Strava", href: "https://www.strava.com/athletes/186219723" },
+    { name: "AI Context", href: "/llms.txt" }
+];
+---
+
+<footer class="w-full border-t border-[#222] pt-12 pb-8 flex flex-col md:flex-row justify-between items-center text-[#444] text-sm">
+    <p>© 2025 Agustín Díaz Cano</p>
+    <div class="flex gap-6 mt-4 md:mt-0 flex-wrap justify-center">
+        {links.map(link => (
+            <a 
+                href={link.href} 
+                target={link.href.startsWith('http') ? "_blank" : "_self"}
+                rel={link.href.startsWith('http') ? "noopener noreferrer" : ""}
+                class="hover:text-white transition-colors"
+            >
+                {link.name}
+            </a>
+        ))}
+    </div>
+</footer>

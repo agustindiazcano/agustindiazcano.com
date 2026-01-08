@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #000000;
+  --color-foreground: #ededed;
+
+  --color-accents-1: #111;
+  --color-accents-2: #333;
+  --color-accents-3: #444;
+  --color-accents-4: #666;
+  --color-accents-5: #888;
+  --color-accents-6: #999;
+  --color-accents-7: #eaeaea;
+  --color-accents-8: #fafafa;
+
+  --color-success: #0070f3;
+  /* Vercel Blue (often used for success/action) */
+  --color-success-lighter: #d3e5ff;
+  --color-success-light: #3291ff;
+  --color-success-dark: #0761d1;
+
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+  /* Tighter tracking characteristic of Vercel */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: -0.04em;
+  /* Aggressive tracking for headings */
+}
+
+code,
+pre,
+.mono {
+  font-family: var(--font-mono);
+}
+
+::selection {
+  background-color: var(--color-success);
+  color: white;
+}
