@@ -7,7 +7,7 @@ export interface Props {
 
 const { 
     title, 
-    description = "Quantitative Systems Engineer & MSc Candidate focused on HFT, C++ Architecture and Distributed Systems.", 
+    description = "Software Engineer & MSc in Information Systems Engineering Candidate", 
     image = "/images/agustin-diaz-cano-software-engineer-1.png" 
 } = Astro.props;
 
@@ -20,13 +20,21 @@ const schema = {
   "@type": "Person",
   "name": "Agustin Diaz Cano",
   "url": siteUrl,
-  "image": imageUrl, // ¡Importante para que Google asocie tu cara!
-  "jobTitle": "Quantitative Systems Engineer",
+  "image": imageUrl,
+  "jobTitle": "Software Engineer",
   "description": description,
-  "alumniOf": {
-    "@type": "CollegeOrUniversity",
-    "name": "Universidad Tecnológica Nacional"
-  },
+  "alumniOf": [
+    {
+      "@type": "CollegeOrUniversity",
+      "name": "Universidad Tecnológica Nacional",
+      "sameAs": "https://www.utn.edu.ar/"
+    },
+    {
+      "@type": "CollegeOrUniversity",
+      "name": "Universidad de Palermo",
+      "sameAs": "https://www.palermo.edu/"
+    }
+  ],
   "knowsAbout": [
   // CORE ENGINEERING
       "C++",
@@ -63,13 +71,16 @@ const schema = {
   "sameAs": [
     "https://github.com/agustindiazcano",
     "https://linkedin.com/in/agustindiazcano",
+    "https://www.researchgate.net/profile/Agustin-Diaz-Cano",
     "https://orcid.org/0009-0001-4336-490X",
     "https://www.moddb.com/members/heroagastin",
     "https://x.com/adiazcano_",
     "https://steamcommunity.com/id/agustindiazcano/",
     "https://www.strava.com/athletes/186219723",
     "https://www.labolsavirtual.com/marcelogallardiola",
-    "https://www.researchgate.net/profile/Agustin-Diaz-Cano"
+    "https://www.youtube.com/@agusdiazcano",
+    "https://medium.com/@agustindiazcano",
+    "https://www.instagram.com/msc_agustindiazcano/"
   ]
 };
 ---
@@ -79,7 +90,7 @@ const schema = {
 <meta name="description" content={description} />
 <link rel="canonical" href={new URL(Astro.url.pathname, siteUrl)} />
 
-<meta property="og:type" content="profile" /> <meta property="og:url" content={Astro.url} />
+<meta property="og:type" content="website" /> <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageUrl} />
