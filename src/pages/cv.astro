@@ -1,0 +1,51 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout title="CV | Agustin Diaz Cano">
+    <main class="min-h-screen max-w-[800px] mx-auto px-6 py-20 flex flex-col">
+        <header class="mb-12">
+            <a
+                href="/"
+                class="text-[#666] hover:text-white transition-colors text-sm mb-8 block"
+                >← Back to Home</a
+            >
+            <h1 class="text-4xl font-bold tracking-tight text-white mb-4">
+                Curriculum Vitae
+            </h1>
+            <p class="text-[#888]">
+                Professional experience and academic background.
+            </p>
+        </header>
+
+        <div
+            class="flex-grow flex flex-col items-center justify-center border border-[#222] rounded-2xl bg-[#111] p-12 text-center"
+        >
+            <div class="mb-6 text-6xl">📄</div>
+            <h2 class="text-2xl font-bold text-white mb-2">
+                Full CV Coming Soon
+            </h2>
+            <p class="text-[#666] max-w-md mb-8">
+                I am currently finalizing the latest version of my resume. For
+                now, please refer to the <a
+                    href="/profile"
+                    class="text-blue-400 hover:underline">Profile</a
+                > page or the <a
+                    href="/llms-full.txt"
+                    class="text-blue-400 hover:underline">AI Context Dossier</a
+                >.
+            </p>
+            <a
+                href="mailto:contact@agustindiazcano.com"
+                class="bg-white text-black px-6 py-3 rounded-full font-medium hover:bg-[#ccc] transition-colors"
+            >
+                Request via Email
+            </a>
+        </div>
+
+        <div class="mt-20">
+            <Footer />
+        </div>
+    </main>
+</Layout>

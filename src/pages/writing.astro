@@ -1,49 +1,72 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Footer from '../components/Footer.astro';
+import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
 
 const posts = [
   {
+    slug: "gdu-testing-architecture", // Matches [slug].astro
     title: "Case Study: GDU Testing Architecture",
     date: "2024",
-    description: "Designing a high-throughput testing framework for retail transaction systems."
+    description:
+      "Designing a high-throughput testing framework for retail transaction systems.",
   },
   {
+    slug: "genetic-algorithms-python",
     title: "Genetic Algorithms in Python",
     date: "2023",
-    description: "Implementing evolutionary strategies for trading strategy optimization."
+    description:
+      "Implementing evolutionary strategies for trading strategy optimization.",
   },
   {
+    slug: "minimizing-latency-cpp",
     title: "Minimizing Latency in C++ Trade Execution",
     date: "2023",
-    description: "Techniques for lock-free queues and kernel bypass networking."
-  }
+    description:
+      "Techniques for lock-free queues and kernel bypass networking.",
+  },
 ];
 ---
 
-<Layout title="Writing | Agustín Díaz Cano">
+<Layout title="Writing | Agustin Diaz Cano">
   <main class="min-h-screen max-w-[800px] mx-auto px-6 py-20">
     <header class="mb-20">
-        <a href="/" class="text-[#666] hover:text-white transition-colors text-sm mb-8 block">← Back to Home</a>
-        <h1 class="text-4xl font-bold tracking-tight text-white mb-4">Writing</h1>
-        <p class="text-[#888]">Technical notes on systems engineering, performance, and quantitative finance.</p>
+      <a
+        href="/"
+        class="text-[#666] hover:text-white transition-colors text-sm mb-8 block"
+        >← Back to Home</a
+      >
+      <h1 class="text-4xl font-bold tracking-tight text-white mb-4">Writing</h1>
+      <p class="text-[#888]">
+        Technical notes on systems engineering, performance, and quantitative
+        finance.
+      </p>
     </header>
 
     <div class="space-y-12">
-        {posts.map(post => (
-            <article class="group cursor-pointer">
-                <div class="flex justify-between items-baseline mb-2">
-                    <h2 class="text-xl font-semibold text-white group-hover:text-blue-400 transition-colors">
-                        {post.title}
-                    </h2>
-                    <span class="text-sm font-mono text-[#444]">{post.date}</span>
-                </div>
-                <p class="text-[#666] text-sm leading-relaxed">{post.description}</p>
-            </article>
-        ))}
+      {
+        posts.map((post) => (
+          <article class="group relative">
+            <div class="flex justify-between items-baseline mb-2">
+              <h2 class="text-xl font-semibold text-white group-hover:text-blue-400 transition-colors">
+                <a
+                  href={`/writing/${post.slug}`}
+                  class="absolute inset-0 z-10 focus:outline-none"
+                >
+                  <span class="sr-only">Read - {post.title}</span>
+                </a>
+                {post.title}
+              </h2>
+              <span class="text-sm font-mono text-[#444]">{post.date}</span>
+            </div>
+            <p class="text-[#666] text-sm leading-relaxed relative z-20 pointer-events-none">
+              {post.description}
+            </p>
+          </article>
+        ))
+      }
     </div>
     <div class="mt-20">
-        <Footer />
+      <Footer />
     </div>
   </main>
 </Layout>

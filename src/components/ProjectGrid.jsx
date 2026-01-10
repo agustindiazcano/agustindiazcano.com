@@ -8,6 +8,7 @@ const ProjectGrid = () => {
         {
             id: 1,
             title: "Algorithmic Trading Engine",
+            slug: "algorithmic-trading-engine",
             subtitle: "Review C++ Architecture",
             description: "Sub-microsecond latency execution system designed for HFT markets.",
             longDescription: "A high-performance trading engine built in C++20 focusing on zero-copy network processing and lock-free data structures. Implements genetic algorithms in Python for strategy optimization before deployment.",
@@ -23,6 +24,7 @@ const ProjectGrid = () => {
         {
             id: 2,
             title: "Zombie Mod 5",
+            slug: "zombie-mod-assault-squad-2",
             subtitle: "View Gameplay & Stats",
             description: "200k+ Active Users.",
             longDescription: "A massive multiplayer mod demonstrating the capacity to handle high concurrency and complex state synchronization. Managed community servers and orchestrated deployment pipelines.",
@@ -38,6 +40,7 @@ const ProjectGrid = () => {
         {
             id: 3,
             title: "WASM Engine",
+            slug: "wasm-engine",
             subtitle: "Run in Browser",
             description: "C++ Game Engine on Web.",
             longDescription: "Porting a custom C++ game engine to WebAssembly to demonstrate native performance in the browser. Handles WebGL rendering and multi-threaded physics.",
@@ -53,6 +56,7 @@ const ProjectGrid = () => {
         {
             id: 4,
             title: "MSc in Engineering",
+            slug: "msc-engineering",
             subtitle: "View Thesis Details",
             description: "Specialization in Systems Engineering.",
             longDescription: "Focusing on the intersection of biological computing (Genetic Algorithms) and financial market efficiency. Thesis explores fuzzy logic applications in high-frequency order routing.",
@@ -210,9 +214,12 @@ const ProjectGrid = () => {
                                                 <button className="flex-1 bg-white text-black font-semibold py-3 rounded-lg hover:bg-[#ccc] transition-colors">
                                                     {project.id === 2 ? "Download Mod" : "View Source"}
                                                 </button>
-                                                <button className="flex-1 bg-[#111] text-white border border-[#333] font-semibold py-3 rounded-lg hover:bg-[#222] transition-colors">
-                                                    Case Study
-                                                </button>
+                                                <a
+                                                    href={`/projects/${project.slug}`}
+                                                    className="flex-1 bg-[#111] text-white border border-[#333] font-semibold py-3 rounded-lg hover:bg-[#222] transition-colors text-center"
+                                                >
+                                                    View Project
+                                                </a>
                                             </div>
                                         </div>
                                     </>

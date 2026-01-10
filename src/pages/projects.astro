@@ -1,23 +1,111 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Footer from '../components/Footer.astro';
-import ProjectGrid from '../components/ProjectGrid.jsx';
-
-// Reusing the same grid for now, but in full page context
+import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
+// Defining projects localy to mirror the source of truth in [slug].astro
+const projects = [
+  {
+    title: "Zombie Mod: Men of War",
+    slug: "zombie-mod-men-of-war",
+    description: "Original mod architecture for the classic RTS.",
+    tags: ["Lua", "RTS", "Modding"],
+    year: "2015",
+  },
+  {
+    title: "Zombie Mod: Call to Arms",
+    slug: "zombie-mod-cta-gates-of-hell",
+    description: "Porting the horde logic to the Gem 2 engine.",
+    tags: ["Gem 2", "AI Logic"],
+    year: "2018",
+  },
+  {
+    title: "Zombie Mod 5: Assault Squad 2",
+    slug: "zombie-mod-assault-squad-2",
+    description:
+      "The peak of the series with 200k+ users and complex state sync.",
+    tags: ["Multiplayer", "Optimization"],
+    year: "2020",
+  },
+  {
+    title: "Biomass (Steam)",
+    slug: "steam-game-biomass",
+    description: "Indie sci-fi action game developed for Steam platform.",
+    tags: ["Unity", "Steamworks API"],
+    year: "2021",
+  },
+  {
+    title: "Algorithmic Trading Engine",
+    slug: "algorithmic-trading-engine",
+    description: "Low-latency execution system with genetic algorithms.",
+    tags: ["C++", "Python", "HFT"],
+    year: "2023",
+  },
+  {
+    title: "WASM Game Engine",
+    slug: "wasm-engine",
+    description: "C++ game engine ported to WebAssembly.",
+    tags: ["C++", "WASM", "WebGL"],
+    year: "2022",
+  },
+  {
+    title: "MSc Engineering Thesis",
+    slug: "msc-engineering",
+    description: "Research on Fuzzy Logic in Financial Markets.",
+    tags: ["Research", "Academia"],
+    year: "2024",
+  },
+];
 ---
 
-<Layout title="Projects | Agustín Díaz Cano">
-  <main class="min-h-screen max-w-[1200px] mx-auto px-6 py-20">
+<Layout title="Projects | Agustin Diaz Cano">
+  <main class="min-h-screen max-w-[800px] mx-auto px-6 py-20">
     <header class="mb-20">
-        <a href="/" class="text-[#666] hover:text-white transition-colors text-sm mb-8 block">← Back to Home</a>
-        <h1 class="text-4xl font-bold tracking-tight text-white mb-4">Projects</h1>
-        <p class="text-[#888]">Engineering portfolio: High-frequency trading, game development, and distributed systems.</p>
+      <a
+        href="/"
+        class="text-[#666] hover:text-white transition-colors text-sm mb-8 block"
+        >← Back to Home</a
+      >
+      <h1 class="text-4xl font-bold tracking-tight text-white mb-4">
+        Projects
+      </h1>
+      <p class="text-[#888]">
+        Engineering portfolio: High-frequency trading, game development, and
+        distributed systems.
+      </p>
     </header>
 
-    <ProjectGrid client:load />
+    <div class="space-y-12">
+      {
+        projects.map((project) => (
+          <article class="group relative">
+            <div class="flex justify-between items-baseline mb-2">
+              <h2 class="text-xl font-semibold text-white group-hover:text-blue-400 transition-colors">
+                <a
+                  href={`/projects/${project.slug}`}
+                  class="absolute inset-0 z-10 focus:outline-none"
+                >
+                  <span class="sr-only">View - {project.title}</span>
+                </a>
+                {project.title}
+              </h2>
+              <span class="text-sm font-mono text-[#444]">{project.year}</span>
+            </div>
+            <p class="text-[#666] text-sm leading-relaxed relative z-20 pointer-events-none mb-3">
+              {project.description}
+            </p>
+            <div class="flex gap-2 relative z-20 pointer-events-none">
+              {project.tags.map((tag) => (
+                <span class="text-xs text-[#444] border border-[#222] px-1.5 py-0.5 rounded">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </article>
+        ))
+      }
+    </div>
 
     <div class="mt-32">
-        <Footer />
+      <Footer />
     </div>
   </main>
 </Layout>
