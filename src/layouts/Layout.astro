@@ -10,6 +10,9 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+
+import fs from 'node:fs';
+const llmContext = fs.readFileSync('public/llms-full.txt', 'utf-8');
 ---
 
 <!doctype html>
@@ -26,5 +29,23 @@ const { title, description } = Astro.props;
 	</head>
 	<body class="bg-background text-foreground antialiased selection:bg-success selection:text-white">
 		<slot />
+        
+        {/* Hidden Context for AI Agents */}
+        <div class="llm-hidden">
+            {llmContext}
+        </div>
 	</body>
 </html>
+
+<style is:global>
+    .llm-hidden {
+        position: absolute;
+        left: -99999px;
+        top: -99999px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(1px, 1px, 1px, 1px); /* extra seguro */
+        white-space: pre-wrap;
+    }
+</style>
