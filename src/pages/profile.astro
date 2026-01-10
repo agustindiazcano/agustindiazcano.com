@@ -1,79 +1,124 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Footer from '../components/Footer.astro';
+import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
 
 const certifications = [
     "Deep Learning Specialization - Coursera/DeepLearning.AI",
     "Advanced C++ Programming",
-    "Cloud Architecture (AWS)"
+    "Cloud Architecture (AWS)",
 ];
 
 const stack = [
-    "C++", "Python", "Rust", "TypeScript", 
-    "Docker", "Kubernetes", "AWS", "Linux Kernel"
+    "C++",
+    "Python",
+    "Rust",
+    "TypeScript",
+    "Docker",
+    "Kubernetes",
+    "AWS",
+    "Linux Kernel",
 ];
 ---
 
-<Layout title="Profile | Agustín Díaz Cano">
-  <main class="min-h-screen flex items-center justify-center p-6 md:p-12">
-    <div class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24">
-        
-        {/* Left Column: Photo & Quick Info */}
-        <div class="md:col-span-4 flex flex-col gap-8">
-            <div class="aspect-square w-full rounded-2xl bg-[#111] border border-[#222] overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-700">
-                {/* Placeholder for Photo */}
-                <img src="/images/agustin-diaz-cano-software-engineer-1.png" alt="Agustín Díaz Cano" class="w-full h-full object-cover" />
+<Layout title="Profile | Agustin Diaz Cano">
+    <main
+        class="min-h-screen flex flex-col items-center justify-center p-6 md:p-12"
+    >
+        <div
+            class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24"
+        >
+            {/* Left Column: Photo & Quick Info */}
+            <div class="md:col-span-4 flex flex-col gap-8">
+                <div
+                    class="aspect-square w-full rounded-2xl bg-[#111] border border-[#222] overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-700"
+                >
+                    {/* Placeholder for Photo */}
+                    <img
+                        src="/images/agustin-diaz-cano-software-engineer-1.png"
+                        alt="Agustin Diaz Cano"
+                        class="w-full h-full object-cover"
+                    />
+                </div>
+
+                <div>
+                    <h3 class="text-white font-medium mb-4">Core Stack</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {
+                            stack.map((tech) => (
+                                <span class="text-xs text-[#888] border border-[#222] px-2 py-1 rounded bg-[#0a0a0a]">
+                                    {tech}
+                                </span>
+                            ))
+                        }
+                    </div>
+                </div>
+
+                <a
+                    href="/"
+                    class="text-[#666] hover:text-white transition-colors text-sm"
+                    >← Back to Home</a
+                >
             </div>
 
-            <div>
-                 <h3 class="text-white font-medium mb-4">Core Stack</h3>
-                 <div class="flex flex-wrap gap-2">
-                    {stack.map(tech => (
-                        <span class="text-xs text-[#888] border border-[#222] px-2 py-1 rounded bg-[#0a0a0a]">{tech}</span>
-                    ))}
-                 </div>
+            {/* Right Column: Narrative */}
+            <div class="md:col-span-8 flex flex-col justify-center">
+                <h1 class="text-4xl font-bold text-white mb-2">
+                    Agustin Diaz Cano
+                </h1>
+                <p class="text-blue-500 font-mono text-sm mb-8">
+                    Quantitative Systems Engineer
+                </p>
+
+                <div class="space-y-6 text-[#999] leading-relaxed mb-12">
+                    <p>
+                        <span class="text-white font-medium"
+                            >I am a Software Engineer focused on distributed
+                            systems and quantitative finance.</span
+                        > My obsession is efficiency: whether optimizing a C++ graphics
+                        engine or reducing latency in a commercial transaction.
+                    </p>
+                    <p>
+                        I come from managing high-traffic environments in retail
+                        (GDU) and orchestrating massive communities in game
+                        development (200k+ users in Zombie Mod 5). Now, I am
+                        applying that reliability engineering experience to the
+                        world of financial markets through my Master's in
+                        Engineering.
+                    </p>
+                    <p>
+                        Beyond the code, I am a marathon runner (42k). I apply
+                        the same training discipline to my professional
+                        development. I seek roles where pressure is high,
+                        precision is critical, and systems must perform under
+                        stress.
+                    </p>
+                    <p class="text-white border-l-2 border-blue-500 pl-4">
+                        Currently based in Argentina, available for global
+                        relocation (EU/USA).
+                    </p>
+                </div>
+
+                <div class="border-t border-[#222] pt-8">
+                    <h3
+                        class="text-sm font-mono text-[#666] uppercase tracking-wider mb-6"
+                    >
+                        Additional Education & Certifications
+                    </h3>
+                    <ul class="grid grid-cols-1 gap-3">
+                        {
+                            certifications.map((cert) => (
+                                <li class="text-[#ccc] text-sm flex items-start gap-2">
+                                    <span class="mt-1.5 w-1 h-1 bg-blue-500 rounded-full" />
+                                    {cert}
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </div>
             </div>
-            
-             <a href="/" class="text-[#666] hover:text-white transition-colors text-sm">← Back to Home</a>
         </div>
-
-        {/* Right Column: Narrative */}
-        <div class="md:col-span-8 flex flex-col justify-center">
-            
-            <h1 class="text-4xl font-bold text-white mb-2">Agustín Díaz Cano</h1>
-            <p class="text-blue-500 font-mono text-sm mb-8">Quantitative Systems Engineer</p>
-
-            <div class="space-y-6 text-[#999] leading-relaxed mb-12">
-                <p>
-                    <span class="text-white font-medium">I am a Software Engineer focused on distributed systems and quantitative finance.</span> My obsession is efficiency: whether optimizing a C++ graphics engine or reducing latency in a commercial transaction.
-                </p>
-                <p>
-                    I come from managing high-traffic environments in retail (GDU) and orchestrating massive communities in game development (200k+ users in Zombie Mod 5). Now, I am applying that reliability engineering experience to the world of financial markets through my Master's in Engineering.
-                </p>
-                <p>
-                    Beyond the code, I am a marathon runner (42k). I apply the same training discipline to my professional development. I seek roles where pressure is high, precision is critical, and systems must perform under stress.
-                </p>
-                <p class="text-white border-l-2 border-blue-500 pl-4">
-                    Currently based in Argentina, available for global relocation (EU/USA).
-                </p>
-            </div>
-
-            <div class="border-t border-[#222] pt-8">
-                <h3 class="text-sm font-mono text-[#666] uppercase tracking-wider mb-6">Additional Education & Certifications</h3>
-                <ul class="grid grid-cols-1 gap-3">
-                    {certifications.map(cert => (
-                        <li class="text-[#ccc] text-sm flex items-start gap-2">
-                            <span class="mt-1.5 w-1 h-1 bg-blue-500 rounded-full"></span>
-                            {cert}
-                        </li>
-                    ))}
-                </ul>
-            </div>
-
+        <div class="mt-20 w-full max-w-5xl">
+            <Footer />
         </div>
-    </div>
-    <div class="mt-20 w-full max-w-5xl">
-        <Footer />
-    </div>
-  </main>
+    </main>
 </Layout>

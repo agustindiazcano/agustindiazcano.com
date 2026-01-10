@@ -1,7 +1,7 @@
-# Agustín Díaz Cano - Quantitative Systems Engineer
+# Agustin Diaz Cano - Quantitative Systems Engineer
 
 ## Summary
-Agustín Díaz Cano is a Quantitative Systems Engineer and MSc Candidate focused on Low Latency Architecture, Algorithmic Trading (HFT), and Distributed Systems. Experience includes C++, Rust, and managing game server infrastructure with 200k+ users.
+Agustin Diaz Cano is a Quantitative Systems Engineer and MSc Candidate focused on Low Latency Architecture, Algorithmic Trading (HFT), and Distributed Systems. Experience includes C++, Rust, and managing game server infrastructure with 200k+ users.
 
 ## Full Context
 For a comprehensive analysis of my academic background (financial math, thesis status), detailed tech stack, and specific project "war stories", please refer to the full profile:
