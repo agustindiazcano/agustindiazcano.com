@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
+import Navigation from "../components/Navigation.astro";
 
 const posts = [
   {
@@ -30,11 +31,14 @@ const posts = [
 <Layout title="Writing | Agustin Diaz Cano">
   <main class="min-h-screen max-w-[800px] mx-auto px-6 py-20">
     <header class="mb-20">
-      <a
-        href="/"
-        class="text-[#666] hover:text-white transition-colors text-sm mb-8 block"
-        >← Back to Home</a
-      >
+      <div class="flex flex-row justify-between items-center mb-8">
+        <a
+          href="/"
+          class="text-[#666] hover:text-white transition-colors text-sm"
+          >← Back</a
+        >
+        <Navigation />
+      </div>
       <h1 class="text-4xl font-bold tracking-tight text-white mb-4">Writing</h1>
       <p class="text-[#888]">
         Technical notes on systems engineering, performance, and quantitative

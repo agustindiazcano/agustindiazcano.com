@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
+import Navigation from "../components/Navigation.astro";
 
 const certifications = [
     "Deep Learning Specialization - Coursera/DeepLearning.AI",
@@ -22,8 +23,18 @@ const stack = [
 
 <Layout title="Profile | Agustin Diaz Cano">
     <main
-        class="min-h-screen flex flex-col items-center justify-center p-6 md:p-12"
+        class="min-h-screen flex flex-col items-center justify-start p-6 pt-20"
     >
+        <div
+            class="w-full max-w-5xl mb-12 flex flex-row justify-between items-center"
+        >
+            <a
+                href="/"
+                class="text-[#666] hover:text-white transition-colors text-sm"
+                >← Back</a
+            >
+            <Navigation />
+        </div>
         <div
             class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24"
         >
@@ -52,12 +63,6 @@ const stack = [
                         }
                     </div>
                 </div>
-
-                <a
-                    href="/"
-                    class="text-[#666] hover:text-white transition-colors text-sm"
-                    >← Back to Home</a
-                >
             </div>
 
             {/* Right Column: Narrative */}

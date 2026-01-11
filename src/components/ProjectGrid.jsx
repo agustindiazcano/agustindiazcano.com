@@ -23,14 +23,14 @@ const ProjectGrid = () => {
         },
         {
             id: 2,
-            title: "Zombie Mod 5",
+            title: "Zombie Mod - Men of War: Assault Squad 2",
             slug: "zombie-mod-assault-squad-2",
             subtitle: "View Gameplay & Stats",
-            description: "200k+ Active Users.",
+            description: "200k+ Downloads.",
             longDescription: "A massive multiplayer mod demonstrating the capacity to handle high concurrency and complex state synchronization. Managed community servers and orchestrated deployment pipelines.",
             tags: ["Game Dev", "Lua"],
             size: "medium",
-            stats: "200k Users | 500+ Servers",
+            stats: "200k Downloads",
             features: [
                 "Lag compensation networking",
                 "Entity component system architecture",
@@ -75,14 +75,20 @@ const ProjectGrid = () => {
         <div className="w-full grid grid-cols-1 md:grid-cols-3 auto-rows-[300px] gap-6 mb-32">
             {projects.map((project) => (
                 <motion.div
-                    layoutId={project.id}
+                    layoutId={String(project.id)}
                     key={project.id}
-                    onClick={() => setSelectedId(project.id)}
-                    className={`relative group overflow-hidden bg-[#111] border border-[#222] rounded-xl cursor-pointer hover:border-[#444] transition-colors p-8 flex flex-col justify-between ${project.size === "large" ? "md:col-span-2" : "md:col-span-1"
+                    className={`relative group overflow-hidden bg-[#111] border border-[#222] rounded-xl flex flex-col justify-between p-8 ${project.size === "large" ? "md:col-span-2" : "md:col-span-1"
                         }`}
-                    whileHover={{ scale: 1.02 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
+                    {/* Clickable Overlay */}
+                    <div
+                        className="absolute inset-0 z-20 cursor-pointer"
+                        onClick={() => setSelectedId(project.id)}
+                    />
+
+                    <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
                     <motion.div className="z-10">
                         {project.id === 4 ? (
                             <>
@@ -118,15 +124,6 @@ const ProjectGrid = () => {
                         ))}
                     </motion.div>
 
-                    {/* Hover Overlay */}
-                    <motion.div
-                        className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-[2px]"
-                    >
-                        <span className="bg-white text-black px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2">
-                            {project.subtitle} ↗
-                        </span>
-                    </motion.div>
-
                     {project.id === 4 && (
                         <div className="absolute right-0 bottom-0 text-9xl font-bold text-[#222] opacity-20 -mb-4 -mr-4 select-none">MSc</div>
                     )}
@@ -147,7 +144,7 @@ const ProjectGrid = () => {
 
                         {/* Modal Card */}
                         <motion.div
-                            layoutId={selectedId}
+                            layoutId={String(selectedId)}
                             className="w-full max-w-2xl bg-[#0a0a0a] border border-[#333] rounded-2xl overflow-hidden relative z-10 max-h-[90vh] flex flex-col"
                         >
                             {(() => {

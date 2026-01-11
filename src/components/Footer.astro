@@ -1,18 +1,32 @@
 ---
 const links = [
-    { name: "LinkedIn", href: "https://linkedin.com/in/agustindiazcano" },
     { name: "GitHub", href: "https://github.com/agustindiazcano" },
+    { name: "LinkedIn", href: "https://linkedin.com/in/agustindiazcano" },
+    {
+        name: "ResearchGate",
+        href: "https://www.researchgate.net/profile/Agustin-Diaz-Cano",
+    },
+    { name: "ORCID", href: "https://orcid.org/0009-0001-4336-490X" },
     { name: "ModDB", href: "https://www.moddb.com/members/heroagastin" },
+    { name: "X (Twitter)", href: "https://x.com/adiazcano_" },
+    { name: "Steam", href: "https://steamcommunity.com/id/agustindiazcano/" },
     { name: "Strava", href: "https://www.strava.com/athletes/186219723" },
-    { name: "AI Context", href: "/llms.txt" },
+    {
+        name: "La Bolsa Virtual",
+        href: "https://www.labolsavirtual.com/marcelogallardiola",
+    },
+    { name: "YouTube", href: "https://www.youtube.com/@agusdiazcano" },
+    { name: "Medium", href: "https://medium.com/@agustindiazcano" },
+    { name: "Dev.to", href: "https://dev.to/agustindiazcano" },
+    { name: "llms.txt", href: "/llms.txt" },
+    { name: "llms-full.txt", href: "/llms-full.txt" },
 ];
 ---
 
 <footer
-    class="w-full border-t border-[#222] pt-12 pb-8 flex flex-col md:flex-row justify-between items-center text-[#444] text-sm"
+    class="w-full border-t border-[#222] pt-12 pb-12 flex flex-col items-center justify-center text-[#444] text-sm gap-8"
 >
-    <p>© 2025 Agustin Diaz Cano</p>
-    <div class="flex gap-6 mt-4 md:mt-0 flex-wrap justify-center">
+    <div class="flex gap-4 flex-wrap justify-center max-w-3xl">
         {
             links.map((link) => (
                 <a
@@ -20,7 +34,7 @@ const links = [
                     target={link.href.startsWith("http") ? "_blank" : "_self"}
                     rel={
                         link.href.startsWith("http")
-                            ? "noopener noreferrer"
+                            ? "noopener noreferrer me"
                             : ""
                     }
                     class="hover:text-white transition-colors"
@@ -30,4 +44,5 @@ const links = [
             ))
         }
     </div>
+    <p>© 2026 Agustin Diaz Cano</p>
 </footer>

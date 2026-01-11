@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Footer from "../../components/Footer.astro";
+import Navigation from "../../components/Navigation.astro";
 
 export async function getStaticPaths() {
     const projects = [
@@ -67,11 +68,14 @@ const { project } = Astro.props;
 <Layout title={`${project.title} | Agustin Diaz Cano`}>
     <main class="min-h-screen max-w-[1000px] mx-auto px-6 py-20">
         <header class="mb-12">
-            <a
-                href="/projects"
-                class="text-[#666] hover:text-white transition-colors text-sm mb-8 block"
-                >← Back to Projects</a
-            >
+            <div class="flex flex-row justify-between items-center mb-8">
+                <a
+                    href="/projects"
+                    class="text-[#666] hover:text-white transition-colors text-sm"
+                    >← Back</a
+                >
+                <Navigation />
+            </div>
 
             <div
                 class="h-64 w-full bg-[#111] rounded-2xl border border-[#222] mb-8 relative overflow-hidden flex items-center justify-center"
