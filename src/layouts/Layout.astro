@@ -1,40 +1,40 @@
 ---
-import '../styles/global.css';
-import '@fontsource/inter';
-import '@fontsource/jetbrains-mono';
-import SEO from '../components/SEO.astro';
+import "../styles/global.css";
+import "@fontsource/inter";
+import "@fontsource/jetbrains-mono";
+import SEO from "../components/SEO.astro";
 
 interface Props {
-	title: string;
+    title: string;
     description?: string;
 }
 
 const { title, description } = Astro.props;
 
-import fs from 'node:fs';
-const llmContext = fs.readFileSync('public/llms-full.txt', 'utf-8');
+import fs from "node:fs";
+const llmContext = fs.readFileSync("public/llms-full.txt", "utf-8");
 ---
 
 <!doctype html>
 <html lang="en" class="dark">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="icon" type="image/png" href="/images/agustin-diaz-cano-software-engineer-1.png" />
-		<link rel="apple-touch-icon" href="/images/agustin-diaz-cano-software-engineer-1.png" />
-        <link rel="shortcut icon" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="alternate icon" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
         <SEO title={title} description={description} />
-	</head>
-	<body class="bg-background text-foreground antialiased selection:bg-success selection:text-white">
-		<slot />
-        
+    </head>
+    <body
+        class="bg-background text-foreground antialiased selection:bg-success selection:text-white"
+    >
+        <slot />
+
         {/* Hidden Context for AI Agents */}
         <div class="llm-hidden">
             {llmContext}
         </div>
-	</body>
+    </body>
 </html>
 
 <style is:global>
