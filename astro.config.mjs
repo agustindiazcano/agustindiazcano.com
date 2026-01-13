@@ -10,6 +10,9 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://agustindiazcano.com',
   vite: {
+    build: {
+      sourcemap: false
+    },
     // @ts-ignore
     plugins: [tailwindcss()]
   },
