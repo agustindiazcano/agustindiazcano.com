@@ -6,24 +6,8 @@ const ProjectGrid = () => {
 
     const projects = [
         {
-            id: 1,
-            title: "Algorithmic Trading Engine",
-            slug: "algorithmic-trading-engine",
-            subtitle: "Review C++ Architecture",
-            description: "Sub-microsecond latency execution system designed for HFT markets.",
-            longDescription: "A high-performance trading engine built in C++20 focusing on zero-copy network processing and lock-free data structures. Implements genetic algorithms in Python for strategy optimization before deployment.",
-            tags: ["C++", "Python", "Genetic Algos"],
-            size: "large",
-            stats: "Latency: 400ns | Uptime: 99.999%",
-            features: [
-                "Kernel bypass networking (DPDK)",
-                "Shared memory ring buffers",
-                "SIMD optimized matching engine"
-            ]
-        },
-        {
             id: 2,
-            title: "Zombie Mod - Men of War: Assault Squad 2",
+            title: "Game Development: Zombie Mod - Men of War",
             slug: "zombie-mod-assault-squad-2",
             subtitle: "View Gameplay & Stats",
             description: "200k+ Downloads.",
@@ -35,38 +19,6 @@ const ProjectGrid = () => {
                 "Lag compensation networking",
                 "Entity component system architecture",
                 "Automated anti-cheat heuristics"
-            ]
-        },
-        {
-            id: 3,
-            title: "WASM Engine",
-            slug: "wasm-engine",
-            subtitle: "Run in Browser",
-            description: "C++ Game Engine on Web.",
-            longDescription: "Porting a custom C++ game engine to WebAssembly to demonstrate native performance in the browser. Handles WebGL rendering and multi-threaded physics.",
-            tags: ["C++", "WASM", "WebGL"],
-            size: "small",
-            stats: "60 FPS @ 4K | <5MB Binary",
-            features: [
-                "Emscripten toolchain optimization",
-                "WebGL 2.0 renderer backend",
-                "Asset streaming system"
-            ]
-        },
-        {
-            id: 4,
-            title: "MSc in Engineering",
-            slug: "msc-engineering",
-            subtitle: "View Thesis Details",
-            description: "Specialization in Systems Engineering.",
-            longDescription: "Focusing on the intersection of biological computing (Genetic Algorithms) and financial market efficiency. Thesis explores fuzzy logic applications in high-frequency order routing.",
-            tags: ["Research", "HFT"],
-            size: "large",
-            stats: "Thesis Phase | Candidate",
-            features: [
-                "Genetic Algorithms Application",
-                "Fuzzy Logic Control Systems",
-                "Market Microstructure Analysis"
             ]
         }
     ];
