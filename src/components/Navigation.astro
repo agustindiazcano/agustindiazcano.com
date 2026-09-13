@@ -1,30 +1,26 @@
 ---
-const pathname = Astro.url.pathname;
-const isHome = pathname === "/";
-
 const links = [
     {
         name: "View Work",
         href: "/",
-        match: "hash",
-        // No icon on left for View Work in the image, just chevron on right (added in markup)
+        match: "exact",
     },
     {
         name: "Projects",
         href: "/projects",
-        match: "path",
+        match: "startsWith",
         icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>`,
     },
     {
         name: "Profile",
         href: "/profile",
-        match: "path",
+        match: "startsWith",
         icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
     },
     {
         name: "Writing",
         href: "/writing",
-        match: "path",
+        match: "startsWith",
         icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>`,
     },
     {
@@ -37,69 +33,74 @@ const links = [
 ];
 ---
 
-<nav class="flex flex-wrap justify-center gap-2 w-full animate-nav-in">
+<nav id="site-nav" class="flex flex-wrap justify-center gap-2 w-full">
     {
-        links.map((link) => {
-            const isActive =
-                link.match === "path"
-                    ? pathname.startsWith(link.href)
-                    : pathname === "/" || pathname === "/#projects"; // Home matches View Work
-
-            return (
-                <a
-                    href={link.href}
-                    target={link.target || "_self"}
-                    class:list={[
-                        "px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 relative group flex items-center gap-2 border border-transparent",
-                        isActive
-                            ? "bg-white text-black shadow-lg shadow-white/5" // Active: White BG, Black Text
-                            : "bg-[#111] text-[#999] border-[#222] hover:text-white hover:border-[#444] hover:bg-[#1a1a1a]", // Inactive: Dark BG
-                    ]}
-                >
-                    {/* Icons */}
-                    {link.name === "View Work" && (
-                        <span class="text-xs">
-                            {/* Placeholder for chevron if needed, or just text? User image has chevron on right usually, but let's put it compatible */}
-                            {/* Actually user image shows text then chevron. Let's stick to left icon for consistency or match image? Image: "View Work v". Others: "Icon Text". */}
-                        </span>
-                    )}
-
-                    {link.icon && <Fragment set:html={link.icon} />}
-
-                    <span>{link.name}</span>
-
-                    {link.name === "View Work" && (
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="14"
-                            height="14"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
-                            <path d="m6 9 6 6 6-6" />
-                        </svg>
-                    )}
-                </a>
-            );
-        })
+        links.map((link) => (
+            <a
+                href={link.href}
+                target={link.target || "_self"}
+                data-nav-href={link.href}
+                data-nav-match={link.match}
+                class="nav-link px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-2 border border-transparent bg-[#111] text-[#999] border-[#222] hover:text-white hover:border-[#444] hover:bg-[#1a1a1a]"
+            >
+                {link.icon && <Fragment set:html={link.icon} />}
+                <span>{link.name}</span>
+                {link.name === "View Work" && (
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="m6 9 6 6 6-6" />
+                    </svg>
+                )}
+            </a>
+        ))
     }
 </nav>
 
-<style>
-    .animate-nav-in {
-        animation: navSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        opacity: 0;
-        transform: translateY(10px);
+<script>
+    const ACTIVE = ["bg-white", "text-black", "shadow-lg", "shadow-white/5"];
+    const INACTIVE = [
+        "bg-[#111]",
+        "text-[#999]",
+        "border-[#222]",
+        "hover:text-white",
+        "hover:border-[#444]",
+        "hover:bg-[#1a1a1a]",
+    ];
+
+    function updateActiveNav() {
+        const pathname = window.location.pathname;
+        const links =
+            document.querySelectorAll<HTMLAnchorElement>("#site-nav .nav-link");
+
+        links.forEach((link) => {
+            const href = link.dataset.navHref ?? "";
+            const match = link.dataset.navMatch ?? "startsWith";
+
+            let isActive = false;
+            if (match === "exact") {
+                isActive = pathname === "/" || pathname === href;
+            } else if (match === "startsWith") {
+                isActive = href !== "/" && pathname.startsWith(href);
+            }
+            // "external" is always inactive
+
+            link.classList.remove(...ACTIVE, ...INACTIVE);
+            link.classList.add(...(isActive ? ACTIVE : INACTIVE));
+        });
     }
 
-    @keyframes navSlideUp {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-</style>
+    // Run immediately on hard load
+    updateActiveNav();
+
+    // Re-run after every View Transition swap
+    document.addEventListener("astro:page-load", updateActiveNav);
+</script>

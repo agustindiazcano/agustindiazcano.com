@@ -2,30 +2,13 @@
 import Layout from "../layouts/Layout.astro";
 import ProjectGrid from "../components/ProjectGrid.jsx";
 import Footer from "../components/Footer.astro";
-import Navigation from "../components/Navigation.astro";
 ---
 
 <Layout title="Agustin Diaz Cano | Software Engineer — AI/ML & Backend">
     <main
-        class="min-h-screen flex flex-col items-center justify-start max-w-[1200px] mx-auto px-6 pt-8 pb-20"
+        class="min-h-screen flex flex-col items-center justify-start max-w-[1200px] mx-auto px-6 pb-20"
     >
-        {/* Hero Section */}
-        <section
-            class="w-full flex flex-col items-center text-center mb-8 fade-in"
-        >
-            <h1
-                class="text-4xl md:text-5xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-[#666] mb-6"
-            >
-                Agustin Diaz Cano
-            </h1>
-            <p class="text-lg md:text-xl text-[#888] mb-0 max-w-2xl">
-                Software Engineer
-            </p>
-            <div class="mt-8 w-full flex justify-center">
-                <Navigation />
-            </div>
-        </section>
-        {/* Bento Grid */}
+
         {/* Bento Grid (Interactive) */}
         <ProjectGrid client:load />
 

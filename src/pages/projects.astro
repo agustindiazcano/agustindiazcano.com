@@ -1,7 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
-import Navigation from "../components/Navigation.astro";
 // Defining projects localy to mirror the source of truth in [slug].astro
 const projects = [
   {
@@ -64,24 +63,17 @@ const projects = [
 ---
 
 <Layout title="Projects | Agustin Diaz Cano">
-  <main class="min-h-screen max-w-[800px] mx-auto px-6 py-20">
-    <header class="mb-20">
-      <div class="flex flex-row justify-between items-center mb-8">
-        <a
-          href="/"
-          class="text-[#666] hover:text-white transition-colors text-sm"
-          >← Back</a
-        >
-        <Navigation />
-      </div>
-      <h1 class="text-4xl font-bold tracking-tight text-white mb-4">
+  <main class="min-h-screen max-w-[800px] mx-auto px-6 pb-20">
+
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold tracking-tight text-white mb-3">
         Projects
-      </h1>
+      </h2>
       <p class="text-[#888]">
         Engineering portfolio: High-frequency trading, game development, and
         distributed systems.
       </p>
-    </header>
+    </section>
 
     <div class="space-y-12">
       {
