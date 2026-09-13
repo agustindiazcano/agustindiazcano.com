@@ -1,43 +1,55 @@
-# Astro Starter Kit: Minimal
+# agustindiazcano.com
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Personal portfolio and blog - built with Astro. Showcases my work in 
+backend development, AI engineering, and independent research projects 
+in physics-based simulation and robotics.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Live site: [agustindiazcano.com](https://agustindiazcano.com)
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Project Structure
 
 ```text
 /
-├── public/
+├── public/                 # Static assets (images, favicon, llms.txt)
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/         # Astro and React components
+│   ├── layouts/            # Page layouts
+│   ├── pages/              # File-based routing
+│   │   ├── cv.astro        # Curriculum Vitae / Summary
+│   │   ├── index.astro     # Home page
+│   │   ├── profile.astro   # Profile and background
+│   │   ├── projects.astro  # Projects catalog
+│   │   ├── writing.astro   # Articles and publications
+│   │   ├── projects/       # Individual project detail pages
+│   │   └── writing/        # In-depth technical articles
+│   └── styles/             # Global CSS and Tailwind styles
+├── astro.config.mjs        # Astro configuration
+├── package.json            # Dependencies and scripts
+├── tsconfig.json           # TypeScript configuration
+└── vercel.json             # Vercel deployment and security headers
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+- `src/pages/projects/` — individual project pages (Men of War Zombie Mod, 
+  MSc engineering coursework, robotics simulations, etc.)
+- `src/pages/writing/` — technical articles and notes
+- `vercel.json` — deployment config, including canonical domain redirects 
+  and security headers
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
+## Commands
 
 | Command                   | Action                                           |
 | :------------------------ | :----------------------------------------------- |
 | `npm install`             | Installs dependencies                            |
 | `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+| `npm run build`           | Build production site to `./dist/`               |
+| `npm run preview`         | Preview build locally before deploying           |
 
-## 👀 Want to learn more?
+## Stack
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Astro · Vercel · deployed with canonical domain enforcement (non-www) and 
+CSP/HSTS security headers.
+
+## Contact
+
+- LinkedIn: [linkedin.com/in/agustindiazcano](https://linkedin.com/in/agustindiazcano)
+- GitHub: [github.com/agustindiazcano](https://github.com/agustindiazcano)
