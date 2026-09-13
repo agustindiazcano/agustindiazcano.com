@@ -1,12 +1,4 @@
 {
-    "redirects": [
-        {
-            "source": "/:path*",
-            "has": [{ "type": "host", "value": "www.agustindiazcano.com" }],
-            "destination": "https://agustindiazcano.com/:path*",
-            "permanent": true
-        }
-    ],
     "cleanUrls": true,
     "headers": [
         {
