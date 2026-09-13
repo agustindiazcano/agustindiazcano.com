@@ -3,7 +3,7 @@
 ## 📌 Project Description
 Personal website and portfolio of **Agustin Diaz-Cano**, Software Engineer and MSc Candidate.
 
-- **Production URL**: [agustindiazcano.com](https://agustindiazcano.com)
+- **Production URL**: [agustindiazcano.com](https://www.agustindiazcano.com)
 - **Deployment**: Vercel
 
 ---

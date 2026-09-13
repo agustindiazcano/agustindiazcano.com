@@ -4,7 +4,7 @@ Personal portfolio and blog - built with Astro. Showcases my work in
 backend development, AI engineering, and independent research projects 
 in physics-based simulation and robotics.
 
-Live site: [agustindiazcano.com](https://agustindiazcano.com)
+Live site: [agustindiazcano.com](https://www.agustindiazcano.com)
 
 ## Project Structure
 

@@ -1,4 +1,4 @@
-Sitemap: https://agustindiazcano.com/sitemap-index.xml
+Sitemap: https://www.agustindiazcano.com/sitemap-index.xml
 
 # Group 1: High-Priority Bots (Search Engines)
 User-agent: Googlebot
@@ -22,4 +22,4 @@ User-agent: *
 Allow: /
 
 # Link to your Sitemap (The map you just verified)
-Sitemap: https://agustindiazcano.com/sitemap-index.xml
+Sitemap: https://www.agustindiazcano.com/sitemap-index.xml

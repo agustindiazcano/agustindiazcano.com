@@ -8,7 +8,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://agustindiazcano.com',
+  site: 'https://www.agustindiazcano.com',
   vite: {
     build: {
       sourcemap: false
