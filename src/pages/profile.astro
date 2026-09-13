@@ -3,24 +3,158 @@ import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
 
 const certifications = [
-    "Deep Learning Specialization - Coursera/DeepLearning.AI",
-    "Advanced C++ Programming",
-    "Cloud Architecture (AWS)",
+    {
+        title: "BigCommerce Developer Certification",
+        year: "2024",
+        links: [
+            {
+                label: "Certificate",
+                url: "https://github.com/agustindiazcano/credentials/blob/main/certificates/bigcommerce-certification-2024.pdf",
+                type: "cert",
+            },
+        ],
+    },
+    {
+        title: "VTEX Tech Training LATAM",
+        year: "2023",
+        links: [
+            {
+                label: "Certificate",
+                url: "https://github.com/agustindiazcano/credentials/blob/main/certificates/VTEX_TechTraining2023.jpeg",
+                type: "cert",
+            },
+        ],
+        modules: [
+            {
+                label: "Block 1",
+                url: "https://github.com/agustindiazcano/credentials/blob/main/certificates/VTEX_TechTraining2023_Bloque1.jpeg",
+            },
+            {
+                label: "Block 2",
+                url: "https://github.com/agustindiazcano/credentials/blob/main/certificates/VTEX_TechTraining2023_Bloque2.jpeg",
+            },
+            {
+                label: "Block 3",
+                url: "https://github.com/agustindiazcano/credentials/blob/main/certificates/VTEX_TechTraining2023_Bloque3.jpeg",
+            },
+        ],
+    },
+    {
+        title: "Claude Academy",
+        year: "2026",
+        isGroup: true,
+        items: [
+            {
+                title: "Claude Platform 101",
+                links: [
+                    {
+                        label: "Certificate",
+                        url: "https://github.com/agustindiazcano/credentials/blob/main/courses/claude-platform-101-agustin-diaz-cano.png",
+                        type: "cert",
+                    },
+                    {
+                        label: "Verify Credential",
+                        url: "https://academy.claude.com/verify/f420c8029d7b9d549b433b260a20ddf0",
+                        type: "verify",
+                    },
+                ],
+            },
+            {
+                title: "Introduction to Model Context Protocol",
+                links: [
+                    {
+                        label: "Certificate",
+                        url: "https://github.com/agustindiazcano/credentials/blob/main/courses/introduction-to-model-context-protocol-agustin-diaz-cano.png",
+                        type: "cert",
+                    },
+                    {
+                        label: "Verify Credential",
+                        url: "https://academy.claude.com/verify/5b1b9259832b840ef40e7cdbaa001ba9",
+                        type: "verify",
+                    },
+                ],
+            },
+            {
+                title: "Model Context Protocol: Advanced Topics",
+                links: [
+                    {
+                        label: "Certificate",
+                        url: "https://github.com/agustindiazcano/credentials/blob/main/courses/model-context-protocol-advanced-topics-agustin-diaz-cano.png",
+                        type: "cert",
+                    },
+                    {
+                        label: "Verify Credential",
+                        url: "https://academy.claude.com/badges/17a347f5-3fbb-4053-a1d3-0fa0b71ada8a",
+                        type: "verify",
+                    },
+                ],
+            },
+            {
+                title: "Claude Code 101",
+                links: [
+                    {
+                        label: "Certificate",
+                        url: "https://github.com/agustindiazcano/credentials/blob/main/courses/claude-code-101-agustin-diaz-cano.png",
+                        type: "cert",
+                    },
+                    {
+                        label: "Verify Credential",
+                        url: "https://academy.claude.com/verify/4bc63266f7750d8d7abf624b5f838818",
+                        type: "verify",
+                    },
+                ],
+            },
+            {
+                title: "Claude Code in Action",
+                links: [
+                    {
+                        label: "Certificate",
+                        url: "https://github.com/agustindiazcano/credentials/blob/main/courses/claude-code-in-action-agustin-diaz-cano.png",
+                        type: "cert",
+                    },
+                    {
+                        label: "Verify Credential",
+                        url: "https://academy.claude.com/badges/3f41a201-39c4-49f8-92ba-1a2c11904ea8",
+                        type: "verify",
+                    },
+                ],
+            },
+        ],
+    },
+];
+
+const supplementaryCoursework = [
+    {
+        institution: "CECE, Universidad de Buenos Aires",
+        year: "2017",
+        courses: [
+            "Bank Teller & Financial Institutions Operations",
+            "Financial Services, Banking & Insurance Operations",
+            "Investments & Finance: Trading in the US Stock Market",
+            "Personal Finance & Investments",
+        ],
+    },
+    {
+        institution: "Fundación Telefónica",
+        year: "2020",
+        courses: [
+            "Introduction to Machine Learning",
+        ],
+    },
 ];
 
 const stack = [
-    "C++",
+
     "Python",
-    "Rust",
     "TypeScript",
     "Docker",
     "Kubernetes",
     "AWS",
-    "Linux Kernel",
+    "Linux",
 ];
 ---
 
-<Layout title="Profile | Agustin Diaz Cano">
+<Layout title="Profile | Agustin Diaz-Cano">
     <main
         class="min-h-screen flex flex-col items-center justify-start p-6 pb-20"
     >
@@ -57,7 +191,7 @@ const stack = [
             {/* Right Column: Narrative */}
             <div class="md:col-span-8 flex flex-col justify-center">
                 <h1 class="text-4xl font-bold text-white mb-2">
-                    Agustin Diaz Cano
+                    Agustin Diaz-Cano
                 </h1>
                 <p class="text-blue-500 font-mono text-sm mb-8">
                     Software Engineer
@@ -65,49 +199,143 @@ const stack = [
 
                 <div class="space-y-6 text-[#999] leading-relaxed mb-12">
                     <p>
-                        <span class="text-white font-medium"
-                            >I am a Software Engineer focused on distributed
-                            systems and quantitative finance.</span
-                        > My obsession is efficiency: whether optimizing a C++ graphics
-                        engine or reducing latency in a commercial transaction.
-                    </p>
-                    <p>
-                        I come from managing high-traffic environments in retail
-                        (GDU) and orchestrating massive communities in game
-                        development (200k+ users in Zombie Mod 5). Now, I am
-                        applying that reliability engineering experience to the
-                        world of financial markets through my Master's in
-                        Engineering.
-                    </p>
-                    <p>
-                        Beyond the code, I am a marathon runner (42k). I apply
-                        the same training discipline to my professional
-                        development. I seek roles where pressure is high,
-                        precision is critical, and systems must perform under
-                        stress.
-                    </p>
-                    <p class="text-white border-l-2 border-blue-500 pl-4">
-                        Currently based in Argentina, available for global
-                        relocation (EU/USA).
                     </p>
                 </div>
 
-                <div class="border-t border-[#222] pt-8">
-                    <h3
-                        class="text-sm font-mono text-[#666] uppercase tracking-wider mb-6"
-                    >
-                        Additional Education & Certifications
-                    </h3>
-                    <ul class="grid grid-cols-1 gap-3">
-                        {
-                            certifications.map((cert) => (
-                                <li class="text-[#ccc] text-sm flex items-start gap-2">
-                                    <span class="mt-1.5 w-1 h-1 bg-blue-500 rounded-full" />
-                                    {cert}
-                                </li>
-                            ))
-                        }
-                    </ul>
+                <div class="border-t border-[#222] pt-8 space-y-10">
+                    {/* Professional Certifications */}
+                    <div>
+                        <h3
+                            class="text-sm font-mono text-[#666] uppercase tracking-wider mb-6"
+                        >
+                            Professional Certifications
+                        </h3>
+                        <div class="space-y-4">
+                            {
+                                certifications.map((item) => (
+                                    <div class="p-4 rounded-xl border border-[#222] bg-[#0d0d0d]/80 hover:border-[#333] transition-colors">
+                                        {item.isGroup ? (
+                                            <div>
+                                                <div class="flex items-center justify-between mb-3 border-b border-[#1c1c1c] pb-2">
+                                                    <h4 class="text-white font-medium text-sm sm:text-base">
+                                                        {item.title}
+                                                    </h4>
+                                                    <span class="text-xs font-mono text-[#666] px-2 py-0.5 rounded bg-[#161616] border border-[#262626]">
+                                                        {item.year}
+                                                    </span>
+                                                </div>
+                                                <div class="space-y-2.5 mt-2">
+                                                    {item.items?.map((sub) => (
+                                                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 py-1.5 border-b border-[#161616] last:border-0">
+                                                            <span class="text-[#ccc] text-sm font-light">
+                                                                {sub.title}
+                                                            </span>
+                                                            <div class="flex flex-wrap items-center gap-2">
+                                                                {sub.links.map((link) => (
+                                                                    <a
+                                                                        href={link.url}
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        class={`inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-md border transition-colors ${
+                                                                            link.type === "verify"
+                                                                                ? "text-blue-400 hover:text-blue-300 bg-blue-500/10 hover:bg-blue-500/20 border-blue-500/30"
+                                                                                : "text-[#999] hover:text-white bg-[#161616] hover:bg-[#222] border-[#262626]"
+                                                                        }`}
+                                                                    >
+                                                                        <span>{link.type === "verify" ? "🔗" : "📄"}</span>
+                                                                        <span>{link.label}</span>
+                                                                    </a>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <div class="flex flex-col gap-2.5">
+                                                <div class="flex items-center justify-between">
+                                                    <h4 class="text-white font-medium text-sm sm:text-base">
+                                                        {item.title}
+                                                    </h4>
+                                                    <span class="text-xs font-mono text-[#666] px-2 py-0.5 rounded bg-[#161616] border border-[#262626]">
+                                                        {item.year}
+                                                    </span>
+                                                </div>
+
+                                                <div class="flex flex-wrap items-center gap-2 mt-1">
+                                                    {item.links?.map((link) => (
+                                                        <a
+                                                            href={link.url}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            class="inline-flex items-center gap-1.5 text-xs text-[#999] hover:text-white bg-[#161616] hover:bg-[#222] border border-[#262626] px-2.5 py-1 rounded-md transition-colors"
+                                                        >
+                                                            <span>📄</span>
+                                                            <span>{link.label}</span>
+                                                        </a>
+                                                    ))}
+
+                                                    {item.modules && (
+                                                        <div class="flex flex-wrap items-center gap-1.5 text-xs text-[#666] sm:ml-2">
+                                                            <span>Module Certificates:</span>
+                                                            {item.modules.map((mod, idx) => (
+                                                                <>
+                                                                    <a
+                                                                        href={mod.url}
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        class="text-[#888] hover:text-blue-400 transition-colors underline underline-offset-2"
+                                                                    >
+                                                                        {mod.label}
+                                                                    </a>
+                                                                    {idx < item.modules.length - 1 && <span>·</span>}
+                                                                </>
+                                                            ))}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
+
+                    {/* Supplementary Coursework */}
+                    <div>
+                        <h3
+                            class="text-sm font-mono text-[#666] uppercase tracking-wider mb-6"
+                        >
+                            Supplementary Coursework
+                        </h3>
+
+                        <div class="space-y-4">
+                            {
+                                supplementaryCoursework.map((group) => (
+                                    <div class="p-4 rounded-xl border border-[#222] bg-[#0d0d0d]/80">
+                                        <div class="flex items-center justify-between mb-3 border-b border-[#1c1c1c] pb-2">
+                                            <h4 class="text-white font-medium text-sm sm:text-base">
+                                                {group.institution}
+                                            </h4>
+                                            <span class="text-xs font-mono text-[#666] px-2 py-0.5 rounded bg-[#161616] border border-[#262626]">
+                                                {group.year}
+                                            </span>
+                                        </div>
+
+                                        <ul class="space-y-2 mt-3">
+                                            {group.courses.map((course) => (
+                                                <li class="text-[#bbb] text-sm flex items-start gap-2.5 font-light">
+                                                    <span class="mt-1.5 w-1.5 h-1.5 bg-blue-500/70 rounded-full shrink-0" />
+                                                    <span>{course}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
