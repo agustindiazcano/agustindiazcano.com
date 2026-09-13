@@ -7,7 +7,7 @@ export interface Props {
 
 const { 
     title, 
-    description = "Software Engineer & MSc in Information Systems Engineering Candidate", 
+    description = "Software Engineer | AI/ML & Backend", 
     image = "/images/agustin-diaz-cano-software-engineer-1.png" 
 } = Astro.props;
 
@@ -18,7 +18,7 @@ const imageUrl = new URL(image, siteUrl).toString();
 const schema = {
   "@context": "https://schema.org",
   "@type": "Person",
-  "name": "Agustin Diaz Cano",
+  "name": "Agustin Diaz-Cano",
   "url": siteUrl,
   "image": imageUrl,
   "jobTitle": "Software Engineer",
@@ -36,37 +36,74 @@ const schema = {
     }
   ],
   "knowsAbout": [
-  // CORE ENGINEERING
-      "C++",
-      "Python",
-      "High-Frequency Trading",
-      "Distributed Systems",
-      "Low Latency Architecture",
+    // CORE ENGINEERING
+    "C++",
+    "Python",
+    "TypeScript",
+    "JavaScript",
+    "SQL",
 
-      // GAME DEV & GRAPHICS
-      "Game Engine Architecture",
-      "Physics Simulation",
-      "Performance Optimization",
+    // BACKEND & FULLSTACK
+    "Backend Development",
+    "Frontend Development",
+    "Full Stack Development",
+    "React",
+    "Node.js",
+    "FastAPI",
+    "Django",
+    "PostgreSQL",
+    "MongoDB",
+    "Docker",
+    "CI/CD",
+    "GitHub Actions",
 
-      // DATA & AI
-      "Artificial Intelligence",
-      "Genetic Algorithms",
-      "Fuzzy Logic",
-      "Data Mining",
+    // ROBOTICS & SIMULATION
+    "Robotics",
+    "MuJoCo",
+    "Physics Simulation",
 
-      // QA & RELIABILITY
-      "Test Automation",
-      "SDET",
-      "Digital Forensics",
-      "System Reliability",
+    // GAME DEV & GRAPHICS
+    "Game Development",
 
-      // FINANCIAL DOMAIN
-      "Financial Engineering",
-      "Quantitative Finance",
-      "Corporate Finance",
-      "Algorithmic Trading",
-      "Statistics",
-      "Calculus"
+    // AI / ML / GENAI
+    "Artificial Intelligence",
+    "Machine Learning",
+    "Deep Learning",
+    "PyTorch",
+    "JAX",
+    "NumPy",
+    "Pandas",
+    "Large Language Models (LLM)",
+    "Retrieval-Augmented Generation (RAG)",
+    "Model Context Protocol (MCP)",
+    "LangChain",
+    "LangGraph",
+    "AI Agents",
+    "Genetic Algorithms",
+    "Fuzzy Logic",
+    "Data Mining",
+
+    // CLOUD & INFRASTRUCTURE
+    "Amazon Web Services (AWS)",
+    "Google Cloud Platform (GCP)",
+    "Google Vertex AI",
+    "Amazon Bedrock",
+
+    // QA & RELIABILITY
+    "Test Automation",
+    "SDET",
+    "Digital Forensics",
+    "System Reliability",
+
+    // FINANCE & ECONOMICS
+    "Quantitative Finance",
+    "Corporate Finance",
+    "Economics",
+    "Financial Calculus",
+
+    // MATH & THEORY
+    "Statistics",
+    "Calculus"
   ],
   "sameAs": [
     "https://github.com/agustindiazcano",
@@ -76,11 +113,11 @@ const schema = {
     "https://www.moddb.com/members/heroagastin",
     "https://x.com/adiazcano_",
     "https://steamcommunity.com/id/agustindiazcano/",
-    "https://www.strava.com/athletes/186219723",
     "https://www.labolsavirtual.com/marcelogallardiola",
     "https://www.youtube.com/@agusdiazcano",
     "https://medium.com/@agustindiazcano",
-    "https://www.instagram.com/msc_agustindiazcano/"
+    "https://dev.to/agustindiazcano",
+    "https://scholar.google.com/citations?user=qUcRD6UAAAAJ&hl=en"
   ]
 };
 ---
