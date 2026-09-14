@@ -4,27 +4,14 @@ import Footer from "../../components/Footer.astro";
 
 export async function getStaticPaths() {
     const posts = [
-        {
-            slug: "gdu-testing-architecture",
-            title: "Case Study: GDU Testing Architecture",
-            date: "2024",
-            description:
-                "Designing a high-throughput testing framework for retail transaction systems.",
-        },
+
         {
             slug: "genetic-algorithms-python",
             title: "Genetic Algorithms in Python",
             date: "2023",
             description:
                 "Implementing evolutionary strategies for trading strategy optimization.",
-        },
-        {
-            slug: "minimizing-latency-cpp",
-            title: "Minimizing Latency in C++ Trade Execution",
-            date: "2023",
-            description:
-                "Techniques for lock-free queues and kernel bypass networking.",
-        },
+        }
     ];
 
     return posts.map((post) => ({
