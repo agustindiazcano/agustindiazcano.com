@@ -9,6 +9,7 @@ import SEO from "../components/SEO.astro";
 import Header from "../components/Header.astro";
 import { ClientRouter } from "astro:transitions";
 import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 interface Props {
     title: string;
@@ -48,6 +49,7 @@ const llmContext = fs.readFileSync("public/llms-full.txt", "utf-8");
             {llmContext}
         </div>
         <Analytics />
+        <SpeedInsights />
     </body>
 </html>
 
