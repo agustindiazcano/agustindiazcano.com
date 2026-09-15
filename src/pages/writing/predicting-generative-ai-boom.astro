@@ -1,0 +1,156 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Footer from "../../components/Footer.astro";
+---
+
+<Layout 
+    title="Predicting the Generative AI Boom | Agustin Diaz-Cano"
+    description="Predicting the Generative AI Boom: My Tech Presentation in March 2021 (20 Months Before ChatGPT) by Agustin Diaz-Cano."
+    canonicalUrl="https://medium.com/@agustindiazcano/predicting-the-generative-ai-boom-my-tech-presentation-in-march-2021-20-months-before-chatgpt-99f60f521694"
+>
+    <main class="min-h-screen max-w-[800px] mx-auto px-6 pb-20">
+
+        <div class="mb-8">
+            <a
+                href="/writing"
+                class="text-[#666] hover:text-white transition-colors text-sm inline-flex items-center gap-1"
+                >← Back to Writing</a
+            >
+        </div>
+
+        <header class="mb-12">
+            <span class="font-mono text-blue-400 text-sm mb-4 block"
+                >Mar 2021</span
+            >
+            <h1
+                class="text-4xl md:text-5xl font-bold tracking-tight text-white mb-6 leading-tight"
+            >
+                Predicting the Generative AI Boom: My Tech Presentation in March 2021 (20 Months Before ChatGPT)
+            </h1>
+            <p
+                class="text-xl text-[#888] leading-relaxed border-l-2 border-[#333] pl-6"
+            >
+                A timestamped, verifiable record of live engagement with generative AI technology and accurate forecasting of its trajectory, 20 months before ChatGPT.
+            </p>
+        </header>
+
+        <article class="prose prose-invert prose-lg max-w-none text-[#999] mb-12">
+            <p><strong>Originally delivered:</strong> March 2021 (Spanish)<br/><strong>This document:</strong> Full English translation</p>
+            <hr />
+            <p><em>Back in March 2021, the world of software development was obsessed with crypto, NFTs, and traditional web frameworks. ChatGPT wouldn't exist for another 20 months. However, while attending a full stack programming bootcamp, I decided to give a presentation on something that I knew was about to change our industry forever: Artificial Intelligence.</em></p>
+            <p><em>At a time when AI was still largely viewed as sci-fi by the general public, I showcased the OpenAI beta, the leap from GPT-2 to GPT-3, and live demos that feel incredibly normal today but were mind-blowing back then (using natural language to build Excel spreadsheets and generate functional React interfaces).</em></p>
+            <p><em>Looking back at this presentation today, it serves as a time capsule. It reflects not just where the technology was, but the exact trajectory it was about to take toward the Singularity and the "GenAI Boom."</em></p>
+            <hr />
+            
+            <h2 class="text-white font-semibold mt-10 mb-4 text-2xl">Transcript</h2>
+            
+            <blockquote class="border-l-4 border-blue-500 pl-4 italic my-4 text-[#888]">
+                [Visual aids notes: fills tables from predictions, Facebook AI code translator between Python, C++, Java, 50 companies automating processes, MuseNet]
+            </blockquote>
+            
+            <p>Hello, good morning. I will now begin my presentation.</p>
+            <p>I am going to talk about Artificial Intelligence.</p>
+            
+            <h3 class="text-white font-semibold mt-8 mb-4">What is Artificial Intelligence?</h3>
+            <p>It is a series of algorithms that allow a program to simulate human intelligence to perform a task that appears to be done through reasoning.</p>
+            <p>It should not be confused with artificial consciousness, which would be the capacity for actual real thought by an artificial intelligence — something that is still far in the future.</p>
+            <p>Artificial intelligence can be used to perform tasks such as:</p>
+            <ul>
+                <li>Surveillance</li>
+                <li>Autonomous driving</li>
+                <li>Disease diagnosis — AI already diagnoses diseases faster and with a lower error rate than human doctors</li>
+                <li>Depression detection</li>
+            </ul>
+            
+            <h3 class="text-white font-semibold mt-8 mb-4">Traditional Approach vs. Machine Learning</h3>
+            <p>One is the traditional approach, which involves programming the system to perform a specific task. Like the case of IBM's Deep Blue, which beat Kasparov in '96. Here, a team of programmers, chess players, and mathematicians with complex algorithms made an AI capable of learning to play chess.</p>
+            <p>The other approach is, instead of programming the AI to perform a task, you program it so it learns how to perform it. This is called <strong>Machine Learning</strong>.</p>
+            <p>Within machine learning we have:</p>
+            <ul>
+                <li><strong>Supervised learning</strong> — classic machine learning</li>
+                <li><strong>Unsupervised learning</strong> — deep learning</li>
+                <li><strong>Reinforcement learning</strong> — deep learning</li>
+            </ul>
+            <p>Machine learning is a field within artificial intelligence, and deep learning is a field within machine learning that uses convolutional neural networks.</p>
+            
+            <h3 class="text-white font-semibold mt-8 mb-4">Supervised Learning</h3>
+            <p>I teach the algorithm what I want it to do. An expert with deep knowledge of the area can teach it what to do when it encounters similar patterns. The idea is that it can recognize new cases outside the model.</p>
+            <p>If it only recognizes very similar cases, it's because our model is overfitted; if it confuses very diverse cases, it's because our model is underfitted.</p>
+            <p>Machine learning is based on cognitive theories of human learning applied to machines. It's a different approach: instead of saying, "well, I'll program an AI to do something," I program an AI to learn to do what I want. When the level of complexity of the tasks increases, this approach makes everything easier, as decision trees can be enormous and difficult to understand.</p>
+            <p>An expert in an area who knows the correct result beforehand teaches the algorithm.</p>
+            <p>I show it a picture of a cat as input, and as output, another picture of a cat. Then I show it another cat, and the algorithm should be able to recognize new cases. If it is unable to recognize other cases, it's because our model is overfitted to only detect that specific type of case, when it needs to be more generalist.</p>
+            <p>The larger the dataset of cat photos we feed it, the greater its capacity to recognize new images it hasn't seen before.</p>
+            
+            <h3 class="text-white font-semibold mt-8 mb-4">Unsupervised Learning (Deep Learning) — Convolutional Neural Networks</h3>
+            <p>This is a more powerful type of machine learning. Here, instead of training it by telling it what the result is beforehand, the focus is on developing an algorithm that learns from the dataset, but without showing it the output of the correct result.</p>
+            <p><strong>Neural networks</strong> are sets of nodes and parameters that dismantle information and process it with mathematical formulas, activating and deactivating nodes depending on whether it guesses right or not until it reaches the output.</p>
+            <p>I show it an image, the nodes activate after doing the math (this activates the neurons), and after a series of activations, the correct result is reached.</p>
+            
+            <h3 class="text-white font-semibold mt-8 mb-4">Reinforcement Learning (Deep Learning)</h3>
+            <p>This involves having the program execute a task many times. Every time it gets it right, it is rewarded to reinforce that behavior, and when it makes a mistake, it is punished. Thus, through trial and error, the program trains itself (self-programs) until it is capable of performing the desired task.</p>
+            <p>A deep learning algorithm with a "reward" and "punishment" system to accelerate learning.</p>
+            <p>An example is a video of a game of hide and seek; the red team has to find the blue team. This simulation was run 10 million times so the AI could learn to play and learn the rules of the game.</p>
+            <p><em>Reference: "OpenAI Plays Hide and Seek…and Breaks The Game!"</em></p>
+            
+            <h3 class="text-white font-semibold mt-8 mb-4">NLP — Natural Language Processing</h3>
+            <p>Natural Language Processing is a deep learning system trained to "understand" human language, whether written or spoken. It can write credible scientific or journalistic articles based on data input. I can tell it to write an article about the last Barcelona match, and it will write it.</p>
+            <p>Among the most powerful is <strong>GPT-3</strong> by Elon Musk's OpenAI.</p>
+            <p>From internet data input, it is capable of simulating credible text; that is, it can predict what word it has to put next so that what it writes makes sense to a human.</p>
+            <p>It was trained for this, but secondary results of this training were cross-language translation and the ability to program.</p>
+            
+            <h3 class="text-white font-semibold mt-8 mb-4">GPT-2 vs. GPT-3</h3>
+            <p>GPT-2 is from 2019, GPT-3 is from 2020. The leap made in such a short time is impressive. Over 90% of advances in artificial intelligence occurred in the last 10 years.</p>
+            <p>Google's DeepMind achieved 600 billion parameters a few months after GPT-3 went public.</p>
+            <p>They have a public API — well, not that public; it's like a beta for a closed circle given to people in the field of AI development and research. Among the applications given to this tech is an app that writes React code based on human language instructions.</p>
+            <p>The most interesting part is not what is currently being done with this, but how it puts into perspective what is coming in the future and the speed at which this is advancing.</p>
+            
+            <h3 class="text-white font-semibold mt-8 mb-4">Closing</h3>
+            <p>The limits of artificial intelligence lie in processing capacity. Today, entire buildings of GPU servers are used to support the power needed to run these increasingly giant neural networks.</p>
+            <p>What exists is a limit in hardware technology; it is very expensive to run something powerful. This limit will be solved with quantum computing; we already have several in development, like IBM's and Google's.</p>
+            <p>There would no longer be computing capacity limits. Obviously, this renders a large part of classical computing obsolete. With quantum computing, current security and cryptography are obsolete.</p>
+            <p>Google's quantum computer solved a math problem in 200 seconds that would have taken a classical supercomputer 10,000 years (Source: Google).</p>
+            <p>And Intel already wants to make commercial quantum computers.</p>
+            <p>Antimatter engines, quantum computers, and artificial intelligence.</p>
+            <p>The 4th industrial revolution is coming, and with it, the singularity is getting closer. The moment when artificial intelligence computers are so smart that they program themselves to be even smarter — in other words, they evolve.</p>
+            <p>This also leads to an economic singularity that feeds back into the technological one.</p>
+            
+            <hr />
+            
+            <h2 class="text-white font-semibold mt-10 mb-4 text-2xl">Reference Videos</h2>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=WhPgZFsPLeE" target="_blank" rel="noopener noreferrer">OpenAI Plays Hide and Seek</a></li>
+                <li><a href="https://www.youtube.com/watch?v=YCur6ir6wmw" target="_blank" rel="noopener noreferrer">Two Minute Papers — video 1</a></li>
+                <li><a href="https://www.youtube.com/watch?v=3UZzu4UQLcI" target="_blank" rel="noopener noreferrer">Two Minute Papers — video 2</a></li>
+                <li><a href="https://www.youtube.com/watch?v=Pb1Pp-cGHZE" target="_blank" rel="noopener noreferrer">Musical Series video</a></li>
+                <li><a href="https://openai.com/blog/musenet/" target="_blank" rel="noopener noreferrer">OpenAI MuseNet</a></li>
+            </ul>
+            
+            <p class="mt-8 italic text-sm text-[#666]">Original presentation: Spanish (see original GitHub repository).</p>
+        </article>
+
+        <div class="border-t border-[#222] pt-8 mb-12 flex flex-col gap-4 sm:flex-row">
+            <a 
+                href="https://medium.com/@agustindiazcano/predicting-the-generative-ai-boom-my-tech-presentation-in-march-2021-20-months-before-chatgpt-99f60f521694" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 bg-[#111] hover:bg-[#222] border border-[#333] text-white px-6 py-3 rounded-lg transition-colors font-medium text-sm"
+            >
+                Read original post on Medium
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-70"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+            <a 
+                href="https://github.com/agustindiazcano/ai-ml-genai-gpt3-demo-march-2021-20-months-before-chatgpt" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 bg-transparent hover:bg-[#111] border border-[#333] text-[#888] hover:text-white px-6 py-3 rounded-lg transition-colors font-medium text-sm"
+            >
+                View GitHub Repository
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </a>
+        </div>
+
+        <div class="mt-20">
+            <Footer />
+        </div>
+    </main>
+</Layout>

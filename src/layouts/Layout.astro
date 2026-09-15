@@ -14,9 +14,10 @@ import SpeedInsights from '@vercel/speed-insights/astro';
 interface Props {
     title: string;
     description?: string;
+    canonicalUrl?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, canonicalUrl } = Astro.props;
 
 import fs from "node:fs";
 const llmContext = fs.readFileSync("public/llms-full.txt", "utf-8");
@@ -31,6 +32,7 @@ const llmContext = fs.readFileSync("public/llms-full.txt", "utf-8");
         <meta name="generator" content={Astro.generator} />
         <SEO title={title} description={description} />
         <ClientRouter />
+        {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
     </head>
     <body
         class="bg-background text-foreground antialiased selection:bg-success selection:text-white"
