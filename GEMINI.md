@@ -72,3 +72,7 @@ Personal website and portfolio of **Agustin Diaz-Cano**, Software Engineer and M
 5. **Custom Workflow Commands**:
    - **/commit**: Inspect staged/unstaged changes, draft conventional commit message, commit locally, and **never push**.
    - **/ship**: Inspect changes, draft conventional commit, commit, run `npm run build` verification (abort if fails), and `git push origin main`.
+
+6. **SEO & Branding Rules**:
+   - "Agustin Diaz Cano" must ALWAYS be written with a hyphen as "**Agustin Diaz-Cano**".
+   - All pages across the site (projects, profile, writing, etc.) must be optimized to rank well when someone searches for "Agustin Diaz-Cano" on Google. Ensure this exact string is included in titles and meta descriptions.

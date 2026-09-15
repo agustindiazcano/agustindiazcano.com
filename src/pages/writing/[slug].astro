@@ -23,7 +23,10 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 ---
 
-<Layout title={`${post.title} | Agustin Diaz Cano`}>
+<Layout 
+    title={`${post.title} | Agustin Diaz-Cano`}
+    description={`${post.description} — An article by Agustin Diaz-Cano.`}
+>
     <main class="min-h-screen max-w-[800px] mx-auto px-6 pb-20">
 
         <div class="mb-8">

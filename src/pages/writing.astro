@@ -4,6 +4,13 @@ import Footer from "../components/Footer.astro";
 
 const posts = [
   {
+    slug: "fundamental-principles",
+    title: "Fundamental Principles of Scientific Validation",
+    date: "Mar 3, 2026",
+    description:
+      "If you cannot describe the physical or logical mechanism driving the inner workings of a phenomenon, you do not have a theory, you have a statistical anecdote.",
+  },
+  {
     slug: "gdu-testing-architecture", // Matches [slug].astro
     title: "lorem",
     date: "2024",
@@ -27,7 +34,10 @@ const posts = [
 ];
 ---
 
-<Layout title="Writing | Agustin Diaz Cano">
+<Layout 
+  title="Writing | Agustin Diaz-Cano"
+  description="Technical notes, articles, and research on systems engineering, performance, and quantitative finance written by Agustin Diaz-Cano."
+>
   <main class="min-h-screen max-w-[800px] mx-auto px-6 pb-20">
 
     <section class="mb-16">
