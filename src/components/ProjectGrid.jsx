@@ -6,18 +6,6 @@ const ProjectGrid = () => {
 
     const projects = [
         {
-            id: 1,
-            title: "HFT Trading Engine",
-            slug: "hft-engine",
-            subtitle: "Low Latency C++",
-            description: "Sub-microsecond latency execution engine.",
-            longDescription: "A high-frequency trading engine written in C++ with custom memory allocators, lock-free queues, and kernel bypass networking for extreme low-latency execution.",
-            tags: ["C++", "Finance", "Low Latency"],
-            size: "large",
-            stats: "< 400ns tick-to-trade",
-            features: ["Kernel bypass networking", "Lock-free data structures", "Order book building"]
-        },
-        {
             id: 2,
             title: "Game Development: Zombie Mod",
             slug: "zombie-mod-assault-squad-2",
@@ -32,30 +20,6 @@ const ProjectGrid = () => {
                 "Entity component system architecture",
                 "Automated anti-cheat heuristics"
             ]
-        },
-        {
-            id: 3,
-            title: "GenAI Context Protocol",
-            slug: "genai-mcp",
-            subtitle: "AI Agents",
-            description: "LangGraph orchestration system.",
-            longDescription: "An implementation of the Model Context Protocol (MCP) integrating LangGraph agents with specialized tooling environments.",
-            tags: ["Python", "AI", "LLM"],
-            size: "medium",
-            stats: "50+ Tools",
-            features: ["RAG Integration", "Agentic orchestration", "Custom tools server"]
-        },
-        {
-            id: 4,
-            title: "MSc in Engineering",
-            slug: "msc-thesis",
-            subtitle: "Thesis Phase",
-            description: "Genetic Algorithms research.",
-            longDescription: "Research focus on applying advanced genetic algorithms to solve NP-hard optimization problems in distributed systems.",
-            tags: ["Research", "Algorithms"],
-            size: "large",
-            stats: "Thesis Phase",
-            features: ["Evolutionary strategies", "Distributed computing", "Mathematical modeling"]
         }
     ];
 
