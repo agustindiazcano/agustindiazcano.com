@@ -7,6 +7,7 @@ import "@fontsource/raleway/100.css";
 import "@fontsource/raleway/700.css";
 import SEO from "../components/SEO.astro";
 import Header from "../components/Header.astro";
+import BackToTopButton from "../components/BackToTopButton.jsx";
 import { ClientRouter } from "astro:transitions";
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
@@ -50,6 +51,7 @@ const llmContext = fs.readFileSync("public/llms-full.txt", "utf-8");
         <div class="llm-hidden">
             {llmContext}
         </div>
+        <BackToTopButton client:load />
         <Analytics />
         <SpeedInsights />
     </body>

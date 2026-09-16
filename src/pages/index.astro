@@ -2,14 +2,12 @@
 import Layout from "../layouts/Layout.astro";
 import ProjectGrid from "../components/ProjectGrid.jsx";
 import Footer from "../components/Footer.astro";
-import BlackHoleBackground from "../components/BlackHoleBackground.jsx";
 ---
 
 <Layout 
     title="Agustin Diaz-Cano | Software Engineer | AI/ML & Backend | MS Candidate"
     description="Agustin Diaz-Cano is a Software Engineer and MSc Candidate specializing in backend, AI/ML, and systems engineering."
 >
-    <BlackHoleBackground client:load />
     <main
         class="min-h-screen flex flex-col items-center justify-start max-w-[1200px] mx-auto px-6 pb-20 relative z-10"
     >
@@ -17,7 +15,7 @@ import BlackHoleBackground from "../components/BlackHoleBackground.jsx";
         {/* Bento Grid (Interactive) */}
         <ProjectGrid client:load />
 
-        <Footer isHome={true} />
+        <Footer />
 
         <style>
             .fade-in {

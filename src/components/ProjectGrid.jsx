@@ -5,20 +5,128 @@ const ProjectGrid = () => {
     const [selectedId, setSelectedId] = useState(null);
 
     const projects = [
+        // ROW 1
+        {
+            id: 9,
+            title: "MCP Transactional Agent",
+            slug: "mcp-transactional-agent",
+            subtitle: "View Case Study",
+            description: "AI-driven transactional agent using Model Context Protocol.",
+            longDescription: "Developed an advanced transactional agent utilizing the Model Context Protocol (MCP) to interact with complex APIs and perform autonomous operations securely.",
+            tags: ["AI", "LLMs", "Agentic Systems"],
+            size: "medium",
+            stats: "",
+            features: [
+                "Autonomous tool execution",
+                "Model Context Protocol integration"
+            ]
+        },
+        {
+            id: 8,
+            title: "Algorithmic Trading Engine",
+            slug: "algorithmic-trading-engine",
+            subtitle: "View Architecture",
+            description: "Automated trading system for financial markets.",
+            longDescription: "Developed a high-performance algorithmic trading engine capable of processing market data and executing trades with low latency.",
+            tags: ["Fintech", "Python", "Trading"],
+            size: "medium",
+            stats: "",
+            features: [
+                "Low latency execution",
+                "Real-time data ingestion"
+            ]
+        },
+        {
+            id: 10,
+            title: "AI & ML Research",
+            slug: "ai-ml-research",
+            subtitle: "View Experiments",
+            description: "A collection of academic experiments and proofs of concept focusing on physics simulations, neural networks, and optimization.",
+            longDescription: "A collection of academic experiments and proofs of concept focusing on physics simulations, neural networks, and optimization. Investigated advanced concepts in autonomous agents and complex system modeling.",
+            tags: ["AI", "ML", "Neural Networks", "Python"],
+            size: "medium",
+            stats: "",
+            features: [
+                "Physics simulations",
+                "Deep reinforcement learning"
+            ]
+        },
+        // ROW 2
+        {
+            id: 11,
+            title: "Astrophysics Data Simulations",
+            slug: "astrophysics-data-simulations",
+            subtitle: "View Details",
+            description: "Simulations of astrophysical phenomena and data analysis.",
+            longDescription: "Developed robust simulations to model complex astrophysics systems, analyzing large datasets for scientific research.",
+            tags: ["Data Science", "Physics", "Python"],
+            size: "medium",
+            stats: "",
+            features: [
+                "Large scale data processing",
+                "High performance computing"
+            ]
+        },
+        {
+            id: 6,
+            title: "LATAM E-commerce Ecosystem",
+            slug: "ecommerce-latam",
+            subtitle: "View Case Study",
+            description: "E-commerce platform for the Latin American market.",
+            longDescription: "Developed a scalable and localized e-commerce solution tailored for LATAM, handling complex payment gateways and shipping logistics.",
+            tags: ["Web Dev", "E-commerce", "React"],
+            size: "medium",
+            stats: "",
+            features: [
+                "Localized payment integrations",
+                "Scalable architecture"
+            ]
+        },
+        {
+            id: 7,
+            title: "InsurTech Quoting Engine",
+            slug: "insurance-quoter",
+            subtitle: "View Architecture",
+            description: "Dynamic insurance quoting engine and frontend.",
+            longDescription: "Built a robust quoting engine and an intuitive user interface for calculating insurance premiums in real-time based on risk factors.",
+            tags: ["Fintech", "TypeScript", "React"],
+            size: "medium",
+            stats: "",
+            features: [
+                "Real-time calculation engine",
+                "Dynamic form generation"
+            ]
+        },
+        // ROW 3
         {
             id: 2,
-            title: "Game Development: Zombie Mod",
-            slug: "zombie-mod-assault-squad-2",
+            title: "Game Dev: Modding Ecosystem",
+            slug: "game-dev-modding",
             subtitle: "View Gameplay & Stats",
-            description: "200k+ Downloads.",
-            longDescription: "A massive multiplayer mod demonstrating the capacity to handle high concurrency and complex state synchronization. Managed community servers and orchestrated deployment pipelines.",
-            tags: ["Game Dev", "Lua"],
-            size: "medium",
-            stats: "200k Downloads",
+            description: "220,000+ Downloads. Combining Zombie Mod and HD Mod across Men of War series.",
+            longDescription: "A massive multiplayer mod ecosystem demonstrating the capacity to handle high concurrency and complex state synchronization. Replaces low-resolution assets with HD textures and detailed models while maintaining performance.",
+            tags: ["Game Dev", "Lua", "3D Modeling"],
+            size: "large",
+            stats: "220k+ Downloads",
             features: [
                 "Lag compensation networking",
                 "Entity component system architecture",
-                "Automated anti-cheat heuristics"
+                "HD Texture replacements"
+            ]
+        },
+        {
+            id: 12,
+            title: "Alien Survival",
+            slug: "alien-survival",
+            subtitle: "View Details",
+            description: "Survival game focusing on resource management and base building.",
+            longDescription: "Created a challenging survival game where players must defend against alien swarms while managing limited resources and building base defenses.",
+            tags: ["Game Dev", "C#", "Unity"],
+            size: "medium",
+            stats: "",
+            features: [
+                "Dynamic wave generation",
+                "Resource management mechanics"
             ]
         }
     ];
