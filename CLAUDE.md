@@ -1,6 +1,6 @@
 # Agustin Diaz-Cano - Portfolio (`agustinweb`)
 
-## 📌 Project Description
+## Project Description
 Personal website and portfolio of **Agustin Diaz-Cano**, Software Engineer and MSc Candidate.
 
 - **Production URL**: [agustindiazcano.com](https://www.agustindiazcano.com)
@@ -8,7 +8,7 @@ Personal website and portfolio of **Agustin Diaz-Cano**, Software Engineer and M
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Framework**: [Astro 5](https://astro.build/) (SSG / SSR)
 - **Interactive Components**: React 19 (`@astrojs/react`)
@@ -19,7 +19,7 @@ Personal website and portfolio of **Agustin Diaz-Cano**, Software Engineer and M
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 /
@@ -43,7 +43,7 @@ Personal website and portfolio of **Agustin Diaz-Cano**, Software Engineer and M
 
 ---
 
-## 💻 Development Commands
+## Development Commands
 
 - `npm run dev` - Starts the local development server (default port: `http://localhost:4321`)
 - `npm run build` - Generates production build in `./dist/`
@@ -51,7 +51,7 @@ Personal website and portfolio of **Agustin Diaz-Cano**, Software Engineer and M
 
 ---
 
-## 🎯 Assistant Guidelines & Instructions
+## Assistant Guidelines & Instructions
 
 1. **Language & Communication**:
    - Always communicate, explain, and reply in **English**.
@@ -79,3 +79,6 @@ Personal website and portfolio of **Agustin Diaz-Cano**, Software Engineer and M
 
 7. **Icons Rule**:
    - EMOJIS ARE NOT ALLOWED
+
+8. **Images Rule**:
+   - USE LAZY LOAD FOR IMAGES AND ADD ALT ATRIBUTE TO ALL IMAGES

@@ -56,54 +56,6 @@ const ProjectGrid = () => {
             size: "large",
             stats: "Thesis Phase",
             features: ["Evolutionary strategies", "Distributed computing", "Mathematical modeling"]
-        },
-        {
-            id: 5,
-            title: "Distributed Task Queue",
-            slug: "task-queue",
-            subtitle: "Backend Infrastructure",
-            description: "Go-based distributed queue.",
-            longDescription: "A scalable, persistent task queue built for high-throughput microservices, ensuring exactly-once processing guarantees.",
-            tags: ["Go", "Redis", "Kafka"],
-            size: "medium",
-            stats: "1M req/sec",
-            features: ["Exactly-once processing", "Auto-scaling workers", "Persistent state"]
-        },
-        {
-            id: 6,
-            title: "Physics Simulation Engine",
-            slug: "physics-engine",
-            subtitle: "Robotics",
-            description: "MuJoCo based physics simulator.",
-            longDescription: "A real-time robotics simulation environment designed for training reinforcement learning agents in complex continuous control tasks.",
-            tags: ["C++", "Python", "MuJoCo"],
-            size: "large",
-            stats: "1000+ FPS",
-            features: ["Rigid body dynamics", "Collision detection", "RL Gym interface"]
-        },
-        {
-            id: 7,
-            title: "Retail E-Commerce Backend",
-            slug: "ecommerce-backend",
-            subtitle: "Microservices",
-            description: "Enterprise scale Node.js backend.",
-            longDescription: "Architected and deployed a multi-tenant e-commerce backend handling inventory, payments, and distributed tracing across 12 microservices.",
-            tags: ["Node.js", "Docker", "PostgreSQL"],
-            size: "medium",
-            stats: "99.99% Uptime",
-            features: ["Event-driven architecture", "Payment gateway integration", "GraphQL API"]
-        },
-        {
-            id: 8,
-            title: "Data Mining Pipeline",
-            slug: "data-pipeline",
-            subtitle: "Big Data",
-            description: "Spark-based ETL pipeline.",
-            longDescription: "End-to-end data engineering pipeline processing terabytes of unstructured data for predictive analytics models.",
-            tags: ["Python", "PySpark", "AWS"],
-            size: "medium",
-            stats: "5TB / day",
-            features: ["Real-time streaming", "Data warehouse integration", "Anomaly detection"]
         }
     ];
 
