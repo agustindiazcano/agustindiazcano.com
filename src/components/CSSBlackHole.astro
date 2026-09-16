@@ -1,0 +1,140 @@
+---
+// CSS Black Hole Background Component
+---
+
+<div id="css-blackhole-container" style="opacity: 0;" class="fixed inset-0 w-full h-[100vh] -z-10 bg-[#05030d] overflow-hidden transition-opacity duration-1000">
+    <div class="space">
+        <div class="stars" id="css-stars"></div>
+        <div class="orb-wrapper">
+            <div class="outer-glow"></div>
+            <div class="ring"></div>
+            <div class="ball"></div>
+        </div>
+        <div class="blur-overlay"></div>
+    </div>
+</div>
+
+<style>
+  .space {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at 50% 45%, #3a1a5c 0%, #1f0f38 45%, #05030d 100%);
+    overflow: hidden;
+  }
+
+  .stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  :global(.stars span) {
+    position: absolute;
+    background: #ffffff;
+    border-radius: 50%;
+    opacity: var(--o, 0.8);
+  }
+
+  .orb-wrapper {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 700px;
+  }
+
+  .outer-glow {
+    position: absolute;
+    inset: -60px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,154,77,0.55) 0%, rgba(255,154,77,0.18) 55%, rgba(255,154,77,0) 100%);
+    filter: blur(18px);
+    animation: breathe 4.5s ease-in-out infinite;
+    animation-delay: -0.6s;
+  }
+
+  @keyframes breathe {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.85;
+    }
+    50% {
+      transform: scale(1.045);
+      opacity: 1;
+    }
+  }
+
+  .ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      #04040a 0%,
+      #04040a 30%,
+      rgba(20,15,10,0.6) 38%,
+      #fffdf2 46%,
+      #fff3c4 56%,
+      rgba(255,210,122,0.85) 66%,
+      rgba(255,178,110,0.55) 78%,
+      rgba(255,178,110,0.3) 88%,
+      rgba(255,178,110,0.12) 95%,
+      rgba(255,178,110,0) 100%
+    );
+    filter: blur(9px);
+    animation: breathe 4.5s ease-in-out infinite;
+  }
+
+  .blur-overlay {
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  
+  .ball {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle at 42% 38%, #14141c 0%, #04040a 40%, rgba(4,4,10,0.9) 62%, rgba(4,4,10,0.4) 80%, rgba(4,4,10,0) 100%);
+    filter: blur(10px);
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const starsContainer = document.getElementById('css-stars');
+    if (!starsContainer) return;
+    
+    const total = 220;
+    for (let i = 0; i < total; i++) {
+      const s = document.createElement('span');
+      const size = Math.random() * 2 + 0.6;
+      s.style.width = size + 'px';
+      s.style.height = size + 'px';
+      s.style.top = Math.random() * 100 + '%';
+      s.style.left = Math.random() * 100 + '%';
+      s.style.setProperty('--o', (Math.random() * 0.7 + 0.3).toFixed(2));
+      starsContainer.appendChild(s);
+    }
+  });
+
+  // Fade in faster on scroll
+  window.addEventListener("scroll", () => {
+      const scrollY = window.scrollY;
+      const opacity = Math.min(1, scrollY / 150);
+      const bg = document.getElementById('css-blackhole-container');
+      if (bg) {
+          bg.style.opacity = opacity.toString();
+      }
+  });
+</script>

@@ -1,4 +1,9 @@
 ---
+export interface Props {
+    isHome?: boolean;
+}
+
+const { isHome = false } = Astro.props;
 const currentYear = new Date().getFullYear();
 
 const links = [
@@ -24,10 +29,12 @@ const links = [
     { name: "llms.txt", href: "/llms.txt" },
     { name: "llms-full.txt", href: "/llms-full.txt" },
 ];
+
+const textColor = isHome ? "text-white/90" : "text-[#444]";
 ---
 
 <footer
-    class="w-full border-t border-[#222] pt-12 pb-12 flex flex-col items-center justify-center text-sm gap-8 text-[#444]"
+    class={`w-full border-t border-[#222] pt-12 pb-12 flex flex-col items-center justify-center text-sm gap-8 ${textColor}`}
 >
     <div class="flex gap-4 flex-wrap justify-center max-w-3xl">
         {
