@@ -6,8 +6,20 @@ const ProjectGrid = () => {
 
     const projects = [
         {
+            id: 1,
+            title: "HFT Trading Engine",
+            slug: "hft-engine",
+            subtitle: "Low Latency C++",
+            description: "Sub-microsecond latency execution engine.",
+            longDescription: "A high-frequency trading engine written in C++ with custom memory allocators, lock-free queues, and kernel bypass networking for extreme low-latency execution.",
+            tags: ["C++", "Finance", "Low Latency"],
+            size: "large",
+            stats: "< 400ns tick-to-trade",
+            features: ["Kernel bypass networking", "Lock-free data structures", "Order book building"]
+        },
+        {
             id: 2,
-            title: "Game Development: Zombie Mod - Men of War",
+            title: "Game Development: Zombie Mod",
             slug: "zombie-mod-assault-squad-2",
             subtitle: "View Gameplay & Stats",
             description: "200k+ Downloads.",
@@ -20,6 +32,78 @@ const ProjectGrid = () => {
                 "Entity component system architecture",
                 "Automated anti-cheat heuristics"
             ]
+        },
+        {
+            id: 3,
+            title: "GenAI Context Protocol",
+            slug: "genai-mcp",
+            subtitle: "AI Agents",
+            description: "LangGraph orchestration system.",
+            longDescription: "An implementation of the Model Context Protocol (MCP) integrating LangGraph agents with specialized tooling environments.",
+            tags: ["Python", "AI", "LLM"],
+            size: "medium",
+            stats: "50+ Tools",
+            features: ["RAG Integration", "Agentic orchestration", "Custom tools server"]
+        },
+        {
+            id: 4,
+            title: "MSc in Engineering",
+            slug: "msc-thesis",
+            subtitle: "Thesis Phase",
+            description: "Genetic Algorithms research.",
+            longDescription: "Research focus on applying advanced genetic algorithms to solve NP-hard optimization problems in distributed systems.",
+            tags: ["Research", "Algorithms"],
+            size: "large",
+            stats: "Thesis Phase",
+            features: ["Evolutionary strategies", "Distributed computing", "Mathematical modeling"]
+        },
+        {
+            id: 5,
+            title: "Distributed Task Queue",
+            slug: "task-queue",
+            subtitle: "Backend Infrastructure",
+            description: "Go-based distributed queue.",
+            longDescription: "A scalable, persistent task queue built for high-throughput microservices, ensuring exactly-once processing guarantees.",
+            tags: ["Go", "Redis", "Kafka"],
+            size: "medium",
+            stats: "1M req/sec",
+            features: ["Exactly-once processing", "Auto-scaling workers", "Persistent state"]
+        },
+        {
+            id: 6,
+            title: "Physics Simulation Engine",
+            slug: "physics-engine",
+            subtitle: "Robotics",
+            description: "MuJoCo based physics simulator.",
+            longDescription: "A real-time robotics simulation environment designed for training reinforcement learning agents in complex continuous control tasks.",
+            tags: ["C++", "Python", "MuJoCo"],
+            size: "large",
+            stats: "1000+ FPS",
+            features: ["Rigid body dynamics", "Collision detection", "RL Gym interface"]
+        },
+        {
+            id: 7,
+            title: "Retail E-Commerce Backend",
+            slug: "ecommerce-backend",
+            subtitle: "Microservices",
+            description: "Enterprise scale Node.js backend.",
+            longDescription: "Architected and deployed a multi-tenant e-commerce backend handling inventory, payments, and distributed tracing across 12 microservices.",
+            tags: ["Node.js", "Docker", "PostgreSQL"],
+            size: "medium",
+            stats: "99.99% Uptime",
+            features: ["Event-driven architecture", "Payment gateway integration", "GraphQL API"]
+        },
+        {
+            id: 8,
+            title: "Data Mining Pipeline",
+            slug: "data-pipeline",
+            subtitle: "Big Data",
+            description: "Spark-based ETL pipeline.",
+            longDescription: "End-to-end data engineering pipeline processing terabytes of unstructured data for predictive analytics models.",
+            tags: ["Python", "PySpark", "AWS"],
+            size: "medium",
+            stats: "5TB / day",
+            features: ["Real-time streaming", "Data warehouse integration", "Anomaly detection"]
         }
     ];
 

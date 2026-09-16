@@ -76,3 +76,6 @@ Personal website and portfolio of **Agustin Diaz-Cano**, Software Engineer and M
 6. **SEO & Branding Rules**:
    - "Agustin Diaz Cano" must ALWAYS be written with a hyphen as "**Agustin Diaz-Cano**".
    - All pages across the site (projects, profile, writing, etc.) must be optimized to rank well when someone searches for "Agustin Diaz-Cano" on Google. Ensure this exact string is included in titles and meta descriptions.
+
+7. **Icons Rule**:
+   - EMOJIS ARE NOT ALLOWED

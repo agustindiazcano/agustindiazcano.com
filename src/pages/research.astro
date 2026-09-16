@@ -1,0 +1,51 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
+
+const publications = [
+];
+---
+
+<Layout 
+  title="Research | Agustin Diaz-Cano"
+  description="Academic research, publications, and scientific work by Agustin Diaz-Cano."
+>
+  <main class="min-h-screen max-w-[800px] mx-auto px-6 pb-20">
+
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold tracking-tight text-white mb-3">Research</h2>
+      <p class="text-[#888]">
+        Publications and Academic Work
+      </p>
+    </section>
+
+    <div class="space-y-12">
+      {
+        publications.length > 0 ? publications.map((pub) => (
+          <article class="group relative">
+            <div class="flex justify-between items-baseline mb-2">
+              <h2 class="text-xl font-semibold text-white group-hover:text-blue-400 transition-colors">
+                <a
+                  href={`/research/${pub.slug}`}
+                  class="absolute inset-0 z-10 focus:outline-none"
+                >
+                  <span class="sr-only">Read - {pub.title}</span>
+                </a>
+                {pub.title}
+              </h2>
+              <span class="text-sm font-mono text-[#444]">{pub.date}</span>
+            </div>
+            <p class="text-[#666] text-sm leading-relaxed relative z-20 pointer-events-none">
+              {pub.description}
+            </p>
+          </article>
+        )) : (
+          <p class="text-[#666] italic">Academic publications will be listed here soon.</p>
+        )
+      }
+    </div>
+    <div class="mt-20">
+      <Footer />
+    </div>
+  </main>
+</Layout>
