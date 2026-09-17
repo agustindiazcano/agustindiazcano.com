@@ -24,10 +24,22 @@ A rigorous double-degree program consisting of a first specialization, followed 
 - **LATAM E-commerce Ecosystem (2022)**: Scalable and localized e-commerce solution handling complex gateways.
 - **InsurTech Quoting Engine (2021)**: Real-time insurance premium quoting engine.
 - **Crypto Ethereum Mining Rig (2017)**: Assembled and configured a rig for Ethereum mining in the early adoption era. [View Repository](https://github.com/agustindiazcano/eth-mining-infrastructure-2017)
-- **Game Dev: Modding Ecosystem (2010)**: 220,000+ Downloads mod across Men of War series.
+- **Game Dev: Modding Ecosystem (2010)**: 220,000+ Downloads across Men of War series (solo creator, no marketing budget, no pre-existing audience).
     - [Men of War Zombie Mod Main (+113k Downloads)](https://www.moddb.com/mods/zombie-mod5)
     - [Men of War Zombie Mod Assault (+84k Downloads)](https://www.moddb.com/mods/men-of-war-zombie-mod)
     - [Men of War HD Mod (20k Downloads)](https://www.moddb.com/mods/hd-mod)
+
+    **Context (actual rarity)**:  
+    - Only ~1–2% of Steam games ever reach 100,000+ lifetime units.  
+    - On Google Play, ~75% of newly launched apps never exceed 1,000 downloads, and only ~2% surpass 100,000.  
+    - On the App Store (iOS), ~92–93% of apps show effectively zero measurable downloads.  
+    - The majority of mid-size company apps (and many corporate products) never reach 200k organic downloads.  
+    Achieving 220k+ downloads as a solo creator is a long-tail outcome that 98–99% of software engineers never accomplish independently in their entire careers.
+
+    Sources:  
+    - Steam: https://www.steampageanalyzer.com/blog/average-steam-game-sales · https://gamalytic.com/years · https://x.com/WladMarhulets/status/1920197804275667122  
+    - Android: https://www.appbrain.com/stats/android-app-downloads · https://www.statista.com/statistics/269884/android-app-downloads/ · https://x.com/Similarweb/status/2066064899428483162  
+    - iOS: https://getappniche.com/answers/how-many-downloads-is-good
 
 ## Writing & Research
 [View All Writing](https://www.agustindiazcano.com/writing) | [View Research](https://www.agustindiazcano.com/research)
