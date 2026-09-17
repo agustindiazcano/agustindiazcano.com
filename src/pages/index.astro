@@ -3,15 +3,18 @@ import Layout from "../layouts/Layout.astro";
 import ProjectGrid from "../components/ProjectGrid.jsx";
 import Footer from "../components/Footer.astro";
 import CSSBlackHole from "../components/CSSBlackHole.astro";
+import LoadingScreen from "../components/LoadingScreen.astro";
 ---
 
 <Layout 
     title="Agustin Diaz-Cano | Software Engineer | AI/ML & Backend | MS Candidate"
     description="Agustin Diaz-Cano is a Software Engineer and MSc Candidate specializing in backend, AI/ML, and systems engineering."
 >
+    <LoadingScreen />
     <CSSBlackHole />
     <main
-        class="min-h-screen flex flex-col items-center justify-start max-w-[1200px] mx-auto px-6 pb-20 relative z-10"
+        id="home-main-content"
+        class="min-h-screen flex flex-col items-center justify-start max-w-[1200px] mx-auto px-6 pb-20 relative z-10 opacity-0 translate-y-6 transition-all duration-1000 ease-out"
     >
 
         {/* Bento Grid (Interactive) */}
@@ -33,6 +36,15 @@ import CSSBlackHole from "../components/CSSBlackHole.astro";
                     opacity: 1;
                     transform: translateY(0);
                 }
+            }
+            #home-main-content.show {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
+            :global(.skip-loading-screen) #home-main-content {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+                transition: none !important;
             }
         </style>
     </main>

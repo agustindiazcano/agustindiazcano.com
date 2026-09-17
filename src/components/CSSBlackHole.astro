@@ -111,20 +111,20 @@
 </style>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("astro:page-load", () => {
     const starsContainer = document.getElementById('css-stars');
-    if (!starsContainer) return;
-    
-    const total = 220;
-    for (let i = 0; i < total; i++) {
-      const s = document.createElement('span');
-      const size = Math.random() * 2 + 0.6;
-      s.style.width = size + 'px';
-      s.style.height = size + 'px';
-      s.style.top = Math.random() * 100 + '%';
-      s.style.left = Math.random() * 100 + '%';
-      s.style.setProperty('--o', (Math.random() * 0.7 + 0.3).toFixed(2));
-      starsContainer.appendChild(s);
+    if (starsContainer && !starsContainer.hasChildNodes()) {
+      const total = 220;
+      for (let i = 0; i < total; i++) {
+        const s = document.createElement('span');
+        const size = Math.random() * 2 + 0.6;
+        s.style.width = size + 'px';
+        s.style.height = size + 'px';
+        s.style.top = Math.random() * 100 + '%';
+        s.style.left = Math.random() * 100 + '%';
+        s.style.setProperty('--o', (Math.random() * 0.7 + 0.3).toFixed(2));
+        starsContainer.appendChild(s);
+      }
     }
   });
 
