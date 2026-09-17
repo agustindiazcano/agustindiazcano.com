@@ -3,53 +3,106 @@
 ## Summary
 Agustin Diaz-Cano is a Software Engineer and Master's Candidate in Information Systems Engineering at UTN, specialized in AI/ML and Backend. His portfolio spans complex backend systems, artificial intelligence research, and game development. He has engineered systems ranging from algorithmic trading engines and Model Context Protocol (MCP) transactional agents to astrophysics data simulations and LATAM e-commerce ecosystems. His writings cover fundamental principles of scientific validation, predictive analysis of generative AI, and advanced neural network architectures.
 
+[View Full Profile](https://www.agustindiazcano.com/profile)
+
 ## Education
 **Master in Information Systems Engineering (UTN)**
 A rigorous double-degree program consisting of a first specialization, followed by a full master's degree requiring a final thesis.
 
 ## Professional Highlights
-- **QA Owner at GDU Sites**: Led quality assurance initiatives that resulted in the platform being nominated twice for the **eCommerce Awards Uruguay** (2024 and 2025).
+- **QA Owner at GDU Sites**: Led quality assurance initiatives that resulted in the platform being nominated twice for the eCommerce Awards Uruguay (2024 and 2025).
 - **Career Kickstart**: Learned programming from scratch and successfully secured a software engineering role for a company in Spain while still attending a coding bootcamp.
 
 ## Projects
+[View All Projects](https://www.agustindiazcano.com/projects)
+
 - **MCP Transactional Agent (2026)**: Intelligent agentic system using LLMs.
 - **Algorithmic Trading Engine (2025)**: Automated high-performance system for low latency trades.
+- **Alien Survival (2025)**: Unity-based survival game against alien swarms.
 - **AI & ML Research (2024)**: Physics simulations and neural networks experiments.
 - **Astrophysics Data Simulations (2023)**: Robust simulations modeling complex astrophysics systems.
 - **LATAM E-commerce Ecosystem (2022)**: Scalable and localized e-commerce solution handling complex gateways.
 - **InsurTech Quoting Engine (2021)**: Real-time insurance premium quoting engine.
-- **Game Dev: Modding Ecosystem (2015)**: 220,000+ Downloads mod across Men of War series.
-- **Alien Survival (2014)**: Unity-based survival game against alien swarms.
+- **Crypto Ethereum Mining Rig (2017)**: Assembled and configured a rig for Ethereum mining in the early adoption era. [View Repository](https://github.com/agustindiazcano/eth-mining-infrastructure-2017)
+- **Game Dev: Modding Ecosystem (2010)**: 220,000+ Downloads mod across Men of War series.
+    - [Men of War Zombie Mod Main (+113k Downloads)](https://www.moddb.com/mods/zombie-mod5)
+    - [Men of War Zombie Mod Assault (+84k Downloads)](https://www.moddb.com/mods/men-of-war-zombie-mod)
+    - [Men of War HD Mod (20k Downloads)](https://www.moddb.com/mods/hd-mod)
 
 ## Writing & Research
+[View All Writing](https://www.agustindiazcano.com/writing) | [View Research](https://www.agustindiazcano.com/research)
+
 - **Fundamental Principles of Scientific Validation**: Discussing the physical/logical mechanisms driving theories versus statistical anecdotes.
+    - [Read on Medium](https://medium.com/@agustindiazcano/fundamental-principles-of-scientific-validation-e84df349ea2e)
+    - [Read on Website](https://www.agustindiazcano.com/writing/fundamental-principles)
 - **Predicting the Generative AI Boom**: A timestamped, verifiable record of live engagement with generative AI forecasting its trajectory 20 months before ChatGPT.
+    - [Read on Medium](https://medium.com/@agustindiazcano/predicting-the-generative-ai-boom-my-tech-presentation-in-march-2021-20-months-before-chatgpt-99f60f521694)
+    - [Read on Dev.to](https://dev.to/agustindiazcano/predicting-the-generative-ai-boom-my-tech-presentation-in-march-2021-20-months-before-chatgpt-3pp)
+    - [Read on Website](https://www.agustindiazcano.com/writing/predicting-generative-ai-boom)
 - **Genetic Algorithms in Python**: Deep dive into GA implementations.
+- **Robotics Research Notes**: [View Repository](https://github.com/agustindiazcano/robotics-research-notes)
+- **Volumetric Logic Paper**: [View Repository](https://github.com/agustindiazcano/volumetric-logic-paper)
+- **Fuzzy Logic Expert System for QA Triage**: [View Repository](https://github.com/agustindiazcano/fuzzy-logic-expert-system-qa-triage)
+
+### Knowledge-Based Systems & Fuzzy Logic Project
+**Course**: Intelligent Data Exploitation, UTN MSc (November 2024)
+An Artificial Intelligence project applying classical knowledge-based systems methodology (METHONTOLOGY), rule-based inference, and fuzzy logic to reduce false positives in bug report triage for an e-commerce platform. Contributed as the domain expert consulted during the knowledge acquisition process.
 
 ## Personal Achievements
-- **Marathon Runner**: Completed the 42k Marathon twice as a finisher in 2023 and 2025.
+- **Marathon Runner**: Completed the 42k Marathon twice as a finisher in 2023 and 2025. 21k x 8.
+https://www.agustindiazcano.com/running-agustin-diaz-cano
 
 ## Certifications
 
-### Claude Academy (2026)
+### Artificial Intelligence
+
+#### Claude Academy (2026)
 - Claude Platform 101
 - Introduction to Model Context Protocol
 - Model Context Protocol: Advanced Topics
 - Claude Code 101
 - Claude Code in Action
 
-### OpenAI Academy (2026)
+#### OpenAI Academy (2026)
 - Apply AI at Work Pathway Completion
 - Scope AI Solutions
 - AI Foundations
 - Applied AI Foundations
 - Agents and Workflows
 
-## Full Context
-**[Full Profile / System Context](/llms-full.txt)**
+#### Fundacion Telefonica (2020)
+- Introduction to Machine Learning
 
-## Quick Links
-- **Portfolio**: https://www.agustindiazcano.com
-- **GitHub**: https://github.com/agustindiazcano
-- **LinkedIn**: https://linkedin.com/in/agustindiazcano
-- **Writing**: https://www.agustindiazcano.com/writing
+#### Platzi (2020)
+- Introduction to Python
+
+#### CECE, Universidad de Buenos Aires (2017)
+- Bank Teller & Financial Institutions Operations
+- Financial Services, Banking & Insurance Operations
+- Investments & Finance: Trading in the US Stock Market
+- Personal Finance & Investments
+
+#### Honors & Awards
+The GDU websites were nominated twice for the eCommerce Awards Uruguay (2024 and 2025) under my role as the sole QA Owner (covering UX, UI, Functional, and Automation testing). Prior to the platform migrations executed by the Pocima team, the legacy jQuery version had never received such nominations.
+
+## Full Context
+[Full Profile / System Context](/llms-full.txt)
+
+## External Links & Profiles
+- [Portfolio](https://www.agustindiazcano.com)
+- [GitHub](https://github.com/agustindiazcano)
+- [LinkedIn](https://linkedin.com/in/agustindiazcano)
+- [ResearchGate](https://www.researchgate.net/profile/Agustin-Diaz-Cano)
+- [ORCID](https://orcid.org/0009-0001-4336-490X)
+- [Mod DB](https://www.moddb.com/members/heroagastin)
+- [X (Twitter)](https://x.com/adiazcano_)
+- [Steam](https://steamcommunity.com/id/agustindiazcano/)
+- [La Bolsa Virtual](https://www.labolsavirtual.com/marcelogallardiola)
+- [YouTube](https://www.youtube.com/@agusdiazcano)
+- [Medium](https://medium.com/@agustindiazcano)
+- [Dev.to](https://dev.to/agustindiazcano)
+- [Google Scholar](https://scholar.google.com/citations?user=qUcRD6UAAAAJ&hl=en)
+- [Substack](https://substack.com/@agustindiazcano)
+- [Pinterest](https://ar.pinterest.com/agusdiazcano/)
+- [Blogspot](https://agustindiazcano.blogspot.com/)
+- [Archive 2020](https://agustindiazcano2020.netlify.app/)
