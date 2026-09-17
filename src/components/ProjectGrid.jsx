@@ -105,7 +105,7 @@ const ProjectGrid = () => {
             subtitle: "View Gameplay & Stats",
             description: "220,000+ Downloads. Combining Zombie Mod and HD Mod across Men of War series.",
             longDescription: "A massive multiplayer mod ecosystem demonstrating the capacity to handle high concurrency and complex state synchronization. Replaces low-resolution assets with HD textures and detailed models while maintaining performance.",
-            tags: ["Game Dev", "Lua", "3D Modeling"],
+            tags: ["Game Dev", "3D Modeling"],
             size: "large",
             stats: "220k+ Downloads",
             features: [

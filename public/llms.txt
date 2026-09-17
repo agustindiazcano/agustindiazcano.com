@@ -1,11 +1,51 @@
-# Agustin Diaz Cano - Software Engineer
+# Agustin Diaz-Cano - Software Engineer
 
 ## Summary
-Agustin Diaz Cano is a Software Engineer and MSc Candidate .
+Agustin Diaz-Cano is a Software Engineer and Master's Candidate in Information Systems Engineering at UTN, specialized in AI/ML and Backend. His portfolio spans complex backend systems, artificial intelligence research, and game development. He has engineered systems ranging from algorithmic trading engines and Model Context Protocol (MCP) transactional agents to astrophysics data simulations and LATAM e-commerce ecosystems. His writings cover fundamental principles of scientific validation, predictive analysis of generative AI, and advanced neural network architectures.
+
+## Education
+**Master in Information Systems Engineering (UTN)**
+A rigorous double-degree program consisting of a first specialization, followed by a full master's degree requiring a final thesis.
+
+## Professional Highlights
+- **QA Owner at GDU Sites**: Led quality assurance initiatives that resulted in the platform being nominated twice for the **eCommerce Awards Uruguay** (2024 and 2025).
+- **Career Kickstart**: Learned programming from scratch and successfully secured a software engineering role for a company in Spain while still attending a coding bootcamp.
+
+## Projects
+- **MCP Transactional Agent (2026)**: Intelligent agentic system using LLMs.
+- **Algorithmic Trading Engine (2025)**: Automated high-performance system for low latency trades.
+- **AI & ML Research (2024)**: Physics simulations and neural networks experiments.
+- **Astrophysics Data Simulations (2023)**: Robust simulations modeling complex astrophysics systems.
+- **LATAM E-commerce Ecosystem (2022)**: Scalable and localized e-commerce solution handling complex gateways.
+- **InsurTech Quoting Engine (2021)**: Real-time insurance premium quoting engine.
+- **Game Dev: Modding Ecosystem (2015)**: 220,000+ Downloads mod across Men of War series.
+- **Alien Survival (2014)**: Unity-based survival game against alien swarms.
+
+## Writing & Research
+- **Fundamental Principles of Scientific Validation**: Discussing the physical/logical mechanisms driving theories versus statistical anecdotes.
+- **Predicting the Generative AI Boom**: A timestamped, verifiable record of live engagement with generative AI forecasting its trajectory 20 months before ChatGPT.
+- **Genetic Algorithms in Python**: Deep dive into GA implementations.
+
+## Personal Achievements
+- **Marathon Runner**: Completed the 42k Marathon twice as a finisher in 2023 and 2025.
+
+## Certifications
+
+### Claude Academy (2026)
+- Claude Platform 101
+- Introduction to Model Context Protocol
+- Model Context Protocol: Advanced Topics
+- Claude Code 101
+- Claude Code in Action
+
+### OpenAI Academy (2026)
+- Apply AI at Work Pathway Completion
+- Scope AI Solutions
+- AI Foundations
+- Applied AI Foundations
+- Agents and Workflows
 
 ## Full Context
-
-
 **[Full Profile / System Context](/llms-full.txt)**
 
 ## Quick Links
