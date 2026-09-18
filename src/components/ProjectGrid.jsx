@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ProjectGrid = () => {
     const [selectedId, setSelectedId] = useState(null);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const projects = [
         // ROW 1
@@ -190,102 +196,108 @@ const ProjectGrid = () => {
                 </motion.div>
             ))}
 
-            <AnimatePresence>
-                {selectedId && (
-                    <div className="fixed inset-0 z-50 flex items-center justify-center px-4" style={{ pointerEvents: 'auto' }}>
-                        {/* Backdrop */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            onClick={() => setSelectedId(null)}
-                            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-                        />
+            {mounted && createPortal(
+                <AnimatePresence>
+                    {selectedId && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center px-4" style={{ pointerEvents: 'auto' }}>
+                            {/* Backdrop */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                onClick={() => setSelectedId(null)}
+                                className="absolute inset-0 bg-black/80 backdrop-blur-sm z-0"
+                            />
 
-                        {/* Modal Card */}
-                        <motion.div
-                            layoutId={String(selectedId)}
-                            className="w-full max-w-2xl bg-[#0a0a0a] border border-[#333] rounded-2xl overflow-hidden relative z-10 max-h-[90vh] flex flex-col"
-                        >
-                            {(() => {
-                                const project = projects.find(p => p.id === selectedId);
-                                return (
-                                    <>
-                                        {/* Media Header Area */}
-                                        <div className="h-64 bg-[#111] border-b border-[#222] flex items-center justify-center relative group">
-                                            <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
-                                            {project.id === 1 ? (
-                                                <div className="font-mono text-xs text-green-500 p-8 w-full h-full overflow-hidden opacity-70">
-                                                    &gt; initializing execution engine...<br />
-                                                    &gt; optimizating routing tables... DONE<br />
-                                                    &gt; connecting to market data feed... CONNECTED<br />
-                                                    &gt; latency check: 400ns... OK<br />
-                                                    <span className="animate-pulse">_</span>
-                                                </div>
-                                            ) : project.id === 2 ? (
-                                                <div className="text-[#333] font-bold text-4xl">VIDEO PLACEHOLDER</div>
-                                            ) : (
-                                                <div className="text-[#333] font-bold text-4xl">{project.title}</div>
-                                            )}
+                            {/* Modal Card */}
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                className="w-full max-w-2xl bg-[#0a0a0a] border border-[#333] rounded-2xl overflow-hidden relative z-50 max-h-[90vh] flex flex-col shadow-2xl"
+                            >
+                                {(() => {
+                                    const project = projects.find(p => p.id === selectedId);
+                                    return (
+                                        <>
+                                            {/* Media Header Area */}
+                                            <div className="h-64 bg-[#111] border-b border-[#222] flex items-center justify-center relative group">
+                                                <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
+                                                {project.id === 1 ? (
+                                                    <div className="font-mono text-xs text-green-500 p-8 w-full h-full overflow-hidden opacity-70">
+                                                        &gt; initializing execution engine...<br />
+                                                        &gt; optimizating routing tables... DONE<br />
+                                                        &gt; connecting to market data feed... CONNECTED<br />
+                                                        &gt; latency check: 400ns... OK<br />
+                                                        <span className="animate-pulse">_</span>
+                                                    </div>
+                                                ) : project.id === 2 ? (
+                                                    <div className="text-[#333] font-bold text-4xl">VIDEO PLACEHOLDER</div>
+                                                ) : (
+                                                    <div className="text-[#333] font-bold text-4xl">{project.title}</div>
+                                                )}
 
-                                            <button
-                                                onClick={() => setSelectedId(null)}
-                                                className="absolute top-4 right-4 bg-black/50 hover:bg-black/80 text-white p-2 rounded-full backdrop-blur-md transition-colors"
-                                            >
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 18 18" /></svg>
-                                            </button>
-                                        </div>
-
-                                        <div className="p-8 overflow-y-auto">
-                                            <div className="flex justify-between items-baseline mb-2">
-                                                <motion.h2 className="text-3xl font-bold text-white">{project.title}</motion.h2>
-                                                <span className="font-mono text-blue-400 text-sm">{project.stats}</span>
+                                                <button
+                                                    onClick={() => setSelectedId(null)}
+                                                    className="absolute top-4 right-4 bg-black/50 hover:bg-black/80 text-white p-2 rounded-full backdrop-blur-md transition-colors"
+                                                >
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 18 18" /></svg>
+                                                </button>
                                             </div>
 
-                                            <p className="text-[#999] mb-8 leading-relaxed">
-                                                {project.longDescription}
-                                            </p>
-
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                                                <div>
-                                                    <h4 className="text-white text-sm font-semibold mb-3 uppercase tracking-wider">Key Features</h4>
-                                                    <ul className="space-y-2">
-                                                        {project.features.map(feature => (
-                                                            <li key={feature} className="text-[#666] text-sm flex items-center gap-2">
-                                                                <span className="w-1.5 h-1.5 bg-blue-500/50 rounded-full"></span> {feature}
-                                                            </li>
-                                                        ))}
-                                                    </ul>
+                                            <div className="p-8 overflow-y-auto">
+                                                <div className="flex justify-between items-baseline mb-2">
+                                                    <motion.h2 className="text-3xl font-bold text-white">{project.title}</motion.h2>
+                                                    <span className="font-mono text-blue-400 text-sm">{project.stats}</span>
                                                 </div>
-                                                <div>
-                                                    <h4 className="text-white text-sm font-semibold mb-3 uppercase tracking-wider">Tech Stack</h4>
-                                                    <div className="flex flex-wrap gap-2">
-                                                        {project.tags.map(tag => (
-                                                            <span key={tag} className="text-[#888] text-xs border border-[#333] px-2 py-1 rounded bg-[#111]">{tag}</span>
-                                                        ))}
+
+                                                <p className="text-[#999] mb-8 leading-relaxed">
+                                                    {project.longDescription}
+                                                </p>
+
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                                                    <div>
+                                                        <h4 className="text-white text-sm font-semibold mb-3 uppercase tracking-wider">Key Features</h4>
+                                                        <ul className="space-y-2">
+                                                            {project.features.map(feature => (
+                                                                <li key={feature} className="text-[#666] text-sm flex items-center gap-2">
+                                                                    <span className="w-1.5 h-1.5 bg-blue-500/50 rounded-full"></span> {feature}
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="text-white text-sm font-semibold mb-3 uppercase tracking-wider">Tech Stack</h4>
+                                                        <div className="flex flex-wrap gap-2">
+                                                            {project.tags.map(tag => (
+                                                                <span key={tag} className="text-[#888] text-xs border border-[#333] px-2 py-1 rounded bg-[#111]">{tag}</span>
+                                                            ))}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <div className="flex gap-4 border-t border-[#222] pt-6">
-                                                <button className="flex-1 bg-white text-black font-semibold py-3 rounded-lg hover:bg-[#ccc] transition-colors">
-                                                    {project.id === 2 ? "Download Mod" : "View Source"}
-                                                </button>
-                                                <a
-                                                    href={`/projects/${project.slug}`}
-                                                    className="flex-1 bg-[#111] text-white border border-[#333] font-semibold py-3 rounded-lg hover:bg-[#222] transition-colors text-center"
-                                                >
-                                                    View Project
-                                                </a>
+                                                <div className="flex gap-4 border-t border-[#222] pt-6">
+                                                    <button className="flex-1 bg-white text-black font-semibold py-3 rounded-lg hover:bg-[#ccc] transition-colors">
+                                                        {project.id === 2 ? "Download Mod" : "View Source"}
+                                                    </button>
+                                                    <a
+                                                        href={`/projects/${project.slug}`}
+                                                        className="flex-1 bg-[#111] text-white border border-[#333] font-semibold py-3 rounded-lg hover:bg-[#222] transition-colors text-center"
+                                                    >
+                                                        View Project
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </>
-                                );
-                            })()}
-                        </motion.div>
-                    </div>
-                )}
-            </AnimatePresence>
+                                        </>
+                                    );
+                                })()}
+                            </motion.div>
+                        </div>
+                    )}
+                </AnimatePresence>,
+                document.body
+            )}
         </div>
     );
 };
