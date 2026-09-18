@@ -54,5 +54,120 @@ const textColor = isHome ? "text-white/90" : "text-[#444]";
             ))
         }
     </div>
-    <p>© {currentYear} Agustin Diaz-Cano</p>
+    <div class="flex flex-col md:flex-row items-center gap-6 md:gap-12 mt-4">
+        <p>© {currentYear} Agustin Diaz-Cano</p>
+        
+        <div class="relative group">
+            <button class="px-4 py-2 border border-[#333] rounded-md text-sm hover:bg-[#111] transition-colors flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                Visitors
+            </button>
+            
+            {/* Tooltip Card */}
+            <div class="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-300 w-80 bg-[#111] border border-[#333] rounded-xl p-4 shadow-xl z-50 text-left">
+                <div class="flex justify-between items-center mb-4 px-2">
+                    <div class="flex flex-col">
+                        <span class="text-sm text-[#aaa] mb-1">Visitors</span>
+                        <span class="text-3xl font-bold text-white">50</span>
+                    </div>
+                    <div class="w-px h-12 bg-[#333]"></div>
+                    <div class="flex flex-col items-end">
+                        <span class="text-sm text-[#aaa] mb-1">Page Views</span>
+                        <span class="text-3xl font-bold text-white">827</span>
+                    </div>
+                </div>
+                
+                <div class="border-t border-[#333] pt-4">
+                    <div class="flex justify-between items-center text-[10px] font-mono text-[#666] uppercase tracking-wider mb-3 px-1">
+                        <span>Countries</span>
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 text-right">%</span>
+                            <span class="w-6 text-right">Vis</span>
+                            <span class="w-8 text-right">Views</span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2.5">
+                        <div class="flex justify-between items-center text-sm text-[#aaa] hover:bg-[#1a1a1a] p-1 rounded transition-colors">
+                            <span class="flex items-center gap-2">
+                                <img src="https://flagcdn.com/ar.svg" alt="Argentina flag" width="16" loading="lazy" class="w-4 h-auto rounded-[2px]" /> 
+                                Argentina
+                            </span>
+                            <div class="flex items-center gap-3">
+                                <span class="text-[#666] w-8 text-right">52%</span>
+                                <span class="font-bold text-white w-6 text-right">26</span>
+                                <span class="font-bold text-white w-8 text-right">746</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-[#aaa] hover:bg-[#1a1a1a] p-1 rounded transition-colors">
+                            <span class="flex items-center gap-2">
+                                <img src="https://flagcdn.com/us.svg" alt="USA flag" width="16" loading="lazy" class="w-4 h-auto rounded-[2px]" /> 
+                                USA
+                            </span>
+                            <div class="flex items-center gap-3">
+                                <span class="text-[#666] w-8 text-right">36%</span>
+                                <span class="font-bold text-white w-6 text-right">18</span>
+                                <span class="font-bold text-white w-8 text-right">67</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-[#aaa] hover:bg-[#1a1a1a] p-1 rounded transition-colors">
+                            <span class="flex items-center gap-2">
+                                <img src="https://flagcdn.com/cn.svg" alt="China flag" width="16" loading="lazy" class="w-4 h-auto rounded-[2px]" /> 
+                                China
+                            </span>
+                            <div class="flex items-center gap-3">
+                                <span class="text-[#666] w-8 text-right">4%</span>
+                                <span class="font-bold text-white w-6 text-right">2</span>
+                                <span class="font-bold text-white w-8 text-right">2</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-[#aaa] hover:bg-[#1a1a1a] p-1 rounded transition-colors">
+                            <span class="flex items-center gap-2">
+                                <img src="https://flagcdn.com/de.svg" alt="Germany flag" width="16" loading="lazy" class="w-4 h-auto rounded-[2px]" /> 
+                                Germany
+                            </span>
+                            <div class="flex items-center gap-3">
+                                <span class="text-[#666] w-8 text-right">2%</span>
+                                <span class="font-bold text-white w-6 text-right">1</span>
+                                <span class="font-bold text-white w-8 text-right">9</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-[#aaa] hover:bg-[#1a1a1a] p-1 rounded transition-colors">
+                            <span class="flex items-center gap-2">
+                                <img src="https://flagcdn.com/id.svg" alt="Indonesia flag" width="16" loading="lazy" class="w-4 h-auto rounded-[2px]" /> 
+                                Indonesia
+                            </span>
+                            <div class="flex items-center gap-3">
+                                <span class="text-[#666] w-8 text-right">2%</span>
+                                <span class="font-bold text-white w-6 text-right">1</span>
+                                <span class="font-bold text-white w-8 text-right">1</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-[#aaa] hover:bg-[#1a1a1a] p-1 rounded transition-colors">
+                            <span class="flex items-center gap-2">
+                                <img src="https://flagcdn.com/sg.svg" alt="Singapore flag" width="16" loading="lazy" class="w-4 h-auto rounded-[2px]" /> 
+                                Singapore
+                            </span>
+                            <div class="flex items-center gap-3">
+                                <span class="text-[#666] w-8 text-right">2%</span>
+                                <span class="font-bold text-white w-6 text-right">1</span>
+                                <span class="font-bold text-white w-8 text-right">1</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-[#aaa] hover:bg-[#1a1a1a] p-1 rounded transition-colors">
+                            <span class="flex items-center gap-2">
+                                <img src="https://flagcdn.com/ve.svg" alt="Venezuela flag" width="16" loading="lazy" class="w-4 h-auto rounded-[2px]" /> 
+                                Venezuela
+                            </span>
+                            <div class="flex items-center gap-3">
+                                <span class="text-[#666] w-8 text-right">2%</span>
+                                <span class="font-bold text-white w-6 text-right">1</span>
+                                <span class="font-bold text-white w-8 text-right">1</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </footer>
