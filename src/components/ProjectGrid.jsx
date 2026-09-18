@@ -160,7 +160,7 @@ const ProjectGrid = () => {
                             <>
                                 <div className="flex justify-between items-start mb-4">
                                     <div>
-                                        <motion.h3 className="text-xl font-semibold text-white">MSc in Engineering</motion.h3>
+                                        <motion.h3 className="font-display text-xl font-normal text-white">MSc in Engineering</motion.h3>
                                         <p className="text-[#888] text-sm">Universidad Tecnológica Nacional</p>
                                     </div>
                                     <span className="text-xs font-mono text-white/50 border border-white/10 px-2 py-1 rounded">Thesis Phase</span>
@@ -178,7 +178,7 @@ const ProjectGrid = () => {
                             </>
                         ) : (
                             <>
-                                <motion.h3 className="text-2xl font-semibold text-white mb-2">{project.title}</motion.h3>
+                                <motion.h3 className="font-display text-2xl font-normal text-white mb-2">{project.title}</motion.h3>
                                 <motion.p className="text-[#888]">{project.description}</motion.p>
                             </>
                         )}
@@ -233,9 +233,9 @@ const ProjectGrid = () => {
                                                         <span className="animate-pulse">_</span>
                                                     </div>
                                                 ) : project.id === 2 ? (
-                                                    <div className="text-[#333] font-bold text-4xl">VIDEO PLACEHOLDER</div>
+                                                    <div className="font-display text-[#333] font-bold text-4xl">VIDEO PLACEHOLDER</div>
                                                 ) : (
-                                                    <div className="text-[#333] font-bold text-4xl">{project.title}</div>
+                                                    <div className="font-display text-[#333] font-bold text-4xl">{project.title}</div>
                                                 )}
 
                                                 <button
@@ -248,7 +248,7 @@ const ProjectGrid = () => {
 
                                             <div className="p-8 overflow-y-auto">
                                                 <div className="flex justify-between items-baseline mb-2">
-                                                    <motion.h2 className="text-3xl font-bold text-white">{project.title}</motion.h2>
+                                                    <motion.h2 className="font-display text-3xl font-bold text-white">{project.title}</motion.h2>
                                                     <span className="font-mono text-blue-400 text-sm">{project.stats}</span>
                                                 </div>
 

@@ -193,13 +193,21 @@ const supplementaryCoursework = [
 ];
 
 const stack = [
-
     "Python",
-    "TypeScript",
     "Docker",
-    "Kubernetes",
+    "Django",
+    "FastAPI",
+    "PostgreSQL",
+    "MongoDB",
+    "MuJoCo",
+    "Pytorch",
+    "React",
+    "Typescript",
+    "Node",
     "AWS",
-    "Linux",
+    "Pandas",
+    "Cypress",
+    "Selenium"
 ];
 
 const education = [
@@ -283,7 +291,7 @@ const education = [
                 </div>
 
                 <div>
-                    <h3 class="text-white font-medium mb-4">Core Stack</h3>
+                    <h3 class="font-display text-[1.4rem] text-white font-medium mb-4">Core Stack</h3>
                     <div class="flex flex-wrap gap-2">
                         {
                             stack.map((tech) => (
@@ -296,7 +304,7 @@ const education = [
                 </div>
 
                 <div>
-                    <h3 class="text-white font-medium mb-4">Connect</h3>
+                    <h3 class="font-display text-[1.4rem] text-white font-medium mb-4">Connect</h3>
                     <div class="flex flex-col gap-3">
                         <a href="https://linkedin.com/in/agustindiazcano" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-[#888] hover:text-[#0077b5] transition-colors group">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
@@ -320,7 +328,7 @@ const education = [
                 <div class="border-t border-[#222] pt-8 space-y-10">
                     {/* Education */}
                     <div>
-                        <h3 class="text-sm font-mono text-[#666] uppercase tracking-wider mb-6">
+                        <h3 class="font-display text-[1.4rem] text-white uppercase tracking-wider mb-6">
                             Education
                         </h3>
                         <div class="space-y-6">
@@ -330,7 +338,7 @@ const education = [
                                         <summary class="flex flex-col xl:flex-row xl:items-center justify-between gap-4 cursor-pointer list-none select-none">
                                             <div>
                                                 <div class="text-xs font-mono text-[#777] mb-1">{edu.category}</div>
-                                                <h4 class="text-white font-medium text-base mb-1 group-hover:text-blue-400 transition-colors">
+                                                <h4 class="font-display text-white font-thin text-base mb-1 group-hover:text-blue-400 transition-colors">
                                                     {edu.title}
                                                 </h4>
                                                 <a href={edu.programUrl} target="_blank" rel="noopener noreferrer" class="text-sm text-[#888] hover:text-white transition-colors flex items-center gap-1.5 w-fit" onclick="event.stopPropagation()">
@@ -342,7 +350,7 @@ const education = [
                                                 <span class="text-xs font-mono text-[#666] px-2.5 py-1 rounded bg-[#161616] border border-[#262626] whitespace-nowrap">
                                                     {edu.period}
                                                 </span>
-                                                <div class="p-1.5 rounded bg-[darkgrey] border border-[#444] text-[#111] group-open:rotate-180 transition-transform duration-300 flex items-center justify-center">
+                                                <div class="p-1.5 rounded bg-white border border-[#444] text-[#111] group-open:rotate-180 transition-transform duration-300 flex items-center justify-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                                                 </div>
                                             </div>
@@ -386,7 +394,7 @@ const education = [
                     {/* Professional Certifications */}
                     <div>
                         <h3
-                            class="text-sm font-mono text-[#666] uppercase tracking-wider mb-6"
+                            class="font-display text-[1.4rem] text-white uppercase tracking-wider mb-6"
                         >
                             Professional Certifications
                         </h3>
@@ -397,7 +405,7 @@ const education = [
                                         {item.isGroup ? (
                                             <div>
                                                 <div class="flex items-center justify-between mb-3 border-b border-[#1c1c1c] pb-2">
-                                                    <h4 class="text-white font-medium text-sm sm:text-base">
+                                                    <h4 class="font-display text-white font-thin text-sm sm:text-base">
                                                         {item.title}
                                                     </h4>
                                                     <span class="text-xs font-mono text-[#666] px-2 py-0.5 rounded bg-[#161616] border border-[#262626]">
@@ -440,7 +448,7 @@ const education = [
                                         ) : (
                                             <div class="flex flex-col gap-2.5">
                                                 <div class="flex items-center justify-between">
-                                                    <h4 class="text-white font-medium text-sm sm:text-base">
+                                                    <h4 class="font-display text-white font-thin text-sm sm:text-base">
                                                         {item.title}
                                                     </h4>
                                                     <span class="text-xs font-mono text-[#666] px-2 py-0.5 rounded bg-[#161616] border border-[#262626]">
@@ -491,7 +499,7 @@ const education = [
                     {/* Supplementary Coursework */}
                     <div>
                         <h3
-                            class="text-sm font-mono text-[#666] uppercase tracking-wider mb-6"
+                            class="font-display text-[1.4rem] text-white uppercase tracking-wider mb-6"
                         >
                             Supplementary Coursework
                         </h3>
@@ -501,7 +509,7 @@ const education = [
                                 supplementaryCoursework.map((group) => (
                                     <div class="p-4 rounded-xl border border-[#222] bg-[#0d0d0d]/80">
                                         <div class="flex items-center justify-between mb-3 border-b border-[#1c1c1c] pb-2">
-                                            <h4 class="text-white font-medium text-sm sm:text-base">
+                                            <h4 class="font-display text-white font-thin text-sm sm:text-base">
                                                 {group.institution}
                                             </h4>
                                             <span class="text-xs font-mono text-[#666] px-2 py-0.5 rounded bg-[#161616] border border-[#262626]">
@@ -525,7 +533,7 @@ const education = [
 
                     {/* Interests */}
                     <div>
-                        <h3 class="text-sm font-mono text-[#666] uppercase tracking-wider mb-6">
+                        <h3 class="font-display text-[1.4rem] text-white uppercase tracking-wider mb-6">
                             Interests
                         </h3>
                         <div class="flex flex-wrap gap-4">
