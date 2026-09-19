@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
+import CSSBlackHole from "../components/CSSBlackHole.astro";
 // Defining projects localy to mirror the source of truth in [slug].astro
 const projects = [
         {
@@ -66,7 +67,8 @@ const projects = [
   title="Projects | Agustin Diaz-Cano"
   description="Software Engineer and Master's Candidate in Information Systems Engineering at UTN, specialized in AI/ML and Backend. Explore my engineering portfolio of projects."
 >
-  <main class="min-h-screen max-w-[800px] mx-auto px-6 pb-20">
+  <CSSBlackHole />
+  <main class="min-h-screen max-w-[800px] mx-auto px-6 pb-20 relative z-10">
 
     <section class="mb-16">
       <h2 class="text-3xl font-bold tracking-tight text-white mb-3">
@@ -75,10 +77,10 @@ const projects = [
 
     </section>
 
-    <div class="space-y-12">
+    <div class="space-y-6">
       {
         projects.map((project) => (
-          <article class="group relative">
+          <article class="group relative bg-black/90 backdrop-blur-sm border border-[#222] rounded-2xl p-6 hover:bg-black hover:border-[#444] transition-all duration-300">
             <div class="flex justify-between items-baseline mb-2">
               <h2 class="text-xl font-semibold text-white group-hover:text-blue-400 transition-colors">
                 <a

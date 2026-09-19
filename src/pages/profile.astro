@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
+import CSSBlackHole from "../components/CSSBlackHole.astro";
 
 const certifications = [
     {
@@ -210,6 +211,20 @@ const stack = [
     "Selenium"
 ];
 
+
+const workExperience = [
+    {
+        title: "Software Engineer",
+        company: "Add your company",
+        period: "2021 - Present",
+        description: [
+            "Add your work experience description here.",
+            "You can add multiple paragraphs."
+        ],
+        tags: ["React", "Node", "AWS"]
+    }
+];
+
 const education = [
     {
         title: "MSc in Information Systems Engineering",
@@ -270,8 +285,9 @@ const education = [
     title="Profile | Agustin Diaz-Cano"
     description="Professional profile, background, and experience of Agustin Diaz-Cano, Software Engineer and MSc Candidate."
 >
+    <CSSBlackHole />
     <main
-        class="min-h-screen flex flex-col items-center justify-start p-6 pb-20"
+        class="min-h-screen flex flex-col items-center justify-start pt-0 pb-20 px-4 relative z-10"
     >
         <div
             class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24"
@@ -325,16 +341,56 @@ const education = [
             {/* Right Column: Narrative */}
             <div class="md:col-span-8 flex flex-col justify-center">
 
-                <div class="border-t border-[#222] pt-8 space-y-10">
+                <div class="space-y-10">
+                    {/* Work Experience */}
+                    <details open class="group/we mb-10 [&_summary::-webkit-details-marker]:hidden">
+                        <summary class="flex items-center justify-between cursor-pointer list-none select-none mb-6">
+                            <h3 class="font-display text-[1.4rem] text-white uppercase tracking-wider mb-0">
+                                Work Experience
+                            </h3>
+                            <div class="p-1.5 rounded bg-white/5 border border-[#333] text-white group-open/we:rotate-180 transition-transform duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </div>
+                        </summary>
+                        <div class="space-y-6">
+                            {
+                                workExperience.map((work) => (
+                                    <article class="group relative bg-black/90 backdrop-blur-sm border border-[#222] rounded-2xl p-6 hover:bg-black hover:border-[#444] transition-all duration-300">
+                                        <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2">
+                                            <h4 class="text-xl font-semibold text-white group-hover:text-blue-400 transition-colors">
+                                                {work.title}
+                                            </h4>
+                                            <span class="text-sm font-mono text-[#666]">{work.period}</span>
+                                        </div>
+                                        <div class="text-[#888] font-medium mb-4">{work.company}</div>
+                                        <div class="space-y-2 text-sm text-[#999] leading-relaxed mb-4">
+                                            {work.description.map((desc) => <p>{desc}</p>)}
+                                        </div>
+                                        <div class="flex flex-wrap gap-2">
+                                            {work.tags.map((tag) => (
+                                                <span class="text-xs text-[#444] border border-[#222] px-1.5 py-0.5 rounded">{tag}</span>
+                                            ))}
+                                        </div>
+                                    </article>
+                                ))
+                            }
+                        </div>
+                    </details>
+
                     {/* Education */}
-                    <div>
-                        <h3 class="font-display text-[1.4rem] text-white uppercase tracking-wider mb-6">
-                            Education
-                        </h3>
+                    <details open class="group/edu_sec mb-10 [&_summary::-webkit-details-marker]:hidden">
+                        <summary class="flex items-center justify-between cursor-pointer list-none select-none mb-6">
+                            <h3 class="font-display text-[1.4rem] text-white uppercase tracking-wider mb-0">
+                                Education
+                            </h3>
+                            <div class="p-1.5 rounded bg-white/5 border border-[#333] text-white group-open/edu_sec:rotate-180 transition-transform duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </div>
+                        </summary>
                         <div class="space-y-6">
                             {
                                 education.map((edu) => (
-                                    <details class="group p-5 rounded-xl border border-[#333] bg-[#1c1c1c] hover:bg-[#262626] hover:border-[#444] transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
+                                    <details class="group p-6 rounded-2xl border border-[#222] bg-black/90 backdrop-blur-sm hover:bg-black hover:border-[#444] transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
                                         <summary class="flex flex-col xl:flex-row xl:items-center justify-between gap-4 cursor-pointer list-none select-none">
                                             <div>
                                                 <div class="text-xs font-mono text-[#777] mb-1">{edu.category}</div>
@@ -389,32 +445,40 @@ const education = [
                                 ))
                             }
                         </div>
-                    </div>
+                    </details>
 
                     {/* Professional Certifications */}
-                    <div>
-                        <h3
-                            class="font-display text-[1.4rem] text-white uppercase tracking-wider mb-6"
-                        >
-                            Professional Certifications
-                        </h3>
-                        <div class="space-y-4">
+                    <details open class="group/cert mb-10 [&_summary::-webkit-details-marker]:hidden">
+                        <summary class="flex items-center justify-between cursor-pointer list-none select-none mb-6">
+                            <h3 class="font-display text-[1.4rem] text-white uppercase tracking-wider mb-0">
+                                Professional Certifications
+                            </h3>
+                            <div class="p-1.5 rounded bg-white/5 border border-[#333] text-white group-open/cert:rotate-180 transition-transform duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </div>
+                        </summary>
+                        <div class="space-y-6">
                             {
                                 certifications.map((item) => (
-                                    <div class="p-4 rounded-xl border border-[#222] bg-[#0d0d0d]/80 hover:border-[#333] transition-colors">
+                                    <div class="bg-black/90 backdrop-blur-sm border border-[#222] rounded-2xl p-6 hover:bg-black hover:border-[#444] transition-all duration-300">
                                         {item.isGroup ? (
-                                            <div>
-                                                <div class="flex items-center justify-between mb-3 border-b border-[#1c1c1c] pb-2">
+                                            <details class="group/subcert [&_summary::-webkit-details-marker]:hidden">
+                                                <summary class="flex items-center justify-between cursor-pointer list-none select-none border-b border-[#1c1c1c] pb-3 mb-3">
                                                     <h4 class="text-white font-thin text-sm sm:text-base">
                                                         {item.title}
                                                     </h4>
-                                                    <span class="text-xs font-mono text-[#666] px-2 py-0.5 rounded bg-[#161616] border border-[#262626]">
-                                                        {item.year}
-                                                    </span>
-                                                </div>
-                                                <div class="space-y-2.5 mt-2">
+                                                    <div class="flex items-center gap-3">
+                                                        <span class="text-xs font-mono text-[#666] px-2 py-0.5 rounded bg-[#161616] border border-[#262626]">
+                                                            {item.year}
+                                                        </span>
+                                                        <div class="p-1 rounded bg-white/10 border border-[#444] text-[#aaa] group-open/subcert:rotate-180 transition-transform duration-300">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                                        </div>
+                                                    </div>
+                                                </summary>
+                                                <div class="space-y-3 mt-4">
                                                     {item.items?.map((sub) => (
-                                                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 py-1.5 border-b border-[#161616] last:border-0">
+                                                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 py-2 border-b border-[#161616] last:border-0">
                                                             <span class="text-[#ccc] text-sm font-light">
                                                                 {sub.title}
                                                             </span>
@@ -444,7 +508,7 @@ const education = [
                                                         </div>
                                                     ))}
                                                 </div>
-                                            </div>
+                                            </details>
                                         ) : (
                                             <div class="flex flex-col gap-2.5">
                                                 <div class="flex items-center justify-between">
@@ -494,20 +558,23 @@ const education = [
                                 ))
                             }
                         </div>
-                    </div>
+                    </details>
 
                     {/* Supplementary Coursework */}
-                    <div>
-                        <h3
-                            class="font-display text-[1.4rem] text-white uppercase tracking-wider mb-6"
-                        >
-                            Supplementary Coursework
-                        </h3>
+                    <details open class="group/supp mb-10 [&_summary::-webkit-details-marker]:hidden">
+                        <summary class="flex items-center justify-between cursor-pointer list-none select-none mb-6">
+                            <h3 class="font-display text-[1.4rem] text-white uppercase tracking-wider mb-0">
+                                Supplementary Coursework
+                            </h3>
+                            <div class="p-1.5 rounded bg-white/5 border border-[#333] text-white group-open/supp:rotate-180 transition-transform duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </div>
+                        </summary>
 
-                        <div class="space-y-4">
+                        <div class="space-y-6">
                             {
                                 supplementaryCoursework.map((group) => (
-                                    <div class="p-4 rounded-xl border border-[#222] bg-[#0d0d0d]/80">
+                                    <div class="bg-black/90 backdrop-blur-sm border border-[#222] rounded-2xl p-6 hover:bg-black hover:border-[#444] transition-all duration-300">
                                         <div class="flex items-center justify-between mb-3 border-b border-[#1c1c1c] pb-2">
                                             <h4 class="text-white font-thin text-sm sm:text-base">
                                                 {group.institution}
@@ -529,9 +596,9 @@ const education = [
                                 ))
                             }
                         </div>
-                    </div>
+                    </details>
 
-                    {/* Interests */}
+                    {/* Interests */}                    {/* Interests */}
                     <div>
                         <h3 class="font-display text-[1.4rem] text-white uppercase tracking-wider mb-6">
                             Interests
