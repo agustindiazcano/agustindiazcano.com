@@ -1,5 +1,9 @@
 ---
 // CSS Black Hole Background Component
+export interface Props {
+    isHome?: boolean;
+}
+const { isHome = false } = Astro.props;
 ---
 
 <div id="css-blackhole-container" style="opacity: 0;" class="fixed inset-0 w-full h-[100vh] -z-10 bg-[#05030d] overflow-hidden transition-opacity duration-1000">
@@ -12,6 +16,7 @@
         </div>
         <div class="blur-overlay"></div>
     </div>
+    {!isHome && <div class="absolute inset-0 bg-black/75 backdrop-blur-[6px] pointer-events-none z-20"></div>}
 </div>
 
 <style>
