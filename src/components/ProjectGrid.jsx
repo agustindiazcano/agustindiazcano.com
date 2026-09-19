@@ -141,7 +141,6 @@ const ProjectGrid = () => {
         <div className="w-full grid grid-cols-1 md:grid-cols-3 auto-rows-[300px] gap-6 mb-32">
             {projects.map((project) => (
                 <motion.div
-                    layoutId={String(project.id)}
                     key={project.id}
                     className={`relative group overflow-hidden bg-[#111] border border-[#222] rounded-xl flex flex-col justify-between p-8 ${project.size === "large" ? "md:col-span-2" : "md:col-span-1"
                         }`}
@@ -206,15 +205,15 @@ const ProjectGrid = () => {
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
                                 onClick={() => setSelectedId(null)}
-                                className="absolute inset-0 bg-black/80 backdrop-blur-sm z-0"
+                                className="absolute inset-0 bg-black/95 z-0"
                             />
 
                             {/* Modal Card */}
                             <motion.div
-                                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                                initial={{ opacity: 0, scale: 0.98, y: 10 }}
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                                exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                exit={{ opacity: 0, scale: 0.98, y: 10 }}
+                                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                                 className="w-full max-w-2xl bg-[#0a0a0a] border border-[#333] rounded-2xl overflow-hidden relative z-50 max-h-[90vh] flex flex-col shadow-2xl"
                             >
                                 {(() => {
