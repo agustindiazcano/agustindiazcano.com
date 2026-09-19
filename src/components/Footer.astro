@@ -1,4 +1,5 @@
 ---
+import { aggregateAnalytics } from '../utils/analytics';
 export interface Props {
     isHome?: boolean;
 }
@@ -6,6 +7,9 @@ export interface Props {
 const { isHome = false } = Astro.props;
 const currentYear = new Date().getFullYear();
 const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+
+const globResult = import.meta.glob('../data/analytics/*.json', { eager: true });
+const analytics = aggregateAnalytics(globResult);
 
 const links = [
     { name: "GitHub", href: "/github" },
@@ -72,12 +76,12 @@ const textColor = isHome ? "text-white/90" : "text-[#444]";
                 <div class="flex justify-between items-center mb-4 px-2">
                     <div class="flex flex-col">
                         <span class="text-sm text-[#aaa] mb-1">Visitors</span>
-                        <span class="text-3xl font-bold text-white">50</span>
+                        <span class="text-3xl font-bold text-white">{analytics.visitors}</span>
                     </div>
                     <div class="w-px h-12 bg-[#333]"></div>
                     <div class="flex flex-col items-end">
                         <span class="text-sm text-[#aaa] mb-1">Page Views</span>
-                        <span class="text-3xl font-bold text-white">827</span>
+                        <span class="text-3xl font-bold text-white">{analytics.pageViews}</span>
                     </div>
                 </div>
                 
@@ -91,84 +95,22 @@ const textColor = isHome ? "text-white/90" : "text-[#444]";
                         </div>
                     </div>
                     
-                    <div class="space-y-2.5">
-                        <div class="flex justify-between items-center text-sm text-[#aaa] hover:bg-[#1a1a1a] p-1 rounded transition-colors">
-                            <span class="flex items-center gap-2">
-                                <img src="https://flagcdn.com/ar.svg" alt="Argentina flag" width="16" loading="lazy" class="w-4 h-auto rounded-[2px]" /> 
-                                Argentina
-                            </span>
-                            <div class="flex items-center gap-3">
-                                <span class="text-[#666] w-8 text-right">52%</span>
-                                <span class="font-bold text-white w-6 text-right">26</span>
-                                <span class="font-bold text-white w-8 text-right">746</span>
+                    <div class="space-y-2.5 max-h-[250px] overflow-y-auto pr-2 custom-scrollbar">
+                        {analytics.countries.map(country => (
+                            <div class="flex justify-between items-center text-sm text-[#aaa] hover:bg-[#1a1a1a] p-1 rounded transition-colors">
+                                <span class="flex items-center gap-2">
+                                    <img src={`https://flagcdn.com/${country.code}.svg`} alt={`${country.name} flag`} width="16" loading="lazy" class="w-4 h-auto rounded-[2px]" /> 
+                                    {country.name}
+                                </span>
+                                <div class="flex items-center gap-3">
+                                    <span class="text-[#666] w-8 text-right">
+                                        {analytics.visitors > 0 ? Math.round((country.visitors / analytics.visitors) * 100) : 0}%
+                                    </span>
+                                    <span class="font-bold text-white w-6 text-right">{country.visitors}</span>
+                                    <span class="font-bold text-white w-8 text-right">{country.views}</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex justify-between items-center text-sm text-[#aaa] hover:bg-[#1a1a1a] p-1 rounded transition-colors">
-                            <span class="flex items-center gap-2">
-                                <img src="https://flagcdn.com/us.svg" alt="USA flag" width="16" loading="lazy" class="w-4 h-auto rounded-[2px]" /> 
-                                USA
-                            </span>
-                            <div class="flex items-center gap-3">
-                                <span class="text-[#666] w-8 text-right">36%</span>
-                                <span class="font-bold text-white w-6 text-right">18</span>
-                                <span class="font-bold text-white w-8 text-right">67</span>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center text-sm text-[#aaa] hover:bg-[#1a1a1a] p-1 rounded transition-colors">
-                            <span class="flex items-center gap-2">
-                                <img src="https://flagcdn.com/cn.svg" alt="China flag" width="16" loading="lazy" class="w-4 h-auto rounded-[2px]" /> 
-                                China
-                            </span>
-                            <div class="flex items-center gap-3">
-                                <span class="text-[#666] w-8 text-right">4%</span>
-                                <span class="font-bold text-white w-6 text-right">2</span>
-                                <span class="font-bold text-white w-8 text-right">2</span>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center text-sm text-[#aaa] hover:bg-[#1a1a1a] p-1 rounded transition-colors">
-                            <span class="flex items-center gap-2">
-                                <img src="https://flagcdn.com/de.svg" alt="Germany flag" width="16" loading="lazy" class="w-4 h-auto rounded-[2px]" /> 
-                                Germany
-                            </span>
-                            <div class="flex items-center gap-3">
-                                <span class="text-[#666] w-8 text-right">2%</span>
-                                <span class="font-bold text-white w-6 text-right">1</span>
-                                <span class="font-bold text-white w-8 text-right">9</span>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center text-sm text-[#aaa] hover:bg-[#1a1a1a] p-1 rounded transition-colors">
-                            <span class="flex items-center gap-2">
-                                <img src="https://flagcdn.com/id.svg" alt="Indonesia flag" width="16" loading="lazy" class="w-4 h-auto rounded-[2px]" /> 
-                                Indonesia
-                            </span>
-                            <div class="flex items-center gap-3">
-                                <span class="text-[#666] w-8 text-right">2%</span>
-                                <span class="font-bold text-white w-6 text-right">1</span>
-                                <span class="font-bold text-white w-8 text-right">1</span>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center text-sm text-[#aaa] hover:bg-[#1a1a1a] p-1 rounded transition-colors">
-                            <span class="flex items-center gap-2">
-                                <img src="https://flagcdn.com/sg.svg" alt="Singapore flag" width="16" loading="lazy" class="w-4 h-auto rounded-[2px]" /> 
-                                Singapore
-                            </span>
-                            <div class="flex items-center gap-3">
-                                <span class="text-[#666] w-8 text-right">2%</span>
-                                <span class="font-bold text-white w-6 text-right">1</span>
-                                <span class="font-bold text-white w-8 text-right">1</span>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center text-sm text-[#aaa] hover:bg-[#1a1a1a] p-1 rounded transition-colors">
-                            <span class="flex items-center gap-2">
-                                <img src="https://flagcdn.com/ve.svg" alt="Venezuela flag" width="16" loading="lazy" class="w-4 h-auto rounded-[2px]" /> 
-                                Venezuela
-                            </span>
-                            <div class="flex items-center gap-3">
-                                <span class="text-[#666] w-8 text-right">2%</span>
-                                <span class="font-bold text-white w-6 text-right">1</span>
-                                <span class="font-bold text-white w-8 text-right">1</span>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -177,6 +119,20 @@ const textColor = isHome ? "text-white/90" : "text-[#444]";
 </footer>
 
 <style>
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+    
     .show-tooltip {
         opacity: 1 !important;
         pointer-events: auto !important;
