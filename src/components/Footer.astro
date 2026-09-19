@@ -5,6 +5,7 @@ export interface Props {
 
 const { isHome = false } = Astro.props;
 const currentYear = new Date().getFullYear();
+const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 
 const links = [
     { name: "GitHub", href: "/github" },
@@ -54,13 +55,13 @@ const textColor = isHome ? "text-white/90" : "text-[#444]";
             ))
         }
     </div>
-    <div class="flex flex-col md:flex-row items-center justify-between w-full mt-4 border-t border-[#222] pt-6">
-        <div class="flex items-center gap-6">
-            <p>© {currentYear} Agustin Diaz-Cano</p>
-            <p class="text-[#888] text-sm">Last Updated: Sep 2026</p>
+    <div class="flex flex-col md:flex-row items-center justify-between w-full mt-4 border-t border-[#222] pt-6 gap-5 md:gap-0">
+        <div class="contents md:flex md:items-center md:gap-6">
+            <p class="order-1 md:order-none">© {currentYear} Agustin Diaz-Cano</p>
+            <p class="text-[#888] text-sm order-3 md:order-none">Last Updated: {lastUpdated}</p>
         </div>
         
-        <div class="relative group mt-4 md:mt-0">
+        <div class="relative group order-2 md:order-none">
             <button id="visitors-btn" class="px-4 py-2 border border-[#333] rounded-md text-sm hover:bg-[#111] transition-colors flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                 Visitors
