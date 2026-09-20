@@ -1,18 +1,18 @@
 {
-  "visitors": 58,
-  "pageViews": 1068,
+  "visitors": 69,
+  "pageViews": 1289,
   "countries": [
     {
       "code": "ar",
       "name": "Argentina",
-      "visitors": 32,
-      "views": 985
+      "visitors": 40,
+      "views": 1200
     },
     {
       "code": "us",
       "name": "USA",
-      "visitors": 19,
-      "views": 68
+      "visitors": 22,
+      "views": 74
     },
     {
       "code": "cn",
