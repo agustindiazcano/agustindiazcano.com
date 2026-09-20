@@ -4,172 +4,194 @@ import Footer from "../components/Footer.astro";
 import CSSBlackHole from "../components/CSSBlackHole.astro";
 import ProjectsCarousel from "../components/ProjectsCarousel.jsx";
 
-const certifications = [
+const certificationCategories = [
     {
-        title: "Claude Academy",
-        year: "2026",
-        isGroup: true,
-        items: [
-            {
-                title: "Claude Platform 101",
-                links: [
-                    {
-                        label: "Certificate",
-                        url: "https://github.com/agustindiazcano/credentials/blob/main/courses/claude-platform-101-agustin-diaz-cano.png",
-                        type: "cert",
-                    },
-                    {
-                        label: "Verify Credential",
-                        url: "https://academy.claude.com/verify/f420c8029d7b9d549b433b260a20ddf0",
-                        type: "verify",
-                    },
-                ],
-            },
-            {
-                title: "Introduction to Model Context Protocol",
-                links: [
-                    {
-                        label: "Certificate",
-                        url: "https://github.com/agustindiazcano/credentials/blob/main/courses/introduction-to-model-context-protocol-agustin-diaz-cano.png",
-                        type: "cert",
-                    },
-                    {
-                        label: "Verify Credential",
-                        url: "https://academy.claude.com/verify/5b1b9259832b840ef40e7cdbaa001ba9",
-                        type: "verify",
-                    },
-                ],
-            },
-            {
-                title: "Model Context Protocol: Advanced Topics",
-                links: [
-                    {
-                        label: "Certificate",
-                        url: "https://github.com/agustindiazcano/credentials/blob/main/courses/model-context-protocol-advanced-topics-agustin-diaz-cano.png",
-                        type: "cert",
-                    },
-                    {
-                        label: "Verify Credential",
-                        url: "https://academy.claude.com/badges/17a347f5-3fbb-4053-a1d3-0fa0b71ada8a",
-                        type: "verify",
-                    },
-                ],
-            },
-            {
-                title: "Claude Code 101",
-                links: [
-                    {
-                        label: "Certificate",
-                        url: "https://github.com/agustindiazcano/credentials/blob/main/courses/claude-code-101-agustin-diaz-cano.png",
-                        type: "cert",
-                    },
-                    {
-                        label: "Verify Credential",
-                        url: "https://academy.claude.com/verify/4bc63266f7750d8d7abf624b5f838818",
-                        type: "verify",
-                    },
-                ],
-            },
-            {
-                title: "Claude Code in Action",
-                links: [
-                    {
-                        label: "Certificate",
-                        url: "https://github.com/agustindiazcano/credentials/blob/main/courses/claude-code-in-action-agustin-diaz-cano.png",
-                        type: "cert",
-                    },
-                    {
-                        label: "Verify Credential",
-                        url: "https://academy.claude.com/badges/3f41a201-39c4-49f8-92ba-1a2c11904ea8",
-                        type: "verify",
-                    },
-                ],
-            },
+        categoryTitle: "Artificial Intelligence",
+        description: [
+            "Development of AI systems, multi-agent architectures, MCP, RAG, and AI evaluation.",
+            "AI-Assisted Development with UI and Terminal Agents applying best practices using safety guards, context, hooks, skills, and subagents."
         ],
-    },
-    {
-        title: "OpenAI Academy",
-        year: "2026",
-        isGroup: true,
+        stack: ["OpenAI API", "Claude API", "TruLens", "Promptfoo", "LangChain", "LangGraph", "LlamaIndex", "AWS Bedrock", "GCP Vertex AI", "LLMs"],
         items: [
             {
-                title: "Apply AI at Work Pathway Completion",
-                links: [
-                    { label: "Certificate", url: "https://github.com/agustindiazcano/credentials/blob/main/courses/certification-apply-ai-at-work-agustin-diaz-cano.pdf", type: "cert" },
-                    { label: "Verify Credential (194117552)", url: "https://oaiacademy.credential.net/9631e930-9aa0-4902-bf26-e712aba9c75e#acc.tf2kuX8n", type: "verify" }
-                ]
+                title: "Claude Academy",
+                url: "https://academy.claude.com/",
+                year: "2026",
+                isGroup: true,
+                items: [
+                    {
+                        title: "Claude Platform 101",
+                        links: [
+                            {
+                                label: "Certificate",
+                                url: "https://github.com/agustindiazcano/credentials/blob/main/courses/claude-platform-101-agustin-diaz-cano.png",
+                                type: "cert",
+                            },
+                            {
+                                label: "Verify Credential",
+                                url: "https://academy.claude.com/verify/f420c8029d7b9d549b433b260a20ddf0",
+                                type: "verify",
+                            },
+                        ],
+                    },
+                    {
+                        title: "Introduction to Model Context Protocol",
+                        links: [
+                            {
+                                label: "Certificate",
+                                url: "https://github.com/agustindiazcano/credentials/blob/main/courses/introduction-to-model-context-protocol-agustin-diaz-cano.png",
+                                type: "cert",
+                            },
+                            {
+                                label: "Verify Credential",
+                                url: "https://academy.claude.com/verify/5b1b9259832b840ef40e7cdbaa001ba9",
+                                type: "verify",
+                            },
+                        ],
+                    },
+                    {
+                        title: "Model Context Protocol: Advanced Topics",
+                        links: [
+                            {
+                                label: "Certificate",
+                                url: "https://github.com/agustindiazcano/credentials/blob/main/courses/model-context-protocol-advanced-topics-agustin-diaz-cano.png",
+                                type: "cert",
+                            },
+                            {
+                                label: "Verify Credential",
+                                url: "https://academy.claude.com/badges/17a347f5-3fbb-4053-a1d3-0fa0b71ada8a",
+                                type: "verify",
+                            },
+                        ],
+                    },
+                    {
+                        title: "Claude Code 101",
+                        links: [
+                            {
+                                label: "Certificate",
+                                url: "https://github.com/agustindiazcano/credentials/blob/main/courses/claude-code-101-agustin-diaz-cano.png",
+                                type: "cert",
+                            },
+                            {
+                                label: "Verify Credential",
+                                url: "https://academy.claude.com/verify/4bc63266f7750d8d7abf624b5f838818",
+                                type: "verify",
+                            },
+                        ],
+                    },
+                    {
+                        title: "Claude Code in Action",
+                        links: [
+                            {
+                                label: "Certificate",
+                                url: "https://github.com/agustindiazcano/credentials/blob/main/courses/claude-code-in-action-agustin-diaz-cano.png",
+                                type: "cert",
+                            },
+                            {
+                                label: "Verify Credential",
+                                url: "https://academy.claude.com/badges/3f41a201-39c4-49f8-92ba-1a2c11904ea8",
+                                type: "verify",
+                            },
+                        ],
+                    },
+                ],
             },
             {
-                title: "Scope AI Solutions",
-                links: [
-                    { label: "Certificate", url: "https://github.com/agustindiazcano/credentials/blob/main/courses/scope-ai-solutions-agustin-diaz-cano.png", type: "cert" },
-                    { label: "Verify Credential (194122660)", url: "https://oaiacademy.credential.net/69470d9c-4c1a-4666-9a91-d6db7ac3cfe5#acc.HlFdvbYg", type: "verify" }
-                ]
-            },
-            {
-                title: "AI Foundations",
-                links: [
-                    { label: "Certificate", url: "https://github.com/agustindiazcano/credentials/blob/main/courses/ai-foundations-agustin-diaz-cano.png", type: "cert" },
-                    { label: "Verify Credential (194117472)", url: "https://oaiacademy.credential.net/6f3feb66-9d98-442e-9f4a-dfd846078b06", type: "verify" }
-                ]
-            },
-            {
-                title: "Applied AI Foundations",
-                links: [
-                    { label: "Certificate", url: "https://github.com/agustindiazcano/credentials/blob/main/courses/applied-ai-foundations-agustin-diaz-cano.png", type: "cert" },
-                    { label: "Verify Credential (194114795)", url: "https://oaiacademy.credential.net/8141a53f-bd3d-4604-9ef1-221d5247e65d", type: "verify" }
-                ]
-            },
-            {
-                title: "Agents and Workflows",
-                links: [
-                    { label: "Certificate", url: "https://github.com/agustindiazcano/credentials/blob/main/courses/agents-and-workflows-agustin-diaz-cano.png", type: "cert" },
-                    { label: "Verify Credential (194109568)", url: "https://oaiacademy.credential.net/91ff16dc-87f0-4971-acbc-f81511c54be4", type: "verify" }
+                title: "OpenAI Academy",
+                url: "https://academy.openai.com/",
+                year: "2026",
+                isGroup: true,
+                items: [
+                    {
+                        title: "Apply AI at Work Pathway Completion",
+                        links: [
+                            { label: "Certificate", url: "https://github.com/agustindiazcano/credentials/blob/main/courses/certification-apply-ai-at-work-agustin-diaz-cano.pdf", type: "cert" },
+                            { label: "Verify Credential (194117552)", url: "https://oaiacademy.credential.net/9631e930-9aa0-4902-bf26-e712aba9c75e#acc.tf2kuX8n", type: "verify" }
+                        ]
+                    },
+                    {
+                        title: "Scope AI Solutions",
+                        links: [
+                            { label: "Certificate", url: "https://github.com/agustindiazcano/credentials/blob/main/courses/scope-ai-solutions-agustin-diaz-cano.png", type: "cert" },
+                            { label: "Verify Credential (194122660)", url: "https://oaiacademy.credential.net/69470d9c-4c1a-4666-9a91-d6db7ac3cfe5#acc.HlFdvbYg", type: "verify" }
+                        ]
+                    },
+                    {
+                        title: "AI Foundations",
+                        links: [
+                            { label: "Certificate", url: "https://github.com/agustindiazcano/credentials/blob/main/courses/ai-foundations-agustin-diaz-cano.png", type: "cert" },
+                            { label: "Verify Credential (194117472)", url: "https://oaiacademy.credential.net/6f3feb66-9d98-442e-9f4a-dfd846078b06", type: "verify" }
+                        ]
+                    },
+                    {
+                        title: "Applied AI Foundations",
+                        links: [
+                            { label: "Certificate", url: "https://github.com/agustindiazcano/credentials/blob/main/courses/applied-ai-foundations-agustin-diaz-cano.png", type: "cert" },
+                            { label: "Verify Credential (194114795)", url: "https://oaiacademy.credential.net/8141a53f-bd3d-4604-9ef1-221d5247e65d", type: "verify" }
+                        ]
+                    },
+                    {
+                        title: "Agents and Workflows",
+                        links: [
+                            { label: "Certificate", url: "https://github.com/agustindiazcano/credentials/blob/main/courses/agents-and-workflows-agustin-diaz-cano.png", type: "cert" },
+                            { label: "Verify Credential (194109568)", url: "https://oaiacademy.credential.net/91ff16dc-87f0-4971-acbc-f81511c54be4", type: "verify" }
+                        ]
+                    }
                 ]
             }
         ]
     },
     {
-        title: "BigCommerce Developer Certification",
-        year: "2024",
-        links: [
-            {
-                label: "Certificate",
-                url: "https://github.com/agustindiazcano/credentials/blob/main/certificates/bigcommerce-certification-2024.pdf",
-                type: "cert",
-            },
+        categoryTitle: "Full Stack Development: Ecommerce",
+        description: [
+            "Specialized training courses focused on implementing enterprise ecommerce platforms with specific frameworks."
         ],
-    },
-    {
-        title: "VTEX Tech Training LATAM",
-        year: "2023",
-        links: [
+        stack: ["JavaScript", "TypeScript", "Node.js", "React", "Microservices", "Postman", "REST API"],
+        items: [
             {
-                label: "Certificate",
-                url: "https://github.com/agustindiazcano/credentials/blob/main/certificates/VTEX_TechTraining2023.jpeg",
-                type: "cert",
-            },
-        ],
-        modules: [
-            {
-                label: "Block 1",
-                url: "https://github.com/agustindiazcano/credentials/blob/main/certificates/VTEX_TechTraining2023_Bloque1.jpeg",
+                title: "BigCommerce Developer Certification",
+                year: "2024",
+                links: [
+                    {
+                        label: "Certificate",
+                        url: "https://github.com/agustindiazcano/credentials/blob/main/certificates/bigcommerce-certification-2024.pdf",
+                        type: "cert",
+                    },
+                ],
             },
             {
-                label: "Block 2",
-                url: "https://github.com/agustindiazcano/credentials/blob/main/certificates/VTEX_TechTraining2023_Bloque2.jpeg",
-            },
-            {
-                label: "Block 3",
-                url: "https://github.com/agustindiazcano/credentials/blob/main/certificates/VTEX_TechTraining2023_Bloque3.jpeg",
-            },
-        ],
+                title: "VTEX Tech Training LATAM",
+                year: "2023",
+                links: [
+                    {
+                        label: "Certificate",
+                        url: "https://github.com/agustindiazcano/credentials/blob/main/certificates/VTEX_TechTraining2023.jpeg",
+                        type: "cert",
+                    },
+                ],
+                modules: [
+                    {
+                        label: "Block 1",
+                        url: "https://github.com/agustindiazcano/credentials/blob/main/certificates/VTEX_TechTraining2023_Bloque1.jpeg",
+                    },
+                    {
+                        label: "Block 2",
+                        url: "https://github.com/agustindiazcano/credentials/blob/main/certificates/VTEX_TechTraining2023_Bloque2.jpeg",
+                    },
+                    {
+                        label: "Block 3",
+                        url: "https://github.com/agustindiazcano/credentials/blob/main/certificates/VTEX_TechTraining2023_Bloque3.jpeg",
+                    },
+                ],
+            }
+        ]
     }
 ];
 
 const supplementaryCoursework = [
     {
-        institution: "CECE, Universidad de Buenos Aires",
+        institution: "Capacitarte (CECE, Universidad de Buenos Aires)",
+        url: "https://www.capacitarte.org/quienes-somos",
         year: "2017",
         courses: [
             "Bank Teller & Financial Institutions Operations",
@@ -180,6 +202,7 @@ const supplementaryCoursework = [
     },
     {
         institution: "Fundación Telefónica",
+        url: "https://www.fundaciontelefonica.com/",
         year: "2020",
         courses: [
             "Introduction to Machine Learning",
@@ -187,6 +210,7 @@ const supplementaryCoursework = [
     },
     {
         institution: "Platzi",
+        url: "https://platzi.com/",
         year: "2020",
         courses: [
             "Introduction to Python",
@@ -215,14 +239,47 @@ const stack = [
 
 const workExperience = [
     {
-        title: "Software Engineer",
-        company: "Add your company",
-        period: "2021 - Present",
+        title: "Software Engineer in Test / Frontend Developer",
+        company: "Pocima | Montevideo, Uruguay - Remote",
+        period: "08/2022 - 06/2025",
+        hasProjects: true,
         description: [
-            "Add your work experience description here.",
-            "You can add multiple paragraphs."
+            "Development agency serving 10+ LATAM/Argentina clients (including Visma, Toto, Korium, Altix, and MetLife); primary and most significant account: Grupo GDU, Uruguay's #1 supermarket retailer (91 physical locations), online channel ~8% of total group revenue (8-figure USD). Platforms: disco.com.uy, devoto.com.uy, geant.com.uy.",
+            "<strong>Software Engineer in Test | 02/2023 - 06/2025</strong>",
+            "• Orchestrated the testing strategy and maintained hands-on execution of E2E automation (75+ tests, Cypress, Selenium) integrated into GitHub Actions and LambdaTest; directly contributed to the sites' nominations for the eCommerce Awards Uruguay 2024 and 2025.",
+            "• Developed and maintained custom architectures and integrations across BigCommerce, VTEX IO, and Odoo (React, Node.js).",
+            "• Beyond QA ownership, hands-on across the full development cycle: built and shipped features, detected and fixed bugs directly in the codebase, and deployed the resulting fixes to production.",
+            "• Managed the end-to-end delivery cycle; primary technical link between the dev team and enterprise stakeholders for deployment approvals and incident management.",
+            "• Led technical triage for critical production issues, translating end-user friction into actionable engineering tickets and prioritizing development assignments.",
+            "• Held Go/No-Go authority on production releases; orchestrated deployments, mandated critical rollbacks when necessary, and directly executed deployments for satellite projects.",
+            "• Executed comprehensive manual, functional, visual, and regression testing across cross-browser and multi-OS environments (iOS, Android, macOS, Windows, Ubuntu), coupled with API testing via Postman.",
+            "• Authored user manuals and operational guides to standardize client platform usage and operating procedures.",
+            "• Introduced an AI-assisted workflow (Claude, Cursor, ChatGPT, Gemini) for dynamic test case generation, development support, error/failure analysis, and test automation acceleration.",
+            "<strong>Frontend Developer | 08/2022 - 02/2023</strong>",
+            "• Legacy platform migration: led the end-to-end frontend migration of GDU's sites from a legacy jQuery architecture to a modern, scalable, component-driven stack (React, TypeScript, VTEX IO)."
         ],
-        tags: ["React", "Node", "AWS"]
+        tags: ["React", "TypeScript", "Python", "JavaScript", "Cypress", "Selenium", "LambdaTest", "GitHub Actions", "Postman", "Chrome DevTools", "VTEX IO", "REST APIs", "Jira", "ClickUp"]
+    },
+    {
+        title: "Technical Code Reviewer",
+        company: "E-learning Company (Latin America - Remote, Part-time)",
+        period: "05/2024 - 07/2026",
+        hasProjects: false,
+        description: [
+            "• Reviewed and delivered written quality feedback on 4,000+ full-stack student projects, evaluating functional correctness, code quality, and adherence to requirements at scale."
+        ],
+        tags: ["React", "Node.js", "Full-Stack"]
+    },
+    {
+        title: "Frontend Engineer",
+        company: "Hello Auto (Spain - Remote)",
+        period: "06/2021 - 06/2022",
+        hasProjects: false,
+        description: [
+            "• Built and maintained the core calculation logic of an insurance quoting engine for an Insurtech platform, implemented client-side (React) with the backend limited to data retrieval: managed asynchronous data flows, promises, and race conditions from multiple fast-arriving data sources feeding real-time premium calculations.",
+            "• Focused primarily on business-logic correctness and data-handling reliability rather than UI work (~10% of scope), an early foundation in testing logic-critical, regulated business flows."
+        ],
+        tags: ["React", "Node.js", "JavaScript", "Azure DevOps", "Git"]
     }
 ];
 
@@ -275,8 +332,10 @@ const education = [
         category: "Bootcamp",
         programUrl: "https://www.plataforma5.la/",
         description: [
-            "800+ hour intensive program.",
-            "Secured first software engineering role within 6 months of starting."
+            "• 800+ hour intensive program, starting from zero programming experience.",
+            "• Within 6 months, secured first software role (Fintech Hello Auto, Spain) and was shipping pull requests to production (application used by final users).",
+            "• Ranked #1 in a cohort of 40 on Codewars and top 10 historically across all alumni in algorithmic problem solving.",
+            "• <strong>Tech Talk - Introduction to Artificial Intelligence:</strong> Delivered a comprehensive presentation to peers covering AI fundamentals, Machine Learning, NLP, and Reinforcement Learning, focusing on GPT-2 and early GPT-3 mechanics. Presented in March 2021, 21 months prior to ChatGPT’s public launch (Nov 2022). Reflecting early vision and interest in the field."
         ],
         documents: [
             { label: "Certificate", url: "https://github.com/agustindiazcano/credentials/blob/main/certificates/plataforma5-coding-bootcamp-certification-2021.pdf", type: "cert" }
@@ -326,6 +385,18 @@ const education = [
                 </div>
 
                 <div>
+                    <h3 class="font-display text-[1.4rem] text-white font-medium mb-4 text-center md:text-left">About</h3>
+                    <div class="text-[#888] text-sm leading-relaxed text-center md:text-left font-light space-y-4">
+                        <p>
+                            Software Engineer | Python Developer with 4+ years of experience in software development, specializing in AI/ML and Backend Development (Python).
+                        </p>
+                        <p>
+                            I'm currently pursuing an M.Sc. in Systems Engineering at UTN, focused on Artificial Intelligence and Data Analysis. My technical focus is building backend architectures that integrate GenAI in production-realistic conditions, not just prototypes. I'm developing projects with Python, Retrieval-Augmented Generation (RAG), and the Model Context Protocol (MCP) to explore LLM orchestration and AI agent design.
+                        </p>
+                    </div>
+                </div>
+
+                <div>
                     <h3 class="font-display text-[1.4rem] text-white font-medium mb-4 text-center md:text-left">Core Stack</h3>
                     <div class="flex flex-wrap gap-2 justify-center md:justify-start">
                         {
@@ -344,7 +415,7 @@ const education = [
 
                 <div class="space-y-10">
                     {/* Work Experience */}
-                    <details open class="group/we mb-10 [&_summary::-webkit-details-marker]:hidden">
+                    <details open class="group/we mb-10 js-desktop-open [&_summary::-webkit-details-marker]:hidden">
                         <summary class="flex items-center justify-between cursor-pointer list-none select-none mb-6">
                             <h3 class="font-display text-[1.4rem] text-white uppercase tracking-wider mb-0 w-full text-center md:text-left">
                                 Work Experience
@@ -376,18 +447,20 @@ const education = [
                                         
                                         <div class="pt-5 mt-5 border-t border-[#1c1c1c]">
                                             <div class="space-y-3 text-sm text-[#999] leading-relaxed mb-6">
-                                                {work.description.map((desc) => <p>{desc}</p>)}
+                                                {work.description.map((desc) => <p set:html={desc}></p>)}
                                             </div>
 
-                                            <div class="mb-6">
-                                                <h5 class="text-white text-sm font-medium mb-3">Projects on Production</h5>
-                                                <ProjectsCarousel client:load />
-                                            </div>
+                                            {work.hasProjects && (
+                                                <div class="mb-6">
+                                                    <h5 class="text-white text-sm font-medium mb-3">Projects on Production</h5>
+                                                    <ProjectsCarousel client:load />
+                                                </div>
+                                            )}
 
                                             <div class="pt-4 border-t border-[#1c1c1c]">
                                                 <div class="flex flex-wrap gap-2">
                                                     {work.tags.map((tag) => (
-                                                        <span class="text-xs text-[#444] border border-[#222] px-1.5 py-0.5 rounded bg-black">{tag}</span>
+                                                        <span class="text-xs text-[#ccc] border border-[#333] px-2 py-1 rounded-md bg-[#161616] font-mono">{tag}</span>
                                                     ))}
                                                 </div>
                                             </div>
@@ -399,7 +472,7 @@ const education = [
                     </details>
 
                     {/* Education */}
-                    <details open class="group/edu_sec mb-10 [&_summary::-webkit-details-marker]:hidden">
+                    <details open class="group/edu_sec mb-10 js-desktop-open [&_summary::-webkit-details-marker]:hidden">
                         <summary class="flex items-center justify-between cursor-pointer list-none select-none mb-6">
                             <h3 class="font-display text-[1.4rem] text-white uppercase tracking-wider mb-0 w-full text-center md:text-left">
                                 Education
@@ -441,7 +514,7 @@ const education = [
                                         <div class="pt-5 mt-5 border-t border-[#1c1c1c]">
                                             <div class="space-y-3 text-sm text-[#999] leading-relaxed">
                                                 {edu.description.map((paragraph) => (
-                                                    <p>{paragraph}</p>
+                                                    <p set:html={paragraph}></p>
                                                 ))}
                                             </div>
 
@@ -474,7 +547,7 @@ const education = [
                     </details>
 
                     {/* Certifications */}
-                    <details open class="group/cert mb-10 [&_summary::-webkit-details-marker]:hidden">
+                    <details class="group/cert mb-10 [&_summary::-webkit-details-marker]:hidden">
                         <summary class="flex items-center justify-between cursor-pointer list-none select-none mb-6">
                             <h3 class="font-display text-[1.4rem] text-white uppercase tracking-wider mb-0 w-full text-center md:text-left">
                                 Certifications
@@ -485,13 +558,39 @@ const education = [
                         </summary>
                         <div class="space-y-6">
                             {
-                                certifications.map((item) => (
-                                    <div class="bg-black/90 backdrop-blur-sm border border-[#222] rounded-2xl p-6 hover:bg-black hover:border-[#444] transition-all duration-300">
+                                certificationCategories.map((category) => (
+                                    <div class="space-y-6 border-t border-[#1c1c1c] first:border-0 pt-6 first:pt-0 mt-6 first:mt-0">
+                                        <div class="space-y-3">
+                                            <h4 class="text-white text-lg font-medium tracking-wide">{category.categoryTitle}</h4>
+                                            <div class="space-y-1.5">
+                                                {category.description.map(desc => (
+                                                    <div class="flex items-start text-[#999] text-sm font-light leading-relaxed">
+                                                        <span class="mr-2.5 mt-0.5 text-[#555] text-xs">•</span>
+                                                        <span>{desc}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            <div class="flex flex-wrap gap-2 pt-2">
+                                                {category.stack.map(tech => (
+                                                    <span class="text-xs text-[#ccc] border border-[#333] px-2 py-1 rounded-md bg-[#161616] font-mono">{tech}</span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                        <div class="space-y-6">
+                                            {category.items.map((item) => (
+                                                <div class="bg-black/90 backdrop-blur-sm border border-[#222] rounded-2xl p-6 hover:bg-black hover:border-[#444] transition-all duration-300">
                                         {item.isGroup ? (
                                             <details class="group/subcert [&_summary::-webkit-details-marker]:hidden">
                                                 <summary class="flex items-center justify-between cursor-pointer list-none select-none border-b border-[#1c1c1c] pb-3 mb-3">
                                                     <h4 class="text-white font-thin text-sm sm:text-base">
-                                                        {item.title}
+                                                        {item.url ? (
+                                                            <a href={item.url} target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors flex items-center gap-1.5 w-fit" onclick="event.stopPropagation()">
+                                                                <span>{item.title}</span>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                                            </a>
+                                                        ) : (
+                                                            item.title
+                                                        )}
                                                     </h4>
                                                     <div class="flex items-center gap-3">
                                                         <span class="text-xs font-mono text-[#666] px-2 py-0.5 rounded bg-[#161616] border border-[#262626]">
@@ -580,6 +679,9 @@ const education = [
                                                 </div>
                                             </div>
                                         )}
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
                                 ))
                             }
@@ -587,7 +689,7 @@ const education = [
                     </details>
 
                                         {/* Honors & Awards */}
-                    <details open class="group/honors mb-10 [&_summary::-webkit-details-marker]:hidden">
+                    <details class="group/honors mb-10 [&_summary::-webkit-details-marker]:hidden">
                         <summary class="flex items-center justify-between cursor-pointer list-none select-none mb-6">
                             <h3 class="font-display text-[1.4rem] text-white uppercase tracking-wider mb-0 w-full text-center md:text-left">
                                 Honors & Awards
@@ -601,13 +703,21 @@ const education = [
                                 <div class="flex flex-col gap-2.5">
                                     <div class="flex items-center justify-between text-center sm:text-left flex-col sm:flex-row gap-2">
                                         <h4 class="text-white font-thin text-sm sm:text-base">
-                                            Nomination to Uruguay eCommerce Awards
+                                            <a href="https://ecommerceday.org.uy/2025/wp-content/uploads/2025/09/Comunicado-finalistas-del-eCommerce-Award-Uruguay-2025.pdf" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors flex items-center justify-center sm:justify-start gap-1.5 w-fit mx-auto sm:mx-0">
+                                                <span>Nomination to Uruguay eCommerce Awards</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                            </a>
                                         </h4>
                                         <span class="text-xs font-mono text-[#666] px-2 py-0.5 rounded bg-[#161616] border border-[#262626]">
                                             2025
                                         </span>
                                     </div>
-                                    <div class="text-[#888] font-medium text-sm text-center sm:text-left">eCommerce Institute Uruguay</div>
+                                    <div class="text-[#888] font-medium text-sm text-center sm:text-left">
+                                        <a href="https://ecommerce.institute/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center justify-center sm:justify-start gap-1.5 w-fit mx-auto sm:mx-0">
+                                            <span>eCommerce Institute</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                        </a>
+                                    </div>
                                     <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mt-1">
                                         <span class="inline-flex items-center gap-1.5 text-xs text-[#999] bg-[#161616] border border-[#262626] px-2.5 py-1 rounded-md">
                                             Disco Uy, Geant, Devoto Uy
@@ -620,13 +730,21 @@ const education = [
                                 <div class="flex flex-col gap-2.5">
                                     <div class="flex items-center justify-between text-center sm:text-left flex-col sm:flex-row gap-2">
                                         <h4 class="text-white font-thin text-sm sm:text-base">
-                                            Nomination to Uruguay eCommerce Awards
+                                            <a href="https://ecommerceday.org.uy/2024/se-conocieron-los-finalistas-de-los-ecommerce-awards-uruguay-2024/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors flex items-center justify-center sm:justify-start gap-1.5 w-fit mx-auto sm:mx-0">
+                                                <span>Nomination to Uruguay eCommerce Awards</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                            </a>
                                         </h4>
                                         <span class="text-xs font-mono text-[#666] px-2 py-0.5 rounded bg-[#161616] border border-[#262626]">
                                             2024
                                         </span>
                                     </div>
-                                    <div class="text-[#888] font-medium text-sm text-center sm:text-left">eCommerce Institute Uruguay</div>
+                                    <div class="text-[#888] font-medium text-sm text-center sm:text-left">
+                                        <a href="https://ecommerce.institute/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center justify-center sm:justify-start gap-1.5 w-fit mx-auto sm:mx-0">
+                                            <span>eCommerce Institute</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                        </a>
+                                    </div>
                                     <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mt-1">
                                         <span class="inline-flex items-center gap-1.5 text-xs text-[#999] bg-[#161616] border border-[#262626] px-2.5 py-1 rounded-md">
                                             Disco Uy, Geant, Devoto Uy
@@ -634,11 +752,15 @@ const education = [
                                     </div>
                                 </div>
                             </div>
+
+                            <p class="text-xs text-[#777] font-light text-center sm:text-left px-2 leading-relaxed italic">
+                                Following the platform migrations completed with the Pocima team, the sites achieved their first-ever nominations for these awards.
+                            </p>
                         </div>
                     </details>
 
 {/* Courses */}
-                    <details open class="group/supp mb-10 [&_summary::-webkit-details-marker]:hidden">
+                    <details class="group/supp mb-10 [&_summary::-webkit-details-marker]:hidden">
                         <summary class="flex items-center justify-between cursor-pointer list-none select-none mb-6">
                             <h3 class="font-display text-[1.4rem] text-white uppercase tracking-wider mb-0 w-full text-center md:text-left">
                                 Courses
@@ -652,11 +774,18 @@ const education = [
                             {
                                 supplementaryCoursework.map((group) => (
                                     <div class="bg-black/90 backdrop-blur-sm border border-[#222] rounded-2xl p-6 hover:bg-black hover:border-[#444] transition-all duration-300">
-                                        <div class="flex items-center justify-between mb-3 border-b border-[#1c1c1c] pb-2">
+                                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-3 border-b border-[#1c1c1c] pb-2 gap-2">
                                             <h4 class="text-white font-thin text-sm sm:text-base">
-                                                {group.institution}
+                                                {group.url ? (
+                                                    <a href={group.url} target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors flex items-center gap-1.5 w-fit">
+                                                        <span>{group.institution}</span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                                    </a>
+                                                ) : (
+                                                    group.institution
+                                                )}
                                             </h4>
-                                            <span class="text-xs font-mono text-[#666] px-2 py-0.5 rounded bg-[#161616] border border-[#262626]">
+                                            <span class="text-xs font-mono text-[#666] px-2 py-0.5 rounded bg-[#161616] border border-[#262626] w-fit">
                                                 {group.year}
                                             </span>
                                         </div>
@@ -680,11 +809,25 @@ const education = [
                         <h3 class="font-display text-[1.4rem] text-white uppercase tracking-wider mb-6 w-full text-center md:text-left">
                             Interests
                         </h3>
-                        <div class="flex flex-col md:flex-row flex-wrap items-center justify-center md:justify-start gap-4 text-center md:text-left">
-                            <a href="/running-agustin-diaz-cano" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#111] hover:bg-[#222] border border-[#222] hover:border-[#444] transition-all duration-300 group">
-                                <span class="text-[#ddd] group-hover:text-white font-medium text-sm">Running</span>
-                            </a>
-                            <span class="text-[#888] text-sm">Completed 2 full marathons 42k and 8 half marathons 21k</span>
+                        <div class="flex flex-col gap-3">
+                            <div class="flex flex-wrap items-center justify-center md:justify-start gap-3">
+                                <a href="/running-agustin-diaz-cano" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#111] hover:bg-[#222] border border-[#222] hover:border-[#444] transition-all duration-300 group">
+                                    <span class="text-[#ddd] group-hover:text-white font-medium text-sm">Running</span>
+                                </a>
+                                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#111] border border-[#222] cursor-default">
+                                    <span class="text-[#ddd] font-medium text-sm">Football</span>
+                                </div>
+                                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#111] border border-[#222] cursor-default">
+                                    <span class="text-[#ddd] font-medium text-sm">Art</span>
+                                </div>
+                                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#111] border border-[#222] cursor-default">
+                                    <span class="text-[#ddd] font-medium text-sm">Movies</span>
+                                </div>
+                                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#111] border border-[#222] cursor-default">
+                                    <span class="text-[#ddd] font-medium text-sm">Music</span>
+                                </div>
+                            </div>
+                            <span class="text-[#888] text-sm text-center md:text-left">Completed 2 full marathons 42k and 8 half marathons 21k</span>
                         </div>
                     </div>
                 </div>
@@ -718,6 +861,13 @@ const education = [
 
 <script>
 class Accordion {
+  el;
+  summary;
+  content;
+  animation;
+  isClosing;
+  isExpanding;
+
   constructor(el) {
     this.el = el;
     this.summary = el.querySelector('summary');
@@ -784,10 +934,12 @@ class Accordion {
 document.addEventListener("astro:page-load", () => {
   const isMobile = window.innerWidth < 768;
   document.querySelectorAll('details').forEach((el) => {
-    if (isMobile) {
-      el.removeAttribute('open');
-    } else {
-      el.setAttribute('open', '');
+    if (el.classList.contains('js-desktop-open')) {
+      if (isMobile) {
+        el.removeAttribute('open');
+      } else {
+        el.setAttribute('open', '');
+      }
     }
     new Accordion(el);
   });
