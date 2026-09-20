@@ -455,7 +455,7 @@ const education = [
                         <div class="space-y-6">
                             {
                                 workExperience.map((work) => (
-                                    <details class="group p-6 rounded-2xl border border-[#222] bg-black/90 backdrop-blur-sm hover:bg-black hover:border-[#444] transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
+                                    <details class="group p-6 rounded-2xl border border-[#222] bg-black/90 backdrop-blur-sm hover:bg-black hover:border-[#444] transition-colors duration-300 [&_summary::-webkit-details-marker]:hidden">
                                         <summary class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer list-none select-none">
                                             <div>
                                                 <h4 class="text-xl font-semibold text-white group-hover:text-blue-400 transition-colors text-center sm:text-left">
@@ -519,7 +519,7 @@ const education = [
                         <div class="space-y-6">
                             {
                                 education.map((edu) => (
-                                    <details class="group p-6 rounded-2xl border border-[#222] bg-black/90 backdrop-blur-sm hover:bg-black hover:border-[#444] transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
+                                    <details class="group p-6 rounded-2xl border border-[#222] bg-black/90 backdrop-blur-sm hover:bg-black hover:border-[#444] transition-colors duration-300 [&_summary::-webkit-details-marker]:hidden">
                                         <summary class="flex flex-col xl:flex-row xl:items-center justify-between gap-4 cursor-pointer list-none select-none">
                                             <div>
                                                 <div class="text-xs font-mono text-[#777] mb-1">{edu.category}</div>
@@ -613,7 +613,7 @@ const education = [
                                         </div>
                                         <div class="space-y-6">
                                             {category.items.map((item) => (
-                                                <div class="bg-black/90 backdrop-blur-sm border border-[#222] rounded-2xl p-6 hover:bg-black hover:border-[#444] transition-all duration-300">
+                                                <div class="bg-black/90 backdrop-blur-sm border border-[#222] rounded-2xl p-6 hover:bg-black hover:border-[#444] transition-colors duration-300">
                                         {item.isGroup ? (
                                             <details class="group/subcert [&_summary::-webkit-details-marker]:hidden">
                                                 <summary class="flex items-center justify-between cursor-pointer list-none select-none border-b border-[#1c1c1c] pb-3 mb-3">
@@ -741,7 +741,7 @@ const education = [
                             </div>
                         </summary>
                         <div class="space-y-6">
-                            <div class="bg-black/90 backdrop-blur-sm border border-[#222] rounded-2xl p-6 hover:bg-black hover:border-[#444] transition-all duration-300">
+                            <div class="bg-black/90 backdrop-blur-sm border border-[#222] rounded-2xl p-6 hover:bg-black hover:border-[#444] transition-colors duration-300">
                                 <div class="flex flex-col gap-2.5">
                                     <div class="flex items-center justify-between text-center sm:text-left flex-col sm:flex-row gap-2">
                                         <h4 class="text-white font-thin text-sm sm:text-base">
@@ -768,7 +768,7 @@ const education = [
                                 </div>
                             </div>
                             
-                            <div class="bg-black/90 backdrop-blur-sm border border-[#222] rounded-2xl p-6 hover:bg-black hover:border-[#444] transition-all duration-300">
+                            <div class="bg-black/90 backdrop-blur-sm border border-[#222] rounded-2xl p-6 hover:bg-black hover:border-[#444] transition-colors duration-300">
                                 <div class="flex flex-col gap-2.5">
                                     <div class="flex items-center justify-between text-center sm:text-left flex-col sm:flex-row gap-2">
                                         <h4 class="text-white font-thin text-sm sm:text-base">
@@ -815,7 +815,7 @@ const education = [
                         <div class="space-y-6">
                             {
                                 supplementaryCoursework.map((group) => (
-                                    <div class="bg-black/90 backdrop-blur-sm border border-[#222] rounded-2xl p-6 hover:bg-black hover:border-[#444] transition-all duration-300">
+                                    <div class="bg-black/90 backdrop-blur-sm border border-[#222] rounded-2xl p-6 hover:bg-black hover:border-[#444] transition-colors duration-300">
                                         <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-3 border-b border-[#1c1c1c] pb-2 gap-2">
                                             <h4 class="text-white font-thin text-sm sm:text-base">
                                                 {group.url ? (
@@ -905,7 +905,6 @@ const education = [
 class Accordion {
   el;
   summary;
-  content;
   animation;
   isClosing;
   isExpanding;
@@ -913,7 +912,6 @@ class Accordion {
   constructor(el) {
     this.el = el;
     this.summary = el.querySelector('summary');
-    this.content = el.querySelector('summary ~ *');
     this.animation = null;
     this.isClosing = false;
     this.isExpanding = false;
@@ -933,7 +931,10 @@ class Accordion {
   shrink() {
     this.isClosing = true;
     const startHeight = `${this.el.offsetHeight}px`;
-    const endHeight = `${this.summary.offsetHeight}px`;
+    this.el.open = false;
+    const endHeight = `${this.el.offsetHeight}px`;
+    this.el.open = true;
+
     if (this.animation) this.animation.cancel();
     this.animation = this.el.animate({
       height: [startHeight, endHeight]
@@ -946,22 +947,21 @@ class Accordion {
   }
 
   open() {
-    this.el.style.height = `${this.el.offsetHeight}px`;
+    this.el.style.height = '';
+    const startHeight = `${this.el.offsetHeight}px`;
     this.el.open = true;
-    window.requestAnimationFrame(() => {
-      this.isExpanding = true;
-      const startHeight = `${this.el.offsetHeight}px`;
-      const endHeight = `${this.summary.offsetHeight + this.content.offsetHeight}px`;
-      if (this.animation) this.animation.cancel();
-      this.animation = this.el.animate({
-        height: [startHeight, endHeight]
-      }, {
-        duration: 400,
-        easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
-      });
-      this.animation.onfinish = () => this.onAnimationFinish(true);
-      this.animation.oncancel = () => this.isExpanding = false;
+    const endHeight = `${this.el.offsetHeight}px`;
+    
+    this.isExpanding = true;
+    if (this.animation) this.animation.cancel();
+    this.animation = this.el.animate({
+      height: [startHeight, endHeight]
+    }, {
+      duration: 400,
+      easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
     });
+    this.animation.onfinish = () => this.onAnimationFinish(true);
+    this.animation.oncancel = () => this.isExpanding = false;
   }
 
   onAnimationFinish(open) {
