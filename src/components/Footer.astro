@@ -65,13 +65,17 @@ const textColor = isHome ? "text-white/90" : "text-[#444]";
             <p class="text-[#888] text-sm order-3 md:order-none">Last Updated: {lastUpdated}</p>
         </div>
         
-        <div class="relative group order-2 md:order-none">
-            <button id="visitors-btn" class="px-4 py-2 border border-[#333] rounded-md text-sm hover:bg-[#111] transition-colors flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-                Visitors
-            </button>
-            
-            {/* Tooltip Card */}
+        <div class="flex items-center gap-3 order-2 md:order-none">
+            <a href="/juego31.html" class="text-[#333] hover:text-white transition-colors" title="Follow the white rabbit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 16a3 3 0 0 1 2.24 5"/><path d="M18 12h.01"/><path d="M18 21h-8a4 4 0 0 1-4-4 7 7 0 0 1 7-7h.2L9.6 6.4a1 1 0 1 1 2.8-2.8L15.8 7h.2c3.3 0 6 2.7 6 6v1a2 2 0 0 1-2 2h-1a3 3 0 0 0-3 3"/><path d="M20 8.54V4a2 2 0 1 0-4 0v3"/><path d="M7.612 12.524a3 3 0 1 0-1.6 4.3"/></svg>
+            </a>
+            <div class="relative group">
+                <button id="visitors-btn" class="px-4 py-2 border border-[#333] rounded-md text-sm hover:bg-[#111] transition-colors flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                    Visitors
+                </button>
+                
+                {/* Tooltip Card */}
             <div id="visitors-tooltip" class="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-300 w-80 bg-[#111] border border-[#333] rounded-xl p-4 shadow-xl z-50 text-left">
                 <div class="flex justify-between items-center mb-4 px-2">
                     <div class="flex flex-col">
@@ -113,6 +117,7 @@ const textColor = isHome ? "text-white/90" : "text-[#444]";
                         ))}
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>
