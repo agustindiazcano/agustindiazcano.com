@@ -296,12 +296,13 @@ const education = [
         category: "Graduate Studies",
         programUrl: "https://frba.utn.edu.ar/posgrado/maestria-en-ingenieria-en-sistemas-de-informacion/",
         description: [
-            "Double titulation program: Specialization in Information Systems Engineering, followed by the Master's degree culminating in a final thesis.",
+            "PhD level credits. Double titulation program: Specialization in Information Systems Engineering, followed by the Master's degree culminating in a final thesis.",
             "Postgraduate program accredited Category A by CONEAU (Argentina's national university accreditation commission — the highest rating awarded). 700 total hours across foundational, elective, and research components.",
             "69% of faculty (11 of 16 professors) hold a Doctoral degree, including the program's Director and Co-Director, both PhDs in Computer Science (Universidad Nacional de La Plata).",
             "Active research lines in Artificial Intelligence, Software Engineering, and Blockchain.",
             "Coursework: Intelligent Information Systems, Project Management and Formulation, Intelligent Data Exploitation, Business Intelligence (Data Warehouse & Data Mining), Smart Contract Design for Blockchain, Conceptual Modeling of Information Systems, Computer Forensics.",
-            "Key Artificial Intelligence topics covered within this coursework include genetic algorithms, artificial neural networks, and fuzzy logic in engineering applied within the Intelligent Information Systems and Intelligent Data Exploitation courses."
+            "Key Artificial Intelligence topics covered within this coursework include genetic algorithms, artificial neural networks, and fuzzy logic in engineering applied within the Intelligent Information Systems and Intelligent Data Exploitation courses.",
+            "Completed a software engineering leveling course (Backend Development, Databases/SQL, AI, Software Engineering) as part of program admission requirements."
         ],
         documents: [
             { label: "Proof of active enrollment — UTN student portal", url: "https://github.com/agustindiazcano/credentials/blob/main/documents/utn-enrollment-proof.png", type: "document" },
@@ -395,18 +396,31 @@ const education = [
                         <p>
                             Software Engineer | Python Developer with 4+ years of experience in software development, specializing in AI/ML and Backend Development (Python).
                         </p>
-                        <p>
-                            I'm currently pursuing an M.Sc. in Systems Engineering at UTN, focused on Artificial Intelligence and Data Analysis. My technical focus is building backend architectures that integrate GenAI in production-realistic conditions, not just prototypes. I'm developing projects with Python, Retrieval-Augmented Generation (RAG), and the Model Context Protocol (MCP) to explore LLM orchestration and AI agent design.
-                        </p>
-                        <p>
-                            Previously, Sole QA Owner and quality authority for Grupo GDU's e-commerce platforms. Responsible for the entire quality strategy of web and mobile across multiple high-traffic sites, covering a multi-million dollar online channel with hundreds of thousands of users. Held full Go/No-Go authority on production releases with no dedicated QA team.
-                        </p>
-                        <p>
-                            Transitioned from zero coding background in the pre-AI era. Wrote my first line of code in October 2020, received a job offer on May 14, 2021, and shipped my first production PR in June 2021 at an international fintech. Participated in more than 10 projects that reached production.
-                        </p>
-                        <p>
-                            In game development, I created full modifications for the Men of War series as a solo developer, reaching over 200,000 downloads. Only a small percentage of Steam games, mods, and mobile apps (typically under 2-5%, and often closer to 1% for the 100k threshold) ever reach that level of adoption.
-                        </p>
+                        <div id="about-extra" class="hidden md:block space-y-4">
+                            <p>
+                                I'm currently pursuing an M.Sc. in Systems Engineering at UTN, focused on Artificial Intelligence and Data Analysis. My technical focus is building backend architectures that integrate GenAI in production-realistic conditions, not just prototypes. I'm developing projects with Python, Retrieval-Augmented Generation (RAG), and the Model Context Protocol (MCP) to explore LLM orchestration and AI agent design.
+                            </p>
+                            <p>
+                                Previously, Sole QA Owner and quality authority for Grupo GDU's e-commerce platforms. Responsible for the entire quality strategy of web and mobile across multiple high-traffic sites, covering a multi-million dollar online channel with hundreds of thousands of users. Held full Go/No-Go authority on production releases with no dedicated QA team. During my tenure, the platforms—previously unranked—achieved nominations for the eCommerce Awards Uruguay in 2024 and 2025.
+                            </p>
+                            <p>
+                                Transitioned from zero coding background in the pre-AI era. Wrote my first line of code in October 2020, received a job offer on May 14, 2021, and shipped my first production PR in June 2021 at an international fintech. Participated in more than 10 projects that reached production.
+                            </p>
+                            <p>
+                                In game development, I created full modifications for the Men of War series as a solo developer, reaching over 200,000 downloads. Only a small percentage of Steam games, mods, and mobile apps (typically under 2-5%, and often closer to 1% for the 100k threshold) ever reach that level of adoption.
+                            </p>
+                        </div>
+                        <button id="about-toggle-btn" class="md:hidden text-[#ccc] hover:text-white transition-colors cursor-pointer w-full text-center mt-2 italic text-xs" onclick="
+                            const text = document.getElementById('about-extra');
+                            const btn = document.getElementById('about-toggle-btn');
+                            if (text.classList.contains('hidden')) {
+                                text.classList.remove('hidden');
+                                btn.innerText = 'Show less';
+                            } else {
+                                text.classList.add('hidden');
+                                btn.innerText = 'Read more...';
+                            }
+                        ">Read more...</button>
                     </div>
                 </div>
 

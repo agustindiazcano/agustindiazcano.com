@@ -1,7 +1,16 @@
 # Agustin Diaz-Cano - Software Engineer
 
-## Summary
-Agustin Diaz-Cano is a Software Engineer and Master's Candidate in Information Systems Engineering at UTN, specialized in AI/ML and Backend. His portfolio spans complex backend systems, artificial intelligence research, and game development. He has engineered systems ranging from algorithmic trading engines and Model Context Protocol (MCP) transactional agents to astrophysics data simulations and LATAM e-commerce ecosystems. His writings cover fundamental principles of scientific validation, predictive analysis of generative AI, and advanced neural network architectures.
+## About
+
+Software Engineer | Python Developer with 4+ years of experience in software development, specializing in AI/ML and Backend Development (Python).
+
+I'm currently pursuing an M.Sc. in Systems Engineering at UTN, focused on Artificial Intelligence and Data Analysis. My technical focus is building backend architectures that integrate GenAI in production-realistic conditions, not just prototypes. I'm developing projects with Python, Retrieval-Augmented Generation (RAG), and the Model Context Protocol (MCP) to explore LLM orchestration and AI agent design.
+
+Previously, Sole QA Owner and quality authority for Grupo GDU's e-commerce platforms. Responsible for the entire quality strategy of web and mobile across multiple high-traffic sites, covering a multi-million dollar online channel with hundreds of thousands of users. Held full Go/No-Go authority on production releases with no dedicated QA team. During my tenure, the platforms—previously unranked—achieved nominations for the eCommerce Awards Uruguay in 2024 and 2025.
+
+Transitioned from zero coding background in the pre-AI era. Wrote my first line of code in October 2020, received a job offer on May 14, 2021, and shipped my first production PR in June 2021 at an international fintech. Participated in more than 10 projects that reached production.
+
+In game development, I created full modifications for the Men of War series as a solo developer, reaching over 200,000 downloads. Only a small percentage of Steam games, mods, and mobile apps (typically under 2-5%, and often closer to 1% for the 100k threshold) ever reach that level of adoption.
 
 [View Full Profile](https://www.agustindiazcano.com/profile)
 
