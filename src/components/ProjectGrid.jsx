@@ -68,6 +68,31 @@ const ProjectGrid = () => {
             ]
         },
         {
+            id: 14,
+            title: "Memory-Constrained LLM Optimization",
+            slug: "memory-constrained-llm-optimization",
+            subtitle: "View Details",
+            description: "Exploration into memory-constrained LLM optimization using OpenAI APIs and parameter golf techniques.",
+            longDescription: "An exploration into memory-constrained LLM optimization using OpenAI APIs and parameter golf techniques to minimize footprint while preserving performance.",
+            tags: ["AI", "LLMs", "Optimization", "Python"],
+            size: "medium",
+            stats: "",
+            features: [
+                "Parameter golf techniques",
+                "OpenAI API integration"
+            ],
+            links: [
+                {
+                    label: "View on GitHub",
+                    url: "https://github.com/agustindiazcano/openai-llm-optimizers-parameter-golf",
+                    primary: true,
+                    icon: (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                    )
+                }
+            ]
+        },
+        {
             id: 8,
             title: "Algorithmic Trading Engine",
             slug: "algorithmic-trading-engine",
@@ -288,7 +313,7 @@ const ProjectGrid = () => {
                         )}
                     </motion.div>
 
-                    <motion.div className="z-10 flex justify-between items-center mt-4">
+                    <motion.div className="relative z-30 flex justify-between items-center mt-4 pointer-events-none">
                         <div className="flex flex-wrap gap-2 pr-2">
                             {project.tags.slice(0, 3).map(tag => (
                                 <span key={tag} className="text-xs text-[#666] border border-[#333] px-2 py-1 rounded-full whitespace-nowrap">{tag}</span>
@@ -303,7 +328,7 @@ const ProjectGrid = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={(e) => e.stopPropagation()}
-                                className="text-[#666] hover:text-white transition-colors flex-shrink-0 relative z-30"
+                                className="text-[#666] hover:text-white transition-colors flex-shrink-0 pointer-events-auto relative after:absolute after:-inset-8"
                                 title="View on GitHub"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
@@ -315,7 +340,7 @@ const ProjectGrid = () => {
                         <div className="absolute right-0 bottom-0 text-9xl font-bold text-[#222] opacity-20 -mb-4 -mr-4 select-none">MSc</div>
                     )}
                 </motion.div>
-                {index === 2 && (
+                {false && index === 2 && (
                     <div className="md:col-span-3 w-full h-12 flex items-center overflow-hidden bg-[#0a0a0a] border-y border-[#222] relative my-2 px-6">
                         <span className="text-[#555] text-xs uppercase tracking-widest font-semibold mr-8 whitespace-nowrap">Production Projects</span>
                         <div className="flex-1 relative h-full flex items-center">

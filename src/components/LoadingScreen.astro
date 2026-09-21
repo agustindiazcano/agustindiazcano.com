@@ -3,9 +3,13 @@
 ---
 
 <script is:inline>
-  if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem("home-loaded")) {
-    document.documentElement.classList.add("skip-loading-screen");
+  function applySkipClass() {
+    if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem("home-loaded")) {
+      document.documentElement.classList.add("skip-loading-screen");
+    }
   }
+  applySkipClass();
+  document.addEventListener('astro:after-swap', applySkipClass);
 </script>
 
 <div id="loading-screen-overlay" class="fixed inset-0 w-full h-[100vh] z-50 bg-[#05030d] overflow-hidden transition-opacity duration-700">

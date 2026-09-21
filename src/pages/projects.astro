@@ -7,44 +7,66 @@ const projects = [
         {
             title: "MCP Transactional Agent",
             slug: "mcp-transactional-agent",
-            description: "AI-driven transactional agent using Model Context Protocol to interact with complex APIs.",
-            tags: ["AI", "LLMs", "Agentic Systems"],
+            description: "Event-driven AI agentic engine. Features MCP tool sandboxing, RabbitMQ asynchronous routing, strict ACID idempotency, and LLM-as-a-Judge guardrails.",
+            tags: ["AI", "LLMs", "PostgreSQL", "FastAPI", "RabbitMQ", "AWS Bedrock", "GCP Vertex AI", "LangGraph", "LangChain", "MCP", "RAG", "Groq", "Docker"],
             year: "2026",
+            githubUrl: "https://github.com/agustindiazcano/mcp-transactional-agent"
+        },
+        {
+            title: "Memory-Constrained LLM Optimization (OpenAI Parameter Golf)",
+            slug: "memory-constrained-llm-optimization",
+            description: "Exploration into memory-constrained LLM optimization using OpenAI APIs and parameter golf techniques.",
+            tags: ["AI", "LLMs", "Optimization", "Python"],
+            year: "2024",
+            githubUrl: "https://github.com/agustindiazcano/openai-llm-optimizers-parameter-golf"
         },
         {
             title: "Algorithmic Trading Engine",
             slug: "algorithmic-trading-engine",
-            description: "Automated high-performance algorithmic trading system capable of processing market data and executing trades with low latency.",
+            description: "Automated trading system for financial markets.",
             tags: ["Fintech", "Python", "Trading"],
             year: "2025",
+            githubUrl: "https://github.com/agustindiazcano/algorithmic-trading-engine"
         },
         {
             title: "AI & ML Research",
             slug: "ai-ml-research",
-            description: "Academic experiments and proofs of concept focusing on physics simulations, neural networks, and optimization.",
+            description: "A collection of academic experiments and proofs of concept focusing on physics simulations, neural networks, and optimization.",
             tags: ["AI", "ML", "Neural Networks", "Python"],
             year: "2024",
+            githubUrl: "https://github.com/agustindiazcano/ai-ml-research"
         },
         {
             title: "Astrophysics Data Simulations",
             slug: "astrophysics-data-simulations",
-            description: "Developed robust simulations to model complex astrophysics systems, analyzing large datasets for scientific research.",
+            description: "Simulations of astrophysical phenomena and data analysis.",
             tags: ["Data Science", "Physics", "Python"],
             year: "2023",
+            githubUrl: "https://github.com/agustindiazcano/astrophysics-data-simulations"
         },
         {
             title: "LATAM E-commerce Ecosystem",
             slug: "ecommerce-latam",
-            description: "Scalable and localized e-commerce solution tailored for LATAM, handling complex payment gateways.",
+            description: "E-commerce platform for the Latin American market.",
             tags: ["Web Dev", "E-commerce", "React"],
             year: "2022",
+            githubUrl: null
         },
         {
             title: "InsurTech Quoting Engine",
             slug: "insurance-quoter",
-            description: "Robust quoting engine and an intuitive user interface for calculating insurance premiums in real-time.",
+            description: "Dynamic insurance quoting engine and frontend.",
             tags: ["Fintech", "TypeScript", "React"],
             year: "2021",
+            githubUrl: null
+        },
+        {
+            title: "Go Async Order Processor",
+            slug: "go-async-order-processor",
+            description: "High-throughput asynchronous order processing engine built with Go.",
+            tags: ["Backend", "Go", "Concurrency"],
+            year: "2021",
+            githubUrl: "https://github.com/agustindiazcano/go-async-order-processor"
         },
         {
             title: "Game Dev: Modding Ecosystem",
@@ -52,13 +74,23 @@ const projects = [
             description: "220,000+ Downloads. Combining Zombie Mod and HD Mod across Men of War series.",
             tags: ["Game Dev", "3D Modeling"],
             year: "2015",
+            githubUrl: null
         },
         {
             title: "Alien Survival",
             slug: "alien-survival",
-            description: "Challenging survival game where players must defend against alien swarms while managing limited resources.",
+            description: "Survival game focusing on resource management and base building.",
             tags: ["Game Dev", "C#", "Unity"],
             year: "2014",
+            githubUrl: "https://github.com/agustindiazcano/biomass"
+        },
+        {
+            title: "Agustin Diaz-Cano Portfolio",
+            slug: "portfolio",
+            description: "Personal website and portfolio built with Astro, React, and Tailwind CSS v4. Features server-side rendering, smooth transitions, and a modern aesthetic.",
+            tags: ["Astro", "React", "Tailwind CSS", "Portfolio"],
+            year: "2026",
+            githubUrl: "https://github.com/agustindiazcano/agustindiazcano.com"
         }
 ];
 ---
@@ -80,28 +112,47 @@ const projects = [
     <div class="space-y-6">
       {
         projects.map((project) => (
-          <article class="group relative bg-black/90 backdrop-blur-sm border border-[#222] rounded-2xl p-6 hover:bg-black hover:border-[#444] transition-all duration-300">
-            <div class="flex justify-between items-baseline mb-2">
-              <h2 class="text-xl font-semibold text-white group-hover:text-blue-400 transition-colors">
-                <a
-                  href={`/projects/${project.slug}`}
-                  class="absolute inset-0 z-10 focus:outline-none"
-                >
-                  <span class="sr-only">View - {project.title}</span>
-                </a>
-                {project.title}
-              </h2>
-              <span class="text-sm font-mono text-[#444]">{project.year}</span>
+          <article class="group relative bg-black/90 backdrop-blur-sm border border-[#222] rounded-2xl p-6 hover:bg-black hover:border-[#444] transition-all duration-300 flex flex-col justify-between">
+            <div>
+                <div class="flex justify-between items-baseline mb-2">
+                <h2 class="text-xl font-semibold text-white group-hover:text-blue-400 transition-colors">
+                    <a
+                    href={`/projects/${project.slug}`}
+                    class="absolute inset-0 z-10 focus:outline-none"
+                    >
+                    <span class="sr-only">View - {project.title}</span>
+                    </a>
+                    {project.title}
+                </h2>
+                <span class="text-sm font-mono text-[#444]">{project.year}</span>
+                </div>
+                <p class="text-[#666] text-sm leading-relaxed relative z-20 pointer-events-none mb-4">
+                {project.description}
+                </p>
             </div>
-            <p class="text-[#666] text-sm leading-relaxed relative z-20 pointer-events-none mb-3">
-              {project.description}
-            </p>
-            <div class="flex gap-2 relative z-20 pointer-events-none">
-              {project.tags.map((tag) => (
-                <span class="text-xs text-[#444] border border-[#222] px-1.5 py-0.5 rounded">
-                  {tag}
-                </span>
-              ))}
+            
+            <div class="flex justify-between items-center relative z-30 pointer-events-none">
+                <div class="flex flex-wrap gap-2 pr-2">
+                    {project.tags.slice(0, 5).map((tag) => (
+                    <span class="text-xs text-[#666] border border-[#333] px-2 py-1 rounded-full whitespace-nowrap">
+                        {tag}
+                    </span>
+                    ))}
+                    {project.tags.length > 5 && (
+                    <span class="text-xs text-[#444] px-1 py-1 whitespace-nowrap">+{project.tags.length - 5}</span>
+                    )}
+                </div>
+                {project.githubUrl && (
+                    <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-[#666] hover:text-white transition-colors flex-shrink-0 pointer-events-auto relative after:absolute after:-inset-4"
+                        title="View on GitHub"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                    </a>
+                )}
             </div>
           </article>
         ))
