@@ -5,10 +5,21 @@ import { motion, AnimatePresence } from 'framer-motion';
 const ProjectGrid = () => {
     const [selectedId, setSelectedId] = useState(null);
     const [mounted, setMounted] = useState(false);
+    const [currentChunk, setCurrentChunk] = useState(0);
+
+    const carouselItems = ["Hello Auto", "Discouy", "Devotouy", "Geant", "Altix", "Stronger", "Factor MX", "Visma", "Stronger", "Dermalink MX", "Korium", "Toto", "Techo", "Zombie Mod", "HD Mod"];
+    const chunkedItems = [];
+    for (let i = 0; i < carouselItems.length; i += 5) {
+        chunkedItems.push(carouselItems.slice(i, i + 5));
+    }
 
     useEffect(() => {
         setMounted(true);
-    }, []);
+        const interval = setInterval(() => {
+            setCurrentChunk(prev => (prev + 1) % chunkedItems.length);
+        }, 3000);
+        return () => clearInterval(interval);
+    }, [chunkedItems.length]);
 
     const projects = [
         // ROW 1
@@ -167,17 +178,17 @@ const ProjectGrid = () => {
     ];
 
     return (
-        <div className="w-full grid grid-cols-1 md:grid-cols-3 auto-rows-[300px] gap-6 mb-32">
-            {projects.map((project) => (
-                <motion.div
-                    key={project.id}
-                    className={`relative group overflow-hidden bg-[#111] border border-[#222] rounded-xl flex flex-col justify-between p-8 ${project.size === "large" ? "md:col-span-2" : "md:col-span-1"
-                        }`}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                >
-                    {/* Clickable Overlay */}
-                    <div
-                        className="absolute inset-0 z-20 cursor-pointer"
+        <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 mb-32">
+            {projects.map((project, index) => (
+                <React.Fragment key={project.id}>
+                    <motion.div
+                        className={`h-[300px] relative group overflow-hidden bg-[#111] border border-[#222] rounded-xl flex flex-col justify-between p-8 ${project.size === "large" ? "md:col-span-2" : "md:col-span-1"
+                            }`}
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    >
+                        {/* Clickable Overlay */}
+                        <div
+                            className="absolute inset-0 z-20 cursor-pointer"
                         onClick={() => setSelectedId(project.id)}
                     />
 
@@ -239,6 +250,33 @@ const ProjectGrid = () => {
                         <div className="absolute right-0 bottom-0 text-9xl font-bold text-[#222] opacity-20 -mb-4 -mr-4 select-none">MSc</div>
                     )}
                 </motion.div>
+                {index === 2 && (
+                    <div className="md:col-span-3 w-full h-12 flex items-center overflow-hidden bg-[#0a0a0a] border-y border-[#222] relative my-2 px-6">
+                        <span className="text-[#555] text-xs uppercase tracking-widest font-semibold mr-8 whitespace-nowrap">Production Projects</span>
+                        <div className="flex-1 relative h-full flex items-center">
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={currentChunk}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="grid grid-cols-5 w-full text-[#888] font-mono text-sm uppercase tracking-wider items-center absolute"
+                                >
+                                    {chunkedItems[currentChunk]?.map((item, i) => (
+                                        <span 
+                                            key={i} 
+                                            className={`whitespace-nowrap ${i === 0 ? 'text-left' : i === 4 ? 'text-right' : 'text-center'}`}
+                                        >
+                                            {item}
+                                        </span>
+                                    ))}
+                                </motion.div>
+                            </AnimatePresence>
+                        </div>
+                    </div>
+                )}
+                </React.Fragment>
             ))}
 
             {mounted && createPortal(
