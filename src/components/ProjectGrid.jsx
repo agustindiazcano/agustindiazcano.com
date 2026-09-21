@@ -17,14 +17,43 @@ const ProjectGrid = () => {
             title: "MCP Transactional Agent",
             slug: "mcp-transactional-agent",
             subtitle: "View Case Study",
-            description: "AI-driven transactional agent using Model Context Protocol.",
-            longDescription: "Developed an advanced transactional agent utilizing the Model Context Protocol (MCP) to interact with complex APIs and perform autonomous operations securely.",
-            tags: ["AI", "LLMs", "Agentic Systems"],
+            description: "Event-driven AI agentic engine. Features MCP tool sandboxing, RabbitMQ asynchronous routing, strict ACID idempotency, and LLM-as-a-Judge guardrails.",
+            longDescription: (
+                <div className="space-y-4">
+                    <p>Event-driven AI agentic engine. Features MCP tool sandboxing, RabbitMQ asynchronous routing, strict ACID idempotency, and LLM-as-a-Judge guardrails.</p>
+                    <p>Beyond the core transactional engine, this project explores a second question: how much of an AI system's decision-making can be made deterministic and auditable, instead of purely probabilistic? Phases 2 and 3 extend the engine with a confidence layer (fuzzy logic + rule-based expert system) and a production observability layer (Kalman filtering over quality metrics), moving the system progressively from "trust the LLM's judgment" toward "trust an explicit, inspectable mechanism, and use the LLM only where symbolic reasoning cannot substitute for it."</p>
+                    <ul className="list-disc pl-5 mt-2 space-y-1">
+                        <li>Tracing and Real-Time Observability with TruLens</li>
+                        <li>Regression Testing and CI/CD with promptfoo</li>
+                    </ul>
+                </div>
+            ),
+            tags: ["AI", "LLMs", "PostgreSQL", "FastAPI", "RabbitMQ", "AWS Bedrock", "GCP Vertex AI", "LangGraph", "LangChain", "MCP", "RAG", "Groq", "Docker"],
             size: "medium",
             stats: "",
             features: [
                 "Autonomous tool execution",
                 "Model Context Protocol integration"
+            ],
+            links: [
+                {
+                    label: "View on GitHub",
+                    url: "https://github.com/agustindiazcano/mcp-transactional-agent",
+                    primary: true,
+                    icon: (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                    )
+                },
+                {
+                    label: "Deterministic Roadmap",
+                    url: "https://github.com/agustindiazcano/mcp-transactional-agent/blob/main/docs/deterministic_guardrails_roadmap.md",
+                    primary: false
+                },
+                {
+                    label: "Testing",
+                    url: "https://github.com/agustindiazcano/mcp-transactional-agent/tree/main/docs/testing",
+                    primary: false
+                }
             ]
         },
         {
@@ -183,10 +212,27 @@ const ProjectGrid = () => {
                         )}
                     </motion.div>
 
-                    <motion.div className="z-10 flex gap-2 mt-4">
-                        {project.tags.map(tag => (
-                            <span key={tag} className="text-xs text-[#666] border border-[#333] px-2 py-1 rounded-full">{tag}</span>
-                        ))}
+                    <motion.div className="z-10 flex justify-between items-center mt-4">
+                        <div className="flex flex-wrap gap-2 pr-2">
+                            {project.tags.slice(0, 3).map(tag => (
+                                <span key={tag} className="text-xs text-[#666] border border-[#333] px-2 py-1 rounded-full whitespace-nowrap">{tag}</span>
+                            ))}
+                            {project.tags.length > 3 && (
+                                <span className="text-xs text-[#444] px-1 py-1 whitespace-nowrap">+{project.tags.length - 3}</span>
+                            )}
+                        </div>
+                        {![6, 7, 2, 4].includes(project.id) && (
+                            <a
+                                href={project.links?.[0]?.url || "https://github.com/agustindiazcano"}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                                className="text-[#666] hover:text-white transition-colors flex-shrink-0"
+                                title="View on GitHub"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                            </a>
+                        )}
                     </motion.div>
 
                     {project.id === 4 && (
@@ -221,71 +267,68 @@ const ProjectGrid = () => {
                                     return (
                                         <>
                                             {/* Media Header Area */}
-                                            <div className="h-64 bg-[#111] border-b border-[#222] flex items-center justify-center relative group">
-                                                <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
-                                                {project.id === 1 ? (
-                                                    <div className="font-mono text-xs text-green-500 p-8 w-full h-full overflow-hidden opacity-70">
-                                                        &gt; initializing execution engine...<br />
-                                                        &gt; optimizating routing tables... DONE<br />
-                                                        &gt; connecting to market data feed... CONNECTED<br />
-                                                        &gt; latency check: 400ns... OK<br />
-                                                        <span className="animate-pulse">_</span>
-                                                    </div>
-                                                ) : project.id === 2 ? (
-                                                    <div className="font-display text-[#333] font-bold text-4xl">VIDEO PLACEHOLDER</div>
-                                                ) : (
-                                                    <div className="font-display text-[#333] font-bold text-4xl">{project.title}</div>
-                                                )}
+                                            <div className="bg-[#111] border-b border-[#222] flex items-center justify-between p-5 relative group">
+                                                <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 pointer-events-none"></div>
+                                                
+                                                <div className="flex flex-col relative z-10 pl-2">
+                                                    <motion.h2 className="font-display text-xl font-bold text-white">{project.title}</motion.h2>
+                                                    {project.stats && (
+                                                        <span className="font-mono text-blue-400 text-xs mt-1">{project.stats}</span>
+                                                    )}
+                                                </div>
 
                                                 <button
                                                     onClick={() => setSelectedId(null)}
-                                                    className="absolute top-4 right-4 bg-black/50 hover:bg-black/80 text-white p-2 rounded-full backdrop-blur-md transition-colors"
+                                                    className="relative z-20 text-[#888] hover:text-white p-2 rounded-full transition-colors flex-shrink-0"
                                                 >
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 18 18" /></svg>
                                                 </button>
                                             </div>
 
                                             <div className="p-8 overflow-y-auto">
-                                                <div className="flex justify-between items-baseline mb-2">
-                                                    <motion.h2 className="font-display text-3xl font-bold text-white">{project.title}</motion.h2>
-                                                    <span className="font-mono text-blue-400 text-sm">{project.stats}</span>
-                                                </div>
-
-                                                <p className="text-[#999] mb-8 leading-relaxed">
+                                                <p className="text-[#999] mb-8 leading-relaxed text-sm md:text-base">
                                                     {project.longDescription}
                                                 </p>
 
-                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                                                    <div>
-                                                        <h4 className="text-white text-sm font-semibold mb-3 uppercase tracking-wider">Key Features</h4>
-                                                        <ul className="space-y-2">
-                                                            {project.features.map(feature => (
-                                                                <li key={feature} className="text-[#666] text-sm flex items-center gap-2">
-                                                                    <span className="w-1.5 h-1.5 bg-blue-500/50 rounded-full"></span> {feature}
-                                                                </li>
-                                                            ))}
-                                                        </ul>
-                                                    </div>
-                                                    <div>
-                                                        <h4 className="text-white text-sm font-semibold mb-3 uppercase tracking-wider">Tech Stack</h4>
-                                                        <div className="flex flex-wrap gap-2">
-                                                            {project.tags.map(tag => (
-                                                                <span key={tag} className="text-[#888] text-xs border border-[#333] px-2 py-1 rounded bg-[#111]">{tag}</span>
-                                                            ))}
-                                                        </div>
+                                                <div className="mb-8">
+                                                    <div className="flex flex-wrap gap-2">
+                                                        {project.tags.map(tag => (
+                                                            <span key={tag} className="text-[#888] text-xs border border-[#333] px-2 py-1 rounded bg-[#111]">{tag}</span>
+                                                        ))}
                                                     </div>
                                                 </div>
 
-                                                <div className="flex gap-4 border-t border-[#222] pt-6">
-                                                    <button className="flex-1 bg-white text-black font-semibold py-3 rounded-lg hover:bg-[#ccc] transition-colors">
-                                                        {project.id === 2 ? "Download Mod" : "View Source"}
-                                                    </button>
-                                                    <a
-                                                        href={`/projects/${project.slug}`}
-                                                        className="flex-1 bg-[#111] text-white border border-[#333] font-semibold py-3 rounded-lg hover:bg-[#222] transition-colors text-center"
-                                                    >
-                                                        View Project
-                                                    </a>
+                                                <div className="flex flex-col sm:flex-row gap-3 border-t border-[#222] pt-6">
+                                                    {project.links ? (
+                                                        project.links.map((link, idx) => (
+                                                            <a
+                                                                key={idx}
+                                                                href={link.url}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                className={`flex-1 flex items-center justify-center gap-2 font-semibold py-3 px-4 rounded-lg transition-colors text-center text-sm ${
+                                                                    link.primary 
+                                                                        ? "bg-white text-black hover:bg-[#ccc]" 
+                                                                        : "bg-[#111] text-white border border-[#333] hover:bg-[#222]"
+                                                                }`}
+                                                            >
+                                                                {link.icon && link.icon}
+                                                                {link.label}
+                                                            </a>
+                                                        ))
+                                                    ) : (
+                                                        <>
+                                                            <button className="flex-1 bg-white text-black font-semibold py-3 rounded-lg hover:bg-[#ccc] transition-colors text-sm">
+                                                                {project.id === 2 ? "Download Mod" : "View Source"}
+                                                            </button>
+                                                            <a
+                                                                href={`/projects/${project.slug}`}
+                                                                className="flex-1 bg-[#111] text-white border border-[#333] font-semibold py-3 rounded-lg hover:bg-[#222] transition-colors text-center text-sm"
+                                                            >
+                                                                View Project
+                                                            </a>
+                                                        </>
+                                                    )}
                                                 </div>
                                             </div>
                                         </>
