@@ -1,5 +1,15 @@
 # Portfolio of Agustin Diaz-Cano — [agustindiazcano.com](https://www.agustindiazcano.com)
 
+<p align="left">
+  <img src="https://img.shields.io/badge/Astro_5-%23BC52EE.svg?style=flat-square&logo=astro&logoColor=white" alt="Astro" />
+  <img src="https://img.shields.io/badge/React_19-%2320232a.svg?style=flat-square&logo=react&logoColor=%2361DAFB" alt="React" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS_v4-%2338B2AC.svg?style=flat-square&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/TypeScript-%23007ACC.svg?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Framer_Motion-%230055FF.svg?style=flat-square&logo=framer&logoColor=white" alt="Framer Motion" />
+  <img src="https://img.shields.io/badge/Vercel-%23000000.svg?style=flat-square&logo=vercel&logoColor=white" alt="Vercel" />
+  <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="License: MIT" />
+</p>
+
 Personal portfolio and technical blog built with Astro 5, React 19, and Tailwind CSS v4. Showcases engineering work across backend systems, distributed architectures, AI/ML optimization, and independent simulations.
 
 Live site: [agustindiazcano.com](https://www.agustindiazcano.com)
