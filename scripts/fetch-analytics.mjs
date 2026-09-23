@@ -1,19 +1,18 @@
 import fs from 'fs';
 import path from 'path';
 
-// Load environment variables
+// Load environment variables (supports VERCEL_PROJECT_ID or PROJECT_ID)
 const VERCEL_TOKEN = process.env.VERCEL_TOKEN;
-const PROJECT_ID = process.env.VERCEL_PROJECT_ID;
+const PROJECT_ID = process.env.VERCEL_PROJECT_ID || process.env.PROJECT_ID;
 
 if (!VERCEL_TOKEN || !PROJECT_ID) {
-    console.error("Missing VERCEL_TOKEN or VERCEL_PROJECT_ID environment variables.");
+    console.error("Missing VERCEL_TOKEN or VERCEL_PROJECT_ID / PROJECT_ID environment variables.");
     process.exit(1);
 }
 
 // Helper to calculate previous 7 days (Monday to Sunday)
 // Note: If running on a Monday, this gets the previous Monday -> Sunday.
 const today = new Date();
-// Get to the most recent Monday
 const currentDay = today.getDay(); // 0 is Sunday, 1 is Monday
 const daysToSubtract = currentDay === 0 ? 6 : currentDay - 1; 
 
@@ -25,17 +24,16 @@ const lastSunday = new Date(lastMonday);
 lastSunday.setDate(lastMonday.getDate() + 6);
 lastSunday.setHours(23, 59, 59, 999);
 
-const fromTime = lastMonday.getTime();
-const untilTime = lastSunday.getTime();
+const sinceIso = lastMonday.toISOString();
+const untilIso = lastSunday.toISOString();
 
-console.log(`Fetching data from ${lastMonday.toISOString()} to ${lastSunday.toISOString()}`);
+console.log(`Fetching data from ${sinceIso} to ${untilIso}`);
 
 async function fetchVercelAPI(endpoint, params = {}) {
     const url = new URL(`https://api.vercel.com/v1/query/web-analytics/${endpoint}`);
     url.searchParams.append('projectId', PROJECT_ID);
-    url.searchParams.append('from', fromTime);
-    url.searchParams.append('until', untilTime);
-    url.searchParams.append('environment', 'production');
+    url.searchParams.append('since', sinceIso);
+    url.searchParams.append('until', untilIso);
     
     for (const [key, value] of Object.entries(params)) {
         url.searchParams.append(key, value);
@@ -48,7 +46,8 @@ async function fetchVercelAPI(endpoint, params = {}) {
     });
 
     if (!response.ok) {
-        throw new Error(`Failed to fetch ${endpoint}: ${response.status} ${response.statusText}`);
+        const errorText = await response.text();
+        throw new Error(`Failed to fetch ${endpoint}: ${response.status} ${response.statusText} - ${errorText}`);
     }
 
     return response.json();
@@ -57,24 +56,23 @@ async function fetchVercelAPI(endpoint, params = {}) {
 async function run() {
     try {
         // 1. Fetch total visitors and pageviews
-        const countData = await fetchVercelAPI('visits/count');
-        const visitors = countData?.visitors || 0;
-        const pageViews = countData?.pageviews || 0; // Vercel uses 'pageviews' in count
+        // Response format: { version: 1, data: { visitors: 58, pageviews: 1079 } }
+        const countRes = await fetchVercelAPI('visits/count');
+        const countData = countRes?.data || {};
+        const visitors = countData.visitors || 0;
+        const pageViews = countData.pageviews || 0;
 
         // 2. Fetch aggregate data by country
-        // Group by country
-        const aggregateData = await fetchVercelAPI('visits/aggregate', {
-            'groupBy': 'country'
+        // Response format: { version: 1, data: [ { country: 'AR', visitors: 40, pageviews: 1167 }, ... ] }
+        const aggregateRes = await fetchVercelAPI('visits/aggregate', {
+            'by': 'country'
         });
 
-        // The aggregate API returns data in format: { data: [ { country: 'ar', visitors: 10, pageviews: 20 }, ... ] }
-        const countriesMap = aggregateData.data || [];
+        const countriesList = aggregateRes?.data || [];
         
-        // Map country codes to readable names (Optional but good for fallback)
-        // Usually Vercel returns just the 2-letter ISO code
-        const formattedCountries = countriesMap.map(c => ({
+        const formattedCountries = countriesList.map(c => ({
             code: (c.country || 'unknown').toLowerCase(),
-            name: (c.country || 'Unknown').toUpperCase(), // You could use a library to map codes to full names if preferred, but UI uses flags
+            name: (c.country || 'Unknown').toUpperCase(),
             visitors: c.visitors || 0,
             views: c.pageviews || 0
         }));
