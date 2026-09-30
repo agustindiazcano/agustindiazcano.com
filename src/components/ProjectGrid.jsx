@@ -61,6 +61,11 @@ const ProjectGrid = () => {
             stats: "Top 32%",
             videoUrl: "https://www.youtube.com/embed/m64qdd1axV0",
             imageUrl: "/images/images-projects/test-mind-home.png",
+            images: [
+                "/images/images-projects/test-mind-home.png",
+                "/images/images-projects/test-mind-2.png",
+                "/images/images-projects/test-mind-3.png"
+            ],
             features: [
                 "Built in 48 hours",
                 "Full Stack + AI"
@@ -117,6 +122,12 @@ const ProjectGrid = () => {
             tags: ["AI", "CI/CD", "Agents", "Testing"],
             size: "medium",
             stats: "",
+            imageUrl: "/images/images-projects/1-afaw.png",
+            images: [
+                "/images/images-projects/1-afaw.png",
+                "/images/images-projects/2-afaw.png",
+                "/images/images-projects/3-afaw.png"
+            ],
             features: [
                 "AST Mutation Testing",
                 "Isolated Context Updates"
@@ -151,6 +162,12 @@ const ProjectGrid = () => {
             tags: ["AI", "LLMs", "PostgreSQL", "FastAPI", "RabbitMQ", "AWS Bedrock", "GCP Vertex AI", "LangGraph", "LangChain", "MCP", "RAG", "Groq", "Docker"],
             size: "medium",
             stats: "",
+            imageUrl: "/images/images-projects/1-mcp.png",
+            images: [
+                "/images/images-projects/1-mcp.png",
+                "/images/images-projects/2-mcp.png",
+                "/images/images-projects/3-mcp.png"
+            ],
             features: [
                 "Autonomous tool execution",
                 "Model Context Protocol integration"
@@ -186,6 +203,7 @@ const ProjectGrid = () => {
             tags: ["AI", "LLMs", "Optimization", "Python"],
             size: "medium",
             stats: "",
+            imageUrl: "/images/images-projects/llm-optimization.png",
             features: [
                 "Parameter golf techniques",
                 "OpenAI API integration"
