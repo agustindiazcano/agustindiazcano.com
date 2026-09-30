@@ -377,7 +377,40 @@ const ProjectGrid = () => {
                 {
                     label: "Zombie Mod",
                     videoUrl: "https://www.youtube.com/embed/3P-1hHL5S8U",
-                    content: "A massive multiplayer mod ecosystem demonstrating the capacity to handle high concurrency and complex state synchronization. It introduces completely new game modes, enemy AI logic, and survival mechanics.",
+                    content: (
+                        <div className="flex flex-col gap-4">
+                            <p><strong>Zombie mod.</strong> The first full modern zombie modification for the Men of War series (Men of War, Assault Squad 2, CTA Gates of Hell), with an original story. Resist waves of zombies to complete missions by combining teams of units in RTS. In development since 2011.</p>
+                            
+                            <div>
+                                <h4 className="text-white font-semibold mb-2">Features:</h4>
+                                <ul className="list-disc pl-5 mb-3 flex flex-col gap-2">
+                                    <li><strong>Zombies:</strong> Integrates special units with customized AI designed for zombie behavior. They will relentlessly attack the player without following traditional game AI patterns.</li>
+                                    <li><strong>Infection System:</strong> A contagion mechanic triggered upon contact with special zombie units.</li>
+                                    <li><strong>Survival:</strong> Endure increasingly larger waves and hordes across various maps. The gameplay focus is on survival and objective completion.</li>
+                                    <li><strong>Zombie Classes:</strong> Including walkers, infectors, runners, bosses, and mini-bosses.</li>
+                                </ul>
+                            </div>
+
+                            <div className="flex flex-col sm:flex-row gap-8">
+                                <div>
+                                    <h4 className="text-white font-semibold mb-2 uppercase text-sm tracking-wider">Game Modes</h4>
+                                    <ul className="list-disc pl-5 flex flex-col gap-1">
+                                        <li>Campaign</li>
+                                        <li>Timed Wave Survival</li>
+                                        <li>Cooperative Multiplayer</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 className="text-white font-semibold mb-2 uppercase text-sm tracking-wider">Planned versions</h4>
+                                    <ul className="list-disc pl-5 flex flex-col gap-1">
+                                        <li>Men of War</li>
+                                        <li>Assault Squad 2</li>
+                                        <li>CTA: Gates of Hell</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    ),
                     images: [
                         "/images/images-projects/zombie-mod/call-to-arms-zombie-mod-1.png",
                         "/images/images-projects/zombie-mod/call-to-arms-zombie-mod-2.png",
