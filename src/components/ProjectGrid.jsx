@@ -513,76 +513,8 @@ const ProjectGrid = () => {
                                         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                                         className={`w-full ${hasMedia ? "max-w-[1200px]" : "max-w-2xl"} bg-[#0a0a0a] border border-[#333] rounded-2xl overflow-hidden relative z-50 max-h-[90vh] flex flex-col md:flex-row shadow-2xl`}
                                     >
-                                        <div className={`flex flex-col h-full max-h-[90vh] ${hasMedia ? "md:w-1/2 border-r border-[#222]" : "w-full"}`}>
-                                            {/* Media Header Area */}
-                                            <div className="bg-[#111] border-b border-[#222] flex items-center justify-between p-5 relative group flex-shrink-0">
-                                                <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 pointer-events-none"></div>
-                                                
-                                                <div className="flex flex-col relative z-10 pl-2">
-                                                    <motion.h2 className="font-display text-xl font-bold text-white">{project.title}</motion.h2>
-                                                    {project.stats && (
-                                                        <span className="font-mono text-blue-400 text-xs mt-1">{project.stats}</span>
-                                                    )}
-                                                </div>
-
-                                                <button
-                                                    onClick={() => setSelectedId(null)}
-                                                    className="relative z-20 text-[#888] hover:text-white p-2 rounded-full transition-colors flex-shrink-0"
-                                                >
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 18 18" /></svg>
-                                                </button>
-                                            </div>
-
-                                            <div className="p-8 overflow-y-auto flex-1">
-                                                <div className="text-[#999] mb-8 leading-relaxed text-sm md:text-base">
-                                                    {project.longDescription}
-                                                </div>
-
-                                                <div className="mb-8">
-                                                    <div className="flex flex-wrap gap-2">
-                                                        {project.tags.map(tag => (
-                                                            <span key={tag} className="text-[#888] text-xs border border-[#333] px-2 py-1 rounded bg-[#111]">{tag}</span>
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div className="bg-[#111] border-t border-[#222] p-5 flex flex-col sm:flex-row gap-3 flex-shrink-0">
-                                                {project.links ? (
-                                                    project.links.map((link, idx) => (
-                                                        <a
-                                                            key={idx}
-                                                            href={link.url}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className={`flex-1 flex items-center justify-center gap-2 font-semibold py-3 px-4 rounded-lg transition-colors text-center text-sm ${
-                                                                link.primary 
-                                                                    ? "bg-white text-black hover:bg-[#ccc]" 
-                                                                    : "bg-[#111] text-white border border-[#333] hover:bg-[#222]"
-                                                            }`}
-                                                        >
-                                                            {link.icon && link.icon}
-                                                            {link.label}
-                                                        </a>
-                                                    ))
-                                                ) : (
-                                                    <>
-                                                        <button className="flex-1 bg-white text-black font-semibold py-3 rounded-lg hover:bg-[#ccc] transition-colors text-sm">
-                                                            {project.id === 2 ? "Download Mod" : "View Source"}
-                                                        </button>
-                                                        <a
-                                                            href={`/projects/${project.slug}`}
-                                                            className="flex-1 bg-[#111] text-white border border-[#333] font-semibold py-3 rounded-lg hover:bg-[#222] transition-colors text-center text-sm"
-                                                        >
-                                                            View Project
-                                                        </a>
-                                                    </>
-                                                )}
-                                            </div>
-                                        </div>
-                                        
                                         {hasMedia && (
-                                            <div className="md:w-1/2 bg-[#050505] flex flex-col h-full max-h-[90vh] overflow-y-auto relative">
+                                            <div className="md:w-1/2 bg-[#050505] flex flex-col h-full max-h-[90vh] overflow-y-auto relative border-b md:border-b-0 md:border-r border-[#222]">
                                                 {project.videoUrl && (
                                                     <div className="w-full aspect-video border-b border-[#222] flex-shrink-0">
                                                         <iframe width="100%" height="100%" src={project.videoUrl} title="Video Preview" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
@@ -620,6 +552,74 @@ const ProjectGrid = () => {
                                                 )}
                                             </div>
                                         )}
+                                        
+                                        <div className={`flex flex-col h-full max-h-[90vh] ${hasMedia ? "md:w-1/2" : "w-full"}`}>
+                                            {/* Media Header Area */}
+                                            <div className="bg-[#111] border-b border-[#222] flex items-center justify-between p-5 relative group flex-shrink-0">
+                                                <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 pointer-events-none"></div>
+                                                
+                                                <div className="flex flex-col relative z-10 pl-2">
+                                                    <motion.h2 className="font-display text-xl font-bold text-white">{project.title}</motion.h2>
+                                                    {project.stats && (
+                                                        <span className="font-mono text-blue-400 text-xs mt-1">{project.stats}</span>
+                                                    )}
+                                                </div>
+
+                                                <button
+                                                    onClick={() => setSelectedId(null)}
+                                                    className="relative z-20 text-[#888] hover:text-white p-2 rounded-full transition-colors flex-shrink-0"
+                                                >
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 18 18" /></svg>
+                                                </button>
+                                            </div>
+
+                                            <div className="p-8 overflow-y-auto flex-1">
+                                                <div className="text-[#999] mb-8 leading-relaxed text-sm md:text-base">
+                                                    {project.longDescription}
+                                                </div>
+
+                                                <div className="mb-8">
+                                                    <div className="flex flex-wrap gap-2">
+                                                        {project.tags.map(tag => (
+                                                            <span key={tag} className="text-[#888] text-xs border border-[#333] px-2 py-1 rounded bg-[#111]">{tag}</span>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div className="bg-[#111] border-t border-[#222] p-5 flex flex-col sm:flex-row gap-3 flex-shrink-0 mt-auto">
+                                                {project.links ? (
+                                                    project.links.map((link, idx) => (
+                                                        <a
+                                                            key={idx}
+                                                            href={link.url}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className={`flex-1 flex items-center justify-center gap-2 font-semibold py-3 px-4 rounded-lg transition-colors text-center text-sm ${
+                                                                link.primary 
+                                                                    ? "bg-white text-black hover:bg-[#ccc]" 
+                                                                    : "bg-[#111] text-white border border-[#333] hover:bg-[#222]"
+                                                            }`}
+                                                        >
+                                                            {link.icon && link.icon}
+                                                            {link.label}
+                                                        </a>
+                                                    ))
+                                                ) : (
+                                                    <>
+                                                        <button className="flex-1 bg-white text-black font-semibold py-3 rounded-lg hover:bg-[#ccc] transition-colors text-sm">
+                                                            {project.id === 2 ? "Download Mod" : "View Source"}
+                                                        </button>
+                                                        <a
+                                                            href={`/projects/${project.slug}`}
+                                                            className="flex-1 bg-[#111] text-white border border-[#333] font-semibold py-3 rounded-lg hover:bg-[#222] transition-colors text-center text-sm"
+                                                        >
+                                                            View Project
+                                                        </a>
+                                                    </>
+                                                )}
+                                            </div>
+                                        </div>
                                     </motion.div>
                                 );
                             })()}
