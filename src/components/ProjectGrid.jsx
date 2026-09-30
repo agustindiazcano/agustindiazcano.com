@@ -37,15 +37,15 @@ const ProjectGrid = () => {
                 <div className="flex flex-col gap-1.5 mt-2">
                     <span className="flex items-start gap-2 text-sm text-[#888]">
                         <span className="w-1 h-1 rounded-full bg-[#555] mt-2 flex-shrink-0"></span>
+                        <span><strong className="text-[#aaa]">Top 32%:</strong> One of 1,124 successful submissions out of 3,464 teams</span>
+                    </span>
+                    <span className="flex items-start gap-2 text-sm text-[#888]">
+                        <span className="w-1 h-1 rounded-full bg-[#555] mt-2 flex-shrink-0"></span>
                         <span>Built from scratch in 48 hours for the IBM AI Hackathon.</span>
                     </span>
                     <span className="flex items-start gap-2 text-sm text-[#888]">
                         <span className="w-1 h-1 rounded-full bg-[#555] mt-2 flex-shrink-0"></span>
                         <span>Full CI/CD, WIF, Terraform, Google Cloud, Full Stack + AI.</span>
-                    </span>
-                    <span className="flex items-start gap-2 text-sm text-[#888]">
-                        <span className="w-1 h-1 rounded-full bg-[#555] mt-2 flex-shrink-0"></span>
-                        <span>One of 1,124 successful submissions out of 3,464 teams (15,727 participants) — Top 32%.</span>
                     </span>
                 </div>
             ),
@@ -56,7 +56,7 @@ const ProjectGrid = () => {
                     <p>Out of 3,464 teams and 15,727 participants, this was one of 1,124 successful submissions, placing it in the top 32%.</p>
                 </div>
             ),
-            tags: ["Hackathon", "IBM", "AI", "Google Cloud", "Terraform", "CI/CD"],
+            tags: ["IBM", "AI", "Google Cloud", "Terraform", "CI/CD"],
             size: "medium",
             stats: "Top 32%",
             videoUrl: "https://www.youtube.com/embed/m64qdd1axV0",
