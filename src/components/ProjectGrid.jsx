@@ -7,9 +7,11 @@ const ProjectGrid = () => {
     const [mounted, setMounted] = useState(false);
     const [currentChunk, setCurrentChunk] = useState(0);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [activeTab, setActiveTab] = useState(0);
 
     useEffect(() => {
         setCurrentImageIndex(0);
+        setActiveTab(0);
     }, [selectedId]);
 
     const carouselItems = ["Hello Auto", "Discouy", "Devotouy", "Geant", "Altix", "Stronger", "Factor MX", "Visma", "Stronger", "Dermalink MX", "Korium", "Toto", "Techo", "Zombie Mod", "HD Mod"];
@@ -135,10 +137,18 @@ const ProjectGrid = () => {
             links: [
                 {
                     label: "View on GitHub",
-                    url: "https://github.com/agustindiazcano/anti-fragile-agentic-workflow",
+                    url: "https://github.com/agustindiazcano/afaw-anti-fragile-agentic-workflow",
                     primary: true,
                     icon: (
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                    )
+                },
+                {
+                    label: "Whitepaper",
+                    url: "https://www.researchgate.net/publication/414988226_AFAW_Anti-Fragile_Agentic_Workflow_Anti-Fragile_Agentic_Workflow_AFAW_A_deterministic_multi-agent_methodology_for_AI-assisted_software_development",
+                    primary: false,
+                    icon: (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                     )
                 }
             ]
@@ -221,11 +231,11 @@ const ProjectGrid = () => {
         },
         {
             id: 8,
-            title: "Algorithmic Trading Engine",
+            title: "AI Crypto Trading Agent",
             slug: "algorithmic-trading-engine",
             subtitle: "View Architecture",
-            description: "Automated trading system for financial markets.",
-            longDescription: "Developed a high-performance algorithmic trading engine capable of processing market data and executing trades with low latency.",
+            description: "A quantitative trading system for Binance evolving from rule-based scripts into a service-oriented decision-making agent.",
+            longDescription: "A quantitative trading system for Binance evolving from rule-based scripts into a service-oriented decision-making agent: real-time market ingestion, technical-signal scoring (MACD/DEA, Bollinger, ADX, RSI, ATR), risk management, and order execution.",
             tags: ["Fintech", "Python", "Trading"],
             size: "medium",
             stats: "",
@@ -246,11 +256,11 @@ const ProjectGrid = () => {
         },
         {
             id: 10,
-            title: "AI & ML Research",
+            title: "M.Sc. Thesis AI/ML",
             slug: "ai-ml-research",
-            subtitle: "View Experiments",
-            description: "A collection of academic experiments and proofs of concept focusing on physics simulations, neural networks, and optimization.",
-            longDescription: "A collection of academic experiments and proofs of concept focusing on physics simulations, neural networks, and optimization. Investigated advanced concepts in autonomous agents and complex system modeling.",
+            subtitle: "View Thesis",
+            description: "LLM-Guided Reinforcement Learning for Legged Robot Navigation, UTN MSc, Jan 2026 - Present.",
+            longDescription: "Investigating a hierarchical neuro-symbolic architecture for quadruped robots: an RBF-based perceptual layer generates interpretable concept activations, and an LLM resolves navigation decisions only in ambiguous cases where multiple concepts compete, analogous to the hierarchical escalation approach used by NVIDIA. Currently in the experimental phase, benchmarking RBF vs. MLP policies (curriculum learning, grid-based navigation) prior to full integration in MuJoCo.",
             tags: ["AI", "ML", "Neural Networks", "Python"],
             size: "medium",
             stats: "",
@@ -270,6 +280,7 @@ const ProjectGrid = () => {
             ]
         },
         // ROW 2
+        /*
         {
             id: 11,
             title: "Astrophysics Data Simulations",
@@ -295,6 +306,7 @@ const ProjectGrid = () => {
                 }
             ]
         },
+        */
         {
             id: 6,
             title: "LATAM E-commerce Ecosystem",
@@ -325,6 +337,7 @@ const ProjectGrid = () => {
                 "Dynamic form generation"
             ]
         },
+        /*
         {
             id: 13,
             title: "Go Async Order Processor",
@@ -350,6 +363,7 @@ const ProjectGrid = () => {
                 }
             ]
         },
+        */
         // ROW 3
         {
             id: 2,
@@ -357,9 +371,42 @@ const ProjectGrid = () => {
             slug: "game-dev-modding",
             subtitle: "View Gameplay & Stats",
             description: "220,000+ Downloads. Combining Zombie Mod and HD Mod across Men of War series.",
+            tabs: [
+                {
+                    label: "Zombie Mod",
+                    videoUrl: "https://www.youtube.com/embed/3P-1hHL5S8U",
+                    content: "A massive multiplayer mod ecosystem demonstrating the capacity to handle high concurrency and complex state synchronization. It introduces completely new game modes, enemy AI logic, and survival mechanics.",
+                    images: [
+                        "/images/images-projects/zombie-mod/call-to-arms-zombie-mod-1.png",
+                        "/images/images-projects/zombie-mod/call-to-arms-zombie-mod-2.png",
+                        "/images/images-projects/zombie-mod/call-to-arms-zombie-mod-3.jpg",
+                        "/images/images-projects/zombie-mod/call-to-arms-zombie-mod-4.jpg",
+                        "/images/images-projects/zombie-mod/call-to-arms-zombie-mod-5.jpg",
+                        "/images/images-projects/zombie-mod/call-to-arms-zombie-mod-6.jpg",
+                        "/images/images-projects/zombie-mod/call-to-arms-zombie-mod-7.png",
+                        "/images/images-projects/zombie-mod/call-to-arms-zombie-mod-8.png",
+                        "/images/images-projects/zombie-mod/call-to-arms-zombie-mod-9.png",
+                        "/images/images-projects/zombie-mod/call-to-arms-zombie-mod-10.png"
+                    ]
+                },
+                {
+                    label: "HD Mod",
+                    content: "Replaces low-resolution assets with HD textures and detailed models while maintaining performance across the Men of War engine. Includes upgraded particle effects, improved lighting shaders, and highly detailed vehicle models.",
+                    images: [
+                        "/images/images-projects/hd-mod/men-of-war-hd-mod-1.jpg",
+                        "/images/images-projects/hd-mod/men-of-war-hd-mod-2.jpg",
+                        "/images/images-projects/hd-mod/men-of-war-hd-mod-3.jpg",
+                        "/images/images-projects/hd-mod/men-of-war-hd-mod-4.jpg",
+                        "/images/images-projects/hd-mod/men-of-war-hd-mod-5.jpg",
+                        "/images/images-projects/hd-mod/men-of-war-hd-mod-6.jpg",
+                        "/images/images-projects/hd-mod/men-of-war-hd-mod-7.png",
+                        "/images/images-projects/hd-mod/men-of-war-hd-mod-8.png"
+                    ]
+                }
+            ],
             longDescription: "A massive multiplayer mod ecosystem demonstrating the capacity to handle high concurrency and complex state synchronization. Replaces low-resolution assets with HD textures and detailed models while maintaining performance.",
             tags: ["Game Dev", "3D Modeling"],
-            size: "large",
+            size: "medium",
             stats: "220k+ Downloads",
             features: [
                 "Lag compensation networking",
@@ -414,7 +461,7 @@ const ProjectGrid = () => {
                     {/* Floating Hover Image */}
                     {project.imageUrl && (
                         <div className="absolute top-1/2 -translate-y-1/2 right-[calc(100%+24px)] w-96 h-60 rounded-lg overflow-hidden border border-[#333] opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-95 group-hover:scale-100 z-50 shadow-2xl pointer-events-none hidden md:block bg-black">
-                            <img src={project.imageUrl} alt="" className="w-full h-full object-contain" />
+                            <img src={project.imageUrl} alt="Built by Agustin Diaz-Cano" loading="lazy" className="w-full h-full object-contain" />
                         </div>
                     )}
 
@@ -520,8 +567,13 @@ const ProjectGrid = () => {
                             {(() => {
                                 const project = projects.find(p => p.id === selectedId);
                                 if (!project) return null;
-                                const imagesArray = project.images || (project.imageUrl ? [project.imageUrl] : []);
-                                const hasMedia = project.videoUrl || imagesArray.length > 0;
+                                
+                                const activeTabData = project.tabs ? project.tabs[activeTab] : null;
+                                const displayVideoUrl = activeTabData?.videoUrl || project.videoUrl;
+                                const displayContent = activeTabData?.content || project.longDescription;
+                                
+                                const imagesArray = activeTabData?.images || project.images || (project.imageUrl ? [project.imageUrl] : []);
+                                const hasMedia = displayVideoUrl || imagesArray.length > 0;
 
                                 return (
                                     <motion.div
@@ -529,18 +581,18 @@ const ProjectGrid = () => {
                                         animate={{ opacity: 1, scale: 1, y: 0 }}
                                         exit={{ opacity: 0, scale: 0.98, y: 10 }}
                                         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                                        className={`w-full ${hasMedia ? "max-w-[1200px]" : "max-w-2xl"} bg-[#0a0a0a] border border-[#333] rounded-2xl overflow-hidden relative z-50 max-h-[90vh] flex flex-col md:flex-row shadow-2xl`}
+                                        className={`w-full ${hasMedia ? "max-w-[1300px]" : "max-w-4xl"} bg-[#0a0a0a] border border-[#333] rounded-2xl overflow-hidden relative z-50 max-h-[90vh] flex flex-col md:flex-row shadow-2xl`}
                                     >
                                         {hasMedia && (
-                                            <div className="md:w-1/2 bg-[#050505] flex flex-col h-full max-h-[90vh] overflow-y-auto relative border-b md:border-b-0 md:border-r border-[#222]">
-                                                {project.videoUrl && (
+                                            <div className="md:w-[45%] flex-shrink-0 bg-[#050505] flex flex-col h-full max-h-[90vh] overflow-y-auto relative border-b md:border-b-0 md:border-r border-[#222]">
+                                                {displayVideoUrl && (
                                                     <div className="w-full aspect-video border-b border-[#222] flex-shrink-0">
-                                                        <iframe width="100%" height="100%" src={project.videoUrl} title="Video Preview" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                                                        <iframe width="100%" height="100%" src={displayVideoUrl} title="Video Preview" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                                                     </div>
                                                 )}
                                                 {imagesArray.length > 0 && (
                                                     <div className="w-full p-4 flex-1 flex items-center justify-center min-h-[300px] relative group/carousel">
-                                                        <img src={imagesArray[currentImageIndex] || imagesArray[0]} alt={project.title} className="max-w-full max-h-full object-contain rounded-lg border border-[#222]" />
+                                                        <img src={imagesArray[currentImageIndex] || imagesArray[0]} alt="Built by Agustin Diaz-Cano" loading="lazy" className="max-w-full max-h-full object-contain rounded-lg border border-[#222]" />
                                                         {imagesArray.length > 1 && (
                                                             <>
                                                                 <button 
@@ -571,7 +623,7 @@ const ProjectGrid = () => {
                                             </div>
                                         )}
                                         
-                                        <div className={`flex flex-col h-full max-h-[90vh] ${hasMedia ? "md:w-1/2" : "w-full"}`}>
+                                        <div className={`flex flex-col h-full max-h-[90vh] flex-1 flex-shrink-0 min-w-[300px]`}>
                                             {/* Media Header Area */}
                                             <div className="bg-[#111] border-b border-[#222] flex items-center justify-between p-5 relative group flex-shrink-0">
                                                 <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 pointer-events-none"></div>
@@ -592,8 +644,21 @@ const ProjectGrid = () => {
                                             </div>
 
                                             <div className="p-8 overflow-y-auto flex-1">
+                                                {project.tabs && (
+                                                    <div className="flex gap-4 mb-6 border-b border-[#222]">
+                                                        {project.tabs.map((tab, idx) => (
+                                                            <button
+                                                                key={idx}
+                                                                onClick={() => setActiveTab(idx)}
+                                                                className={`pb-2 text-sm font-semibold transition-all ${activeTab === idx ? "text-white border-b-2 border-white" : "text-[#777] hover:text-[#ccc] border-b-2 border-transparent"}`}
+                                                            >
+                                                                {tab.label}
+                                                            </button>
+                                                        ))}
+                                                    </div>
+                                                )}
                                                 <div className="text-[#999] mb-8 leading-relaxed text-sm md:text-base">
-                                                    {project.longDescription}
+                                                    {displayContent}
                                                 </div>
 
                                                 <div className="mb-8">
@@ -638,6 +703,25 @@ const ProjectGrid = () => {
                                                 )}
                                             </div>
                                         </div>
+                                        
+                                        {/* Projects Sidebar */}
+                                        <div className="md:w-64 bg-[#0a0a0a] border-t md:border-t-0 md:border-l border-[#222] flex flex-col max-h-[90vh] flex-shrink-0 hidden md:flex">
+                                            <div className="p-4 border-b border-[#222] sticky top-0 bg-[#0a0a0a] z-10 flex-shrink-0">
+                                                <h3 className="text-white font-display font-semibold text-xs tracking-widest uppercase">Other Projects</h3>
+                                            </div>
+                                            <div className="flex flex-col p-2 gap-1 overflow-y-auto flex-1 custom-scrollbar">
+                                                {projects.filter(p => ![11, 13].includes(p.id)).map((p) => (
+                                                    <button
+                                                        key={p.id}
+                                                        onClick={() => setSelectedId(p.id)}
+                                                        className={`text-left px-3 py-2 rounded-lg text-sm transition-colors ${p.id === selectedId ? "bg-[#222] text-white font-medium" : "text-[#777] hover:bg-[#111] hover:text-[#ccc]"}`}
+                                                    >
+                                                        {p.title}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+
                                     </motion.div>
                                 );
                             })()}
