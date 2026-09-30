@@ -6,6 +6,11 @@ const ProjectGrid = () => {
     const [selectedId, setSelectedId] = useState(null);
     const [mounted, setMounted] = useState(false);
     const [currentChunk, setCurrentChunk] = useState(0);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    useEffect(() => {
+        setCurrentImageIndex(0);
+    }, [selectedId]);
 
     const carouselItems = ["Hello Auto", "Discouy", "Devotouy", "Geant", "Altix", "Stronger", "Factor MX", "Visma", "Stronger", "Dermalink MX", "Korium", "Toto", "Techo", "Zombie Mod", "HD Mod"];
     const chunkedItems = [];
@@ -497,7 +502,8 @@ const ProjectGrid = () => {
                             {(() => {
                                 const project = projects.find(p => p.id === selectedId);
                                 if (!project) return null;
-                                const hasMedia = project.videoUrl || project.imageUrl;
+                                const imagesArray = project.images || (project.imageUrl ? [project.imageUrl] : []);
+                                const hasMedia = project.videoUrl || imagesArray.length > 0;
 
                                 return (
                                     <motion.div
@@ -539,52 +545,77 @@ const ProjectGrid = () => {
                                                         ))}
                                                     </div>
                                                 </div>
-
-                                                <div className="flex flex-col sm:flex-row gap-3 border-t border-[#222] pt-6">
-                                                    {project.links ? (
-                                                        project.links.map((link, idx) => (
-                                                            <a
-                                                                key={idx}
-                                                                href={link.url}
-                                                                target="_blank"
-                                                                rel="noopener noreferrer"
-                                                                className={`flex-1 flex items-center justify-center gap-2 font-semibold py-3 px-4 rounded-lg transition-colors text-center text-sm ${
-                                                                    link.primary 
-                                                                        ? "bg-white text-black hover:bg-[#ccc]" 
-                                                                        : "bg-[#111] text-white border border-[#333] hover:bg-[#222]"
-                                                                }`}
-                                                            >
-                                                                {link.icon && link.icon}
-                                                                {link.label}
-                                                            </a>
-                                                        ))
-                                                    ) : (
-                                                        <>
-                                                            <button className="flex-1 bg-white text-black font-semibold py-3 rounded-lg hover:bg-[#ccc] transition-colors text-sm">
-                                                                {project.id === 2 ? "Download Mod" : "View Source"}
-                                                            </button>
-                                                            <a
-                                                                href={`/projects/${project.slug}`}
-                                                                className="flex-1 bg-[#111] text-white border border-[#333] font-semibold py-3 rounded-lg hover:bg-[#222] transition-colors text-center text-sm"
-                                                            >
-                                                                View Project
-                                                            </a>
-                                                        </>
-                                                    )}
-                                                </div>
+                                            </div>
+                                            
+                                            <div className="bg-[#111] border-t border-[#222] p-5 flex flex-col sm:flex-row gap-3 flex-shrink-0">
+                                                {project.links ? (
+                                                    project.links.map((link, idx) => (
+                                                        <a
+                                                            key={idx}
+                                                            href={link.url}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className={`flex-1 flex items-center justify-center gap-2 font-semibold py-3 px-4 rounded-lg transition-colors text-center text-sm ${
+                                                                link.primary 
+                                                                    ? "bg-white text-black hover:bg-[#ccc]" 
+                                                                    : "bg-[#111] text-white border border-[#333] hover:bg-[#222]"
+                                                            }`}
+                                                        >
+                                                            {link.icon && link.icon}
+                                                            {link.label}
+                                                        </a>
+                                                    ))
+                                                ) : (
+                                                    <>
+                                                        <button className="flex-1 bg-white text-black font-semibold py-3 rounded-lg hover:bg-[#ccc] transition-colors text-sm">
+                                                            {project.id === 2 ? "Download Mod" : "View Source"}
+                                                        </button>
+                                                        <a
+                                                            href={`/projects/${project.slug}`}
+                                                            className="flex-1 bg-[#111] text-white border border-[#333] font-semibold py-3 rounded-lg hover:bg-[#222] transition-colors text-center text-sm"
+                                                        >
+                                                            View Project
+                                                        </a>
+                                                    </>
+                                                )}
                                             </div>
                                         </div>
                                         
                                         {hasMedia && (
-                                            <div className="md:w-1/2 bg-[#050505] flex flex-col h-full max-h-[90vh] overflow-y-auto">
+                                            <div className="md:w-1/2 bg-[#050505] flex flex-col h-full max-h-[90vh] overflow-y-auto relative">
                                                 {project.videoUrl && (
                                                     <div className="w-full aspect-video border-b border-[#222] flex-shrink-0">
                                                         <iframe width="100%" height="100%" src={project.videoUrl} title="Video Preview" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                                                     </div>
                                                 )}
-                                                {project.imageUrl && (
-                                                    <div className="w-full p-4 flex-1 flex items-center justify-center min-h-[300px]">
-                                                        <img src={project.imageUrl} alt={project.title} className="max-w-full max-h-full object-contain rounded-lg border border-[#222]" />
+                                                {imagesArray.length > 0 && (
+                                                    <div className="w-full p-4 flex-1 flex items-center justify-center min-h-[300px] relative group/carousel">
+                                                        <img src={imagesArray[currentImageIndex] || imagesArray[0]} alt={project.title} className="max-w-full max-h-full object-contain rounded-lg border border-[#222]" />
+                                                        {imagesArray.length > 1 && (
+                                                            <>
+                                                                <button 
+                                                                    onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(prev => prev === 0 ? imagesArray.length - 1 : prev - 1); }}
+                                                                    className="absolute left-6 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/60 hover:bg-black/90 border border-[#333] rounded-full flex items-center justify-center text-white opacity-0 group-hover/carousel:opacity-100 transition-opacity z-20"
+                                                                >
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                                                                </button>
+                                                                <button 
+                                                                    onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(prev => (prev + 1) % imagesArray.length); }}
+                                                                    className="absolute right-6 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/60 hover:bg-black/90 border border-[#333] rounded-full flex items-center justify-center text-white opacity-0 group-hover/carousel:opacity-100 transition-opacity z-20"
+                                                                >
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                                                                </button>
+                                                                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+                                                                    {imagesArray.map((_, idx) => (
+                                                                        <button 
+                                                                            key={idx}
+                                                                            onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(idx); }}
+                                                                            className={`w-2 h-2 rounded-full transition-colors ${idx === currentImageIndex ? 'bg-white' : 'bg-white/30 hover:bg-white/60'}`}
+                                                                        />
+                                                                    ))}
+                                                                </div>
+                                                            </>
+                                                        )}
                                                     </div>
                                                 )}
                                             </div>
