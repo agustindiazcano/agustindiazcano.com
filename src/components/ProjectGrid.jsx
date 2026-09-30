@@ -24,6 +24,85 @@ const ProjectGrid = () => {
     const projects = [
         // ROW 1
         {
+            id: 16,
+            title: "Multi-Agent Mutation Testing System (MCP)",
+            slug: "multi-agent-mutation-testing",
+            subtitle: "View Hackathon Project",
+            description: (
+                <div className="flex flex-col gap-1.5 mt-2">
+                    <span className="flex items-start gap-2 text-sm text-[#888]">
+                        <span className="w-1 h-1 rounded-full bg-[#555] mt-2 flex-shrink-0"></span>
+                        <span>Built from scratch in 48 hours for the IBM AI Hackathon.</span>
+                    </span>
+                    <span className="flex items-start gap-2 text-sm text-[#888]">
+                        <span className="w-1 h-1 rounded-full bg-[#555] mt-2 flex-shrink-0"></span>
+                        <span>Full CI/CD, WIF, Terraform, Google Cloud, Full Stack + AI.</span>
+                    </span>
+                    <span className="flex items-start gap-2 text-sm text-[#888]">
+                        <span className="w-1 h-1 rounded-full bg-[#555] mt-2 flex-shrink-0"></span>
+                        <span>One of 1,124 successful submissions out of 3,464 teams (15,727 participants) — Top 32%.</span>
+                    </span>
+                </div>
+            ),
+            longDescription: (
+                <div className="space-y-4">
+                    <p>Built from scratch in 48 hours for the IBM AI Hackathon, this project introduces a Multi-Agent Mutation Testing System (MCP).</p>
+                    <p>It leverages Full CI/CD, Workload Identity Federation (WIF), Terraform, and Google Cloud, combining Full Stack development with AI capabilities.</p>
+                    <p>Out of 3,464 teams and 15,727 participants, this was one of 1,124 successful submissions, placing it in the top 32%.</p>
+                </div>
+            ),
+            tags: ["Hackathon", "IBM", "AI", "Google Cloud", "Terraform", "CI/CD"],
+            size: "medium",
+            stats: "Top 32%",
+            features: [
+                "Built in 48 hours",
+                "Full Stack + AI"
+            ]
+        },
+        {
+            id: 15,
+            title: "Anti-Fragile Agentic Workflow (AFAW)",
+            slug: "afaw",
+            subtitle: "View Case Study",
+            description: (
+                <div className="flex flex-col gap-1.5">
+                    <span>A practical methodology and boilerplate for running several coding agents in parallel without collisions.</span>
+                    <span className="flex items-center gap-2 text-sm text-[#777]">
+                        <span className="w-1 h-1 rounded-full bg-[#555]"></span>
+                        AI-Assisted Development framework.
+                    </span>
+                </div>
+            ),
+            longDescription: (
+                <div className="space-y-4">
+                    <p>This is a practical methodology and boilerplate for running several coding agents in parallel on the same repository without them colliding, overwriting shared state, or writing vacuous tests.</p>
+                    <p>The core premise: Instead of trying to fully automate everything with a swarm of agents (which tends to burn a lot of tokens and still needs heavy supervision), this workflow keeps a human in the loop. The AI proposes, deterministic tools measure. A human still approves every merge.</p>
+                    <p>To make this work, I implemented two main constraints:</p>
+                    <ul className="list-disc pl-5 mt-2 space-y-1">
+                        <li><strong>AST Mutation Testing on CI diffs:</strong> CI injects mutants into the modified files. If the agent's test fails to catch the mutation, the PR is automatically blocked.</li>
+                        <li><strong>Isolated Context Updates:</strong> Agents are forbidden from editing the same global context files. Each agent writes a separate update file for its task, and CI merges them all together post-PR to prevent git conflicts.</li>
+                    </ul>
+                </div>
+            ),
+            tags: ["AI", "CI/CD", "Agents", "Testing"],
+            size: "medium",
+            stats: "",
+            features: [
+                "AST Mutation Testing",
+                "Isolated Context Updates"
+            ],
+            links: [
+                {
+                    label: "View on GitHub",
+                    url: "https://github.com/agustindiazcano/anti-fragile-agentic-workflow",
+                    primary: true,
+                    icon: (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                    )
+                }
+            ]
+        },
+        {
             id: 9,
             title: "MCP Transactional Agent",
             slug: "mcp-transactional-agent",
