@@ -398,7 +398,31 @@ const ProjectGrid = () => {
                 {
                     label: "HD Mod",
                     videoUrl: "https://www.youtube.com/embed/OqOEpmcCkec",
-                    content: "Replaces low-resolution assets with HD textures and detailed models while maintaining performance across the Men of War engine. Includes upgraded particle effects, improved lighting shaders, and highly detailed vehicle models.",
+                    content: (
+                        <div className="flex flex-col gap-4">
+                            <div>
+                                <h4 className="text-white font-semibold mb-2">Project Overview</h4>
+                                <p>Large-scale modification for Men of War that enhanced visual fidelity and gameplay balance across both singleplayer and multiplayer modes. The project required deep understanding of the game's asset pipeline, texture formats, and multiplayer synchronization protocols.</p>
+                            </div>
+                            <div>
+                                <h4 className="text-white font-semibold mb-2">Technical Implementation</h4>
+                                <h5 className="text-[#ccc] font-medium mb-1 mt-3">Asset Replacement Pipeline:</h5>
+                                <ul className="list-disc pl-5 mb-3 flex flex-col gap-1">
+                                    <li>Completely replaced infantry textures and 3D models for multiple factions (Russia, USA, Germany, Britain)</li>
+                                    <li>Redesigned uniform and helmet systems with period-accurate historical detail</li>
+                                    <li>Integrated new audio assets for weapons and ambient sound</li>
+                                    <li>Implemented custom music tracks for both campaign and multiplayer sessions</li>
+                                </ul>
+                                
+                                <h5 className="text-[#ccc] font-medium mb-1 mt-3">Multiplayer Balance & Economy:</h5>
+                                <ul className="list-disc pl-5 flex flex-col gap-1">
+                                    <li>Rebalanced command point economy and resource distribution systems</li>
+                                    <li>Modified map scripts for historical scenarios (Omaha Beach, Hill 400, Reichstag)</li>
+                                    <li>Optimized network synchronization for texture-heavy assets to maintain performance in 8+ player lobbies</li>
+                                </ul>
+                            </div>
+                        </div>
+                    ),
                     images: [
                         "/images/images-projects/hd-mod/men-of-war-hd-mod-1.jpg",
                         "/images/images-projects/hd-mod/men-of-war-hd-mod-2.jpg",
