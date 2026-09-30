@@ -54,9 +54,34 @@ const ProjectGrid = () => {
             tags: ["Hackathon", "IBM", "AI", "Google Cloud", "Terraform", "CI/CD"],
             size: "medium",
             stats: "Top 32%",
+            videoUrl: "https://www.youtube.com/embed/m64qdd1axV0",
+            imageUrl: "/images/images-projects/test-mind-home.png",
             features: [
                 "Built in 48 hours",
                 "Full Stack + AI"
+            ],
+            links: [
+                {
+                    label: "GitHub Repo",
+                    url: "https://github.com/agustindiazcano/ibm-bob-mcp-agent-guard",
+                    primary: true,
+                    icon: (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                    )
+                },
+                {
+                    label: "Live Demo",
+                    url: "https://ibm-bob-mcp-agent-guard.vercel.app/",
+                    primary: false,
+                    icon: (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    )
+                },
+                {
+                    label: "Hackathon",
+                    url: "https://lablab.ai/ai-hackathons/ibm-bob-2-hackathon",
+                    primary: false
+                }
             ]
         },
         {
@@ -363,6 +388,13 @@ const ProjectGrid = () => {
 
                     <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
+                    {/* Floating Hover Image */}
+                    {project.imageUrl && (
+                        <div className="absolute top-6 right-6 w-96 h-60 rounded-lg overflow-hidden border border-[#333] opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-95 group-hover:scale-100 z-50 shadow-2xl pointer-events-none hidden md:block bg-black">
+                            <img src={project.imageUrl} alt="" className="w-full h-full object-contain" />
+                        </div>
+                    )}
+
                     <motion.div className="z-10">
                         {project.id === 4 ? (
                             <>
@@ -462,19 +494,22 @@ const ProjectGrid = () => {
                             />
 
                             {/* Modal Card */}
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.98, y: 10 }}
-                                animate={{ opacity: 1, scale: 1, y: 0 }}
-                                exit={{ opacity: 0, scale: 0.98, y: 10 }}
-                                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                                className="w-full max-w-2xl bg-[#0a0a0a] border border-[#333] rounded-2xl overflow-hidden relative z-50 max-h-[90vh] flex flex-col shadow-2xl"
-                            >
-                                {(() => {
-                                    const project = projects.find(p => p.id === selectedId);
-                                    return (
-                                        <>
+                            {(() => {
+                                const project = projects.find(p => p.id === selectedId);
+                                if (!project) return null;
+                                const hasMedia = project.videoUrl || project.imageUrl;
+
+                                return (
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.98, y: 10 }}
+                                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                                        exit={{ opacity: 0, scale: 0.98, y: 10 }}
+                                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                                        className={`w-full ${hasMedia ? "max-w-[1200px]" : "max-w-2xl"} bg-[#0a0a0a] border border-[#333] rounded-2xl overflow-hidden relative z-50 max-h-[90vh] flex flex-col md:flex-row shadow-2xl`}
+                                    >
+                                        <div className={`flex flex-col h-full max-h-[90vh] ${hasMedia ? "md:w-1/2 border-r border-[#222]" : "w-full"}`}>
                                             {/* Media Header Area */}
-                                            <div className="bg-[#111] border-b border-[#222] flex items-center justify-between p-5 relative group">
+                                            <div className="bg-[#111] border-b border-[#222] flex items-center justify-between p-5 relative group flex-shrink-0">
                                                 <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 pointer-events-none"></div>
                                                 
                                                 <div className="flex flex-col relative z-10 pl-2">
@@ -492,10 +527,10 @@ const ProjectGrid = () => {
                                                 </button>
                                             </div>
 
-                                            <div className="p-8 overflow-y-auto">
-                                                <p className="text-[#999] mb-8 leading-relaxed text-sm md:text-base">
+                                            <div className="p-8 overflow-y-auto flex-1">
+                                                <div className="text-[#999] mb-8 leading-relaxed text-sm md:text-base">
                                                     {project.longDescription}
-                                                </p>
+                                                </div>
 
                                                 <div className="mb-8">
                                                     <div className="flex flex-wrap gap-2">
@@ -538,10 +573,25 @@ const ProjectGrid = () => {
                                                     )}
                                                 </div>
                                             </div>
-                                        </>
-                                    );
-                                })()}
-                            </motion.div>
+                                        </div>
+                                        
+                                        {hasMedia && (
+                                            <div className="md:w-1/2 bg-[#050505] flex flex-col h-full max-h-[90vh] overflow-y-auto">
+                                                {project.videoUrl && (
+                                                    <div className="w-full aspect-video border-b border-[#222] flex-shrink-0">
+                                                        <iframe width="100%" height="100%" src={project.videoUrl} title="Video Preview" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                                                    </div>
+                                                )}
+                                                {project.imageUrl && (
+                                                    <div className="w-full p-4 flex-1 flex items-center justify-center min-h-[300px]">
+                                                        <img src={project.imageUrl} alt={project.title} className="max-w-full max-h-full object-contain rounded-lg border border-[#222]" />
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+                                    </motion.div>
+                                );
+                            })()}
                         </div>
                     )}
                 </AnimatePresence>,
