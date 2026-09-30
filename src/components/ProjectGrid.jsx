@@ -387,6 +387,10 @@ const ProjectGrid = () => {
                         "/images/images-projects/zombie-mod/call-to-arms-zombie-mod-8.png",
                         "/images/images-projects/zombie-mod/call-to-arms-zombie-mod-9.png",
                         "/images/images-projects/zombie-mod/call-to-arms-zombie-mod-10.png"
+                    ],
+                    links: [
+                        { label: "Download Zombie Mod 5", url: "https://www.moddb.com/mods/zombie-mod5", primary: true },
+                        { label: "Download Men of War Zombie Mod", url: "https://www.moddb.com/mods/men-of-war-zombie-mod", primary: false }
                     ]
                 },
                 {
@@ -402,6 +406,9 @@ const ProjectGrid = () => {
                         "/images/images-projects/hd-mod/men-of-war-hd-mod-6.jpg",
                         "/images/images-projects/hd-mod/men-of-war-hd-mod-7.png",
                         "/images/images-projects/hd-mod/men-of-war-hd-mod-8.png"
+                    ],
+                    links: [
+                        { label: "Download HD Mod", url: "https://www.moddb.com/mods/hd-mod", primary: true }
                     ]
                 }
             ],
@@ -573,6 +580,7 @@ const ProjectGrid = () => {
                                 const activeTabData = project.tabs ? project.tabs[activeTab] : null;
                                 const displayVideoUrl = activeTabData?.videoUrl || project.videoUrl;
                                 const displayContent = activeTabData?.content || project.longDescription;
+                                const displayLinks = activeTabData?.links || project.links;
                                 
                                 const imagesArray = activeTabData?.images || project.images || (project.imageUrl ? [project.imageUrl] : []);
                                 const hasMedia = displayVideoUrl || imagesArray.length > 0;
@@ -673,8 +681,8 @@ const ProjectGrid = () => {
                                             </div>
                                             
                                             <div className="bg-[#111] border-t border-[#222] p-5 flex flex-col sm:flex-row gap-3 flex-shrink-0 mt-auto">
-                                                {project.links ? (
-                                                    project.links.map((link, idx) => (
+                                                {displayLinks ? (
+                                                    displayLinks.map((link, idx) => (
                                                         <a
                                                             key={idx}
                                                             href={link.url}
