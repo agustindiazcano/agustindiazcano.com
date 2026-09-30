@@ -424,7 +424,7 @@ const ProjectGrid = () => {
                         ) : (
                             <>
                                 <motion.h3 className="font-display text-2xl font-normal text-white mb-2">{project.title}</motion.h3>
-                                <motion.p className="text-[#888]">{project.description}</motion.p>
+                                <motion.div className="text-[#888]">{project.description}</motion.div>
                             </>
                         )}
                     </motion.div>
