@@ -8,10 +8,12 @@ const ProjectGrid = () => {
     const [currentChunk, setCurrentChunk] = useState(0);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [activeTab, setActiveTab] = useState(0);
+    const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
     useEffect(() => {
         setCurrentImageIndex(0);
         setActiveTab(0);
+        setIsLightboxOpen(false);
     }, [selectedId]);
 
     const carouselItems = ["Hello Auto", "Discouy", "Devotouy", "Geant", "Altix", "Stronger", "Factor MX", "Visma", "Stronger", "Dermalink MX", "Korium", "Toto", "Techo", "Zombie Mod", "HD Mod"];
@@ -602,7 +604,13 @@ const ProjectGrid = () => {
                                                 )}
                                                 {imagesArray.length > 0 && (
                                                     <div className="w-full p-4 flex-1 flex items-center justify-center min-h-[300px] relative group/carousel">
-                                                        <img src={imagesArray[currentImageIndex] || imagesArray[0]} alt="Built by Agustin Diaz-Cano" loading="lazy" className="max-w-full max-h-full object-contain rounded-lg border border-[#222]" />
+                                                        <img 
+                                                            src={imagesArray[currentImageIndex] || imagesArray[0]} 
+                                                            alt="Built by Agustin Diaz-Cano" 
+                                                            loading="lazy" 
+                                                            onClick={() => setIsLightboxOpen(true)}
+                                                            className="max-w-full max-h-full object-contain rounded-lg border border-[#222] cursor-pointer hover:border-[#444] transition-colors" 
+                                                        />
                                                         {imagesArray.length > 1 && (
                                                             <>
                                                                 <button 
@@ -731,6 +739,58 @@ const ProjectGrid = () => {
                                                 ))}
                                             </div>
                                         </div>
+
+                                        {/* Lightbox Overlay */}
+                                        <AnimatePresence>
+                                            {isLightboxOpen && imagesArray.length > 0 && (
+                                                <motion.div 
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: 1 }}
+                                                    exit={{ opacity: 0 }}
+                                                    transition={{ duration: 0.2 }}
+                                                    className="absolute inset-0 z-[100] bg-[#0a0a0a] flex flex-col items-center justify-center"
+                                                >
+                                                    <div className="absolute top-4 right-4 z-50 flex gap-2">
+                                                        <div className="bg-black/50 text-[#aaa] font-mono text-sm px-4 py-2 rounded-full border border-[#222]">
+                                                            {currentImageIndex + 1} / {imagesArray.length}
+                                                        </div>
+                                                        <button 
+                                                            onClick={() => setIsLightboxOpen(false)}
+                                                            className="w-10 h-10 bg-black/50 hover:bg-black/80 hover:text-white text-[#aaa] border border-[#222] rounded-full flex items-center justify-center transition-colors"
+                                                            title="Close Image Viewer"
+                                                        >
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 18 18" /></svg>
+                                                        </button>
+                                                    </div>
+                                                    
+                                                    <div className="relative w-full h-full flex items-center justify-center p-4 sm:p-12">
+                                                        <img 
+                                                            src={imagesArray[currentImageIndex]} 
+                                                            alt="Built by Agustin Diaz-Cano - Fullscreen" 
+                                                            loading="lazy" 
+                                                            className="max-w-full max-h-full object-contain select-none"
+                                                        />
+                                                        
+                                                        {imagesArray.length > 1 && (
+                                                            <>
+                                                                <button 
+                                                                    onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(prev => prev === 0 ? imagesArray.length - 1 : prev - 1); }}
+                                                                    className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/50 hover:bg-black/80 border border-[#333] rounded-full flex items-center justify-center text-white transition-all z-20"
+                                                                >
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                                                                </button>
+                                                                <button 
+                                                                    onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(prev => (prev + 1) % imagesArray.length); }}
+                                                                    className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/50 hover:bg-black/80 border border-[#333] rounded-full flex items-center justify-center text-white transition-all z-20"
+                                                                >
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                                                                </button>
+                                                            </>
+                                                        )}
+                                                    </div>
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
 
                                     </motion.div>
                                 );
