@@ -381,21 +381,21 @@ const ProjectGrid = () => {
             {projects.map((project, index) => (
                 <React.Fragment key={project.id}>
                     <motion.div
-                        className={`h-[300px] relative group overflow-hidden bg-[#111] border border-[#222] rounded-xl flex flex-col justify-between p-8 ${project.size === "large" ? "md:col-span-2" : "md:col-span-1"
+                        className={`h-[300px] relative group hover:z-50 bg-[#111] border border-[#222] rounded-xl flex flex-col justify-between p-8 ${project.size === "large" ? "md:col-span-2" : "md:col-span-1"
                             }`}
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     >
                         {/* Clickable Overlay */}
                         <div
-                            className="absolute inset-0 z-20 cursor-pointer"
+                            className="absolute inset-0 z-20 cursor-pointer rounded-xl"
                         onClick={() => setSelectedId(project.id)}
                     />
 
-                    <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                    <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl" />
 
                     {/* Floating Hover Image */}
                     {project.imageUrl && (
-                        <div className="absolute top-6 right-6 w-96 h-60 rounded-lg overflow-hidden border border-[#333] opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-95 group-hover:scale-100 z-50 shadow-2xl pointer-events-none hidden md:block bg-black">
+                        <div className="absolute top-1/2 -translate-y-1/2 right-[calc(100%+24px)] w-96 h-60 rounded-lg overflow-hidden border border-[#333] opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-95 group-hover:scale-100 z-50 shadow-2xl pointer-events-none hidden md:block bg-black">
                             <img src={project.imageUrl} alt="" className="w-full h-full object-contain" />
                         </div>
                     )}
