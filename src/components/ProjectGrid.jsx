@@ -583,10 +583,10 @@ const ProjectGrid = () => {
                                         animate={{ opacity: 1, scale: 1, y: 0 }}
                                         exit={{ opacity: 0, scale: 0.98, y: 10 }}
                                         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                                        className={`w-full ${hasMedia ? "max-w-[1300px]" : "max-w-4xl"} bg-[#0a0a0a] border border-[#333] rounded-2xl overflow-hidden relative z-50 max-h-[90vh] flex flex-col md:flex-row shadow-2xl`}
+                                        className="w-full max-w-[1300px] h-[90vh] bg-[#0a0a0a] border border-[#333] rounded-2xl overflow-hidden relative z-50 flex flex-col md:flex-row shadow-2xl"
                                     >
                                         {hasMedia && (
-                                            <div className="md:w-[45%] flex-shrink-0 bg-[#050505] flex flex-col h-full max-h-[90vh] overflow-y-auto relative border-b md:border-b-0 md:border-r border-[#222]">
+                                            <div className="md:w-[45%] flex-shrink-0 bg-[#050505] flex flex-col h-full overflow-y-auto relative border-b md:border-b-0 md:border-r border-[#222]">
                                                 {displayVideoUrl && (
                                                     <div className="w-full aspect-video border-b border-[#222] flex-shrink-0">
                                                         <iframe width="100%" height="100%" src={displayVideoUrl} title="Video Preview" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
@@ -625,7 +625,7 @@ const ProjectGrid = () => {
                                             </div>
                                         )}
                                         
-                                        <div className={`flex flex-col h-full max-h-[90vh] flex-1 flex-shrink-0 min-w-[300px]`}>
+                                        <div className={`flex flex-col h-full flex-1 flex-shrink-0 min-w-[300px]`}>
                                             {/* Media Header Area */}
                                             <div className="bg-[#111] border-b border-[#222] flex items-center justify-between p-5 relative group flex-shrink-0">
                                                 <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 pointer-events-none"></div>
@@ -707,7 +707,7 @@ const ProjectGrid = () => {
                                         </div>
                                         
                                         {/* Projects Sidebar */}
-                                        <div className="md:w-64 bg-[#0a0a0a] border-t md:border-t-0 md:border-l border-[#222] flex flex-col max-h-[90vh] flex-shrink-0 hidden md:flex">
+                                        <div className="md:w-64 bg-[#0a0a0a] border-t md:border-t-0 md:border-l border-[#222] flex flex-col h-full flex-shrink-0 hidden md:flex">
                                             <div className="p-4 border-b border-[#222] sticky top-0 bg-[#0a0a0a] z-10 flex-shrink-0">
                                                 <h3 className="text-white font-display font-semibold text-xs tracking-widest uppercase">Other Projects</h3>
                                             </div>
