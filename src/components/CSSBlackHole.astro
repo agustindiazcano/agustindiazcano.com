@@ -6,10 +6,10 @@ export interface Props {
 const { isHome = false } = Astro.props;
 ---
 
-<div id="css-blackhole-container" style="opacity: 0;" class="fixed inset-0 w-full h-[100vh] -z-10 bg-[#05030d] overflow-hidden transition-opacity duration-1000">
+<div id="css-blackhole-container" class="fixed inset-0 w-full h-[100vh] -z-10 bg-[#05030d] overflow-hidden">
     <div class="space">
         <div class="stars" id="css-stars"></div>
-        <div class="orb-wrapper">
+        <div class="orb-wrapper" id="orb-wrapper" style="filter: brightness(0.3);">
             <div class="outer-glow"></div>
             <div class="ring"></div>
             <div class="ball"></div>
@@ -136,10 +136,10 @@ const { isHome = false } = Astro.props;
   // Fade in faster on scroll
   window.addEventListener("scroll", () => {
       const scrollY = window.scrollY;
-      const opacity = Math.min(1, scrollY / 150);
-      const bg = document.getElementById('css-blackhole-container');
-      if (bg) {
-          bg.style.opacity = opacity.toString();
+      const brightness = Math.min(1, 0.3 + (scrollY / 150) * 0.7);
+      const orb = document.getElementById('orb-wrapper');
+      if (orb) {
+          orb.style.filter = `brightness(${brightness})`;
       }
   });
 </script>
