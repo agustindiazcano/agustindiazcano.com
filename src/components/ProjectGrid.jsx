@@ -391,6 +391,7 @@ const ProjectGrid = () => {
                 },
                 {
                     label: "HD Mod",
+                    videoUrl: "https://www.youtube.com/embed/OqOEpmcCkec",
                     content: "Replaces low-resolution assets with HD textures and detailed models while maintaining performance across the Men of War engine. Includes upgraded particle effects, improved lighting shaders, and highly detailed vehicle models.",
                     images: [
                         "/images/images-projects/hd-mod/men-of-war-hd-mod-1.jpg",
@@ -408,6 +409,7 @@ const ProjectGrid = () => {
             tags: ["Game Dev", "3D Modeling"],
             size: "medium",
             stats: "220k+ Downloads",
+            imageUrl: "/images/images-projects/zombie-mod/call-to-arms-zombie-mod-1.png",
             features: [
                 "Lag compensation networking",
                 "Entity component system architecture",
