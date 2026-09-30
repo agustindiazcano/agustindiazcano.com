@@ -391,8 +391,8 @@ const ProjectGrid = () => {
                         "/images/images-projects/zombie-mod/call-to-arms-zombie-mod-10.png"
                     ],
                     links: [
-                        { label: "Download Zombie Mod 5", url: "https://www.moddb.com/mods/zombie-mod5", primary: true },
-                        { label: "Download Men of War Zombie Mod", url: "https://www.moddb.com/mods/men-of-war-zombie-mod", primary: false }
+                        { label: "Zombie Mod", url: "https://www.moddb.com/mods/zombie-mod5", primary: true },
+                        { label: "Zombie Assault", url: "https://www.moddb.com/mods/men-of-war-zombie-mod", primary: false }
                     ]
                 },
                 {
@@ -410,7 +410,7 @@ const ProjectGrid = () => {
                         "/images/images-projects/hd-mod/men-of-war-hd-mod-8.png"
                     ],
                     links: [
-                        { label: "Download HD Mod", url: "https://www.moddb.com/mods/hd-mod", primary: true }
+                        { label: "HD Mod", url: "https://www.moddb.com/mods/hd-mod", primary: true }
                     ]
                 }
             ],
