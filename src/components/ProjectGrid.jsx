@@ -48,6 +48,59 @@ const ProjectGrid = () => {
     const projects = [
         // ROW 1
         {
+            id: 18,
+            title: "Quantum Computing: Windfarm Optimization",
+            slug: "wind-farm-quantum-optimization",
+            subtitle: "View Details",
+            description: "Constraint-preserving quantum optimization (XY-mixer QAOA) that minimizes wake losses during wind farm curtailment, validated on IonQ Forte 1 trapped-ion hardware.",
+            longDescription: (
+                <div className="space-y-4">
+                    <p className="text-white font-medium">Tested on a real quantum computer (IonQ Forte 1).</p>
+                    <p><strong>Tech stack</strong></p>
+                    <ul className="list-disc pl-5 space-y-1">
+                        <li><strong>Languages and core:</strong> Python (3.12 / 3.14), JavaScript, HTML5, CSS3</li>
+                        <li><strong>Quantum computing and math:</strong> Qiskit 2.5 (SparsePauliOp, StatevectorEstimator, StatevectorSampler, StatePreparation), IonQ Forte 1 (QPU), QAOA, QUBO, Ising Hamiltonians, NumPy, SciPy (COBYLA)</li>
+                        <li><strong>Quality, data and CI/CD:</strong> Pytest (150+ tests), GitHub Actions, ERA5 / Open-Meteo API, SCADA wind datasets (Zenodo)</li>
+                    </ul>
+                    <p><strong>Overview.</strong> When a wind farm must temporarily reduce its output because of grid limits or maintenance (curtailment), shutting down the wrong combination of turbines wastes energy because of the wake effect: the cone of slow, turbulent air that every active turbine leaves behind it. Choosing exactly K active turbines out of N positions is a combinatorial optimization problem whose search space scales as C(N, K).</p>
+                    <p>QWind tackles this problem by formulating a cost Hamiltonian based on wake physics and solving it with a variational quantum circuit (QAOA) designed to preserve, by symmetry, the exact number of active turbines. It comes with a reproducible experimental protocol that compares its performance against classical methods and strict statistical controls, including a run on the IonQ Forte 1 trapped-ion quantum computer. Built for the Qollab x IonQ Global Quantum Hackathon (Professional Track, UNICEN Node).</p>
+                    <ul className="list-disc pl-5 space-y-1">
+                        <li><strong>Constraint-preserving quantum ansatz (XY-QAOA + Dicke state):</strong> Standard quantum approaches add a quadratic penalty term (lambda) that pollutes the energy spectrum and wastes between 36% and 74% of measurements on invalid configurations. QWind builds the circuit in Qiskit starting from a Dicke state (a uniform superposition of all states with exact Hamming weight K), coupled to an XY mixer (swaps between adjacent or all qubit pairs) and a ramp initialization inspired by quantum annealing. By algebraic construction, the circuit evolves exclusively inside the feasible subspace: 100% of the samples in noise-free simulation are valid plans, multiplying the probability of sampling the optimal layout by 3.4x to 17.1x compared with the penalty formulation, and by 3x to 7.5x compared with random valid sampling.</li>
+                        <li><strong>Real quantum hardware execution (IonQ Forte 1):</strong> The optimized circuit was compiled and run on the 36-qubit IonQ Forte 1 QPU through Qollab (N=6, K=3, p=1, 997 shots, compiled to 123 single-qubit and 78 two-qubit gates). Beyond improving the optimization, the hard constraint works as free error detection on noisy hardware: the 21.7% of readouts that left the K=3 subspace because of gate noise were discarded automatically. On the remaining valid samples, the hardware reached a success probability of 0.1665 against an ideal 0.1784 (93% functional fidelity) and found the exact global optimum.</li>
+                        <li><strong>Experimental protocol and scientific rigor (qwind-v1):</strong> Evaluation on 6 datasets: real turbine positions and measured SCADA data from the operating Penmanshiel (14 turbines, Scotland) and Kelmarsh (6 turbines, England) wind farms, ERA5 climate reanalysis series for Chubut and Bahia Blanca (Argentina), and controlled synthetic grids. Benchmarked against exact enumeration (ground truth), Simulated Annealing, greedy search with local swaps, a penalty weight sweep and a uniform distribution over feasible states. The pipeline is 100% automated in GitHub Actions, with no table or metric in the repository edited by hand (<code>scripts/make_results_tables.py</code>), backed by more than 150 unit tests in pytest that verify exact equivalence between the QUBO energy, the Ising Hamiltonian and brute force.</li>
+                    </ul>
+                </div>
+            ),
+            tags: ["Quantum Computing", "Python"],
+            size: "medium",
+            stats: "",
+            videoUrl: "https://www.youtube.com/embed/UGVkgYGXkF4",
+            features: [
+                "Constraint-preserving XY-mixer QAOA with Dicke initial state",
+                "Executed on IonQ Forte 1 trapped-ion hardware"
+            ],
+            links: [
+                {
+                    label: "View on GitHub",
+                    url: "https://github.com/agustindiazcano/qwind-qaoa-windfarm",
+                    primary: true,
+                    icon: (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                    )
+                },
+                {
+                    label: "Live Site",
+                    url: "https://agustindiazcano.github.io/qwind-qaoa-windfarm/",
+                    primary: false
+                },
+                {
+                    label: "Qollab",
+                    url: "https://qollab.xyz/u/agustindiazcano/qwind",
+                    primary: false
+                }
+            ]
+        },
+        {
             id: 9,
             title: "MCP Transactional Agent",
             slug: "mcp-transactional-agent",
@@ -98,8 +151,71 @@ const ProjectGrid = () => {
             ]
         },
         {
+            id: 16,
+            title: "Multi-Agent Mutation Testing System (MCP)",
+            slug: "multi-agent-mutation-testing",
+            subtitle: "View Hackathon Project",
+            description: (
+                <div className="flex flex-col gap-1.5 mt-2">
+                    <span className="flex items-start gap-2 text-sm text-[#888]">
+                        <span className="w-1 h-1 rounded-full bg-[#555] mt-2 flex-shrink-0"></span>
+                        <span>Built from scratch in 48 hours for the IBM AI Hackathon.</span>
+                    </span>
+                    <span className="flex items-start gap-2 text-sm text-[#888]">
+                        <span className="w-1 h-1 rounded-full bg-[#555] mt-2 flex-shrink-0"></span>
+                        <span>Full CI/CD, WIF, Terraform, Google Cloud, Full Stack + AI.</span>
+                    </span>
+                </div>
+            ),
+            longDescription: (
+                <div className="space-y-4">
+                    <p>Built from scratch in 48 hours for the IBM AI Hackathon, this project introduces a Multi-Agent Mutation Testing System (MCP).</p>
+                    <p>It leverages Full CI/CD, Workload Identity Federation (WIF), Terraform, and Google Cloud, combining Full Stack development with AI capabilities.</p>
+                    <p>Out of 3,464 teams and 15,727 participants, this was one of 1,124 successful submissions, placing it in the top 32%.</p>
+                </div>
+            ),
+            tags: ["IBM", "AI", "Google Cloud"],
+            size: "medium",
+            stats: "Top 32%",
+            videoUrl: "https://www.youtube.com/embed/m64qdd1axV0",
+            imageUrl: "/images/images-projects/test-mind-home.png",
+            images: [
+                "/images/images-projects/test-mind-home.png",
+                "/images/images-projects/test-mind-2.png",
+                "/images/images-projects/test-mind-3.png"
+            ],
+            features: [
+                "Built in 48 hours",
+                "Full Stack + AI"
+            ],
+            links: [
+                {
+                    label: "GitHub Repo",
+                    url: "https://github.com/agustindiazcano/ibm-bob-mcp-agent-guard",
+                    primary: true,
+                    icon: (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                    )
+                },
+                {
+                    label: "Live Demo",
+                    url: "https://ibm-bob-mcp-agent-guard.vercel.app/",
+                    primary: false,
+                    icon: (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    )
+                },
+                {
+                    label: "Hackathon",
+                    url: "https://lablab.ai/ai-hackathons/ibm-bob-2-hackathon",
+                    primary: false
+                }
+            ]
+        },
+        // ROW 2
+        {
             id: 17,
-            title: "Argentina 2056: Data Visualization, 3D Visualization and Economic Analysis",
+            title: "Argentina 2056: Data Visualization and Economic Analysis",
             slug: "argentina-2056",
             subtitle: "View Details",
             description: "Interactive data visualization of the Crossing of the Andes (1817), Argentina's current economy, and a projection towards 2056 with the impact of AI on the economy.",
@@ -145,121 +261,36 @@ const ProjectGrid = () => {
             ]
         },
         {
-            id: 18,
-            title: "Wind Farm Optimization on Quantum Computing",
-            slug: "wind-farm-quantum-optimization",
+            id: 12,
+            title: "Zombie Horde Survivors: Hybrid 3D Squad Shooter & Real-Time Strategy Game",
+            slug: "zombie-horde-survivors",
             subtitle: "View Details",
-            description: "Constraint-preserving quantum optimization (XY-mixer QAOA) that minimizes wake losses during wind farm curtailment, validated on IonQ Forte 1 trapped-ion hardware.",
+            description: "3D survival game, RTS",
             longDescription: (
                 <div className="space-y-4">
-                    <p><strong>Overview.</strong> When a wind farm must temporarily reduce its output because of grid limits or maintenance (curtailment), shutting down the wrong combination of turbines wastes energy because of the wake effect: the cone of slow, turbulent air that every active turbine leaves behind it. Choosing exactly K active turbines out of N positions is a combinatorial optimization problem whose search space scales as C(N, K).</p>
-                    <p>QWind tackles this problem by formulating a cost Hamiltonian based on wake physics and solving it with a variational quantum circuit (QAOA) designed to preserve, by symmetry, the exact number of active turbines. It comes with a reproducible experimental protocol that compares its performance against classical methods and strict statistical controls, including a run on the IonQ Forte 1 trapped-ion quantum computer. Built for the Qollab x IonQ Global Quantum Hackathon (Professional Track, UNICEN Node).</p>
-                    <p><strong>Physical, mathematical and quantum architecture</strong></p>
-                    <ul className="list-disc pl-5 space-y-1">
-                        <li><strong>Physical modeling and QUBO / Ising formulation:</strong> Implementation of the analytical Jensen/Park (top-hat) velocity deficit model, weighted by 16-sector wind roses (frequency and direction). Pairwise turbine losses are mapped to a QUBO matrix, <code>{"E(x) = sum_i h_i x_i + sum_(i<j) J_ij x_i x_j + lambda (sum_i x_i - K)^2"}</code>, and transformed exactly into a sparse Pauli operator (SparsePauliOp) through the Ising mapping <code>{"x_i = (1 - Z_i) / 2"}</code>.</li>
-                        <li><strong>Constraint-preserving quantum ansatz (XY-QAOA + Dicke state):</strong> Standard quantum approaches add a quadratic penalty term (lambda) that pollutes the energy spectrum and wastes between 36% and 74% of measurements on invalid configurations. QWind builds the circuit in Qiskit starting from a Dicke state (a uniform superposition of all states with exact Hamming weight K), coupled to an XY mixer (swaps between adjacent or all qubit pairs) and a ramp initialization inspired by quantum annealing. By algebraic construction, the circuit evolves exclusively inside the feasible subspace: 100% of the samples in noise-free simulation are valid plans, multiplying the probability of sampling the optimal layout by 3.4x to 17.1x compared with the penalty formulation, and by 3x to 7.5x compared with random valid sampling.</li>
-                        <li><strong>Real quantum hardware execution (IonQ Forte 1):</strong> The optimized circuit was compiled and run on the 36-qubit IonQ Forte 1 QPU through Qollab (N=6, K=3, p=1, 997 shots, compiled to 123 single-qubit and 78 two-qubit gates). Beyond improving the optimization, the hard constraint works as free error detection on noisy hardware: the 21.7% of readouts that left the K=3 subspace because of gate noise were discarded automatically. On the remaining valid samples, the hardware reached a success probability of 0.1665 against an ideal 0.1784 (93% functional fidelity) and found the exact global optimum.</li>
-                        <li><strong>Experimental protocol and scientific rigor (qwind-v1):</strong> Evaluation on 6 datasets: real turbine positions and measured SCADA data from the operating Penmanshiel (14 turbines, Scotland) and Kelmarsh (6 turbines, England) wind farms, ERA5 climate reanalysis series for Chubut and Bahia Blanca (Argentina), and controlled synthetic grids. Benchmarked against exact enumeration (ground truth), Simulated Annealing, greedy search with local swaps, a penalty weight sweep and a uniform distribution over feasible states. The pipeline is 100% automated in GitHub Actions, with no table or metric in the repository edited by hand (<code>scripts/make_results_tables.py</code>), backed by more than 150 unit tests in pytest that verify exact equivalence between the QUBO energy, the Ising Hamiltonian and brute force.</li>
-                    </ul>
-                    <p><strong>Tech stack</strong></p>
-                    <ul className="list-disc pl-5 space-y-1">
-                        <li><strong>Languages and core:</strong> Python (3.12 / 3.14), JavaScript, HTML5, CSS3</li>
-                        <li><strong>Quantum computing and math:</strong> Qiskit 2.5 (SparsePauliOp, StatevectorEstimator, StatevectorSampler, StatePreparation), IonQ Forte 1 (QPU), QAOA, QUBO, Ising Hamiltonians, NumPy, SciPy (COBYLA)</li>
-                        <li><strong>Quality, data and CI/CD:</strong> Pytest (150+ tests), GitHub Actions, ERA5 / Open-Meteo API, SCADA wind datasets (Zenodo)</li>
-                    </ul>
+                    <p>3D web game that combines tactical action (direct control in top-down, third-person and first-person views) with real-time strategy (RTS) command. Players lead a squad of 4 soldiers and a support drone against dynamic waves of enemies and bosses, with a drag-and-drop inventory system featuring real-time 3D viewers, an Aliens-inspired motion tracker radar, perk progression, a between-wave shop, and full support for desktop and mobile devices (touch controls, gyroscope/vibration and an adaptive layout).</p>
+                    <p>Built on a decoupled architecture where the entire mathematical simulation of the game (<code>src/sim</code>) is pure TypeScript, 100% free of rendering dependencies (enforced by ESLint rules and unit tests in Vitest). It is connected to a Three.js graphics engine through a fixed-timestep loop with frame interpolation, and 3D asset licenses are verified automatically (<code>assets.toml</code>) in CI/CD.</p>
                 </div>
             ),
-            tags: ["Python", "Qiskit", "QAOA", "QUBO", "IonQ Forte 1", "NumPy", "SciPy", "Pytest", "GitHub Actions"],
+            tags: ["TypeScript", "Three.js", "Vite", "Vitest", "WebGL", "HTML5 Canvas", "Web Audio API", "GitHub Actions"],
             size: "medium",
             stats: "",
-            videoUrl: "https://www.youtube.com/embed/UGVkgYGXkF4",
             features: [
-                "Constraint-preserving XY-mixer QAOA with Dicke initial state",
-                "Executed on IonQ Forte 1 trapped-ion hardware"
+                "Hybrid tactical shooter and real-time strategy gameplay",
+                "Pure TypeScript simulation decoupled from the Three.js renderer"
             ],
             links: [
                 {
                     label: "View on GitHub",
-                    url: "https://github.com/agustindiazcano/qwind-qaoa-windfarm",
+                    url: "https://github.com/agustindiazcano/zombie-horde-survivors",
                     primary: true,
                     icon: (
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
                     )
                 },
                 {
-                    label: "Live Site",
-                    url: "https://agustindiazcano.github.io/qwind-qaoa-windfarm/",
-                    primary: false
-                },
-                {
-                    label: "Qollab",
-                    url: "https://qollab.xyz/u/agustindiazcano/qwind",
-                    primary: false
-                }
-            ]
-        },
-        {
-            id: 16,
-            title: "Multi-Agent Mutation Testing System (MCP)",
-            slug: "multi-agent-mutation-testing",
-            subtitle: "View Hackathon Project",
-            description: (
-                <div className="flex flex-col gap-1.5 mt-2">
-                    <span className="flex items-start gap-2 text-sm text-[#888]">
-                        <span className="w-1 h-1 rounded-full bg-[#555] mt-2 flex-shrink-0"></span>
-                        <span><strong className="text-[#aaa]">Top 32%:</strong> One of 1,124 successful submissions out of 3,464 teams</span>
-                    </span>
-                    <span className="flex items-start gap-2 text-sm text-[#888]">
-                        <span className="w-1 h-1 rounded-full bg-[#555] mt-2 flex-shrink-0"></span>
-                        <span>Built from scratch in 48 hours for the IBM AI Hackathon.</span>
-                    </span>
-                    <span className="flex items-start gap-2 text-sm text-[#888]">
-                        <span className="w-1 h-1 rounded-full bg-[#555] mt-2 flex-shrink-0"></span>
-                        <span>Full CI/CD, WIF, Terraform, Google Cloud, Full Stack + AI.</span>
-                    </span>
-                </div>
-            ),
-            longDescription: (
-                <div className="space-y-4">
-                    <p>Built from scratch in 48 hours for the IBM AI Hackathon, this project introduces a Multi-Agent Mutation Testing System (MCP).</p>
-                    <p>It leverages Full CI/CD, Workload Identity Federation (WIF), Terraform, and Google Cloud, combining Full Stack development with AI capabilities.</p>
-                    <p>Out of 3,464 teams and 15,727 participants, this was one of 1,124 successful submissions, placing it in the top 32%.</p>
-                </div>
-            ),
-            tags: ["IBM", "AI", "Google Cloud", "Terraform", "CI/CD"],
-            size: "medium",
-            stats: "Top 32%",
-            videoUrl: "https://www.youtube.com/embed/m64qdd1axV0",
-            imageUrl: "/images/images-projects/test-mind-home.png",
-            images: [
-                "/images/images-projects/test-mind-home.png",
-                "/images/images-projects/test-mind-2.png",
-                "/images/images-projects/test-mind-3.png"
-            ],
-            features: [
-                "Built in 48 hours",
-                "Full Stack + AI"
-            ],
-            links: [
-                {
-                    label: "GitHub Repo",
-                    url: "https://github.com/agustindiazcano/ibm-bob-mcp-agent-guard",
-                    primary: true,
-                    icon: (
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-                    )
-                },
-                {
-                    label: "Live Demo",
-                    url: "https://ibm-bob-mcp-agent-guard.vercel.app/",
-                    primary: false,
-                    icon: (
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                    )
-                },
-                {
-                    label: "Hackathon",
-                    url: "https://lablab.ai/ai-hackathons/ibm-bob-2-hackathon",
+                    label: "Play Online",
+                    url: "https://agustindiazcano.github.io/zombie-horde-survivors/",
                     primary: false
                 }
             ]
@@ -321,6 +352,32 @@ const ProjectGrid = () => {
                 }
             ]
         },
+        // ROW 3
+        {
+            id: 10,
+            title: "M.Sc. Thesis AI/ML",
+            slug: "ai-ml-research",
+            subtitle: "View Thesis",
+            description: "LLM-Guided Reinforcement Learning for Legged Robot Navigation, UTN MSc, Jan 2026 - Present.",
+            longDescription: "Investigating a hierarchical neuro-symbolic architecture for quadruped robots: an RBF-based perceptual layer generates interpretable concept activations, and an LLM resolves navigation decisions only in ambiguous cases where multiple concepts compete, analogous to the hierarchical escalation approach used by NVIDIA. Currently in the experimental phase, benchmarking RBF vs. MLP policies (curriculum learning, grid-based navigation) prior to full integration in MuJoCo.",
+            tags: ["AI", "ML", "Neural Networks", "Python"],
+            size: "medium",
+            stats: "",
+            features: [
+                "Physics simulations",
+                "Deep reinforcement learning"
+            ],
+            links: [
+                {
+                    label: "View on GitHub",
+                    url: "https://github.com/agustindiazcano/ai-ml-research",
+                    primary: true,
+                    icon: (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                    )
+                }
+            ]
+        },
         {
             id: 14,
             title: "Memory-Constrained LLM Optimization",
@@ -372,117 +429,7 @@ const ProjectGrid = () => {
                 }
             ]
         },
-        {
-            id: 10,
-            title: "M.Sc. Thesis AI/ML",
-            slug: "ai-ml-research",
-            subtitle: "View Thesis",
-            description: "LLM-Guided Reinforcement Learning for Legged Robot Navigation, UTN MSc, Jan 2026 - Present.",
-            longDescription: "Investigating a hierarchical neuro-symbolic architecture for quadruped robots: an RBF-based perceptual layer generates interpretable concept activations, and an LLM resolves navigation decisions only in ambiguous cases where multiple concepts compete, analogous to the hierarchical escalation approach used by NVIDIA. Currently in the experimental phase, benchmarking RBF vs. MLP policies (curriculum learning, grid-based navigation) prior to full integration in MuJoCo.",
-            tags: ["AI", "ML", "Neural Networks", "Python"],
-            size: "medium",
-            stats: "",
-            features: [
-                "Physics simulations",
-                "Deep reinforcement learning"
-            ],
-            links: [
-                {
-                    label: "View on GitHub",
-                    url: "https://github.com/agustindiazcano/ai-ml-research",
-                    primary: true,
-                    icon: (
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-                    )
-                }
-            ]
-        },
-        // ROW 2
-        /*
-        {
-            id: 11,
-            title: "Astrophysics Data Simulations",
-            slug: "astrophysics-data-simulations",
-            subtitle: "View Details",
-            description: "Simulations of astrophysical phenomena and data analysis.",
-            longDescription: "Developed robust simulations to model complex astrophysics systems, analyzing large datasets for scientific research.",
-            tags: ["Data Science", "Physics", "Python"],
-            size: "medium",
-            stats: "",
-            features: [
-                "Large scale data processing",
-                "High performance computing"
-            ],
-            links: [
-                {
-                    label: "View on GitHub",
-                    url: "https://github.com/agustindiazcano/astrophysics-data-simulations",
-                    primary: true,
-                    icon: (
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-                    )
-                }
-            ]
-        },
-        */
-        {
-            id: 6,
-            title: "LATAM E-commerce Ecosystem",
-            slug: "ecommerce-latam",
-            subtitle: "View Case Study",
-            description: "E-commerce platform for the Latin American market.",
-            longDescription: "Developed a scalable and localized e-commerce solution tailored for LATAM, handling complex payment gateways and shipping logistics.",
-            tags: ["Web Dev", "E-commerce", "React"],
-            size: "medium",
-            stats: "",
-            features: [
-                "Localized payment integrations",
-                "Scalable architecture"
-            ]
-        },
-        {
-            id: 7,
-            title: "InsurTech Quoting Engine",
-            slug: "insurance-quoter",
-            subtitle: "View Architecture",
-            description: "Dynamic insurance quoting engine and frontend.",
-            longDescription: "Built a robust quoting engine and an intuitive user interface for calculating insurance premiums in real-time based on risk factors.",
-            tags: ["Fintech", "TypeScript", "React"],
-            size: "medium",
-            stats: "",
-            features: [
-                "Real-time calculation engine",
-                "Dynamic form generation"
-            ]
-        },
-        /*
-        {
-            id: 13,
-            title: "Go Async Order Processor",
-            slug: "go-async-order-processor",
-            subtitle: "View Architecture",
-            description: "High-throughput asynchronous order processing engine built with Go.",
-            longDescription: "A concurrent order processing system demonstrating advanced Go patterns, channels, and goroutines to handle high-volume transactional workloads efficiently.",
-            tags: ["Backend", "Go", "Concurrency"],
-            size: "medium",
-            stats: "",
-            features: [
-                "Goroutine-based concurrency",
-                "High-throughput processing"
-            ],
-            links: [
-                {
-                    label: "View on GitHub",
-                    url: "https://github.com/agustindiazcano/go-async-order-processor",
-                    primary: true,
-                    icon: (
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-                    )
-                }
-            ]
-        },
-        */
-        // ROW 3
+        // ROW 4
         {
             id: 2,
             title: "Game Dev: Modding Ecosystem",
@@ -599,40 +546,89 @@ const ProjectGrid = () => {
             ]
         },
         {
-            id: 12,
-            title: "Zombie Horde Survivors: Hybrid 3D Squad Shooter & Real-Time Strategy Game",
-            slug: "zombie-horde-survivors",
-            subtitle: "View Details",
-            description: "Zero-backend 3D web game blending direct squad control (top-down, third and first person) with real-time strategy command against dynamic waves of enemies and bosses.",
-            longDescription: (
-                <div className="space-y-4">
-                    <p>Zero-backend 3D web game that combines tactical action (direct control in top-down, third-person and first-person views) with real-time strategy (RTS) command. Players lead a squad of 4 soldiers and a support drone against dynamic waves of enemies and bosses, with a drag-and-drop inventory system featuring real-time 3D viewers, an Aliens-inspired motion tracker radar, perk progression, a between-wave shop, and full support for desktop and mobile devices (touch controls, gyroscope/vibration and an adaptive layout).</p>
-                    <p>Built on a decoupled architecture where the entire mathematical simulation of the game (<code>src/sim</code>) is pure TypeScript, 100% free of rendering dependencies (enforced by ESLint rules and unit tests in Vitest). It is connected to a Three.js graphics engine through a fixed-timestep loop with frame interpolation, and 3D asset licenses are verified automatically (<code>assets.toml</code>) in CI/CD.</p>
-                </div>
-            ),
-            tags: ["TypeScript", "Three.js", "Vite", "Vitest", "WebGL", "HTML5 Canvas", "Web Audio API", "GitHub Actions"],
+            id: 7,
+            title: "InsurTech Quoting Engine",
+            slug: "insurance-quoter",
+            subtitle: "View Architecture",
+            description: "Dynamic insurance quoting engine and frontend.",
+            longDescription: "Built a robust quoting engine and an intuitive user interface for calculating insurance premiums in real-time based on risk factors.",
+            tags: ["Fintech", "TypeScript", "React"],
             size: "medium",
             stats: "",
             features: [
-                "Hybrid tactical shooter and real-time strategy gameplay",
-                "Pure TypeScript simulation decoupled from the Three.js renderer"
+                "Real-time calculation engine",
+                "Dynamic form generation"
+            ]
+        },
+        {
+            id: 6,
+            title: "LATAM E-commerce Ecosystem",
+            slug: "ecommerce-latam",
+            subtitle: "View Case Study",
+            description: "E-commerce platform for the Latin American market.",
+            longDescription: "Developed a scalable and localized e-commerce solution tailored for LATAM, handling complex payment gateways and shipping logistics.",
+            tags: ["Web Dev", "E-commerce", "React"],
+            size: "medium",
+            stats: "",
+            features: [
+                "Localized payment integrations",
+                "Scalable architecture"
+            ]
+        }
+        /*
+        {
+            id: 11,
+            title: "Astrophysics Data Simulations",
+            slug: "astrophysics-data-simulations",
+            subtitle: "View Details",
+            description: "Simulations of astrophysical phenomena and data analysis.",
+            longDescription: "Developed robust simulations to model complex astrophysics systems, analyzing large datasets for scientific research.",
+            tags: ["Data Science", "Physics", "Python"],
+            size: "medium",
+            stats: "",
+            features: [
+                "Large scale data processing",
+                "High performance computing"
             ],
             links: [
                 {
                     label: "View on GitHub",
-                    url: "https://github.com/agustindiazcano/zombie-horde-survivors",
+                    url: "https://github.com/agustindiazcano/astrophysics-data-simulations",
                     primary: true,
                     icon: (
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
                     )
-                },
-                {
-                    label: "Play Online",
-                    url: "https://agustindiazcano.github.io/zombie-horde-survivors/",
-                    primary: false
                 }
             ]
-        }
+        },
+        */
+        /*
+        {
+            id: 13,
+            title: "Go Async Order Processor",
+            slug: "go-async-order-processor",
+            subtitle: "View Architecture",
+            description: "High-throughput asynchronous order processing engine built with Go.",
+            longDescription: "A concurrent order processing system demonstrating advanced Go patterns, channels, and goroutines to handle high-volume transactional workloads efficiently.",
+            tags: ["Backend", "Go", "Concurrency"],
+            size: "medium",
+            stats: "",
+            features: [
+                "Goroutine-based concurrency",
+                "High-throughput processing"
+            ],
+            links: [
+                {
+                    label: "View on GitHub",
+                    url: "https://github.com/agustindiazcano/go-async-order-processor",
+                    primary: true,
+                    icon: (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                    )
+                }
+            ]
+        },
+        */
     ];
 
     // Rendered inside the header nav row (#view-toggle-slot) so it sits level with the nav buttons
@@ -765,7 +761,7 @@ const ProjectGrid = () => {
                             </>
                         ) : (
                             <>
-                                <motion.h3 className={`font-display font-normal text-white ${isList ? 'text-sm mb-0.5' : 'text-2xl mb-2'}`}>{project.title}</motion.h3>
+                                <motion.h3 className={`font-display font-normal text-white ${isList ? 'text-sm mb-0.5' : 'text-lg mb-2'}`}>{project.title}</motion.h3>
                                 <motion.div className={`text-[#888] ${isList ? 'text-xs line-clamp-1' : ''}`}>{project.description}</motion.div>
                             </>
                         )}
