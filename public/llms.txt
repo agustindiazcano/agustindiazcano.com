@@ -27,6 +27,7 @@ A rigorous double-degree program consisting of a first specialization, followed 
 
 - **MCP Transactional Agent (2026)**: Intelligent agentic system using LLMs.
 - **Algorithmic Trading Engine (2025)**: Automated high-performance system for low latency trades.
+- **Wind Farm Optimization on Quantum Computing (2026)**: Constraint-preserving XY-mixer QAOA for wind farm curtailment, executed on IonQ Forte 1 hardware.
 - **Zombie Horde Survivors (2026)**: Hybrid 3D squad shooter and real-time strategy web game built with TypeScript and Three.js.
 - **AI & ML Research (2024)**: Physics simulations and neural networks experiments.
 - **Astrophysics Data Simulations (2023)**: Robust simulations modeling complex astrophysics systems.

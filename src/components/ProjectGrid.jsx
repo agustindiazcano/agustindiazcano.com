@@ -102,7 +102,7 @@ const ProjectGrid = () => {
             title: "Argentina 2056: Data Visualization, 3D Visualization and Economic Analysis",
             slug: "argentina-2056",
             subtitle: "View Details",
-            description: "Interactive data visualization web app combining a 3D reconstruction of the Crossing of the Andes (1817) with reproducible macroeconomic analysis of Argentina (1960-2056).",
+            description: "Interactive data visualization of the Crossing of the Andes (1817), Argentina's current economy, and a projection towards 2056 with the impact of AI on the economy.",
             longDescription: (
                 <div className="space-y-4">
                     <p><strong>Overview.</strong> Argentina 2056 is an interactive data visualization and storytelling platform that approaches Argentina's history and economic future from two complementary angles: the logistical feat of the Crossing of the Andes (1817), rendered in 3D, and a rigorous analysis of real macroeconomic series from 1960 with international projections toward 2056. The whole project follows open-data principles, source traceability with no artificial interpolation of missing data, and end-to-end reproducibility.</p>
@@ -140,6 +140,60 @@ const ProjectGrid = () => {
                 {
                     label: "Live Site",
                     url: "https://argentina2056.vercel.app/",
+                    primary: false
+                }
+            ]
+        },
+        {
+            id: 18,
+            title: "Wind Farm Optimization on Quantum Computing",
+            slug: "wind-farm-quantum-optimization",
+            subtitle: "View Details",
+            description: "Constraint-preserving quantum optimization (XY-mixer QAOA) that minimizes wake losses during wind farm curtailment, validated on IonQ Forte 1 trapped-ion hardware.",
+            longDescription: (
+                <div className="space-y-4">
+                    <p><strong>Overview.</strong> When a wind farm must temporarily reduce its output because of grid limits or maintenance (curtailment), shutting down the wrong combination of turbines wastes energy because of the wake effect: the cone of slow, turbulent air that every active turbine leaves behind it. Choosing exactly K active turbines out of N positions is a combinatorial optimization problem whose search space scales as C(N, K).</p>
+                    <p>QWind tackles this problem by formulating a cost Hamiltonian based on wake physics and solving it with a variational quantum circuit (QAOA) designed to preserve, by symmetry, the exact number of active turbines. It comes with a reproducible experimental protocol that compares its performance against classical methods and strict statistical controls, including a run on the IonQ Forte 1 trapped-ion quantum computer. Built for the Qollab x IonQ Global Quantum Hackathon (Professional Track, UNICEN Node).</p>
+                    <p><strong>Physical, mathematical and quantum architecture</strong></p>
+                    <ul className="list-disc pl-5 space-y-1">
+                        <li><strong>Physical modeling and QUBO / Ising formulation:</strong> Implementation of the analytical Jensen/Park (top-hat) velocity deficit model, weighted by 16-sector wind roses (frequency and direction). Pairwise turbine losses are mapped to a QUBO matrix, <code>{"E(x) = sum_i h_i x_i + sum_(i<j) J_ij x_i x_j + lambda (sum_i x_i - K)^2"}</code>, and transformed exactly into a sparse Pauli operator (SparsePauliOp) through the Ising mapping <code>{"x_i = (1 - Z_i) / 2"}</code>.</li>
+                        <li><strong>Constraint-preserving quantum ansatz (XY-QAOA + Dicke state):</strong> Standard quantum approaches add a quadratic penalty term (lambda) that pollutes the energy spectrum and wastes between 36% and 74% of measurements on invalid configurations. QWind builds the circuit in Qiskit starting from a Dicke state (a uniform superposition of all states with exact Hamming weight K), coupled to an XY mixer (swaps between adjacent or all qubit pairs) and a ramp initialization inspired by quantum annealing. By algebraic construction, the circuit evolves exclusively inside the feasible subspace: 100% of the samples in noise-free simulation are valid plans, multiplying the probability of sampling the optimal layout by 3.4x to 17.1x compared with the penalty formulation, and by 3x to 7.5x compared with random valid sampling.</li>
+                        <li><strong>Real quantum hardware execution (IonQ Forte 1):</strong> The optimized circuit was compiled and run on the 36-qubit IonQ Forte 1 QPU through Qollab (N=6, K=3, p=1, 997 shots, compiled to 123 single-qubit and 78 two-qubit gates). Beyond improving the optimization, the hard constraint works as free error detection on noisy hardware: the 21.7% of readouts that left the K=3 subspace because of gate noise were discarded automatically. On the remaining valid samples, the hardware reached a success probability of 0.1665 against an ideal 0.1784 (93% functional fidelity) and found the exact global optimum.</li>
+                        <li><strong>Experimental protocol and scientific rigor (qwind-v1):</strong> Evaluation on 6 datasets: real turbine positions and measured SCADA data from the operating Penmanshiel (14 turbines, Scotland) and Kelmarsh (6 turbines, England) wind farms, ERA5 climate reanalysis series for Chubut and Bahia Blanca (Argentina), and controlled synthetic grids. Benchmarked against exact enumeration (ground truth), Simulated Annealing, greedy search with local swaps, a penalty weight sweep and a uniform distribution over feasible states. The pipeline is 100% automated in GitHub Actions, with no table or metric in the repository edited by hand (<code>scripts/make_results_tables.py</code>), backed by more than 150 unit tests in pytest that verify exact equivalence between the QUBO energy, the Ising Hamiltonian and brute force.</li>
+                    </ul>
+                    <p><strong>Tech stack</strong></p>
+                    <ul className="list-disc pl-5 space-y-1">
+                        <li><strong>Languages and core:</strong> Python (3.12 / 3.14), JavaScript, HTML5, CSS3</li>
+                        <li><strong>Quantum computing and math:</strong> Qiskit 2.5 (SparsePauliOp, StatevectorEstimator, StatevectorSampler, StatePreparation), IonQ Forte 1 (QPU), QAOA, QUBO, Ising Hamiltonians, NumPy, SciPy (COBYLA)</li>
+                        <li><strong>Quality, data and CI/CD:</strong> Pytest (150+ tests), GitHub Actions, ERA5 / Open-Meteo API, SCADA wind datasets (Zenodo)</li>
+                    </ul>
+                </div>
+            ),
+            tags: ["Python", "Qiskit", "QAOA", "QUBO", "IonQ Forte 1", "NumPy", "SciPy", "Pytest", "GitHub Actions"],
+            size: "medium",
+            stats: "",
+            videoUrl: "https://www.youtube.com/embed/UGVkgYGXkF4",
+            features: [
+                "Constraint-preserving XY-mixer QAOA with Dicke initial state",
+                "Executed on IonQ Forte 1 trapped-ion hardware"
+            ],
+            links: [
+                {
+                    label: "View on GitHub",
+                    url: "https://github.com/agustindiazcano/qwind-qaoa-windfarm",
+                    primary: true,
+                    icon: (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                    )
+                },
+                {
+                    label: "Live Site",
+                    url: "https://agustindiazcano.github.io/qwind-qaoa-windfarm/",
+                    primary: false
+                },
+                {
+                    label: "Qollab",
+                    url: "https://qollab.xyz/u/agustindiazcano/qwind",
                     primary: false
                 }
             ]
@@ -604,6 +658,15 @@ const ProjectGrid = () => {
                 </div>
     );
 
+    // Quick links shown next to the GitHub icon on each card
+    const toWatchUrl = (url) => url.replace('youtube.com/embed/', 'youtube.com/watch?v=');
+    const getVideoLink = (project) => {
+        const embedded = project.videoUrl || project.tabs?.find((tab) => tab.videoUrl)?.videoUrl;
+        if (embedded) return toWatchUrl(embedded);
+        return project.links?.find((link) => /youtube\.com|youtu\.be/.test(link.url))?.url;
+    };
+    const getLiveLink = (project) => project.links?.find((link) => /^(live|play)\b/i.test(link.label))?.url;
+
     const productionIds = [6, 7];
     const visibleProjects = projects.filter((p) => {
         if (categoryFilter === 'all') return true;
@@ -717,18 +780,46 @@ const ProjectGrid = () => {
                                 <span className={`text-[#444] whitespace-nowrap ${isList ? 'text-[10px]' : 'text-xs px-1 py-1'}`}>+{project.tags.length - 3}</span>
                             )}
                         </div>
-                        {![6, 7, 2, 4].includes(project.id) && (
-                            <a
-                                href={project.links?.[0]?.url || "https://github.com/agustindiazcano"}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                onClick={(e) => e.stopPropagation()}
-                                className="text-[#666] hover:text-white transition-colors flex-shrink-0 pointer-events-auto relative after:absolute after:-inset-8"
-                                title="View on GitHub"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-                            </a>
-                        )}
+                        <div className="flex items-center gap-3 flex-shrink-0">
+                            {getLiveLink(project) && (
+                                <a
+                                    href={getLiveLink(project)}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="text-xs font-mono font-semibold text-red-500 hover:text-red-400 transition-colors pointer-events-auto relative after:absolute after:-inset-3"
+                                    title="Live demo"
+                                >
+                                    Live
+                                </a>
+                            )}
+                            {getVideoLink(project) && (
+                                <a
+                                    href={getVideoLink(project)}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="text-[#666] hover:text-white transition-colors pointer-events-auto relative after:absolute after:-inset-3"
+                                    title="Watch on YouTube"
+                                    aria-label="Watch on YouTube"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
+                                </a>
+                            )}
+                            {![6, 7, 2, 4].includes(project.id) && (
+                                <a
+                                    href={project.links?.[0]?.url || "https://github.com/agustindiazcano"}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="text-[#666] hover:text-white transition-colors pointer-events-auto relative after:absolute after:-inset-3"
+                                    title="View on GitHub"
+                                    aria-label="View on GitHub"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                                </a>
+                            )}
+                        </div>
                     </motion.div>
 
                     {project.id === 4 && !isList && (
