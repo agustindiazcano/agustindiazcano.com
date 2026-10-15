@@ -99,10 +99,10 @@ const ProjectGrid = () => {
         },
         {
             id: 17,
-            title: "Argentina 2056: Data Storytelling, 3D Visualization and Economic Analysis",
+            title: "Argentina 2056: Data Visualization, 3D Visualization and Economic Analysis",
             slug: "argentina-2056",
             subtitle: "View Details",
-            description: "Interactive data storytelling web app combining a 3D reconstruction of the Crossing of the Andes (1817) with reproducible macroeconomic analysis of Argentina (1960-2056).",
+            description: "Interactive data visualization web app combining a 3D reconstruction of the Crossing of the Andes (1817) with reproducible macroeconomic analysis of Argentina (1960-2056).",
             longDescription: (
                 <div className="space-y-4">
                     <p><strong>Overview.</strong> Argentina 2056 is an interactive data visualization and storytelling platform that approaches Argentina's history and economic future from two complementary angles: the logistical feat of the Crossing of the Andes (1817), rendered in 3D, and a rigorous analysis of real macroeconomic series from 1960 with international projections toward 2056. The whole project follows open-data principles, source traceability with no artificial interpolation of missing data, and end-to-end reproducibility.</p>
@@ -121,7 +121,7 @@ const ProjectGrid = () => {
                     </ul>
                 </div>
             ),
-            tags: ["Data Storytelling", "3D Visualization", "TypeScript", "Python", "React 19", "Three.js", "ECharts", "MapLibre GL", "Zustand", "NumPy", "Pytest", "Vitest", "Playwright", "GitHub Actions"],
+            tags: ["TypeScript", "Python", "React 19", "Three.js", "ECharts", "MapLibre GL", "Zustand", "NumPy", "Pytest", "Vitest", "Playwright", "GitHub Actions"],
             size: "medium",
             stats: "",
             features: [
@@ -546,26 +546,36 @@ const ProjectGrid = () => {
         },
         {
             id: 12,
-            title: "Alien Survival",
-            slug: "alien-survival",
+            title: "Zombie Horde Survivors: Hybrid 3D Squad Shooter & Real-Time Strategy Game",
+            slug: "zombie-horde-survivors",
             subtitle: "View Details",
-            description: "Survival game focusing on resource management and base building.",
-            longDescription: "Created a challenging survival game where players must defend against alien swarms while managing limited resources and building base defenses.",
-            tags: ["Game Dev", "C#", "Unity"],
+            description: "Zero-backend 3D web game blending direct squad control (top-down, third and first person) with real-time strategy command against dynamic waves of enemies and bosses.",
+            longDescription: (
+                <div className="space-y-4">
+                    <p>Zero-backend 3D web game that combines tactical action (direct control in top-down, third-person and first-person views) with real-time strategy (RTS) command. Players lead a squad of 4 soldiers and a support drone against dynamic waves of enemies and bosses, with a drag-and-drop inventory system featuring real-time 3D viewers, an Aliens-inspired motion tracker radar, perk progression, a between-wave shop, and full support for desktop and mobile devices (touch controls, gyroscope/vibration and an adaptive layout).</p>
+                    <p>Built on a decoupled architecture where the entire mathematical simulation of the game (<code>src/sim</code>) is pure TypeScript, 100% free of rendering dependencies (enforced by ESLint rules and unit tests in Vitest). It is connected to a Three.js graphics engine through a fixed-timestep loop with frame interpolation, and 3D asset licenses are verified automatically (<code>assets.toml</code>) in CI/CD.</p>
+                </div>
+            ),
+            tags: ["TypeScript", "Three.js", "Vite", "Vitest", "WebGL", "HTML5 Canvas", "Web Audio API", "GitHub Actions"],
             size: "medium",
             stats: "",
             features: [
-                "Dynamic wave generation",
-                "Resource management mechanics"
+                "Hybrid tactical shooter and real-time strategy gameplay",
+                "Pure TypeScript simulation decoupled from the Three.js renderer"
             ],
             links: [
                 {
                     label: "View on GitHub",
-                    url: "https://github.com/agustindiazcano/biomass",
+                    url: "https://github.com/agustindiazcano/zombie-horde-survivors",
                     primary: true,
                     icon: (
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
                     )
+                },
+                {
+                    label: "Play Online",
+                    url: "https://agustindiazcano.github.io/zombie-horde-survivors/",
+                    primary: false
                 }
             ]
         }
