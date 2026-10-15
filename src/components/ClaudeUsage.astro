@@ -9,21 +9,29 @@ const stats = [
     { label: "Most active day", value: "Sep 26" },
     { label: "Current streak", value: "13 days" },
 ];
+
+const visibleStats = stats.filter((stat) => stat.always);
+const extraStats = stats.filter((stat) => !stat.always);
+
+// Compact on tablet/laptop (md up to 1299px), regular on mobile and wide screens
+const tableText = "text-sm md:text-[11px] min-[1300px]:text-sm";
+const labelCell = "py-1.5 md:py-1 min-[1300px]:py-1.5 pl-4 md:pl-3 min-[1300px]:pl-4 pr-3 text-left font-normal text-[#888]";
+const valueCell = "py-1.5 md:py-1 min-[1300px]:py-1.5 pr-4 md:pr-3 min-[1300px]:pr-4 text-right font-mono text-white whitespace-nowrap";
 ---
 
 <section
     id="claude-usage"
-    class="w-full md:w-72 xl:w-64 bg-[#111] border border-[#222] rounded-xl"
+    class="relative w-full md:w-48 min-[1300px]:w-64 bg-[#111] border border-[#222] rounded-xl"
     aria-label="Claude usage over the last 30 days"
 >
     <button
         id="claude-usage-toggle"
         type="button"
         aria-expanded="false"
-        aria-controls="claude-usage-table"
-        class="w-full flex items-center justify-between gap-3 px-4 py-3 text-left cursor-pointer"
+        aria-controls="claude-usage-extra"
+        class="w-full flex items-center justify-between gap-3 px-4 py-3 md:px-3 md:py-2 min-[1300px]:px-4 min-[1300px]:py-3 text-left cursor-pointer"
     >
-        <h2 class="font-mono text-xs uppercase tracking-wider text-[#888]">
+        <h2 class="font-mono text-xs md:text-[9px] min-[1300px]:text-xs uppercase tracking-wider text-[#888]">
             Claude Usage: Last 30 Days
         </h2>
         <svg
@@ -42,39 +50,54 @@ const stats = [
             <path d="m6 9 6 6 6-6"></path>
         </svg>
     </button>
-    <table id="claude-usage-table" class="w-full text-sm mb-3">
+
+    <table class:list={["w-full", tableText]}>
         <tbody>
             {
-                stats.map((stat) => (
-                    <tr
-                        class="border-t border-[#222]"
-                        data-extra={stat.always ? undefined : ""}
-                        hidden={!stat.always}
-                    >
-                        <th scope="row" class="py-1.5 pl-4 pr-3 text-left font-normal text-[#888]">
-                            {stat.label}
-                        </th>
-                        <td class="py-1.5 pr-4 text-right font-mono text-white whitespace-nowrap">
-                            {stat.value}
-                        </td>
+                visibleStats.map((stat) => (
+                    <tr class="border-t border-[#222]">
+                        <th scope="row" class={labelCell}>{stat.label}</th>
+                        <td class={valueCell}>{stat.value}</td>
                     </tr>
                 ))
             }
         </tbody>
     </table>
+
+    {/* Opens as an overlay under the box so it never pushes the layout down */}
+    <div
+        id="claude-usage-extra"
+        hidden
+        class="absolute left-[-1px] right-[-1px] top-full z-30 bg-[#111] border border-[#222] border-t-0 rounded-b-xl shadow-lg shadow-black/60"
+    >
+        <table class:list={["w-full", tableText]}>
+            <tbody>
+                {
+                    extraStats.map((stat) => (
+                        <tr class="border-t border-[#222]">
+                            <th scope="row" class={labelCell}>{stat.label}</th>
+                            <td class={valueCell}>{stat.value}</td>
+                        </tr>
+                    ))
+                }
+            </tbody>
+        </table>
+    </div>
 </section>
 
 <script>
     document.addEventListener("astro:page-load", () => {
+        const section = document.getElementById("claude-usage");
         const toggle = document.getElementById("claude-usage-toggle");
         const chevron = document.getElementById("claude-usage-chevron");
-        const rows = document.querySelectorAll<HTMLElement>("#claude-usage-table [data-extra]");
-        if (!toggle) return;
+        const extra = document.getElementById("claude-usage-extra");
+        if (!section || !toggle || !extra) return;
 
         toggle.addEventListener("click", () => {
             const open = toggle.getAttribute("aria-expanded") !== "true";
             toggle.setAttribute("aria-expanded", String(open));
-            rows.forEach((row) => (row.hidden = !open));
+            extra.hidden = !open;
+            section.classList.toggle("rounded-b-none", open);
             chevron?.classList.toggle("rotate-180", open);
         });
     });

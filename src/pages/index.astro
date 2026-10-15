@@ -13,8 +13,8 @@ import LoadingScreen from "../components/LoadingScreen.astro";
 >
     <LoadingScreen />
     <CSSBlackHole isHome={true} />
-    {/* Floats to the right of the header on wide screens, stacks above the grid otherwise */}
-    <div class="w-full max-w-[1200px] mx-auto px-6 mb-6 flex justify-end relative z-20 xl:absolute xl:top-8 xl:right-6 xl:w-auto xl:max-w-none xl:mx-0 xl:px-0 xl:mb-0">
+    {/* Floats to the right of the header from 1024px up (compact below 1300px), stacks above the grid otherwise */}
+    <div class="w-full max-w-[1200px] mx-auto px-6 mb-6 flex justify-end relative z-20 lg:absolute lg:top-8 lg:right-6 lg:w-auto lg:max-w-none lg:mx-0 lg:px-0 lg:mb-0">
         <ClaudeUsage />
     </div>
     <main

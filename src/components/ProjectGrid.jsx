@@ -10,6 +10,7 @@ const ProjectGrid = () => {
     const [activeTab, setActiveTab] = useState(0);
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
     const [viewMode, setViewMode] = useState('cards');
+    const [categoryFilter, setCategoryFilter] = useState('all');
 
     useEffect(() => {
         try {
@@ -46,6 +47,103 @@ const ProjectGrid = () => {
 
     const projects = [
         // ROW 1
+        {
+            id: 9,
+            title: "MCP Transactional Agent",
+            slug: "mcp-transactional-agent",
+            subtitle: "View Case Study",
+            description: "Event-driven AI agentic engine. Features MCP tool sandboxing, RabbitMQ asynchronous routing, strict ACID idempotency, and LLM-as-a-Judge guardrails.",
+            longDescription: (
+                <div className="space-y-4">
+                    <p>Event-driven AI agentic engine. Features MCP tool sandboxing, RabbitMQ asynchronous routing, strict ACID idempotency, and LLM-as-a-Judge guardrails.</p>
+                    <p>Beyond the core transactional engine, this project explores a second question: how much of an AI system's decision-making can be made deterministic and auditable, instead of purely probabilistic? Phases 2 and 3 extend the engine with a confidence layer (fuzzy logic + rule-based expert system) and a production observability layer (Kalman filtering over quality metrics), moving the system progressively from "trust the LLM's judgment" toward "trust an explicit, inspectable mechanism, and use the LLM only where symbolic reasoning cannot substitute for it."</p>
+                    <ul className="list-disc pl-5 mt-2 space-y-1">
+                        <li>Tracing and Real-Time Observability with TruLens</li>
+                        <li>Regression Testing and CI/CD with promptfoo</li>
+                    </ul>
+                </div>
+            ),
+            tags: ["AI", "LLMs", "PostgreSQL", "FastAPI", "RabbitMQ", "AWS Bedrock", "GCP Vertex AI", "LangGraph", "LangChain", "MCP", "RAG", "Groq", "Docker"],
+            size: "medium",
+            stats: "",
+            imageUrl: "/images/images-projects/1-mcp.png",
+            images: [
+                "/images/images-projects/1-mcp.png",
+                "/images/images-projects/2-mcp.png",
+                "/images/images-projects/3-mcp.png"
+            ],
+            features: [
+                "Autonomous tool execution",
+                "Model Context Protocol integration"
+            ],
+            links: [
+                {
+                    label: "View on GitHub",
+                    url: "https://github.com/agustindiazcano/mcp-transactional-agent",
+                    primary: true,
+                    icon: (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                    )
+                },
+                {
+                    label: "Deterministic Roadmap",
+                    url: "https://github.com/agustindiazcano/mcp-transactional-agent/blob/main/docs/deterministic_guardrails_roadmap.md",
+                    primary: false
+                },
+                {
+                    label: "Testing",
+                    url: "https://github.com/agustindiazcano/mcp-transactional-agent/tree/main/docs/testing",
+                    primary: false
+                }
+            ]
+        },
+        {
+            id: 17,
+            title: "Argentina 2056: Data Storytelling, 3D Visualization and Economic Analysis",
+            slug: "argentina-2056",
+            subtitle: "View Details",
+            description: "Interactive data storytelling web app combining a 3D reconstruction of the Crossing of the Andes (1817) with reproducible macroeconomic analysis of Argentina (1960-2056).",
+            longDescription: (
+                <div className="space-y-4">
+                    <p><strong>Overview.</strong> Argentina 2056 is an interactive data visualization and storytelling platform that approaches Argentina's history and economic future from two complementary angles: the logistical feat of the Crossing of the Andes (1817), rendered in 3D, and a rigorous analysis of real macroeconomic series from 1960 with international projections toward 2056. The whole project follows open-data principles, source traceability with no artificial interpolation of missing data, and end-to-end reproducibility.</p>
+                    <p><strong>Project architecture</strong></p>
+                    <ul className="list-disc pl-5 space-y-1">
+                        <li><strong>The Crossing of the Andes (1817):</strong> 3D geospatial and tactical viewer with real topography, column trajectories, a camera system, an interactive timeline, an elevation profile and a recreation of the Battle of Chacabuco.</li>
+                        <li><strong>Towards 2056 (14 data chapters):</strong> Interactive analysis of historical real GDP series (constant 2015 USD), global ranking evolution, productivity, exports by complex, provincial distribution, hydrocarbons and mining. Includes a mathematical growth-rate simulator (log-linear regression, point-to-point rates and exact GDP doubling time) contrasted with fast-growth cases (South Korea, China, India) and developed economies (USA).</li>
+                        <li><strong>Open Data Explorer (/data):</strong> Auditable catalog with direct access to the tables behind each visualization, CSV download and source metadata.</li>
+                    </ul>
+                    <p><strong>Engineering and tech stack</strong></p>
+                    <ul className="list-disc pl-5 space-y-1">
+                        <li><strong>Frontend and visualization (strict TypeScript):</strong> Built with React 19, Vite, Zustand and GSAP. Hybrid graphics rendering combining Three.js (3D scenes), ECharts (dynamic statistical charts on linear and logarithmic scales) and MapLibre GL (2D/3D vector cartography). Every chart ships with an alternative data table and full keyboard navigation.</li>
+                        <li><strong>Data pipeline (Python 3.12):</strong> Pure-adapter architecture built on the Python standard library, NumPy (cohort-based demographic modeling) and jsonschema. The pipeline ingests raw data (World Bank, IMF, OECD, UN, INDEC, the Energy and Mining Secretariats, USGS), records every file with a cryptographic hash, date and origin, validates data contracts and compiles reproducible static outputs without relying on heavy libraries.</li>
+                        <li><strong>Statistical engine (pure TypeScript):</strong> Decoupled module of side-effect-free functions for exact doubling-time calculation, log-linear regressions (R² and residual analysis) and rolling windows.</li>
+                        <li><strong>Quality, testing and CI/CD:</strong> Developed under TDD. Unit tests in Python (pytest) and TypeScript (Vitest), E2E and automated accessibility tests with Playwright + axe-core, strict linting (Ruff and ESLint), bundle performance budgets, and continuous integration on GitHub Actions with deployment to Vercel.</li>
+                    </ul>
+                </div>
+            ),
+            tags: ["Data Storytelling", "3D Visualization", "TypeScript", "Python", "React 19", "Three.js", "ECharts", "MapLibre GL", "Zustand", "NumPy", "Pytest", "Vitest", "Playwright", "GitHub Actions"],
+            size: "medium",
+            stats: "",
+            features: [
+                "3D reconstruction of the Crossing of the Andes",
+                "Reproducible macroeconomic analysis with SHA-256 source traceability"
+            ],
+            links: [
+                {
+                    label: "View on GitHub",
+                    url: "https://github.com/agustindiazcano/arg-2056-udesa",
+                    primary: true,
+                    icon: (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                    )
+                },
+                {
+                    label: "Live Site",
+                    url: "https://argentina2056.vercel.app/",
+                    primary: false
+                }
+            ]
+        },
         {
             id: 16,
             title: "Multi-Agent Mutation Testing System (MCP)",
@@ -166,56 +264,6 @@ const ProjectGrid = () => {
                     icon: (
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                     )
-                }
-            ]
-        },
-        {
-            id: 9,
-            title: "MCP Transactional Agent",
-            slug: "mcp-transactional-agent",
-            subtitle: "View Case Study",
-            description: "Event-driven AI agentic engine. Features MCP tool sandboxing, RabbitMQ asynchronous routing, strict ACID idempotency, and LLM-as-a-Judge guardrails.",
-            longDescription: (
-                <div className="space-y-4">
-                    <p>Event-driven AI agentic engine. Features MCP tool sandboxing, RabbitMQ asynchronous routing, strict ACID idempotency, and LLM-as-a-Judge guardrails.</p>
-                    <p>Beyond the core transactional engine, this project explores a second question: how much of an AI system's decision-making can be made deterministic and auditable, instead of purely probabilistic? Phases 2 and 3 extend the engine with a confidence layer (fuzzy logic + rule-based expert system) and a production observability layer (Kalman filtering over quality metrics), moving the system progressively from "trust the LLM's judgment" toward "trust an explicit, inspectable mechanism, and use the LLM only where symbolic reasoning cannot substitute for it."</p>
-                    <ul className="list-disc pl-5 mt-2 space-y-1">
-                        <li>Tracing and Real-Time Observability with TruLens</li>
-                        <li>Regression Testing and CI/CD with promptfoo</li>
-                    </ul>
-                </div>
-            ),
-            tags: ["AI", "LLMs", "PostgreSQL", "FastAPI", "RabbitMQ", "AWS Bedrock", "GCP Vertex AI", "LangGraph", "LangChain", "MCP", "RAG", "Groq", "Docker"],
-            size: "medium",
-            stats: "",
-            imageUrl: "/images/images-projects/1-mcp.png",
-            images: [
-                "/images/images-projects/1-mcp.png",
-                "/images/images-projects/2-mcp.png",
-                "/images/images-projects/3-mcp.png"
-            ],
-            features: [
-                "Autonomous tool execution",
-                "Model Context Protocol integration"
-            ],
-            links: [
-                {
-                    label: "View on GitHub",
-                    url: "https://github.com/agustindiazcano/mcp-transactional-agent",
-                    primary: true,
-                    icon: (
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-                    )
-                },
-                {
-                    label: "Deterministic Roadmap",
-                    url: "https://github.com/agustindiazcano/mcp-transactional-agent/blob/main/docs/deterministic_guardrails_roadmap.md",
-                    primary: false
-                },
-                {
-                    label: "Testing",
-                    url: "https://github.com/agustindiazcano/mcp-transactional-agent/tree/main/docs/testing",
-                    primary: false
                 }
             ]
         },
@@ -546,10 +594,44 @@ const ProjectGrid = () => {
                 </div>
     );
 
+    const productionIds = [6, 7];
+    const visibleProjects = projects.filter((p) => {
+        if (categoryFilter === 'all') return true;
+        const isProduction = productionIds.includes(p.id);
+        return categoryFilter === 'production' ? isProduction : !isProduction;
+    });
+
+    const categoryFilterControl = (
+        <div className="inline-flex items-center gap-1 p-1 bg-[#111] border border-[#222] rounded-full" role="group" aria-label="Project category">
+            {[
+                { value: 'all', label: 'All' },
+                { value: 'personal', label: 'Personal' },
+                { value: 'production', label: 'Production' }
+            ].map(({ value, label }) => (
+                <button
+                    key={value}
+                    type="button"
+                    onClick={() => setCategoryFilter(value)}
+                    aria-pressed={categoryFilter === value}
+                    className={`px-3 py-1 rounded-full text-sm font-medium cursor-pointer transition-colors ${categoryFilter === value ? 'bg-[#222] text-white' : 'text-[#666] hover:text-white'}`}
+                >
+                    {label}
+                </button>
+            ))}
+        </div>
+    );
+
+    const headerControls = (
+        <>
+            {viewToggle}
+            {categoryFilterControl}
+        </>
+    );
+
     // Column where each card starts in the 3-col grid, to open the hover preview towards free space
     const startsInLeftColumn = {};
     let gridCol = 0;
-    projects.forEach((p) => {
+    visibleProjects.forEach((p) => {
         const span = p.size === "large" ? 2 : 1;
         if (gridCol + span > 3) gridCol = 0;
         startsInLeftColumn[p.id] = gridCol === 0;
@@ -559,15 +641,15 @@ const ProjectGrid = () => {
     return (
         <div className="w-full mb-32">
             {mounted && (viewToggleSlot
-                ? createPortal(viewToggle, viewToggleSlot)
-                : <div className="flex justify-end mb-4">{viewToggle}</div>
+                ? createPortal(headerControls, viewToggleSlot)
+                : <div className="flex justify-end gap-2 mb-4">{headerControls}</div>
             )}
-            <div className={`grid gap-6 ${isList ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-3'}`}>
-            {projects.map((project, index) => (
+            <div className={`grid ${isList ? 'grid-cols-1 gap-2' : 'grid-cols-1 md:grid-cols-3 gap-6'}`}>
+            {visibleProjects.map((project, index) => (
                 <React.Fragment key={project.id}>
                     <motion.div
                         className={`relative group hover:z-50 bg-[#111] border border-[#222] rounded-xl flex ${isList
-                            ? "flex-col md:flex-row md:items-center justify-between gap-4 p-5 md:px-8"
+                            ? "flex-col md:flex-row md:items-center justify-between gap-2 md:gap-4 py-2.5 px-4 md:px-5"
                             : `h-[300px] flex-col justify-between p-8 ${project.size === "large" ? "md:col-span-2" : "md:col-span-1"}`
                             }`}
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -610,8 +692,8 @@ const ProjectGrid = () => {
                             </>
                         ) : (
                             <>
-                                <motion.h3 className="font-display text-2xl font-normal text-white mb-2">{project.title}</motion.h3>
-                                <motion.div className="text-[#888]">{project.description}</motion.div>
+                                <motion.h3 className={`font-display font-normal text-white ${isList ? 'text-sm mb-0.5' : 'text-2xl mb-2'}`}>{project.title}</motion.h3>
+                                <motion.div className={`text-[#888] ${isList ? 'text-xs line-clamp-1' : ''}`}>{project.description}</motion.div>
                             </>
                         )}
                     </motion.div>
@@ -619,10 +701,10 @@ const ProjectGrid = () => {
                     <motion.div className={`relative z-30 flex justify-between items-center pointer-events-none ${isList ? 'md:max-w-[45%] gap-4' : 'mt-4'}`}>
                         <div className="flex flex-wrap gap-2 pr-2">
                             {project.tags.slice(0, 3).map(tag => (
-                                <span key={tag} className="text-xs text-[#666] border border-[#333] px-2 py-1 rounded-full whitespace-nowrap">{tag}</span>
+                                <span key={tag} className={`text-[#666] border border-[#333] rounded-full whitespace-nowrap ${isList ? 'text-[10px] px-1.5 py-0.5' : 'text-xs px-2 py-1'}`}>{tag}</span>
                             ))}
                             {project.tags.length > 3 && (
-                                <span className="text-xs text-[#444] px-1 py-1 whitespace-nowrap">+{project.tags.length - 3}</span>
+                                <span className={`text-[#444] whitespace-nowrap ${isList ? 'text-[10px]' : 'text-xs px-1 py-1'}`}>+{project.tags.length - 3}</span>
                             )}
                         </div>
                         {![6, 7, 2, 4].includes(project.id) && (

@@ -21,7 +21,12 @@ const { className = "" } = Astro.props;
     <p class="text-sm md:text-lg text-[#888] mb-0 max-w-3xl font-normal tracking-wider font-display">
         MS Candidate, <br class="md:hidden" /> Information Systems Engineering
     </p>
-    <div class="mt-6 w-full flex justify-center">
+    <div class="mt-6 w-full flex flex-col items-center relative">
         <Navigation />
+        {/* Home-only controls (view toggle + category filter): sit in the header's bottom margin on md+ so they take no extra vertical space */}
+        <div
+            id="view-toggle-slot"
+            class="flex items-center gap-2 mt-3 md:mt-0 md:absolute md:top-full md:inset-x-0 md:justify-start lg:justify-center empty:hidden"
+        ></div>
     </div>
 </header>
