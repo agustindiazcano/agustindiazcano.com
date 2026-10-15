@@ -1,0 +1,81 @@
+---
+const stats = [
+    { label: "Total tokens", value: "8.1 Billion", always: true },
+    { label: "Sessions", value: "88", always: true },
+    { label: "Favorite model", value: "Sonnet 5.5" },
+    { label: "Longest session", value: "2d 6h 42m" },
+    { label: "Active days", value: "25/30" },
+    { label: "Longest streak", value: "13 days" },
+    { label: "Most active day", value: "Sep 26" },
+    { label: "Current streak", value: "13 days" },
+];
+---
+
+<section
+    id="claude-usage"
+    class="w-full md:w-72 xl:w-64 bg-[#111] border border-[#222] rounded-xl"
+    aria-label="Claude usage over the last 30 days"
+>
+    <button
+        id="claude-usage-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="claude-usage-table"
+        class="w-full flex items-center justify-between gap-3 px-4 py-3 text-left cursor-pointer"
+    >
+        <h2 class="font-mono text-xs uppercase tracking-wider text-[#888]">
+            Claude Usage: Last 30 Days
+        </h2>
+        <svg
+            id="claude-usage-chevron"
+            class="flex-shrink-0 text-[#666] transition-transform duration-200"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        >
+            <path d="m6 9 6 6 6-6"></path>
+        </svg>
+    </button>
+    <table id="claude-usage-table" class="w-full text-sm mb-3">
+        <tbody>
+            {
+                stats.map((stat) => (
+                    <tr
+                        class="border-t border-[#222]"
+                        data-extra={stat.always ? undefined : ""}
+                        hidden={!stat.always}
+                    >
+                        <th scope="row" class="py-1.5 pl-4 pr-3 text-left font-normal text-[#888]">
+                            {stat.label}
+                        </th>
+                        <td class="py-1.5 pr-4 text-right font-mono text-white whitespace-nowrap">
+                            {stat.value}
+                        </td>
+                    </tr>
+                ))
+            }
+        </tbody>
+    </table>
+</section>
+
+<script>
+    document.addEventListener("astro:page-load", () => {
+        const toggle = document.getElementById("claude-usage-toggle");
+        const chevron = document.getElementById("claude-usage-chevron");
+        const rows = document.querySelectorAll<HTMLElement>("#claude-usage-table [data-extra]");
+        if (!toggle) return;
+
+        toggle.addEventListener("click", () => {
+            const open = toggle.getAttribute("aria-expanded") !== "true";
+            toggle.setAttribute("aria-expanded", String(open));
+            rows.forEach((row) => (row.hidden = !open));
+            chevron?.classList.toggle("rotate-180", open);
+        });
+    });
+</script>

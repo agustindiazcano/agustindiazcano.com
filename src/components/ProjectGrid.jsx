@@ -9,6 +9,20 @@ const ProjectGrid = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [activeTab, setActiveTab] = useState(0);
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+    const [viewMode, setViewMode] = useState('cards');
+
+    useEffect(() => {
+        try {
+            const saved = localStorage.getItem('projectViewMode');
+            if (saved === 'list' || saved === 'cards') setViewMode(saved);
+        } catch (e) {}
+    }, []);
+
+    const changeViewMode = (mode) => {
+        setViewMode(mode);
+        try { localStorage.setItem('projectViewMode', mode); } catch (e) {}
+    };
+    const isList = viewMode === 'list';
 
     useEffect(() => {
         setCurrentImageIndex(0);
@@ -509,12 +523,45 @@ const ProjectGrid = () => {
         }
     ];
 
+    // Column where each card starts in the 3-col grid, to open the hover preview towards free space
+    const startsInLeftColumn = {};
+    let gridCol = 0;
+    projects.forEach((p) => {
+        const span = p.size === "large" ? 2 : 1;
+        if (gridCol + span > 3) gridCol = 0;
+        startsInLeftColumn[p.id] = gridCol === 0;
+        gridCol = (gridCol + span) % 3;
+    });
+
     return (
-        <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 mb-32">
+        <div className="w-full mb-32">
+            <div className="flex justify-end mb-4">
+                <div className="inline-flex items-center gap-1 p-1 bg-[#111] border border-[#222] rounded-lg" role="group" aria-label="Project view mode">
+                    {[
+                        { mode: 'cards', label: 'Card view', icon: <><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></> },
+                        { mode: 'list', label: 'List view', icon: <><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></> }
+                    ].map(({ mode, label, icon }) => (
+                        <button
+                            key={mode}
+                            type="button"
+                            onClick={() => changeViewMode(mode)}
+                            aria-label={label}
+                            aria-pressed={viewMode === mode}
+                            title={label}
+                            className={`p-2 rounded-md transition-colors ${viewMode === mode ? 'bg-[#222] text-white' : 'text-[#666] hover:text-white'}`}
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{icon}</svg>
+                        </button>
+                    ))}
+                </div>
+            </div>
+            <div className={`grid gap-6 ${isList ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-3'}`}>
             {projects.map((project, index) => (
                 <React.Fragment key={project.id}>
                     <motion.div
-                        className={`h-[300px] relative group hover:z-50 bg-[#111] border border-[#222] rounded-xl flex flex-col justify-between p-8 ${project.size === "large" ? "md:col-span-2" : "md:col-span-1"
+                        className={`relative group hover:z-50 bg-[#111] border border-[#222] rounded-xl flex ${isList
+                            ? "flex-col md:flex-row md:items-center justify-between gap-4 p-5 md:px-8"
+                            : `h-[300px] flex-col justify-between p-8 ${project.size === "large" ? "md:col-span-2" : "md:col-span-1"}`
                             }`}
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     >
@@ -527,14 +574,14 @@ const ProjectGrid = () => {
                     <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl" />
 
                     {/* Floating Hover Image */}
-                    {project.imageUrl && (
-                        <div className="absolute top-1/2 -translate-y-1/2 right-[calc(100%+24px)] w-96 h-60 rounded-lg overflow-hidden border border-[#333] opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-95 group-hover:scale-100 z-50 shadow-2xl pointer-events-none hidden md:block bg-black">
+                    {project.imageUrl && !isList && (
+                        <div className={`absolute top-1/2 -translate-y-1/2 ${startsInLeftColumn[project.id] ? 'left-[calc(100%+24px)]' : 'right-[calc(100%+24px)]'} w-96 h-60 rounded-lg overflow-hidden border border-[#333] opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-95 group-hover:scale-100 z-50 shadow-2xl pointer-events-none hidden md:block bg-black`}>
                             <img src={project.imageUrl} alt="Built by Agustin Diaz-Cano" loading="lazy" className="w-full h-full object-contain" />
                         </div>
                     )}
 
-                    <motion.div className="z-10">
-                        {project.id === 4 ? (
+                    <motion.div className={`z-10 ${isList ? 'flex-1 min-w-0' : ''}`}>
+                        {project.id === 4 && !isList ? (
                             <>
                                 <div className="flex justify-between items-start mb-4">
                                     <div>
@@ -562,7 +609,7 @@ const ProjectGrid = () => {
                         )}
                     </motion.div>
 
-                    <motion.div className="relative z-30 flex justify-between items-center mt-4 pointer-events-none">
+                    <motion.div className={`relative z-30 flex justify-between items-center pointer-events-none ${isList ? 'md:max-w-[45%] gap-4' : 'mt-4'}`}>
                         <div className="flex flex-wrap gap-2 pr-2">
                             {project.tags.slice(0, 3).map(tag => (
                                 <span key={tag} className="text-xs text-[#666] border border-[#333] px-2 py-1 rounded-full whitespace-nowrap">{tag}</span>
@@ -585,7 +632,7 @@ const ProjectGrid = () => {
                         )}
                     </motion.div>
 
-                    {project.id === 4 && (
+                    {project.id === 4 && !isList && (
                         <div className="absolute right-0 bottom-0 text-9xl font-bold text-[#222] opacity-20 -mb-4 -mr-4 select-none">MSc</div>
                     )}
                 </motion.div>
@@ -617,6 +664,7 @@ const ProjectGrid = () => {
                 )}
                 </React.Fragment>
             ))}
+            </div>
 
             {mounted && createPortal(
                 <AnimatePresence>
