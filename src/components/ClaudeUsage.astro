@@ -1,13 +1,15 @@
 ---
+import currentUsage from "../data/claude-usage/current.json";
+
 const stats = [
-    { label: "Total tokens", value: "8.1 Billion", always: true },
-    { label: "Sessions", value: "88", always: true },
-    { label: "Favorite model", value: "Sonnet 5.5" },
-    { label: "Longest session", value: "2d 6h 42m" },
-    { label: "Active days", value: "25/30" },
-    { label: "Longest streak", value: "13 days" },
-    { label: "Most active day", value: "Sep 26" },
-    { label: "Current streak", value: "13 days" },
+    { label: "Total tokens", value: currentUsage.totalTokens, always: true },
+    { label: "Sessions", value: String(currentUsage.sessions), always: true },
+    { label: "Favorite model", value: currentUsage.favoriteModel },
+    { label: "Longest session", value: currentUsage.longestSession },
+    { label: "Active days", value: currentUsage.activeDays },
+    { label: "Longest streak", value: currentUsage.longestStreak },
+    { label: "Most active day", value: currentUsage.mostActiveDay },
+    { label: "Current streak", value: currentUsage.currentStreak },
 ];
 
 const visibleStats = stats.filter((stat) => stat.always);
@@ -31,9 +33,14 @@ const valueCell = "py-1.5 md:py-1 min-[1300px]:py-1.5 pr-4 md:pr-3 min-[1300px]:
         aria-controls="claude-usage-extra"
         class="w-full flex items-center justify-between gap-3 px-4 py-3 md:px-3 md:py-2 min-[1300px]:px-4 min-[1300px]:py-3 text-left cursor-pointer"
     >
-        <h2 class="font-mono text-xs md:text-[9px] min-[1300px]:text-xs uppercase tracking-wider text-[#888]">
-            Claude Usage: Last 30 Days
-        </h2>
+        <div class="flex flex-col">
+            <h2 class="font-mono text-xs md:text-[9px] min-[1300px]:text-xs uppercase tracking-wider text-[#888]">
+                Claude Usage: Last 30 Days
+            </h2>
+            <span class="font-mono text-[10px] md:text-[8px] min-[1300px]:text-[10px] text-[#555] lowercase mt-0.5">
+                period {currentUsage.period}
+            </span>
+        </div>
         <svg
             id="claude-usage-chevron"
             class="flex-shrink-0 text-[#666] transition-transform duration-200"
@@ -68,7 +75,7 @@ const valueCell = "py-1.5 md:py-1 min-[1300px]:py-1.5 pr-4 md:pr-3 min-[1300px]:
     <div
         id="claude-usage-extra"
         hidden
-        class="absolute left-[-1px] right-[-1px] top-full z-30 bg-[#111] border border-[#222] border-t-0 rounded-b-xl shadow-lg shadow-black/60"
+        class="absolute left-[-1px] right-[-1px] top-full z-30 bg-[#111] border border-[#222] border-t-0 rounded-b-xl shadow-lg shadow-black/60 overflow-hidden"
     >
         <table class:list={["w-full", tableText]}>
             <tbody>
@@ -82,6 +89,14 @@ const valueCell = "py-1.5 md:py-1 min-[1300px]:py-1.5 pr-4 md:pr-3 min-[1300px]:
                 }
             </tbody>
         </table>
+
+        {
+            currentUsage.period && (
+                <div class="border-t border-[#222] px-4 py-2 md:px-3 md:py-1.5 min-[1300px]:px-4 min-[1300px]:py-2 bg-[#0d0d0d] font-mono text-[10px] md:text-[8.5px] min-[1300px]:text-[10px] text-[#888] text-center lowercase">
+                    period {currentUsage.period}
+                </div>
+            )
+        }
     </div>
 </section>
 
