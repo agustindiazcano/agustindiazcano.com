@@ -666,25 +666,57 @@ const ProjectGrid = () => {
     const productionIds = [6, 7];
     const visibleProjects = projects.filter((p) => {
         if (categoryFilter === 'all') return true;
-        const isProduction = productionIds.includes(p.id);
-        return categoryFilter === 'production' ? isProduction : !isProduction;
+        if (categoryFilter === 'production') return productionIds.includes(p.id);
+        if (categoryFilter === 'personal') return !productionIds.includes(p.id);
+        if (categoryFilter === 'ai') {
+            return p.tags?.some((t) => /^(ai|ml|llms|neural networks|agents|rag)$/i.test(t));
+        }
+        if (categoryFilter === 'python') {
+            return p.tags?.some((t) => /^python$/i.test(t));
+        }
+        if (categoryFilter === 'typescript') {
+            return p.tags?.some((t) => /^typescript$/i.test(t));
+        }
+        return true;
     });
+
+    const filterOptions = [
+        { value: 'all', label: 'All' },
+        { value: 'personal', label: 'Personal' },
+        { value: 'production', label: 'Production' },
+        { value: 'ai', label: 'AI' },
+        {
+            value: 'python',
+            label: 'Python',
+            icon: (
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M11.914 0C5.82 0 6.2 2.656 6.2 2.656l.006 2.752h5.814v.826H3.9S0 5.79 0 11.932c0 6.14 3.402 5.92 3.402 5.92h2.032v-2.857s-.11-3.402 3.346-3.402h5.765s3.236.054 3.236-3.18V2.656S18.26 0 11.914 0zm-3.29 1.838a1.009 1.009 0 1 1 0 2.018 1.009 1.009 0 0 1 0-2.018zm3.376 22.162c6.094 0 5.714-2.656 5.714-2.656l-.006-2.752h-5.814v-.826h8.12s3.9.444 3.9-5.698c0-6.14-3.402-5.92-3.402-5.92h-2.032v2.857s.11 3.402-3.346 3.402H8.721s-3.236-.054-3.236 3.18v5.757s-.484 2.656 5.861 2.656zm3.29-1.838a1.009 1.009 0 1 1 0-2.018 1.009 1.009 0 0 1 0 2.018z" />
+                </svg>
+            ),
+        },
+        {
+            value: 'typescript',
+            label: 'TypeScript',
+            icon: (
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0H1.125zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-1.35-.43 6.953 6.953 0 0 0-1.428-.15c-.722 0-1.28.163-1.674.49-.394.326-.59.78-.59 1.363 0 .422.109.77.327 1.047.218.277.534.52.949.728.415.208.932.41 1.552.607.62.196 1.25.437 1.89.722.64.286 1.192.678 1.656 1.176.463.498.695 1.176.695 2.034 0 .894-.251 1.666-.754 2.316-.502.65-1.218 1.144-2.148 1.482-.93.338-2.052.507-3.366.507-.775 0-1.55-.078-2.325-.235a8.775 8.775 0 0 1-2.08-.684v-2.61c.735.408 1.503.715 2.305.92.802.205 1.564.307 2.286.307.72 0 1.29-.168 1.708-.503.418-.335.628-.81.628-1.424 0-.447-.113-.815-.34-1.104-.226-.29-.554-.543-.984-.76-.43-.217-.962-.43-1.597-.64-.635-.21-1.275-.462-1.92-.756a4.417 4.417 0 0 1-1.637-1.196c-.432-.513-.648-1.196-.648-2.05 0-.84.24-1.572.72-2.196.48-.624 1.157-1.1 2.03-1.428.874-.328 1.913-.492 3.118-.492zm-8.878.214v2.336h-2.97v11.45H3.69v-11.45H.72V9.964h8.91z" />
+                </svg>
+            ),
+        },
+    ];
 
     const categoryFilterControl = (
         <div className="inline-flex items-center gap-1 p-1 bg-[#111] border border-[#222] rounded-full" role="group" aria-label="Project category">
-            {[
-                { value: 'all', label: 'All' },
-                { value: 'personal', label: 'Personal' },
-                { value: 'production', label: 'Production' }
-            ].map(({ value, label }) => (
+            {filterOptions.map(({ value, label, icon }) => (
                 <button
                     key={value}
                     type="button"
                     onClick={() => setCategoryFilter(value)}
                     aria-pressed={categoryFilter === value}
-                    className={`px-3 py-1 rounded-full text-sm font-medium cursor-pointer transition-colors ${categoryFilter === value ? 'bg-[#222] text-white' : 'text-[#666] hover:text-white'}`}
+                    className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs md:text-sm font-medium cursor-pointer transition-colors whitespace-nowrap ${categoryFilter === value ? 'bg-[#222] text-white' : 'text-[#666] hover:text-white'}`}
                 >
-                    {label}
+                    {icon}
+                    <span>{label}</span>
                 </button>
             ))}
         </div>
