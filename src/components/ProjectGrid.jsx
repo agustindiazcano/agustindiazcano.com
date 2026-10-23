@@ -268,16 +268,19 @@ const ProjectGrid = () => {
             description: "3D survival game, RTS",
             longDescription: (
                 <div className="space-y-4">
-                    <p>3D web game that combines tactical action (direct control in top-down, third-person and first-person views) with real-time strategy (RTS) command. Players lead a squad of 4 soldiers and a support drone against dynamic waves of enemies and bosses, with a drag-and-drop inventory system featuring real-time 3D viewers, an Aliens-inspired motion tracker radar, perk progression, a between-wave shop, and full support for desktop and mobile devices (touch controls, gyroscope/vibration and an adaptive layout).</p>
-                    <p>Built on a decoupled architecture where the entire mathematical simulation of the game (<code>src/sim</code>) is pure TypeScript, 100% free of rendering dependencies (enforced by ESLint rules and unit tests in Vitest). It is connected to a Three.js graphics engine through a fixed-timestep loop with frame interpolation, and 3D asset licenses are verified automatically (<code>assets.toml</code>) in CI/CD.</p>
+                    <p>3D squad game that runs entirely in the browser, with no server or accounts. Four soldiers and a support drone fight dynamic waves of zombies and bosses, played in third person, top-down or as an RTS. It includes a drag-and-drop inventory with real-time 3D viewers, an Aliens-inspired motion tracker radar, perk progression, a between-wave shop, and full mobile support (touch controls, gyroscope/vibration and an adaptive layout).</p>
+                    <p>The whole simulation (<code>src/sim</code>) is pure TypeScript with no rendering dependencies (enforced by ESLint and Vitest), running at a fixed 60 Hz step with seeded randomness. It connects to a Three.js (WebGL) renderer through frame interpolation, with GLSL shaders for water, sky and weather. All gameplay numbers live in JSON validated with zod, and 3D asset licenses are verified automatically in CI.</p>
+                    <p>Physics are custom: O(1) constant-time collisions and gravity unified in a single solver. On top of it, fluids (waves, vortices, buoyancy) and optics (reflections, refraction, caustics, fog) are drawn with lightweight formulas in a single pass instead of heavy render passes. Rust compiled to WASM (<code>crates/sim-core</code>) handles zombie separation and the flow field, and Rapier (deterministic WASM physics) powers the physics lab map.</p>
                 </div>
             ),
-            tags: ["TypeScript", "Three.js", "Vite", "Vitest", "WebGL", "HTML5 Canvas", "Web Audio API", "GitHub Actions"],
+            tags: ["TypeScript", "Three.js", "Vite", "Vitest", "WebGL", "GLSL", "Rust", "WASM", "Rapier", "zod", "GitHub Actions"],
             size: "medium",
             stats: "",
             features: [
                 "Hybrid tactical shooter and real-time strategy gameplay",
-                "Pure TypeScript simulation decoupled from the Three.js renderer"
+                "Pure TypeScript 60 Hz simulation decoupled from the Three.js renderer",
+                "Custom O(1) physics solver with lightweight fluids and optics",
+                "Rust/WASM for zombie separation and flow field"
             ],
             links: [
                 {
