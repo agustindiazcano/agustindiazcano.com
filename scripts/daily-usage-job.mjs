@@ -1,4 +1,4 @@
-// Scheduled by Windows; works in a disposable clone and only commits the usage snapshot.
+// Scheduled by Windows; works in a disposable clone and commits generated usage files.
 import { execFileSync, spawnSync } from 'node:child_process';
 import { appendFileSync, mkdirSync, mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -17,13 +17,13 @@ try {
   run('git', ['clone', '--quiet', '--single-branch', '--branch', 'main', '--', repo, work]);
   const result = run(process.execPath, [join(work, 'scripts', 'update-usage.mjs')], work);
   log(`Calculated: ${JSON.stringify(JSON.parse(result))}`);
-  const changed = spawnSync('git', ['diff', '--quiet', '--', 'src/data/claude-usage/current.json'], { cwd: work, env, timeout: 300000 });
+  const changed = spawnSync('git', ['diff', '--quiet', '--', 'src/data/claude-usage/current.json', 'public/llms.txt', 'public/llms-full.txt'], { cwd: work, env, timeout: 300000 });
   if (changed.status === 0) log('No changes');
   else {
     if (changed.status !== 1) throw new Error('Unable to inspect usage changes');
     if (process.argv.includes('--dry-run')) { log('Dry run: usage changed; no commit or push'); process.exitCode = 0; }
     else {
-    run('git', ['add', '--', 'src/data/claude-usage/current.json'], work);
+    run('git', ['add', '--', 'src/data/claude-usage/current.json', 'public/llms.txt', 'public/llms-full.txt'], work);
     run('git', ['commit', '-m', 'chore: update AI usage stats'], work);
     run('git', ['push', 'origin', 'HEAD:main'], work);
     log('Committed and pushed usage update to main');

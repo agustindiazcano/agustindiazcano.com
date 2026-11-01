@@ -30,4 +30,27 @@ data.combined = { totalTokens: format(claude.total + codex.totals.total_tokens +
 const tmp = new URL('./current.json.tmp', file);
 writeFileSync(tmp, `${JSON.stringify(data, null, 2)}\n`);
 renameSync(tmp, file);
+
+const combinedTotal = claude.total + codex.totals.total_tokens + antigravity.stats.total;
+const monthsMedian = Math.round(combinedTotal / 51e6);
+const yearsMedian = (combinedTotal / 51e6 / 12).toFixed(1);
+const monthsPower = Math.round(combinedTotal / 380e6);
+const yearsPower = (combinedTotal / 380e6 / 12).toFixed(1);
+const teamSize = monthsMedian;
+
+const section = `## AI Agent Usage (Last 30 Days)
+- **Combined Total**: ~${(combinedTotal / 1e9).toFixed(2)} Billion tokens across ${data.combined.sessions} sessions (${claude.firstDay} to ${claude.today}).
+- **Per-Agent Breakdown**: Claude Code (~${(claude.total / 1e9).toFixed(2)}B tokens, ${claude.sessions} sessions) | Antigravity (~${(antigravity.stats.total / 1e6).toFixed(1)}M tokens, ${antigravity.stats.sessions} sessions) | Codex (~${(codex.totals.total_tokens / 1e6).toFixed(1)}M tokens, ${codex.sessions} sessions).
+- **Reference Comparisons**: The combined count is approximately ${monthsMedian} months (~${yearsMedian} years) at 51M tokens/month, or ${monthsPower} months (~${yearsPower} years) at 380M tokens/month. It is numerically comparable to one month at the median rate for ~${teamSize} developers.
+- **Benchmark Source**: [Jellyfish Q1 2026 study](https://jellyfish.co/blog/is-tokenmaxxing-cost-effective-new-data-from-jellyfish-explains/) reported 51M tokens/month at the median and 380M at the 90th percentile among 12,000 developers at 200 companies. These are reference rates, not a global ranking; accounting methods and coverage may differ.\n`;
+
+for (const relPath of ['../public/llms.txt', '../public/llms-full.txt']) {
+  const url = new URL(relPath, import.meta.url);
+  let content = readFileSync(url, 'utf8');
+  const regex = /## AI Agent Usage \(Last 30 Days\)[\s\S]*?(?=\r?\n## About)/;
+  if (!regex.test(content)) throw new Error(`Usage section not found in ${relPath}`);
+  content = content.replace(regex, section);
+  writeFileSync(url, content, 'utf8');
+}
+
 console.log(JSON.stringify({ period: data.period, claude: { totalTokens: claude.total, sessions: claude.sessions }, codex: data.codex, antigravity: data.antigravity, combined: data.combined, warnings: { codexFirst: codex.first, antigravityMissingTranscripts: antigravity.missingTranscripts, antigravityWithoutTokens: antigravity.withoutTokens } }, null, 2));
