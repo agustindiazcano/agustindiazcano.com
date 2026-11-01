@@ -1,9 +1,9 @@
 {
-  "period": "09-25 to 10-25",
+  "period": "10-01 to 10-31",
   "favoriteModel": "Sonnet 5.5",
-  "totalTokens": "8.6b",
-  "sessions": 126,
-  "activeDays": "27/30",
-  "longestStreak": "13 days",
-  "currentStreak": "9 days"
+  "totalTokens": "7.9b",
+  "sessions": 128,
+  "activeDays": "29/30",
+  "longestStreak": "16 days",
+  "currentStreak": "16 days"
 }
