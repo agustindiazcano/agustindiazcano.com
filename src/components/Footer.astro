@@ -181,7 +181,7 @@ const textColor = isHome ? "text-white/90" : "text-[#888]";
                 tooltip.classList.toggle("show-tooltip");
             });
             document.addEventListener("click", (e) => {
-                if (!tooltip.contains(e.target)) {
+                if (e.target instanceof Node && !tooltip.contains(e.target)) {
                     tooltip.classList.remove("show-tooltip");
                 }
             });

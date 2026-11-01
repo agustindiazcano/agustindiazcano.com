@@ -1,101 +1,60 @@
 ---
 import currentUsage from "../data/claude-usage/current.json";
 
-const stats = [
-    { label: "Total tokens", value: currentUsage.totalTokens, always: true },
-    { label: "Sessions", value: String(currentUsage.sessions), always: true },
-    { label: "Favorite model", value: currentUsage.favoriteModel },
-    { label: "Active days", value: currentUsage.activeDays },
-    { label: "Longest streak", value: currentUsage.longestStreak },
-    { label: "Current streak", value: currentUsage.currentStreak },
+const formatTokens = (value: number) => `${(value / 1_000_000).toFixed(1)}m`;
+const views = [
+    { title: "AI Usage", tokens: currentUsage.combined.totalTokens, sessions: currentUsage.combined.sessions, details: [
+        ["Claude tokens", currentUsage.totalTokens], ["Codex tokens", formatTokens(currentUsage.codex.totalTokens)], ["Antigravity tokens", formatTokens(currentUsage.antigravity.totalTokens)],
+    ] },
+    { title: "Claude Code Usage", tokens: currentUsage.totalTokens, sessions: currentUsage.sessions, details: [
+        ["Favorite model", currentUsage.favoriteModel], ["Active days", currentUsage.activeDays],
+        ["Longest streak", currentUsage.longestStreak], ["Current streak", currentUsage.currentStreak],
+    ] },
+    { title: "Codex Usage", tokens: formatTokens(currentUsage.codex.totalTokens), sessions: currentUsage.codex.sessions, details: [
+        ["Input", formatTokens(currentUsage.codex.inputTokens)], ["Cached input", formatTokens(currentUsage.codex.cachedInputTokens)],
+        ["Output", formatTokens(currentUsage.codex.outputTokens)], ["Local records since", currentUsage.codex.recordedSince],
+    ] },
+    { title: "Antigravity Usage", tokens: formatTokens(currentUsage.antigravity.totalTokens), sessions: currentUsage.antigravity.sessions, details: [
+        ["Input", formatTokens(currentUsage.antigravity.inputTokens)], ["Cache read", formatTokens(currentUsage.antigravity.cachedInputTokens)],
+        ["Output", formatTokens(currentUsage.antigravity.outputTokens)], ["Turns", String(currentUsage.antigravity.turns)],
+    ] },
 ];
-
-const visibleStats = stats.filter((stat) => stat.always);
-const extraStats = stats.filter((stat) => !stat.always);
-
-// Compact on tablet/laptop (md up to 1299px), regular on mobile and wide screens
 const tableText = "text-sm md:text-[11px] min-[1300px]:text-sm";
 const labelCell = "py-1.5 md:py-1 min-[1300px]:py-1.5 pl-4 md:pl-3 min-[1300px]:pl-4 pr-3 text-left font-normal text-[#888]";
 const valueCell = "py-1.5 md:py-1 min-[1300px]:py-1.5 pr-4 md:pr-3 min-[1300px]:pr-4 text-right font-mono text-white whitespace-nowrap";
 ---
 
-<section
-    id="claude-usage"
-    class="relative w-full md:w-48 min-[1300px]:w-64 bg-[#111] border border-[#222] rounded-xl"
-    aria-label="Claude usage over the last 30 days"
->
-    <button
-        id="claude-usage-toggle"
-        type="button"
-        aria-expanded="false"
-        aria-controls="claude-usage-extra"
-        class="w-full flex items-center justify-between gap-3 px-4 py-3 md:px-3 md:py-2 min-[1300px]:px-4 min-[1300px]:py-3 text-left cursor-pointer"
-    >
-        <div class="flex flex-col">
-            <h2 class="font-mono text-xs md:text-[9px] min-[1300px]:text-xs uppercase tracking-wider text-[#888]">
-                Claude Usage: Last 30 Days
-            </h2>
-            <span class="font-mono text-[10px] md:text-[8px] min-[1300px]:text-[10px] text-[#555] lowercase mt-0.5">
-                period {currentUsage.period}
-            </span>
-        </div>
-        <svg
-            id="claude-usage-chevron"
-            class="flex-shrink-0 text-[#666] transition-transform duration-200"
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-        >
-            <path d="m6 9 6 6 6-6"></path>
-        </svg>
-    </button>
-
-    <table class:list={["w-full", tableText]}>
-        <tbody>
-            {
-                visibleStats.map((stat) => (
-                    <tr class="border-t border-[#222]">
-                        <th scope="row" class={labelCell}>{stat.label}</th>
-                        <td class={valueCell}>{stat.value}</td>
-                    </tr>
-                ))
-            }
-        </tbody>
-    </table>
-
-    {/* Opens as an overlay under the box so it never pushes the layout down */}
-    <div
-        id="claude-usage-extra"
-        hidden
-        class="absolute left-[-1px] right-[-1px] top-full z-30 bg-[#111] border border-[#222] border-t-0 rounded-b-xl shadow-lg shadow-black/60 overflow-hidden"
-    >
-        <table class:list={["w-full", tableText]}>
-            <tbody>
-                {
-                    extraStats.map((stat) => (
-                        <tr class="border-t border-[#222]">
-                            <th scope="row" class={labelCell}>{stat.label}</th>
-                            <td class={valueCell}>{stat.value}</td>
-                        </tr>
-                    ))
-                }
-            </tbody>
-        </table>
-
-        {
-            currentUsage.period && (
-                <div class="border-t border-[#222] px-4 py-2 md:px-3 md:py-1.5 min-[1300px]:px-4 min-[1300px]:py-2 bg-[#0d0d0d] font-mono text-[10px] md:text-[8.5px] min-[1300px]:text-[10px] text-[#888] text-center lowercase">
-                    period {currentUsage.period}
-                </div>
-            )
-        }
+<section id="claude-usage" class="relative w-full md:w-48 min-[1300px]:w-64 bg-[#111] border border-[#222] rounded-xl" aria-label="Claude, Codex and Antigravity usage over the last 30 days">
+    <div class="flex items-center px-2 md:px-1 min-[1300px]:px-2">
+        <button type="button" data-usage-nav="-1" aria-label="Previous usage view" class="p-2 text-[#888] hover:text-white cursor-pointer">&#8249;</button>
+        <button id="claude-usage-toggle" type="button" aria-expanded="false" aria-controls="claude-usage-extra" class="min-w-0 flex-1 flex items-center justify-between gap-1 py-3 md:py-2 min-[1300px]:py-3 text-left cursor-pointer">
+            <div class="flex flex-col min-w-0">
+                <h2 id="usage-title" class="font-mono text-xs md:text-[9px] min-[1300px]:text-xs uppercase tracking-wider text-[#888]">{views[0].title}</h2>
+                <span class="font-mono text-[10px] md:text-[8px] min-[1300px]:text-[10px] text-[#555] lowercase mt-0.5">last 30 days · {currentUsage.period}</span>
+            </div>
+            <svg id="claude-usage-chevron" class="flex-shrink-0 text-[#666] transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+        </button>
+        <button type="button" data-usage-nav="1" aria-label="Next usage view" class="p-2 text-[#888] hover:text-white cursor-pointer">&#8250;</button>
     </div>
+    <div aria-live="polite">
+        {views.map((view, index) => (
+            <table class:list={["w-full", tableText]} data-usage-view={index} hidden={index !== 0}>
+                <tbody>
+                    <tr class="border-t border-[#222]"><th scope="row" class={labelCell}>Total tokens</th><td class={valueCell}>{view.tokens}</td></tr>
+                    <tr class="border-t border-[#222]"><th scope="row" class={labelCell}>Sessions</th><td class={valueCell}>{view.sessions}</td></tr>
+                </tbody>
+            </table>
+        ))}
+    </div>
+    <div id="claude-usage-extra" hidden class="absolute left-[-1px] right-[-1px] top-full z-30 bg-[#111] border border-[#222] border-t-0 rounded-b-xl shadow-lg shadow-black/60 overflow-hidden">
+        {views.map((view, index) => (
+            <table class:list={["w-full", tableText]} data-usage-detail={index} hidden={index !== 0}>
+                <tbody>{view.details.map(([label, value]) => <tr class="border-t border-[#222]"><th scope="row" class={labelCell}>{label}</th><td class={valueCell}>{value}</td></tr>)}</tbody>
+            </table>
+        ))}
+        <div class="border-t border-[#222] px-4 py-2 md:px-3 md:py-1.5 min-[1300px]:px-4 min-[1300px]:py-2 bg-[#0d0d0d] font-mono text-[10px] md:text-[8.5px] min-[1300px]:text-[10px] text-[#888] text-center lowercase">period {currentUsage.period}</div>
+    </div>
+    <script is:inline type="application/json" id="usage-titles" set:html={JSON.stringify(views.map((view) => view.title)).replace(/</g, "\\u003c")} />
 </section>
 
 <script>
@@ -104,8 +63,17 @@ const valueCell = "py-1.5 md:py-1 min-[1300px]:py-1.5 pr-4 md:pr-3 min-[1300px]:
         const toggle = document.getElementById("claude-usage-toggle");
         const chevron = document.getElementById("claude-usage-chevron");
         const extra = document.getElementById("claude-usage-extra");
-        if (!section || !toggle || !extra) return;
-
+        const title = document.getElementById("usage-title");
+        const titles = JSON.parse(document.getElementById("usage-titles")?.textContent || "[]") as string[];
+        if (!section || !toggle || !extra || !title || !titles.length) return;
+        let index = 0;
+        section.querySelectorAll<HTMLButtonElement>("[data-usage-nav]").forEach((button) => button.addEventListener("click", () => {
+            index = (index + Number(button.dataset.usageNav) + titles.length) % titles.length;
+            title.textContent = titles[index];
+            section.querySelectorAll<HTMLElement>("[data-usage-view], [data-usage-detail]").forEach((element) => {
+                element.hidden = Number(element.dataset.usageView ?? element.dataset.usageDetail) !== index;
+            });
+        }));
         toggle.addEventListener("click", () => {
             const open = toggle.getAttribute("aria-expanded") !== "true";
             toggle.setAttribute("aria-expanded", String(open));

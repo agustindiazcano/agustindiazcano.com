@@ -53,6 +53,8 @@ Personal website and portfolio of **Agustin Diaz-Cano**, Software Engineer and M
 
 ## Assistant Guidelines & Instructions
 
+For 30-day Claude Code, Codex and Antigravity usage updates, use the [update-usage skill](.claude/skills/update-usage/SKILL.md).
+
 1. **Language & Communication**:
    - Always communicate, explain, and reply in **English**.
 

@@ -4,7 +4,9 @@ import Footer from "../components/Footer.astro";
 import CSSBlackHole from "../components/CSSBlackHole.astro";
 import ProjectsCarousel from "../components/ProjectsCarousel.jsx";
 
-const certificationCategories = [
+type CertificationLink = { label: string; url: string; type: string };
+type CertificationItem = { title: string; url: string; year: string; isGroup?: boolean; items?: { title: string; links: CertificationLink[] }[]; links?: CertificationLink[]; modules?: { label: string; url: string }[] };
+const certificationCategories: { categoryTitle: string; description: string[]; stack: string[]; items: CertificationItem[] }[] = [
     {
         categoryTitle: "Artificial Intelligence",
         description: [
@@ -745,7 +747,7 @@ const education = [
                                                                     >
                                                                         {mod.label}
                                                                     </a>
-                                                                    {idx < item.modules.length - 1 && <span>·</span>}
+                                                                    {idx < (item.modules?.length ?? 0) - 1 && <span>·</span>}
                                                                 </>
                                                             ))}
                                                         </div>
@@ -935,22 +937,22 @@ const education = [
 
 <script>
 class Accordion {
-  el;
-  summary;
-  animation;
-  isClosing;
-  isExpanding;
+  el: HTMLDetailsElement;
+  summary: HTMLElement | null;
+  animation: Animation | null;
+  isClosing: boolean;
+  isExpanding: boolean;
 
-  constructor(el) {
+  constructor(el: HTMLDetailsElement) {
     this.el = el;
     this.summary = el.querySelector('summary');
     this.animation = null;
     this.isClosing = false;
     this.isExpanding = false;
-    this.summary.addEventListener('click', (e) => this.onClick(e));
+    this.summary?.addEventListener('click', (e) => this.onClick(e));
   }
 
-  onClick(e) {
+  onClick(e: MouseEvent) {
     e.preventDefault();
     this.el.style.overflow = 'hidden';
     if (this.isClosing || !this.el.open) {
@@ -996,7 +998,7 @@ class Accordion {
     this.animation.oncancel = () => this.isExpanding = false;
   }
 
-  onAnimationFinish(open) {
+  onAnimationFinish(open: boolean) {
     this.el.open = open;
     this.animation = null;
     this.isClosing = false;
