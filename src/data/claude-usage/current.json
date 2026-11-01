@@ -1,8 +1,8 @@
 {
-  "period": "10-01 to 10-31",
+  "period": "10-03 to 11-01",
   "favoriteModel": "Sonnet 5.5",
-  "totalTokens": "7.9b",
-  "sessions": 128,
+  "totalTokens": "8.1b",
+  "sessions": 131,
   "activeDays": "29/30",
   "longestStreak": "16 days",
   "currentStreak": "16 days"
