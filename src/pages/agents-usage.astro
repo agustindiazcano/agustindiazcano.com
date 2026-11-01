@@ -1,0 +1,157 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
+import usage from "../data/claude-usage/current.json";
+
+const agents = [
+  { id: "claude", name: "Claude Code", short: "CC", color: "#d6a47e", tokens: usage.claudeTotalTokens, sessions: usage.sessions, note: "Anthropic" },
+  { id: "codex", name: "Codex", short: "CX", color: "#80d3bf", tokens: usage.codex.totalTokens, sessions: usage.codex.sessions, note: "OpenAI" },
+  { id: "antigravity", name: "Antigravity", short: "AG", color: "#a99bf2", tokens: usage.antigravity.totalTokens, sessions: usage.antigravity.sessions, note: "Google" },
+];
+const total = agents.reduce((sum, agent) => sum + agent.tokens, 0);
+const sessions = agents.reduce((sum, agent) => sum + agent.sessions, 0);
+const format = (value: number) => value >= 1e9 ? `${(value / 1e9).toFixed(2)}B` : `${(value / 1e6).toFixed(1)}M`;
+const medianMonths = Math.round(total / 51e6);
+const powerMonths = Math.round(total / 380e6);
+const source = "https://jellyfish.co/blog/is-tokenmaxxing-cost-effective-new-data-from-jellyfish-explains/";
+---
+
+<Layout title="AI Usage Dashboard | Agustin Diaz-Cano" description="Explore Agustin Diaz-Cano's 30-day AI agent token usage across Claude Code, Codex and Antigravity, with comparisons to Jellyfish research.">
+  <main class="usage-page">
+    <div class="dashboard">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">HOME</a><span>/</span><span>AI USAGE</span></nav>
+
+      <header class="hero">
+        <div>
+          <p class="eyebrow"><span class="live-dot"></span> A PERSONAL USAGE EXPLORER <span class="slash">/</span> 01</p>
+          <h1>AI Usage<span class="accent">.</span></h1>
+          <p class="hero-copy">A closer look at the agents behind the work. One rolling window, three tools, and the context to make sense of the numbers.</p>
+        </div>
+        <div class="hero-aside"><span>THE CURRENT WINDOW</span><strong>Last 30 days</strong><small>Snapshot period · {usage.period}</small></div>
+      </header>
+
+      <section aria-label="Filter usage by agent" class="filter-line">
+        <div><span class="section-kicker">EXPLORE THE DATA</span><p>Select an agent to focus the dashboard.</p></div>
+        <div class="filters" role="group" aria-label="Agent filter">
+          <button type="button" class="filter active" data-agent="all" aria-pressed="true">All agents</button>
+          {agents.map(agent => <button type="button" class="filter" data-agent={agent.id} aria-pressed="false"><span class="filter-dot" style={`--agent-color:${agent.color}`}></span>{agent.name}</button>)}
+        </div>
+      </section>
+
+      <section class="overview" aria-label="Usage overview" aria-live="polite">
+        <article class="total-card">
+          <div class="card-top"><span class="section-kicker">TOTAL TOKENS</span><span class="tiny-tag">30 DAYS</span></div>
+          <div class="big-number"><span id="total-value">{format(total)}</span><span class="unit"> tokens</span></div>
+          <p id="total-exact" class="muted">{total.toLocaleString("en-US")} processed tokens</p>
+          <div class="total-foot"><span><span class="live-dot"></span> <span id="selection-label">ALL AGENTS</span></span><span>INPUT + OUTPUT + CACHE</span></div>
+        </article>
+        <article class="small-card"><span class="section-kicker">SESSIONS</span><strong id="session-value">{sessions}</strong><span class="muted">Recorded activity</span><span class="card-index">01 / 02</span></article>
+        <article class="small-card"><span class="section-kicker">ACTIVE AGENTS</span><strong id="agent-value">03</strong><span class="muted" id="agent-caption">In this snapshot</span><span class="card-index">02 / 02</span></article>
+      </section>
+
+      <section class="breakdown section-space" aria-labelledby="breakdown-heading">
+        <div class="section-heading"><div><p class="eyebrow">01 <span class="slash">/</span> THE BREAKDOWN</p><h2 id="breakdown-heading">The agents at work<span class="accent">.</span></h2></div><p>Tokens processed by each agent, including cached context.</p></div>
+        <div class="breakdown-grid">
+          <div class="share-card">
+            <div class="card-top"><span class="section-kicker">SHARE OF TOTAL</span><span class="tiny-tag">BY AGENT</span></div>
+            <div class="stacked-bar" aria-label="Share of combined tokens by agent">{agents.map(agent => <span style={`width:${agent.tokens / total * 100}%; background:${agent.color}`} title={`${agent.name}: ${(agent.tokens / total * 100).toFixed(1)}%`}></span>)}</div>
+            <div class="share-legend">{agents.map(agent => <div><span><i style={`--agent-color:${agent.color}`}></i>{agent.name}</span><strong>{(agent.tokens / total * 100).toFixed(1)}%</strong></div>)}</div>
+            <p class="chart-note">Shares always refer to the combined total.</p>
+          </div>
+          <div class="agent-list">{agents.map(agent => <article class="agent-row" data-agent-row={agent.id} style={`--agent-color:${agent.color}`}>
+            <div class="agent-icon">{agent.short}</div><div class="agent-info"><div class="agent-name">{agent.name}<span>{agent.note}</span></div><div class="agent-bar"><span style={`width:${agent.tokens / total * 100}%`}></span></div></div><div class="agent-numbers"><strong>{format(agent.tokens)}</strong><span>{agent.sessions} sessions</span></div>
+          </article>)}</div>
+        </div>
+        <div class="detail-grid" aria-label="Additional agent statistics">
+          <article class="detail-card" data-agent-row="claude"><div class="detail-title"><span class="detail-dot" style="--agent-color:#d6a47e"></span>CLAUDE CODE <span>ACTIVITY</span></div><dl><div><dt>Favorite model</dt><dd>{usage.favoriteModel}</dd></div><div><dt>Active days</dt><dd>{usage.activeDays}</dd></div><div><dt>Longest streak</dt><dd>{usage.longestStreak}</dd></div><div><dt>Current streak</dt><dd>{usage.currentStreak}</dd></div></dl></article>
+          <article class="detail-card" data-agent-row="codex"><div class="detail-title"><span class="detail-dot" style="--agent-color:#80d3bf"></span>CODEX <span>TOKEN MIX</span></div><dl><div><dt>Input</dt><dd>{format(usage.codex.inputTokens)}</dd></div><div><dt>Cached input</dt><dd>{format(usage.codex.cachedInputTokens)}</dd></div><div><dt>Output</dt><dd>{format(usage.codex.outputTokens)}</dd></div></dl><p>Cached input is included in input.</p></article>
+          <article class="detail-card" data-agent-row="antigravity"><div class="detail-title"><span class="detail-dot" style="--agent-color:#a99bf2"></span>ANTIGRAVITY <span>TOKEN MIX</span></div><dl><div><dt>Input</dt><dd>{format(usage.antigravity.inputTokens)}</dd></div><div><dt>Cache read</dt><dd>{format(usage.antigravity.cachedInputTokens)}</dd></div><div><dt>Output</dt><dd>{format(usage.antigravity.outputTokens)}</dd></div><div><dt>Turns</dt><dd>{usage.antigravity.turns.toLocaleString("en-US")}</dd></div></dl></article>
+        </div>
+        <p class="data-note">This is a snapshot of locally recorded activity, not a complete account-wide ledger. Codex records begin on {usage.codex.recordedSince} within this window; some Antigravity transcripts lack token counts. Claude session counts are estimates.</p>
+      </section>
+
+      <section class="benchmark section-space" aria-labelledby="benchmark-heading">
+        <div class="section-heading"><div><p class="eyebrow">02 <span class="slash">/</span> PUT IT IN CONTEXT</p><h2 id="benchmark-heading">Numbers need a<br /><span class="serif-accent">frame of reference.</span></h2></div><p>A comparison with observed AI coding usage in Jellyfish's Q1 2026 research.</p></div>
+        <div class="benchmark-grid">
+          <div class="pyramid-card">
+            <div class="card-top"><span class="section-kicker">MONTHLY TOKEN USAGE</span><span class="tiny-tag">REFERENCE POINTS</span></div>
+            <div class="pyramid-layout">
+              <div class="pyramid" aria-hidden="true"><div class="pyramid-lines"></div><span class="pyramid-top">P90</span><span class="pyramid-bottom">P50</span></div>
+              <div class="pyramid-labels"><div><span>90TH PERCENTILE</span><strong>380M</strong><small>Power user / month</small></div><div><span>50TH PERCENTILE</span><strong>51M</strong><small>Median developer / month</small></div></div>
+            </div>
+            <div class="pyramid-caption">Illustrative distribution · not a chart of measured population proportions</div>
+          </div>
+          <div class="comparison-card">
+            <div class="card-top"><span class="section-kicker">SELECTED USAGE COMPARED</span><span class="tiny-tag" id="compare-label">ALL AGENTS</span></div>
+            <div class="compare-item"><div><strong id="median-months">{medianMonths}</strong><span> months</span></div><p>of a median developer's usage <span>at 51M tokens / month</span></p></div>
+            <div class="compare-item"><div><strong id="power-months">{powerMonths}</strong><span> months</span></div><p>of a 90th-percentile user's usage <span>at 380M tokens / month</span></p></div>
+            <div class="compare-foot">A numerical comparison of token volume, not productivity or an exact percentile.</div>
+          </div>
+        </div>
+        <div class="equivalent"><span class="equivalent-icon" aria-hidden="true">↗</span><p><strong>Another way to picture it.</strong> At the median reference rate, the selected usage is numerically equivalent to one month of usage by approximately <strong id="team-size">{medianMonths} developers</strong>.</p></div>
+      </section>
+
+      <section class="research section-space" aria-labelledby="research-heading">
+        <div class="section-heading"><div><p class="eyebrow">03 <span class="slash">/</span> THE RESEARCH</p><h2 id="research-heading">Behind the benchmark<span class="accent">.</span></h2></div><p>Good data deserves a little more context than a headline.</p></div>
+        <div class="research-grid">
+          <article class="research-main"><span class="tiny-tag">JELLYFISH RESEARCH · APRIL 2026</span><h3>Is “tokenmaxxing” cost effective?</h3><p>Jellyfish analyzed AI coding activity from <strong>12,000 developers across 200 companies</strong> in Q1 2026. The study reports a median of 51 million tokens per month and approximately 380 million at the 90th percentile.</p><p>For the subset of roughly 7,500 developers whose usage could be linked to pull requests, the research found that output increased with token use, but not proportionally. Its conclusion: token volume alone is an incomplete measure of impact.</p><a href={source} target="_blank" rel="noopener noreferrer">Read the original research <span aria-hidden="true">↗</span></a></article>
+          <aside class="research-side"><span class="section-kicker">READING THE DATA</span><h3>What this comparison can—and cannot—tell you.</h3><p>The benchmarks describe Jellyfish's sample in Q1 2026, not every developer worldwide. The data here combines local records from three tools, including cached tokens; coverage and accounting can differ.</p><p>The published reference points do not establish a 99th percentile or a precise global rank. The triangle is illustrative, not a measured distribution.</p><div class="source-links"><a href="https://jellyfish.co/state-of-ai-software-engineering/" target="_blank" rel="noopener noreferrer">Jellyfish research hub ↗</a><a href="https://jellyfish.co/blog/are-ai-coding-tools-making-companies-more-productive/" target="_blank" rel="noopener noreferrer">Related engineering analysis ↗</a></div></aside>
+        </div>
+      </section>
+      <div class="page-end"><span>BUILT FROM REAL WORKFLOWS</span><a href="/">BACK TO HOME ↗</a></div>
+      <Footer />
+    </div>
+  </main>
+  <script is:inline type="application/json" id="usage-dashboard-data" set:html={JSON.stringify(agents).replace(/</g, "\\u003c")} />
+</Layout>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const dataElement = document.getElementById("usage-dashboard-data");
+    if (!dataElement) return;
+    const agents = JSON.parse(dataElement.textContent || "[]") as { id: string; name: string; tokens: number; sessions: number }[];
+    const format = (value: number) => value >= 1e9 ? `${(value / 1e9).toFixed(2)}B` : `${(value / 1e6).toFixed(1)}M`;
+    const set = (id: string, value: string) => { const element = document.getElementById(id); if (element) element.textContent = value; };
+    document.querySelectorAll<HTMLButtonElement>(".filter[data-agent]").forEach(button => button.addEventListener("click", () => {
+      const selected = button.dataset.agent === "all" ? agents : agents.filter(agent => agent.id === button.dataset.agent);
+      const tokens = selected.reduce((sum, agent) => sum + agent.tokens, 0);
+      const sessions = selected.reduce((sum, agent) => sum + agent.sessions, 0);
+      const label = button.dataset.agent === "all" ? "ALL AGENTS" : selected[0].name.toUpperCase();
+      document.querySelectorAll<HTMLButtonElement>(".filter[data-agent]").forEach(item => { const active = item === button; item.classList.toggle("active", active); item.setAttribute("aria-pressed", String(active)); });
+      document.querySelectorAll<HTMLElement>("[data-agent-row]").forEach(row => row.classList.toggle("dimmed", button.dataset.agent !== "all" && row.dataset.agentRow !== button.dataset.agent));
+      set("total-value", format(tokens)); set("total-exact", tokens.toLocaleString("en-US") + " processed tokens");
+      set("selection-label", label); set("session-value", String(sessions)); set("agent-value", String(selected.length).padStart(2, "0"));
+      set("agent-caption", selected.length === 1 ? "Selected agent" : "In this snapshot"); set("compare-label", label);
+      set("median-months", String(Math.round(tokens / 51e6))); set("power-months", String(Math.round(tokens / 380e6)));
+      set("team-size", `${Math.round(tokens / 51e6)} developers`);
+    }));
+  });
+</script>
+
+<style>
+  .usage-page { color:#eee; background:#0a0c0c; min-height:100vh; padding:0 22px 64px; }
+  .dashboard { max-width:1120px; margin:auto; }
+  .breadcrumb { display:flex; gap:12px; align-items:center; padding:30px 0 48px; font:10px 'JetBrains Mono',monospace; letter-spacing:.12em; color:#63736d; }
+  .breadcrumb a:hover,.page-end a:hover { color:#a4edd6; }
+  .hero { display:flex; justify-content:space-between; align-items:end; gap:40px; border-bottom:1px solid #24312d; padding-bottom:46px; }
+  .eyebrow,.section-kicker { font:10px 'JetBrains Mono',monospace; letter-spacing:.13em; color:#84a69a; }
+  .eyebrow { display:flex; align-items:center; gap:10px; margin:0 0 18px; }
+  .slash { color:#4c6c61; }
+  .live-dot { display:inline-block; width:7px; height:7px; border-radius:50%; background:#83e0bc; box-shadow:0 0 12px #83e0bc88; }
+  h1 { font-size:clamp(56px,9vw,110px); line-height:.94; letter-spacing:-.075em; font-weight:500; margin:0; }
+  .accent { color:#80d5b7; }
+  .hero-copy { max-width:510px; color:#9aa9a2; font-size:16px; line-height:1.7; margin:22px 0 0; }
+  .hero-aside { flex-shrink:0; border-left:1px solid #34463f; padding:3px 0 3px 20px; display:grid; gap:8px; }
+  .hero-aside span,.hero-aside small { font:10px 'JetBrains Mono',monospace; color:#7d9087; }.hero-aside strong { font-size:18px; font-weight:500; }
+  .filter-line { display:flex; justify-content:space-between; align-items:center; gap:20px; padding:30px 0 22px; }.filter-line p { color:#788880; font-size:13px; margin:7px 0 0; }
+  .filters { display:flex; flex-wrap:wrap; gap:6px; }.filter { background:#111715; color:#9aaba3; border:1px solid #283530; border-radius:5px; padding:10px 13px; font:11px 'JetBrains Mono',monospace; cursor:pointer; transition:.2s; }.filter:hover,.filter.active { background:#d2f1e3; border-color:#d2f1e3; color:#102018; }.filter:focus-visible { outline:2px solid #a0f3d0; outline-offset:3px; }.filter-dot,.share-legend i { display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--agent-color); margin-right:7px; }
+  .overview { display:grid; grid-template-columns:2fr 1fr 1fr; gap:10px; }.total-card,.small-card,.share-card,.agent-row,.pyramid-card,.comparison-card,.research-main,.research-side { border:1px solid #26342f; background:#111815; border-radius:8px; }.total-card { padding:24px; background:radial-gradient(ellipse at 90% 10%,#203e32 0,transparent 57%),#111a16; }.card-top { display:flex; justify-content:space-between; align-items:center; gap:10px; }.tiny-tag { color:#9db8aa; border:1px solid #344a40; border-radius:3px; padding:5px 7px; font:9px 'JetBrains Mono',monospace; letter-spacing:.08em; }.big-number { font-size:clamp(44px,6vw,76px); line-height:1; letter-spacing:-.065em; margin-top:40px; }.big-number .unit { font-size:15px; letter-spacing:0; color:#96a99f; }.muted { color:#82948a; font-size:12px; }.total-foot { border-top:1px solid #2c4438; margin-top:26px; padding-top:15px; display:flex; justify-content:space-between; gap:10px; color:#83a594; font:9px 'JetBrains Mono',monospace; letter-spacing:.08em; }.small-card { position:relative; padding:24px; display:flex; flex-direction:column; min-height:235px; }.small-card strong { font-size:48px; font-weight:400; letter-spacing:-.05em; margin-top:44px; }.card-index { position:absolute; bottom:24px; right:22px; color:#4d6257; font:9px 'JetBrains Mono',monospace; }
+  .section-space { margin-top:100px; }.section-heading { display:flex; justify-content:space-between; align-items:end; gap:35px; margin-bottom:28px; }.section-heading h2 { font-size:clamp(30px,4vw,48px); line-height:1.1; letter-spacing:-.055em; font-weight:500; margin:0; }.section-heading>p { max-width:260px; color:#899b91; font-size:13px; line-height:1.6; }.serif-accent { font-family:Georgia,serif; font-weight:400; font-style:italic; color:#a5ddc6; letter-spacing:-.04em; }
+  .breakdown-grid { display:grid; grid-template-columns:1fr 1.45fr; gap:10px; }.share-card,.pyramid-card,.comparison-card { padding:24px; }.stacked-bar { display:flex; height:12px; overflow:hidden; border-radius:3px; margin:43px 0 25px; gap:2px; }.stacked-bar span { min-width:2px; }.share-legend { display:grid; gap:13px; }.share-legend div { display:flex; justify-content:space-between; color:#aab8b0; font-size:12px; }.share-legend strong { font:12px 'JetBrains Mono',monospace; color:#e5eee9; }.chart-note,.data-note { color:#788c81; font-size:11px; line-height:1.65; }.chart-note { margin-top:28px; }.data-note { margin:15px 0 0; max-width:850px; }.agent-list { display:grid; gap:8px; }.agent-row { display:flex; align-items:center; gap:16px; padding:18px; transition:opacity .2s; }.agent-row.dimmed { opacity:.3; }.agent-icon { display:grid; place-items:center; width:42px; height:42px; flex-shrink:0; border:1px solid color-mix(in srgb,var(--agent-color) 35%,transparent); border-radius:5px; color:var(--agent-color); background:color-mix(in srgb,var(--agent-color) 8%,transparent); font:11px 'JetBrains Mono',monospace; }.agent-info { flex:1; min-width:0; }.agent-name { font-size:13px; }.agent-name span { display:block; font:10px 'JetBrains Mono',monospace; color:#71877a; margin-top:4px; }.agent-bar { background:#26342d; height:3px; margin-top:12px; }.agent-bar span { display:block; height:100%; min-width:3px; background:var(--agent-color); }.agent-numbers { display:grid; gap:5px; text-align:right; white-space:nowrap; }.agent-numbers strong { font:16px 'JetBrains Mono',monospace; }.agent-numbers span { font-size:10px; color:#81948a; }
+  .benchmark-grid { display:grid; grid-template-columns:1.05fr 1fr; gap:10px; }.pyramid-layout { display:flex; justify-content:center; align-items:center; gap:38px; padding:42px 0 20px; }.pyramid { width:190px; height:210px; background:linear-gradient(0deg,#25463a,#9be1c4); clip-path:polygon(50% 0,100% 100%,0 100%); position:relative; }.pyramid-lines { position:absolute; inset:0; background:repeating-linear-gradient(0deg,transparent 0,transparent 50px,#0d1a1455 51px,#0d1a1455 52px); }.pyramid-top,.pyramid-bottom { position:absolute; left:0; right:0; text-align:center; font:10px 'JetBrains Mono',monospace; color:#0d2117; }.pyramid-top { top:100px; }.pyramid-bottom { bottom:20px; color:#bbdece; }.pyramid-labels { display:flex; flex-direction:column; gap:32px; }.pyramid-labels div { display:grid; gap:6px; }.pyramid-labels span { font:9px 'JetBrains Mono',monospace; color:#87aa98; }.pyramid-labels strong { font:24px 'JetBrains Mono',monospace; }.pyramid-labels small { color:#84988c; font-size:11px; }.pyramid-caption,.compare-foot { border-top:1px solid #293a31; padding-top:15px; color:#7e9487; font:10px 'JetBrains Mono',monospace; line-height:1.6; }.compare-item { display:flex; align-items:center; gap:20px; padding:27px 0; border-bottom:1px solid #293a31; }.compare-item div { white-space:nowrap; min-width:145px; }.compare-item strong { font:38px 'JetBrains Mono',monospace; letter-spacing:-.06em; color:#afe6cd; }.compare-item div span { font-size:12px; color:#9fb1a6; }.compare-item p { font-size:12px; color:#d1dfd6; line-height:1.5; }.compare-item p span { display:block; color:#7f9487; }.compare-foot { border:0; }.equivalent { display:flex; gap:18px; align-items:center; margin-top:10px; border:1px solid #30483b; border-radius:8px; padding:20px 24px; background:#17271f; }.equivalent-icon { font-size:24px; color:#9ce0c0; }.equivalent p { font-size:13px; color:#a9bcb0; line-height:1.6; margin:0; }.equivalent strong { color:#e7f3eb; }
+  .detail-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-top:10px; }.detail-card { background:#0f1512; border:1px solid #26342f; border-radius:8px; padding:19px; transition:opacity .2s; min-width:0; }.detail-card.dimmed { opacity:.3; }.detail-title { font:10px 'JetBrains Mono',monospace; color:#d8e8de; }.detail-title>span:last-child { float:right; color:#6c8276; font-size:9px; }.detail-dot { display:inline-block; width:7px; height:7px; background:var(--agent-color); border-radius:50%; margin-right:6px; }.detail-card dl { margin:17px 0 0; }.detail-card dl div { display:flex; justify-content:space-between; gap:8px; padding:5px 0; font-size:11px; }.detail-card dt { color:#83988b; }.detail-card dd { margin:0; color:#dbe8df; text-align:right; overflow-wrap:anywhere; }.detail-card p { font-size:10px; color:#81968a; margin:12px 0 0; }
+  .research-grid { display:grid; grid-template-columns:1.35fr 1fr; gap:10px; }.research-main,.research-side { padding:30px; }.research-main h3,.research-side h3 { font-size:24px; font-weight:500; line-height:1.2; letter-spacing:-.03em; margin:24px 0 16px; }.research-main p,.research-side p { color:#9aaba1; font-size:13px; line-height:1.8; }.research-main strong { color:#e1eee6; }.research-main>a,.source-links a { display:inline-block; color:#a5e7c9; font:11px 'JetBrains Mono',monospace; margin-top:18px; }.research-main>a:hover,.source-links a:hover { text-decoration:underline; }.research-side { background:#0d1310; }.research-side h3 { font-size:19px; }.source-links { border-top:1px solid #26342f; display:flex; flex-direction:column; margin-top:20px; }.page-end { display:flex; justify-content:space-between; border-top:1px solid #26342f; padding:35px 0 65px; margin-top:100px; color:#6d8578; font:10px 'JetBrains Mono',monospace; letter-spacing:.08em; }
+  @media(max-width:760px) { .breadcrumb { padding:24px 0 38px; }.hero { display:block; padding-bottom:30px; }.hero-aside { margin-top:30px; }.filter-line,.section-heading { display:block; }.filters { margin-top:18px; }.filter { padding:9px 10px; }.overview { grid-template-columns:1fr 1fr; }.total-card { grid-column:1 / -1; }.small-card { min-height:155px; padding:18px; }.small-card strong { margin-top:25px; font-size:38px; }.section-space { margin-top:72px; }.section-heading>p { margin-top:16px; }.breakdown-grid,.benchmark-grid,.research-grid { grid-template-columns:1fr; }.agent-row { padding:15px 12px; gap:10px; }.agent-icon { width:36px; height:36px; }.agent-numbers strong { font-size:13px; }.pyramid-layout { gap:22px; }.pyramid { width:150px; height:170px; }.pyramid-top { top:80px; }.pyramid-labels strong { font-size:20px; }.research-main,.research-side { padding:23px; }.page-end { margin-top:70px; }.total-foot { font-size:8px; } }
+  @media(max-width:370px) { .usage-page { padding-left:16px; padding-right:16px; }.filter { font-size:10px; }.pyramid { width:120px; height:145px; }.pyramid-top { top:68px; }.compare-item { gap:8px; }.compare-item div { min-width:120px; }.compare-item strong { font-size:31px; } }
+  @media(max-width:760px) { .detail-grid { grid-template-columns:1fr; } }
+</style>

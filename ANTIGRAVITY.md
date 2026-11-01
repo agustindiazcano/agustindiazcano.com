@@ -10,7 +10,7 @@ This file defines supplementary instructions for agents working on this project.
 
 ## 1. Initial discovery
 
-Before delegating, identify the integration actually available in the environment: a native Antigravity tool or subagent, a configured integration, an available command or wrapper, or alternatively Gemini CLI. Check availability and consult local help or documentation for syntax, noninteractive mode, capabilities, permissions, and session options. Use the platform's command discovery and `<command> --help` as appropriate. Do not assume that `antigravity`, `agy-ctl`, `agysw`, or a web-search capability exists or has a particular syntax.
+On this Windows PC, `agy` is the installed Antigravity CLI. A plain interactive `agy` session and a brief `agy --sandbox --print` request both returned an answer on November 1, 2026. Availability, authentication, model, and capabilities can change; check `agy --help` when needed. Do not assume a web-search capability is available merely because the CLI responds. If `agy` is unavailable, identify any other explicitly configured integration before considering a permitted alternative.
 
 Antigravity, Gemini CLI, and profile managers are distinct components; do not assume changing one changes the others. If several integrations exist, prefer the one configured by the user for this project. Do not install software, configure accounts, or request credentials without need and authorization.
 
@@ -36,11 +36,15 @@ Do not send secrets, keys, personal data, or sensitive content to another servic
 
 ### Terminal use
 
-Use only commands and options verified in the installation. If Gemini CLI is available and its help confirms the syntax, this is an example of read-only analysis:
+Run `agy` from the project directory for an interactive session. A terminal capable of interaction is required; wait for sign-in and initialization to finish before concluding that it failed. If the session enters an automatic edit mode, change to an appropriate mode or restrict the assignment to read-only work unless edits are authorized; never assume the mode grants additional permissions.
+
+For a focused noninteractive task, the installed help documented `--print`, `--sandbox`, and `--print-timeout`. For example:
 
 ```bash
-gemini -p 'Analyze the input text and summarize findings and relevant lines.' < path/to/file
+agy --sandbox --print-timeout 120s --print "Analyze the requested topic; return sources and uncertainties. Do not edit files."
 ```
+
+Wait for the process result, not just the first quiet output. A brief noninteractive test succeeded, but a research request timed out after 60 seconds without a result: allow an appropriate timeout, and report timeouts as inconclusive rather than claiming the CLI cannot work. Do not infer successful Google access from a simple reply. A sandboxed execution may lack access to the user's login or local files; follow the host's permission and escalation rules instead of bypassing them. Interactive and noninteractive invocations may have different behavior.
 
 Standard input, repository access, structured output, and permissions depend on the version and configuration; verify them. Do not redirect a response directly over an existing file. For changes, use a temporary file or an authorized editing mechanism, review the diff, and verify before incorporating the result. Do not execute suggested code or commands without evaluating them.
 
