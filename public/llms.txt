@@ -10,7 +10,7 @@
 
 Software Engineer | Python Developer with 4+ years of experience in software development, specializing in AI/ML and Backend Development (Python).
 
-I'm currently pursuing an M.Sc. in Systems Engineering at UTN, focused on Artificial Intelligence and Data Analysis. My thesis investigates LLM-guided reinforcement learning for legged robot navigation, benchmarked in MuJoCo and grid-based environments. My technical focus is building backend architectures that integrate GenAI in production-realistic conditions, not just prototypes. I'm developing projects with Python, Retrieval-Augmented Generation (RAG), and the Model Context Protocol (MCP) to explore LLM orchestration and AI agent design.
+I'm currently pursuing an M.Sc. in Computer Systems Engineering at UTN, focused on Artificial Intelligence and Data Analysis. My thesis investigates LLM-guided reinforcement learning for legged robot navigation, benchmarked in MuJoCo and grid-based environments. My technical focus is building backend architectures that integrate GenAI in production-realistic conditions, not just prototypes. I'm developing projects with Python, Retrieval-Augmented Generation (RAG), and the Model Context Protocol (MCP) to explore LLM orchestration and AI agent design.
 
 Previously, Sole QA Owner and quality authority for Grupo GDU's e-commerce platforms. Responsible for the entire quality strategy of web and mobile across multiple high-traffic sites, covering a multi-million dollar online channel with hundreds of thousands of users. Held full Go/No-Go authority on production releases with no dedicated QA team. During my tenure, the platforms—previously unranked—achieved nominations for the eCommerce Awards Uruguay in 2024 and 2025.
 
@@ -21,7 +21,7 @@ In game development, I created full modifications for the Men of War series as a
 [View Full Profile](https://www.agustindiazcano.com/profile)
 
 ## Education
-**Master in Systems Engineering (UTN)**
+**Master in Computer Systems Engineering (UTN)**
 A rigorous double-degree program consisting of a first specialization, followed by a full master's degree requiring a final thesis.
 
 ## Professional Highlights

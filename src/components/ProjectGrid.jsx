@@ -785,7 +785,7 @@ const ProjectGrid = () => {
                                 </div>
 
                                 <p className="text-[#666] uppercase text-xs tracking-wider font-semibold mb-6">
-                                    Specialization in Systems Engineering
+                                    Specialization in Computer Systems Engineering
                                 </p>
 
                                 <div className="space-y-3 text-sm text-[#888]">
