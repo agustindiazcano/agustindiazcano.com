@@ -10,14 +10,8 @@ const views = [
         ["Favorite model", currentUsage.favoriteModel], ["Active days", currentUsage.activeDays],
         ["Longest streak", currentUsage.longestStreak], ["Current streak", currentUsage.currentStreak],
     ] },
-    { title: "Codex Usage", tokens: formatTokens(currentUsage.codex.totalTokens), sessions: currentUsage.codex.sessions, details: [
-        ["Input", formatTokens(currentUsage.codex.inputTokens)], ["Cached input", formatTokens(currentUsage.codex.cachedInputTokens)],
-        ["Output", formatTokens(currentUsage.codex.outputTokens)], ["Local records since", currentUsage.codex.recordedSince],
-    ] },
-    { title: "Antigravity Usage", tokens: formatTokens(currentUsage.antigravity.totalTokens), sessions: currentUsage.antigravity.sessions, details: [
-        ["Input", formatTokens(currentUsage.antigravity.inputTokens)], ["Cache read", formatTokens(currentUsage.antigravity.cachedInputTokens)],
-        ["Output", formatTokens(currentUsage.antigravity.outputTokens)], ["Turns", String(currentUsage.antigravity.turns)],
-    ] },
+    { title: "Codex Usage", tokens: formatTokens(currentUsage.codex.totalTokens), sessions: currentUsage.codex.sessions, details: [] },
+    { title: "Antigravity Usage", tokens: formatTokens(currentUsage.antigravity.totalTokens), sessions: currentUsage.antigravity.sessions, details: [] },
 ];
 const tableText = "text-sm md:text-[11px] min-[1300px]:text-sm";
 const labelCell = "py-1.5 md:py-1 min-[1300px]:py-1.5 pl-4 md:pl-3 min-[1300px]:pl-4 pr-3 text-left font-normal text-[#888]";
@@ -27,7 +21,7 @@ const valueCell = "py-1.5 md:py-1 min-[1300px]:py-1.5 pr-4 md:pr-3 min-[1300px]:
 <section id="claude-usage" class="relative w-full md:w-48 min-[1300px]:w-64 bg-[#111] border border-[#222] rounded-xl" aria-label="Claude, Codex and Antigravity usage over the last 30 days">
     <div class="flex items-center px-2 md:px-1 min-[1300px]:px-2">
         <button type="button" data-usage-nav="-1" aria-label="Previous usage view" class="p-2 text-[#888] hover:text-white cursor-pointer">&#8249;</button>
-        <button id="claude-usage-toggle" type="button" aria-expanded="false" aria-controls="claude-usage-extra" class="min-w-0 flex-1 flex items-center justify-between gap-1 py-3 md:py-2 min-[1300px]:py-3 text-left cursor-pointer">
+        <button id="claude-usage-toggle" type="button" aria-expanded="false" aria-controls="claude-usage-extra" class="min-w-0 flex-1 flex items-center justify-between gap-1 py-3 md:py-2 min-[1300px]:py-3 text-left cursor-pointer disabled:cursor-default">
             <div class="flex flex-col min-w-0">
                 <h2 id="usage-title" class="font-mono text-xs md:text-[9px] min-[1300px]:text-xs uppercase tracking-wider text-[#888]">{views[0].title}</h2>
                 <span class="font-mono text-[10px] md:text-[8px] min-[1300px]:text-[10px] text-[#555] lowercase mt-0.5">last 30 days · {currentUsage.period}</span>
@@ -60,7 +54,7 @@ const valueCell = "py-1.5 md:py-1 min-[1300px]:py-1.5 pr-4 md:pr-3 min-[1300px]:
 <script>
     document.addEventListener("astro:page-load", () => {
         const section = document.getElementById("claude-usage");
-        const toggle = document.getElementById("claude-usage-toggle");
+        const toggle = document.getElementById("claude-usage-toggle") as HTMLButtonElement | null;
         const chevron = document.getElementById("claude-usage-chevron");
         const extra = document.getElementById("claude-usage-extra");
         const title = document.getElementById("usage-title");
@@ -70,6 +64,15 @@ const valueCell = "py-1.5 md:py-1 min-[1300px]:py-1.5 pr-4 md:pr-3 min-[1300px]:
         section.querySelectorAll<HTMLButtonElement>("[data-usage-nav]").forEach((button) => button.addEventListener("click", () => {
             index = (index + Number(button.dataset.usageNav) + titles.length) % titles.length;
             title.textContent = titles[index];
+            const hasDetails = index < 2;
+            toggle.disabled = !hasDetails;
+            chevron?.toggleAttribute("hidden", !hasDetails);
+            if (!hasDetails) {
+                toggle.setAttribute("aria-expanded", "false");
+                extra.hidden = true;
+                section.classList.remove("rounded-b-none");
+                chevron?.classList.remove("rotate-180");
+            }
             section.querySelectorAll<HTMLElement>("[data-usage-view], [data-usage-detail]").forEach((element) => {
                 element.hidden = Number(element.dataset.usageView ?? element.dataset.usageDetail) !== index;
             });

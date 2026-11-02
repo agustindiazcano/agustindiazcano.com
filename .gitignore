@@ -25,3 +25,9 @@ pnpm-debug.log*
 
 # Local scratch files for AI agents
 scratch/
+
+# Local annotated design references
+/2026_11_02_02b_Kleki.png
+/2026_11_02_02c_Kleki.png
+/2026_11_02_02d_Kleki.png
+/2026_11_02_02f_Kleki.png
