@@ -709,7 +709,7 @@ const ProjectGrid = () => {
     ];
 
     const categoryFilterControl = (
-        <div className="inline-flex items-center gap-1 p-1 bg-[#111] border border-[#222] rounded-full" role="group" aria-label="Project category">
+        <div className="hidden md:inline-flex items-center gap-1 p-1 bg-[#111] border border-[#222] rounded-full" role="group" aria-label="Project category">
             {filterOptions.map(({ value, label, icon }) => (
                 <button
                     key={value}
