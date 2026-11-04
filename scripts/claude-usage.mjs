@@ -19,13 +19,17 @@ for (const row of cache.dailyModelTokens) {
 }
 for (const row of cache.dailyActivity) if (row.date >= firstDay && row.date <= today && row.date <= lastCached) sessionsByDay[row.date] = row.sessionCount || 0;
 const live = new Map(), liveSessions = new Set();
+const warnings = [];
 function scan(dir) {
   if (!existsSync(dir)) throw new Error(`Missing Claude projects directory: ${dir}`);
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const file = join(dir, entry.name);
     if (entry.isDirectory()) { scan(file); continue; }
     if (!entry.name.endsWith('.jsonl')) continue;
-    for (const line of readFileSync(file, 'utf8').split('\n')) {
+    let contents;
+    try { contents = readFileSync(file, 'utf8'); }
+    catch (error) { warnings.push(`${file}: skipped (${error.code || error.message})`); continue; }
+    for (const line of contents.split('\n')) {
       if (!line.includes('"usage"')) continue;
       const event = JSON.parse(line);
       if (event.type !== 'assistant' || !event.message?.usage || !event.timestamp) continue;
@@ -48,4 +52,4 @@ scan(join(base, 'projects'));
 for (const { day, model, total } of live.values()) { models[model] = (models[model] || 0) + total; daily[day] = (daily[day] || 0) + total; }
 const total = Object.values(models).reduce((a, b) => a + b, 0);
 const sessions = Object.values(sessionsByDay).reduce((a, b) => a + b, 0) + liveSessions.size;
-console.log(JSON.stringify({ firstDay, today, lastCached, total, sessions, models, daily, liveMessages: live.size, liveSessions: liveSessions.size }, null, 2));
+console.log(JSON.stringify({ firstDay, today, lastCached, total, sessions, models, daily, liveMessages: live.size, liveSessions: liveSessions.size, warnings }, null, 2));

@@ -5,6 +5,7 @@ const formatTokens = (value: number) => `${(value / 1_000_000).toFixed(1)}m`;
 const views = [
     { title: "AI Usage", tokens: currentUsage.combined.totalTokens, sessions: currentUsage.combined.sessions, details: [
         ["Claude tokens", currentUsage.totalTokens], ["Codex tokens", formatTokens(currentUsage.codex.totalTokens)], ["Antigravity tokens", formatTokens(currentUsage.antigravity.totalTokens)],
+        ["Meta Muse tokens", formatTokens(currentUsage.metamuse.totalTokens)], ["Grok tokens", formatTokens(currentUsage.grok.totalTokens)],
     ] },
     { title: "Claude Code Usage", tokens: currentUsage.totalTokens, sessions: currentUsage.sessions, details: [
         ["Favorite model", currentUsage.favoriteModel], ["Active days", currentUsage.activeDays],
@@ -12,13 +13,20 @@ const views = [
     ] },
     { title: "Codex Usage", tokens: formatTokens(currentUsage.codex.totalTokens), sessions: currentUsage.codex.sessions, details: [] },
     { title: "Antigravity Usage", tokens: formatTokens(currentUsage.antigravity.totalTokens), sessions: currentUsage.antigravity.sessions, details: [] },
+    { title: "Meta Muse Usage", tokens: formatTokens(currentUsage.metamuse.totalTokens), sessions: currentUsage.metamuse.sessions, details: [
+        ["Favorite model", currentUsage.metamuse.favoriteModel],
+    ] },
+    { title: "Grok Usage", tokens: formatTokens(currentUsage.grok.totalTokens), sessions: currentUsage.grok.sessions, details: [] },
+    { title: "Cursor Usage", tokens: "n/a", sessions: currentUsage.cursor.sessions, details: [
+        ["Coverage", "server-side only"],
+    ] },
 ];
 const tableText = "text-sm md:text-[11px] min-[1300px]:text-sm";
 const labelCell = "py-1 md:py-1 min-[1300px]:py-1.5 pl-4 md:pl-3 min-[1300px]:pl-4 pr-3 text-left font-normal text-[#888]";
 const valueCell = "py-1 md:py-1 min-[1300px]:py-1.5 pr-4 md:pr-3 min-[1300px]:pr-4 text-right font-mono text-white whitespace-nowrap";
 ---
 
-<section id="claude-usage" class="relative w-full md:w-48 min-[1300px]:w-64 bg-[#111] border border-[#222] rounded-xl" aria-label="Claude, Codex and Antigravity usage over the last 30 days">
+<section id="claude-usage" class="relative w-full md:w-48 min-[1300px]:w-64 bg-[#111] border border-[#222] rounded-xl" aria-label="Claude, Codex, Antigravity, Meta Muse, Grok and Cursor usage over the last 30 days">
     <div class="flex items-center px-2 md:px-1 min-[1300px]:px-2">
         <button type="button" data-usage-nav="-1" aria-label="Previous usage view" class="p-2 text-[#888] hover:text-white cursor-pointer">&#8249;</button>
         <button id="claude-usage-toggle" type="button" aria-expanded="false" aria-controls="claude-usage-extra" class="relative min-w-0 flex-1 flex items-center justify-between gap-1 py-2 md:py-2 min-[1300px]:py-3 text-left cursor-pointer disabled:cursor-default">
@@ -78,7 +86,8 @@ const valueCell = "py-1 md:py-1 min-[1300px]:py-1.5 pr-4 md:pr-3 min-[1300px]:pr
         section.querySelectorAll<HTMLButtonElement>("[data-usage-nav]").forEach((button) => button.addEventListener("click", () => {
             index = (index + Number(button.dataset.usageNav) + titles.length) % titles.length;
             title.textContent = titles[index];
-            const hasDetails = index < 2;
+            const detail = section.querySelector<HTMLElement>(`[data-usage-detail="${index}"]`);
+            const hasDetails = detail !== null && detail.childElementCount > 0;
             toggle.disabled = !hasDetails;
             chevron?.toggleAttribute("hidden", !hasDetails);
             if (!hasDetails) {

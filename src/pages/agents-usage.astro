@@ -7,6 +7,9 @@ const agents = [
   { id: "claude", name: "Claude Code", short: "CC", color: "#d6a47e", tokens: usage.claudeTotalTokens, sessions: usage.sessions, note: "Anthropic" },
   { id: "codex", name: "Codex", short: "CX", color: "#80d3bf", tokens: usage.codex.totalTokens, sessions: usage.codex.sessions, note: "OpenAI" },
   { id: "antigravity", name: "Antigravity", short: "AG", color: "#a99bf2", tokens: usage.antigravity.totalTokens, sessions: usage.antigravity.sessions, note: "Google" },
+  { id: "metamuse", name: "Meta Muse", short: "MM", color: "#6ea8fe", tokens: usage.metamuse.totalTokens, sessions: usage.metamuse.sessions, note: "Meta" },
+  { id: "grok", name: "Grok", short: "GK", color: "#ededed", tokens: usage.grok.totalTokens, sessions: usage.grok.sessions, note: "xAI" },
+  { id: "cursor", name: "Cursor", short: "CU", color: "#ff9d6b", tokens: usage.cursor.totalTokens, sessions: usage.cursor.sessions, note: "Server-side" },
 ];
 const total = agents.reduce((sum, agent) => sum + agent.tokens, 0);
 const sessions = agents.reduce((sum, agent) => sum + agent.sessions, 0);
@@ -16,7 +19,7 @@ const powerMonths = Math.round(total / 380e6);
 const source = "https://jellyfish.co/blog/is-tokenmaxxing-cost-effective-new-data-from-jellyfish-explains/";
 ---
 
-<Layout title="AI Usage Dashboard | Agustin Diaz-Cano" description="Explore Agustin Diaz-Cano's 30-day AI agent token usage across Claude Code, Codex and Antigravity, with comparisons to Jellyfish research." compactHeader>
+<Layout title="AI Usage Dashboard | Agustin Diaz-Cano" description="Explore Agustin Diaz-Cano's 30-day AI agent token usage across Claude Code, Codex, Antigravity, Meta Muse, Grok and Cursor, with comparisons to Jellyfish research." compactHeader>
   <main class="usage-page">
     <div class="dashboard">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">HOME</a><span>/</span><span>AI USAGE</span></nav>
@@ -43,7 +46,7 @@ const source = "https://jellyfish.co/blog/is-tokenmaxxing-cost-effective-new-dat
           <div class="total-foot"><span><span class="live-dot"></span> <span id="selection-label">ALL AGENTS</span></span></div>
         </article>
         <article class="small-card"><span class="section-kicker">SESSIONS</span><strong id="session-value">{sessions}</strong><span class="muted">Recorded activity</span><span class="card-index">01 / 02</span></article>
-        <article class="small-card"><span class="section-kicker">ACTIVE AGENTS</span><strong id="agent-value">03</strong><span class="muted" id="agent-caption">In this snapshot</span><span class="card-index">02 / 02</span></article>
+        <article class="small-card"><span class="section-kicker">ACTIVE AGENTS</span><strong id="agent-value">{String(agents.length).padStart(2, "0")}</strong><span class="muted" id="agent-caption">In this snapshot</span><span class="card-index">02 / 02</span></article>
       </section>
 
       <section class="breakdown section-space" aria-labelledby="breakdown-heading">
@@ -53,10 +56,10 @@ const source = "https://jellyfish.co/blog/is-tokenmaxxing-cost-effective-new-dat
             <div class="card-top"><span class="section-kicker">SHARE OF TOTAL</span><span class="tiny-tag">BY AGENT</span></div>
             <div class="stacked-bar" aria-label="Share of combined tokens by agent">{agents.map(agent => <span style={`width:${agent.tokens / total * 100}%; background:${agent.color}`} title={`${agent.name}: ${(agent.tokens / total * 100).toFixed(1)}%`}></span>)}</div>
             <div class="share-legend">{agents.map(agent => <div><span><i style={`--agent-color:${agent.color}`}></i>{agent.name}</span><strong>{(agent.tokens / total * 100).toFixed(1)}%</strong></div>)}</div>
-            <p class="chart-note">Shares always refer to the combined total.</p>
+            <p class="chart-note">Shares always refer to the combined total. Cursor usage is tracked server-side, so local records carry no token counts.</p>
           </div>
           <div class="agent-list">{agents.map(agent => <article class="agent-row" data-agent-row={agent.id} style={`--agent-color:${agent.color}`}>
-            <div class="agent-icon">{agent.short}</div><div class="agent-info"><div class="agent-name">{agent.name}<span>{agent.note}</span></div><div class="agent-bar"><span style={`width:${agent.tokens / total * 100}%`}></span></div></div><div class="agent-numbers"><strong>{format(agent.tokens)}</strong><span>{agent.sessions} sessions</span></div>
+            <div class="agent-icon">{agent.short}</div><div class="agent-info"><div class="agent-name">{agent.name}<span>{agent.note}</span></div><div class="agent-bar"><span style={`width:${agent.tokens / total * 100}%`}></span></div></div><div class="agent-numbers"><strong>{agent.tokens > 0 ? format(agent.tokens) : "n/a"}</strong><span>{agent.sessions} sessions</span></div>
           </article>)}</div>
         </div>
       </section>
@@ -83,7 +86,7 @@ const source = "https://jellyfish.co/blog/is-tokenmaxxing-cost-effective-new-dat
         <div class="section-heading"><div><p id="research-heading" class="eyebrow">03 <span class="slash">/</span> THE RESEARCH</p></div></div>
         <div class="research-grid">
           <article class="research-main"><span class="tiny-tag">JELLYFISH RESEARCH · APRIL 2026</span><h3>Is “tokenmaxxing” cost effective?</h3><p>Jellyfish analyzed AI coding activity from <strong>12,000 developers across 200 companies</strong> in Q1 2026. The study reports a median of 51 million tokens per month and approximately 380 million at the 90th percentile.</p><a href={source} target="_blank" rel="noopener noreferrer">Read the original research <span aria-hidden="true">↗</span></a></article>
-          <aside class="research-side"><span class="section-kicker">READING THE DATA</span><p>The benchmarks describe Jellyfish's sample in Q1 2026. The data here combines local records from three tools, including cached tokens; coverage and accounting can differ.</p><div class="source-links"><a href="https://jellyfish.co/state-of-ai-software-engineering/" target="_blank" rel="noopener noreferrer">Jellyfish research hub ↗</a><a href="https://jellyfish.co/blog/are-ai-coding-tools-making-companies-more-productive/" target="_blank" rel="noopener noreferrer">Related engineering analysis ↗</a></div></aside>
+          <aside class="research-side"><span class="section-kicker">READING THE DATA</span><p>The benchmarks describe Jellyfish's sample in Q1 2026. The data here combines local records from five tools plus Cursor activity, including cached tokens; Cursor exposes no local token counters and coverage and accounting can differ.</p><div class="source-links"><a href="https://jellyfish.co/state-of-ai-software-engineering/" target="_blank" rel="noopener noreferrer">Jellyfish research hub ↗</a><a href="https://jellyfish.co/blog/are-ai-coding-tools-making-companies-more-productive/" target="_blank" rel="noopener noreferrer">Related engineering analysis ↗</a></div></aside>
         </div>
       </section>
       <div class="page-end"><span>BUILT FROM REAL WORKFLOWS</span><a href="/">BACK TO HOME ↗</a></div>

@@ -1,9 +1,9 @@
 # Agustin Diaz-Cano - Software Engineer
 
 ## AI Agent Usage (Last 30 Days)
-- **Combined Total**: ~9.27 Billion tokens across 236 sessions (2026-10-05 to 2026-11-03).
-- **Per-Agent Breakdown**: Claude Code (~7.83B tokens, 144 sessions) | Antigravity (~918.3M tokens, 54 sessions) | Codex (~517.9M tokens, 38 sessions).
-- **Reference Comparisons**: The combined count is approximately 182 months (~15.1 years) at 51M tokens/month, or 24 months (~2.0 years) at 380M tokens/month. It is numerically comparable to one month at the median rate for ~182 developers.
+- **Combined Total**: ~9.67 Billion tokens across 241 sessions (2026-10-06 to 2026-11-04).
+- **Per-Agent Breakdown**: Claude Code (~8.18B tokens, 140 sessions) | Antigravity (~918.5M tokens, 55 sessions) | Codex (~539.6M tokens, 39 sessions) | Meta Muse (~20.2M tokens, 5 sessions) | Grok (~5.4M tokens, 2 sessions) | Cursor (server-side only, 0 local transcript sessions, no local token counters).
+- **Reference Comparisons**: The combined count is approximately 190 months (~15.8 years) at 51M tokens/month, or 25 months (~2.1 years) at 380M tokens/month. It is numerically comparable to one month at the median rate for ~190 developers.
 - **Benchmark Source**: [Jellyfish Q1 2026 study](https://jellyfish.co/blog/is-tokenmaxxing-cost-effective-new-data-from-jellyfish-explains/) reported 51M tokens/month at the median and 380M at the 90th percentile among 12,000 developers at 200 companies. These are reference rates, not a global ranking; accounting methods and coverage may differ.
 
 ## About
