@@ -53,6 +53,8 @@ Personal website and portfolio of **Agustin Diaz-Cano**, Software Engineer and M
 
 ## Assistant Guidelines & Instructions
 
+For multi-model AI agent token usage statistics and updating the usage breakdown table (Claude Code, Antigravity, Codex, Meta Muse, Grok, and Cursor), follow the [ai-usage-stats skill](.agents/skills/ai-usage-stats/SKILL.md).
+
 1. **Language & Communication**:
    - Always communicate, explain, and reply in **English**.
 

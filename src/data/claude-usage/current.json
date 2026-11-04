@@ -7,33 +7,33 @@
   "longestStreak": "19 days",
   "currentStreak": "19 days",
   "codex": {
-    "totalTokens": 569574189,
-    "sessions": 45,
-    "inputTokens": 568265412,
-    "cachedInputTokens": 560121728,
-    "outputTokens": 1308777,
+    "totalTokens": 615711116,
+    "sessions": 48,
+    "inputTokens": 614276535,
+    "cachedInputTokens": 605534464,
+    "outputTokens": 1434581,
     "recordedSince": "10-12"
   },
   "antigravity": {
-    "totalTokens": 924788245,
-    "sessions": 56,
-    "turns": 7206,
-    "inputTokens": 64451209,
-    "cachedInputTokens": 857085171,
-    "outputTokens": 3251865
+    "totalTokens": 949079160,
+    "sessions": 63,
+    "turns": 7409,
+    "inputTokens": 65832407,
+    "cachedInputTokens": 879870664,
+    "outputTokens": 3376089
   },
   "combined": {
-    "totalTokens": "9.74b",
-    "sessions": 250
+    "totalTokens": "9.85b",
+    "sessions": 262
   },
   "claudeTotalTokens": 8182674633,
   "metamuse": {
-    "totalTokens": 55118927,
-    "sessions": 7,
-    "inputTokens": 54780405,
-    "cachedInputTokens": 52025959,
-    "outputTokens": 338522,
-    "favoriteModel": "muse-spark-1.3"
+    "totalTokens": 95065985,
+    "sessions": 9,
+    "inputTokens": 94542381,
+    "cachedInputTokens": 90327192,
+    "outputTokens": 523604,
+    "favoriteModel": "muse-wonder-1.0"
   },
   "grok": {
     "totalTokens": 5376787,

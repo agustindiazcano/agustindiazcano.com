@@ -53,7 +53,7 @@ Personal website and portfolio of **Agustin Diaz-Cano**, Software Engineer and M
 
 ## Assistant Guidelines & Instructions
 
-For 30-day Claude Code, Codex and Antigravity usage updates, use the [update-usage skill](.claude/skills/update-usage/SKILL.md).
+For 30-day AI agent and model usage updates and tables across all models (Claude Code, Antigravity, Codex, Meta Muse, Grok, and Cursor), follow the [ai-usage-stats skill](.agents/skills/ai-usage-stats/SKILL.md) and the [update-usage skill](.claude/skills/update-usage/SKILL.md).
 
 For delegation to Antigravity, read [ANTIGRAVITY.md](ANTIGRAVITY.md) and use the [delegate-antigravity skill](.claude/skills/delegate-antigravity/SKILL.md). For Google search tasks, delegate to Antigravity when available and permitted; otherwise use an available alternative and explain the limitation.
 
