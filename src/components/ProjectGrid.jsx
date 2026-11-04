@@ -16,6 +16,7 @@ const ProjectGrid = () => {
         try {
             const saved = localStorage.getItem('projectViewMode');
             if (saved === 'list' || saved === 'cards') setViewMode(saved);
+            else if (window.matchMedia('(max-width: 767px)').matches) setViewMode('list');
         } catch (e) {}
     }, []);
 
