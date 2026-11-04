@@ -15,8 +15,8 @@ const ProjectGrid = () => {
     useEffect(() => {
         try {
             const saved = localStorage.getItem('projectViewMode');
-            if (saved === 'list' || saved === 'cards') setViewMode(saved);
-            else if (window.matchMedia('(max-width: 767px)').matches) setViewMode('list');
+            if (window.matchMedia('(max-width: 767px)').matches) setViewMode('list');
+            else if (saved === 'list' || saved === 'cards') setViewMode(saved);
         } catch (e) {}
     }, []);
 
@@ -638,7 +638,7 @@ const ProjectGrid = () => {
     // Rendered inside the header nav row (#view-toggle-slot) so it sits level with the nav buttons
     const viewToggleSlot = mounted ? document.getElementById('view-toggle-slot') : null;
     const viewToggle = (
-                <div className="inline-flex items-center gap-1 p-1 bg-[#111] border border-[#222] rounded-full" role="group" aria-label="Project view mode">
+                <div className="hidden md:inline-flex items-center gap-1 p-1 bg-[#111] border border-[#222] rounded-full" role="group" aria-label="Project view mode">
                     {[
                         { mode: 'cards', label: 'Card view', icon: <><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></> },
                         { mode: 'list', label: 'List view', icon: <><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></> }

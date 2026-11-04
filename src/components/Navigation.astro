@@ -52,7 +52,7 @@ const socialLinks = [
 ];
 ---
 
-<nav id="site-nav" class="flex flex-wrap justify-center gap-2 w-full">
+<nav id="site-nav" class="flex flex-wrap justify-center gap-1.5 md:gap-2 w-full">
     {
         links.map((link) => (
             <a
@@ -61,7 +61,7 @@ const socialLinks = [
                 rel={link.target === "_blank" ? "noopener noreferrer" : undefined}
                 data-nav-href={link.href}
                 data-nav-match={link.match}
-                class="nav-link px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium transition-all duration-300 flex items-center gap-2 border border-transparent bg-[#111] text-[#999] border-[#222] hover:text-white hover:border-[#444] hover:bg-[#1a1a1a]"
+                class="nav-link px-2.5 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium transition-all duration-300 flex items-center gap-2 border border-transparent bg-[#111] text-[#999] border-[#222] hover:text-white hover:border-[#444] hover:bg-[#1a1a1a]"
             >
                 {link.icon && <Fragment set:html={link.icon} />}
                 <span>{link.name}</span>
@@ -74,7 +74,7 @@ const socialLinks = [
                 href={social.href}
                 target={social.target || "_self"}
                 rel={social.target === "_blank" ? "noopener noreferrer" : undefined}
-                class="lg:hidden text-[#999] hover:text-white transition-all duration-300 p-2.5 rounded-full border border-[#222] bg-[#111] hover:border-[#444] hover:bg-[#1a1a1a] flex items-center justify-center self-center"
+                class="lg:hidden text-[#999] hover:text-white transition-all duration-300 p-2 md:p-2.5 rounded-full border border-[#222] bg-[#111] hover:border-[#444] hover:bg-[#1a1a1a] flex items-center justify-center self-center"
                 aria-label={social.name}
             >
                 <Fragment set:html={social.icon} />
@@ -101,6 +101,10 @@ const socialLinks = [
             <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#111] border-b border-r border-[#333] rotate-45"></div>
         </div>
     </div>
+    <a
+        href="/agents-usage"
+        class="md:hidden self-center flex items-center gap-1 px-2.5 py-2 rounded-full border border-[#222] bg-[#111] text-[11px] font-mono text-[#999] transition-colors hover:text-white hover:border-[#68d6ba]"
+    >AI Usage <span aria-hidden="true">&#8599;</span></a>
 </nav>
 
 <style>
