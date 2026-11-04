@@ -637,6 +637,7 @@ const ProjectGrid = () => {
 
     // Rendered inside the header nav row (#view-toggle-slot) so it sits level with the nav buttons
     const viewToggleSlot = mounted ? document.getElementById('view-toggle-slot') : null;
+
     const viewToggle = (
                 <div className="hidden md:inline-flex items-center gap-1 p-1 bg-[#111] border border-[#222] rounded-full" role="group" aria-label="Project view mode">
                     {[
@@ -729,7 +730,7 @@ const ProjectGrid = () => {
     const headerControls = (
         <>
             {viewToggle}
-            {categoryFilterControl}
+
         </>
     );
 
@@ -745,6 +746,7 @@ const ProjectGrid = () => {
 
     return (
         <div className="w-full mb-32">
+
             {mounted && (viewToggleSlot
                 ? createPortal(headerControls, viewToggleSlot)
                 : <div className="flex justify-end gap-2 mb-4">{headerControls}</div>
