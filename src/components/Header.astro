@@ -9,7 +9,7 @@ const { className = "" } = Astro.props;
 ---
 
 <header
-    class={`w-full flex flex-col items-center text-center mb-8 md:mb-10 ${className}`}
+    class={`w-full flex flex-col items-center text-center mb-4 md:mb-10 ${className}`}
 >
     {/* Desktop-only top-left vertical social links */}
     <nav
@@ -90,20 +90,20 @@ const { className = "" } = Astro.props;
     </nav>
     <a href="/" class="group inline-block focus:outline-none">
         <h1
-            class="h-[5.5rem] font-thin font-display tracking-normal text-[2.5rem] md:text-[4rem] text-transparent bg-clip-text bg-gradient-to-b from-white to-[#777] mb-0 group-hover:from-white group-hover:to-[#aaa] transition-colors duration-200"
+            class="md:h-[5.5rem] font-thin font-display tracking-normal leading-tight md:leading-normal text-[1.75rem] md:text-[4rem] text-transparent bg-clip-text bg-gradient-to-b from-white to-[#777] mb-0 group-hover:from-white group-hover:to-[#aaa] transition-colors duration-200"
         >
             Agustin Diaz-Cano
         </h1>
     </a>
-    <p class="text-sm md:text-lg text-[#888] mb-0 max-w-3xl font-normal tracking-wider font-display">
-        MS Candidate, <br class="md:hidden" /> Computer Systems Engineering
+    <p class="text-xs md:text-lg text-[#888] mb-0 max-w-3xl font-normal tracking-wider font-display">
+        MS Candidate, Computer Systems Engineering
     </p>
-    <div class="mt-6 w-full flex flex-col items-center relative">
+    <div class="mt-3 md:mt-6 w-full flex flex-col items-center relative">
         <Navigation />
         {/* Home-only controls (view toggle + category filter): sit in the header's bottom margin on md+ so they take no extra vertical space */}
         <div
             id="view-toggle-slot"
-            class="flex flex-wrap items-center justify-center gap-2 mt-3 md:mt-2 lg:mt-3 md:absolute md:top-full md:inset-x-0 empty:hidden"
+            class="flex flex-wrap items-center justify-center gap-2 mt-2 md:mt-2 lg:mt-3 md:absolute md:top-full md:inset-x-0 empty:hidden"
         ></div>
     </div>
 </header>
