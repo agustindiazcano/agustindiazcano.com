@@ -89,6 +89,11 @@ Live site: [agustindiazcano.com](https://www.agustindiazcano.com)
 Astro · Vercel · deployed with canonical domain enforcement (non-www) and 
 CSP/HSTS security headers.
 
+## Autor
+
+Agustin Diaz-Cano
+MS Candidate, Systems Engineering
+
 ## Contact
 
 - LinkedIn: [linkedin.com/in/agustindiazcano](https://linkedin.com/in/agustindiazcano)
