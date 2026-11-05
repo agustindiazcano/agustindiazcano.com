@@ -92,7 +92,7 @@ CSP/HSTS security headers.
 ## Autor
 
 Agustin Diaz-Cano
-MS Candidate, Systems Engineering
+MS Candidate, Systems Engineering (UTN FRBA, Argentina)
 
 ## Contact
 
