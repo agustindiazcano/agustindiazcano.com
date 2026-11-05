@@ -578,6 +578,21 @@ const ProjectGrid = () => {
                 "Localized payment integrations",
                 "Scalable architecture"
             ]
+        },
+        {
+            id: 15,
+            title: "Agent robot fleets for logistics",
+            slug: "agent-robot-fleets-logistics",
+            subtitle: "View Details",
+            description: "A safety and reliability control plane for LLM-directed warehouse robot fleets.",
+            longDescription: "A safety and reliability control plane for LLM-directed warehouse robot fleets.",
+            tags: ["AI", "Robotics", "Logistics", "Agentic Systems"],
+            size: "medium",
+            stats: "",
+            features: [
+                "Safety and reliability control plane",
+                "LLM-directed warehouse robot fleets"
+            ]
         }
         /*
         {
