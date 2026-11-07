@@ -808,7 +808,7 @@ const ProjectGrid = () => {
 
                                 <div className="space-y-3 text-sm text-[#888]">
                                     <p className="flex items-center gap-3">
-                                        <span className="text-lg">🔬</span> <span>Focus: <span className="text-white">Genetic Algorithms</span></span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#888] inline-block shrink-0"><path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/><path d="M9 14h2"/><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/><path d="m12 6 1-4"/><path d="m8 6-1-4"/></svg> <span>Focus: <span className="text-white">Genetic Algorithms</span></span>
                                     </p>
                                 </div>
                             </>

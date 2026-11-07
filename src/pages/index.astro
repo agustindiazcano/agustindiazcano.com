@@ -48,9 +48,7 @@ import LoadingScreen from "../components/LoadingScreen.astro";
                 transform: none !important;
             }
             :global(.skip-loading-screen) #home-main-content {
-                opacity: 1 !important;
-                transform: none !important;
-                transition: none !important;
+                animation: pageContentFadeIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             }
             :global(html.rabbit-cinema-active) #home-main-content,
             :global(html.rabbit-cinema-active.skip-loading-screen) #home-main-content,
@@ -61,6 +59,7 @@ import LoadingScreen from "../components/LoadingScreen.astro";
                 pointer-events: none !important;
                 transform: translateY(16px) scale(0.98) !important;
                 transition: opacity 0.45s ease, visibility 0.45s !important;
+                animation: none !important;
             }
         </style>
     </main>

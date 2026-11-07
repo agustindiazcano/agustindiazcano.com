@@ -93,3 +93,19 @@ pre,
   background-color: var(--color-success);
   color: white;
 }
+
+/* Page entrance animation for seamless navigation between sections */
+.page-fade-in {
+  animation: pageContentFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pageContentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
