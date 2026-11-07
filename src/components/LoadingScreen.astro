@@ -28,20 +28,13 @@
 </script>
 
 <style is:global>
-  /* During 3D Black Hole Intro: UI waits to render smoothly while cosmic approach flight plays */
+  /* During 3D Black Hole Intro: UI waits to render smoothly while cosmic approach flight plays with background blur */
   html.intro-active #site-header-container,
   html.intro-active #home-floating-usage,
   html.intro-active #home-main-content,
   html.intro-active #home-main-content.show {
     opacity: 0 !important;
     visibility: hidden !important;
-    pointer-events: none !important;
-  }
-
-  /* Black hole is sharp and cinematic in deep space during the flight towards it */
-  html.intro-active #gargantua-blur-overlay,
-  html.intro-active #gargantua-dim-overlay {
-    opacity: 0 !important;
     pointer-events: none !important;
   }
 </style>
