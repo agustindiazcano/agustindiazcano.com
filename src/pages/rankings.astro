@@ -95,6 +95,9 @@ const schema = {
                                         </span>
                                         <span class="font-mono text-xs text-[#68d6ba]">{entry.metric}</span>
                                         <span class="text-sm text-[#888] leading-relaxed">{entry.detail}</span>
+                                        {entry.method && (
+                                            <span class="text-xs text-[#666] leading-relaxed border-l border-[#333] pl-3 mt-1">{entry.method}</span>
+                                        )}
                                         <span class="font-mono text-[10px] text-[#555]">
                                             Checked <time datetime={entry.checked}>{entry.checked}</time>
                                         </span>
