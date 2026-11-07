@@ -9,6 +9,22 @@ export const competitionTiers: RankingTier[] = [
         description: "Hackathon results and verified participation.",
         entries: [
             {
+                platform: "Qollab x IonQ Global Quantum Hackathon (Argentina)",
+                metric: "1st place Quantum Impact (Industrial Application) and 3rd place overall",
+                detail: "QWind, a quantum optimizer for wind farms built with Baltazar Salerno and run on IonQ Forte 1 hardware. Categories: Quantum Impact (Industrial Application), Quantum Unlocked (Educational), Quantum Playground (Games).",
+                url: "https://exa.unicen.edu.ar/la-sede-unicen-se-destaco-en-el-hackathon-mundial-de-computacion-cuantica-con-proyectos-premiados/",
+                source: "exa.unicen.edu.ar",
+                checked: "2026-11-07",
+            },
+            {
+                platform: "Qollab: UNICEN node results",
+                metric: "Official node results page",
+                detail: "Winners of the Argentina node of the Qollab x IonQ Hackathon 2026, hosted by UNICEN.",
+                url: "https://qollab.xyz/explore/hackathon-2026/unicen",
+                source: "qollab.xyz",
+                checked: "2026-11-07",
+            },
+            {
                 platform: "IBM Bob 2.0 Global Hackathon (lablab.ai)",
                 metric: "Top 32% by delivery",
                 detail: "One of 1,124 successful submissions out of 3,464 teams and 15,727 participants, with TestMind AI.",
