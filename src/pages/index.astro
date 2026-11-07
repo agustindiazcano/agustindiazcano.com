@@ -50,6 +50,9 @@ import LoadingScreen from "../components/LoadingScreen.astro";
             :global(.skip-loading-screen) #home-main-content {
                 animation: pageContentFadeIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             }
+            :global(html.intro-active) #home-main-content,
+            :global(html.intro-active) #home-main-content.show,
+            :global(html.intro-active) #home-floating-usage,
             :global(html.rabbit-cinema-active) #home-main-content,
             :global(html.rabbit-cinema-active.skip-loading-screen) #home-main-content,
             :global(html.rabbit-cinema-active) #home-main-content.show,
