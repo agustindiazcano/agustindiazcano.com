@@ -91,7 +91,7 @@ export const rankingTiers: RankingTier[] = [
                 platform: "Gitista Argentina",
                 metric: "#23 in Argentina",
                 detail: "724 total contributions (690 pull requests) across 34 repositories.",
-                method: "Method: Gitista scores each developer as the sum of pull requests, reviews, issues and repositories (S = PRs + Reviews + Issues + Repos). Here: 690 PRs + 0 reviews + 0 issues + 34 repositories = 724."
+                method: "Method: Gitista scores each developer as the sum of pull requests, reviews, issues and repositories (S = PRs + Reviews + Issues + Repos). Here: 690 PRs + 0 reviews + 0 issues + 34 repositories = 724.",
                 url: "https://gitista.com/argentina/",
                 source: "gitista.com",
                 checked: "2026-11-07",
@@ -100,7 +100,7 @@ export const rankingTiers: RankingTier[] = [
                 platform: "Gitista Global",
                 metric: "#3291 worldwide",
                 detail: "Global rank on Gitista, with 61 followers on GitHub.",
-                method: "Method: same score as the Argentina ranking (S = PRs + Reviews + Issues + Repos), compared worldwide."
+                method: "Method: same score as the Argentina ranking (S = PRs + Reviews + Issues + Repos), compared worldwide.",
                 url: "https://gitista.com/search/?country=AR&handle=agustindiazcano",
                 source: "gitista.com",
                 checked: "2026-11-07",
@@ -109,7 +109,7 @@ export const rankingTiers: RankingTier[] = [
                 platform: "Gitista Argentina: Python",
                 metric: "#12 in Argentina (Python)",
                 detail: "Position when filtering the Argentina ranking by the Python language.",
-                method: "Method: same score (S = PRs + Reviews + Issues + Repos), computed on the Python repositories only."
+                method: "Method: same score (S = PRs + Reviews + Issues + Repos), with the Argentina ranking filtered by the Python language.",
                 url: "https://gitista.com/argentina/",
                 source: "gitista.com",
                 checked: "2026-11-07",
