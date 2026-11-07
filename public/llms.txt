@@ -139,7 +139,7 @@ https://www.agustindiazcano.com/running-agustin-diaz-cano
 
 Full ledger with sources: https://www.agustindiazcano.com/rankings (last updated 2026-11-07)
 
-- **Qollab x IonQ Global Quantum Hackathon (UNICEN node)**: QWind (Agustin Diaz-Cano and Baltazar Salerno) shared 3rd place and received Best of Quantum Impact. Source: https://exa.unicen.edu.ar/la-sede-unicen-se-destaco-en-el-hackathon-mundial-de-computacion-cuantica-con-proyectos-premiados/
+- **Qollab x IonQ Global Quantum Hackathon (Argentina)**: QWind (Agustin Diaz-Cano and Baltazar Salerno) won 1st place in Quantum Impact (Industrial Application) and 3rd place overall. Source: https://exa.unicen.edu.ar/la-sede-unicen-se-destaco-en-el-hackathon-mundial-de-computacion-cuantica-con-proyectos-premiados/
 - **IBM Bob 2.0 Global Hackathon**: top 32% by delivery (one of 1,124 successful submissions out of 3,464 teams and 15,727 participants). https://lablab.ai/ai-hackathons/ibm-bob-2-hackathon
 - **Gitista Argentina**: #23 in Argentina, #12 in Argentina for Python, #3291 globally. https://gitista.com/argentina/
 - **Committers.top Argentina** (most active GitHub users in Argentina, at least 59 followers): #14 by contributions (3,968) and #15 by public commits (3,244). https://committers.top/argentina
