@@ -425,6 +425,14 @@ const { isHome = true } = Astro.props;
 
         let currentPreset = activeModeId === 1 ? { ...MODE_1 } : { ...MODE_2 };
 
+        // Check if initial cosmic flight intro is active
+        const isIntroActive = document.documentElement.classList.contains('intro-active');
+        let isIntroFlight = isIntroActive;
+        let introStartTime = performance.now();
+        let introDone = false;
+        let introPauseTimer: ReturnType<typeof setTimeout> | null = null;
+        let introHideTimer: ReturnType<typeof setTimeout> | null = null;
+
         let state = {
             engine: 'webgl',
             speed: currentPreset.speed,
@@ -434,11 +442,11 @@ const { isHome = true } = Astro.props;
             dim: currentPreset.dim,
             autoCam: currentPreset.autoCam,
             camSpeed: currentPreset.camSpeed,
-            camDist: currentPreset.camDist,
-            zoom: currentPreset.zoom,
-            offsetY: currentPreset.offsetY,
-            pitch: 0.14,
-            roll: -0.21,
+            camDist: isIntroFlight ? 28.0 : currentPreset.camDist,
+            zoom: isIntroFlight ? 0.58 : currentPreset.zoom,
+            offsetY: isIntroFlight ? 0.0 : currentPreset.offsetY,
+            pitch: isIntroFlight ? 0.08 : 0.14,
+            roll: isIntroFlight ? -0.10 : -0.21,
             yaw: 0.0,
             isCinema: false
         };
@@ -630,21 +638,23 @@ const { isHome = true } = Astro.props;
                     dir = nextDir;
                 }
 
-                float photonRingDist = abs(minR - rs * 1.06);
-                float photonRing = exp(-photonRingDist * 26.0) * 1.15;
-                float photonAsymmetry = 1.0 - 0.45 * u_doppler * (uv.x / (length(uv) + 0.1));
-                accumColor += vec3(1.0, 0.88, 0.62) * photonRing * clamp(photonAsymmetry, 0.4, 1.6);
+                if (swallowed) {
+                    accumColor = vec3(0.0);
+                } else {
+                    float photonRingDist = abs(minR - rs * 1.06);
+                    float photonRing = exp(-photonRingDist * 26.0) * 1.15;
+                    float photonAsymmetry = 1.0 - 0.45 * u_doppler * (uv.x / (length(uv) + 0.1));
+                    accumColor += vec3(1.0, 0.88, 0.62) * photonRing * clamp(photonAsymmetry, 0.4, 1.6);
 
-                if (!swallowed) {
                     vec2 starUV = dir.xy / (abs(dir.z) + 0.4) * 160.0;
                     float starVal = pow(hash(floor(starUV)), 28.0);
                     float starMask = smoothstep(rs * 1.15, rs * 1.8, minR);
                     accumColor += vec3(0.85, 0.9, 1.0) * starVal * starMask * 0.45;
-                }
 
-                float centerGlow = exp(-length(uv) * 2.6) * 0.12;
-                float anamorphic = exp(-abs(uv.y) * 38.0) * exp(-abs(uv.x) * 1.6) * 0.18;
-                accumColor += vec3(1.0, 0.65, 0.28) * (centerGlow + anamorphic);
+                    float centerGlow = exp(-length(uv) * 2.6) * 0.12;
+                    float anamorphic = exp(-abs(uv.y) * 38.0) * exp(-abs(uv.x) * 1.6) * 0.18;
+                    accumColor += vec3(1.0, 0.65, 0.28) * (centerGlow + anamorphic);
+                }
 
                 accumColor *= u_exposure;
                 vec3 x = max(vec3(0.0), accumColor - 0.004);
@@ -1065,7 +1075,80 @@ const { isHome = true } = Astro.props;
             const dt = Math.min(0.1, (now - prevTime) * 0.001);
             prevTime = now;
 
-            if (state.autoCam && !isDragging) {
+            if (isIntroFlight) {
+                const elapsed = now - introStartTime;
+                const flightDuration = 1800;
+                const progress = Math.min(1.0, elapsed / flightDuration);
+
+                // Gravitational acceleration towards singularity (cosmic power ease-in)
+                const ease = Math.pow(progress, 2.2);
+
+                const startCamDist = 28.0;
+                const endCamDist = 2.80;
+                const startZoom = 0.58;
+                const endZoom = 0.65;
+
+                state.camDist = startCamDist + (endCamDist - startCamDist) * ease;
+                state.zoom = startZoom + (endZoom - startZoom) * ease;
+                state.pitch = 0.08 + 0.16 * ease;
+                state.roll = -0.10 - 0.28 * ease;
+                state.yaw = 0.42 * ease;
+                state.offsetY = currentPreset.offsetY * ease;
+
+                const blackoutEl = document.getElementById('gargantua-intro-blackout');
+                if (blackoutEl) {
+                    if (progress > 0.78) {
+                        const blackoutProgress = Math.min(1.0, (progress - 0.78) / 0.22);
+                        blackoutEl.style.opacity = blackoutProgress.toString();
+                    } else {
+                        blackoutEl.style.opacity = '0';
+                    }
+                }
+
+                if (progress >= 1.0 && !introDone) {
+                    introDone = true;
+                    isIntroFlight = false;
+                    const blackoutEl = document.getElementById('gargantua-intro-blackout');
+                    if (blackoutEl) blackoutEl.style.opacity = '1';
+
+                    // Pause in pure blackness for 320ms, then reset to normal view and lift curtain
+                    introPauseTimer = setTimeout(() => {
+                        targetPitch = 0.14;
+                        targetRoll = -0.21;
+                        targetYaw = 0.0;
+                        targetZoom = currentPreset.zoom;
+                        targetCamDist = currentPreset.camDist;
+                        targetOffsetY = currentPreset.offsetY;
+                        state.zoom = currentPreset.zoom;
+                        state.camDist = currentPreset.camDist;
+                        state.offsetY = currentPreset.offsetY;
+                        state.pitch = 0.14;
+                        state.roll = -0.21;
+                        state.yaw = 0.0;
+                        camPhase = 0.0;
+
+                        try {
+                            sessionStorage.setItem("home-loaded", "true");
+                        } catch (e) {}
+
+                        document.documentElement.classList.remove("intro-active");
+                        document.documentElement.classList.add("skip-loading-screen");
+
+                        const mainContent = document.getElementById('home-main-content');
+                        if (mainContent) {
+                            mainContent.classList.add('show');
+                        }
+
+                        // Dissolve blackout curtain to reveal normal home page
+                        if (blackoutEl) {
+                            blackoutEl.style.opacity = '0';
+                            introHideTimer = setTimeout(() => {
+                                blackoutEl.style.display = 'none';
+                            }, 550);
+                        }
+                    }, 320);
+                }
+            } else if (state.autoCam && !isDragging) {
                 camPhase += dt * state.camSpeed * 0.65;
                 targetYaw += dt * state.camSpeed * 0.38;
                 state.pitch = 0.14 + Math.sin(camPhase * 0.85) * 0.18;
@@ -1117,6 +1200,18 @@ const { isHome = true } = Astro.props;
         if (resizeListener) {
             window.removeEventListener('resize', resizeListener);
             resizeListener = null;
+        }
+        if (introPauseTimer) {
+            clearTimeout(introPauseTimer);
+            introPauseTimer = null;
+        }
+        if (introHideTimer) {
+            clearTimeout(introHideTimer);
+            introHideTimer = null;
+        }
+        const blackoutEl = document.getElementById('gargantua-intro-blackout');
+        if (blackoutEl) {
+            blackoutEl.style.display = 'none';
         }
         document.documentElement.classList.remove('rabbit-cinema-active');
         const mainContent = document.getElementById('home-main-content');

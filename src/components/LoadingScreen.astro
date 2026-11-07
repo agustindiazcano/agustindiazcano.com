@@ -2,6 +2,14 @@
 // 3D Black Hole Initial Cosmic Intro
 ---
 
+{/* Intro Blackout Curtain: plunged into total blackness crossing event horizon, then dissolves smoothly into normal site */}
+<div 
+  id="gargantua-intro-blackout" 
+  class="fixed inset-0 bg-black pointer-events-none z-50 opacity-0 transition-opacity" 
+  style="transition-duration: 550ms; transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);"
+  aria-hidden="true"
+></div>
+
 <script is:inline>
   function applyIntroState() {
     try {
@@ -20,7 +28,7 @@
 </script>
 
 <style is:global>
-  /* During 3D Black Hole Intro: UI waits to render smoothly while blurred black hole intro plays */
+  /* During 3D Black Hole Intro: UI waits to render smoothly while cosmic approach flight plays */
   html.intro-active #site-header-container,
   html.intro-active #home-floating-usage,
   html.intro-active #home-main-content,
@@ -29,10 +37,18 @@
     visibility: hidden !important;
     pointer-events: none !important;
   }
+
+  /* Black hole is sharp and cinematic in deep space during the flight towards it */
+  html.intro-active #gargantua-blur-overlay,
+  html.intro-active #gargantua-dim-overlay {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
 </style>
 
 <script>
-  function runBlackHoleIntro() {
+  function setupIntroFallback() {
+    const blackout = document.getElementById('gargantua-intro-blackout');
     const mainContent = document.getElementById('home-main-content');
     let isFirstVisit = false;
     try {
@@ -44,30 +60,33 @@
     if (!isFirstVisit) {
       document.documentElement.classList.remove("intro-active");
       document.documentElement.classList.add("skip-loading-screen");
+      if (blackout) blackout.style.display = 'none';
       if (mainContent) {
         mainContent.classList.add('show');
       }
       return;
     }
 
-    // 3D Black Hole Intro duration (~1600ms, matching previous intro timing)
-    const introDuration = 1600;
-
-    const timer = setTimeout(() => {
-      try {
-        sessionStorage.setItem("home-loaded", "true");
-      } catch (e) {}
-
-      document.documentElement.classList.remove("intro-active");
-      document.documentElement.classList.add("skip-loading-screen");
-
-      if (mainContent) {
-        mainContent.classList.add('show');
+    // Safety fallback: if for any reason engine animation does not complete within 3.5s, force transition
+    const fallbackTimer = setTimeout(() => {
+      if (document.documentElement.classList.contains('intro-active')) {
+        try {
+          sessionStorage.setItem("home-loaded", "true");
+        } catch (e) {}
+        document.documentElement.classList.remove("intro-active");
+        document.documentElement.classList.add("skip-loading-screen");
+        if (blackout) {
+          blackout.style.opacity = '0';
+          setTimeout(() => { blackout.style.display = 'none'; }, 550);
+        }
+        if (mainContent) {
+          mainContent.classList.add('show');
+        }
       }
-    }, introDuration);
+    }, 3500);
 
-    window.addEventListener('beforeunload', () => clearTimeout(timer), { once: true });
+    window.addEventListener('beforeunload', () => clearTimeout(fallbackTimer), { once: true });
   }
 
-  document.addEventListener("astro:page-load", runBlackHoleIntro);
+  document.addEventListener("astro:page-load", setupIntroFallback);
 </script>
