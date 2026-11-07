@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
 import CSSBlackHole from "../components/CSSBlackHole.astro";
+import RankingTierList from "../components/RankingTierList.astro";
 import { rankingTiers, rankingsLastUpdated } from "../data/rankings";
 
 const siteUrl = "https://www.agustindiazcano.com";
@@ -71,47 +72,13 @@ const schema = {
         <div class="space-y-12">
             {
                 rankingTiers.map((tier, tierIndex) => (
-                    <section aria-labelledby={`tier-${tier.id}`}>
-                        <p class="font-mono text-[11px] uppercase tracking-wider text-[#555] mb-1">Tier {tierIndex + 1}</p>
-                        <h2 id={`tier-${tier.id}`} class="text-xl font-semibold text-white mb-1">{tier.title}</h2>
-                        <p class="text-sm text-[#666] mb-5">{tier.description}</p>
-
-                        <ul class="border border-[#222] rounded-2xl overflow-hidden divide-y divide-[#222] bg-[#111]">
-                            {tier.entries.map((entry) => (
-                                <li>
-                                    <a
-                                        href={entry.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="group flex flex-col gap-1 px-4 py-4 transition-colors hover:bg-[#161616] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#68d6ba]"
-                                    >
-                                        <span class="flex items-baseline justify-between gap-4">
-                                            <span class="text-sm font-semibold text-white group-hover:text-[#68d6ba] transition-colors">
-                                                {entry.platform}
-                                            </span>
-                                            <span class="font-mono text-[11px] text-[#555] whitespace-nowrap">
-                                                {entry.source} <span aria-hidden="true">↗</span>
-                                            </span>
-                                        </span>
-                                        <span class="font-mono text-xs text-[#68d6ba]">{entry.metric}</span>
-                                        <span class="text-sm text-[#888] leading-relaxed">{entry.detail}</span>
-                                        {entry.method && (
-                                            <span class="text-xs text-[#666] leading-relaxed border-l border-[#333] pl-3 mt-1">{entry.method}</span>
-                                        )}
-                                        <span class="font-mono text-[10px] text-[#555]">
-                                            Checked <time datetime={entry.checked}>{entry.checked}</time>
-                                        </span>
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </section>
+                    <RankingTierList tier={tier} label={`Tier ${tierIndex + 1}`} />
                 ))
             }
         </div>
 
         <p class="mt-12 text-sm text-[#666]">
-            See also the <a href="/agents-usage" class="text-[#888] underline underline-offset-4 hover:text-white transition-colors">AI Usage dashboard</a> and the <a href="/profile" class="text-[#888] underline underline-offset-4 hover:text-white transition-colors">full profile</a>.
+            See also <a href="/competitions" class="text-[#888] underline underline-offset-4 hover:text-white transition-colors">competitions and hackathons</a>, the <a href="/agents-usage" class="text-[#888] underline underline-offset-4 hover:text-white transition-colors">AI Usage dashboard</a> and the <a href="/profile" class="text-[#888] underline underline-offset-4 hover:text-white transition-colors">full profile</a>.
         </p>
 
         <div class="mt-20">
