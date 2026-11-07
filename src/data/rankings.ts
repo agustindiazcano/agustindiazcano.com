@@ -32,18 +32,18 @@ export const rankingTiers: RankingTier[] = [
         entries: [
             {
                 platform: "Qollab x IonQ Global Quantum Hackathon (Argentina)",
-                metric: "1st place Quantum Impact (Industrial Application) and 3rd place overall",
-                detail: "QWind, a wind farm optimizer using quantum algorithms, developed with Baltazar Salerno. Covered by the Facultad de Ciencias Exactas (UNICEN) among the awarded projects.",
-                url: "https://exa.unicen.edu.ar/la-sede-unicen-se-destaco-en-el-hackathon-mundial-de-computacion-cuantica-con-proyectos-premiados/",
-                source: "exa.unicen.edu.ar",
+                metric: "3rd place at the UNICEN node",
+                detail: "Categories: Quantum Impact (Industrial Application), Quantum Unlocked (Educational), Quantum Playground (Games).",
+                url: "https://qollab.xyz/explore/hackathon-2026/unicen",
+                source: "qollab.xyz",
                 checked: "2026-11-07",
             },
             {
-                platform: "QWind on Qollab",
-                metric: "Project showcase",
-                detail: "QAOA wind farm optimizer published on the Qollab platform.",
-                url: "https://qollab.xyz/u/agustindiazcano/qwind",
-                source: "qollab.xyz",
+                platform: "UNICEN news: QWind",
+                metric: "Best of Quantum Impact recognition",
+                detail: "QWind, a quantum optimizer for wind farms built with Baltazar Salerno and run on IonQ Forte 1 hardware, reported by the Facultad de Ciencias Exactas (UNICEN).",
+                url: "https://exa.unicen.edu.ar/la-sede-unicen-se-destaco-en-el-hackathon-mundial-de-computacion-cuantica-con-proyectos-premiados/",
+                source: "exa.unicen.edu.ar",
                 checked: "2026-11-07",
             },
             {
