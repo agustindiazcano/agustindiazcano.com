@@ -11,7 +11,7 @@ export const competitionTiers: RankingTier[] = [
             {
                 platform: "Qollab x IonQ Global Quantum Hackathon (Argentina)",
                 metric: "1st place Quantum Impact (Industrial Application) and 3rd place overall",
-                detail: "QWind, a quantum optimizer for wind farms built with Baltazar Salerno and run on IonQ Forte 1 hardware. Categories: Quantum Impact (Industrial Application), Quantum Unlocked (Educational), Quantum Playground (Games).",
+                detail: "QWind, a quantum optimizer for wind farms that I built with Baltazar Salerno and run on IonQ Forte 1 hardware. Categories: Quantum Impact (Industrial Application), Quantum Unlocked (Educational), Quantum Playground (Games).",
                 url: "https://exa.unicen.edu.ar/la-sede-unicen-se-destaco-en-el-hackathon-mundial-de-computacion-cuantica-con-proyectos-premiados/",
                 source: "exa.unicen.edu.ar",
                 checked: "2026-11-07",
