@@ -68,6 +68,14 @@ export const rankingTiers: RankingTier[] = [
                 source: "gitista.com",
                 checked: "2026-11-07",
             },
+            {
+                platform: "Gitista Argentina: Python",
+                metric: "#12 in Argentina (Python)",
+                detail: "Position when filtering the Argentina ranking by the Python language.",
+                url: "https://gitista.com/argentina/",
+                source: "gitista.com",
+                checked: "2026-11-07",
+            },
         ],
     },
     {
