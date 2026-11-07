@@ -131,7 +131,7 @@ export const rankingTiers: RankingTier[] = [
             },
             {
                 platform: "Codewars: Plataforma 5 clan",
-                metric: "#9 in the Plataforma 5 clan leaderboard",
+                metric: "#8 in the Plataforma 5 clan leaderboard",
                 detail: "Ranked by honor among all members of the Plataforma 5 programming bootcamp clan.",
                 url: "https://www.codewars.com/users/leaderboard/clan?clan=Plataforma+5",
                 source: "codewars.com",

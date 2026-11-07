@@ -31,7 +31,7 @@ In game development, I created full modifications for the Men of War series as a
 - **Qollab (quantum computing platform)**: https://qollab.xyz/u/agustindiazcano
 - **Rankings and Recognition**: https://www.agustindiazcano.com/rankings
 - **UNICEN news (QWind, shared 3rd place and Best of Quantum Impact)**: https://exa.unicen.edu.ar/la-sede-unicen-se-destaco-en-el-hackathon-mundial-de-computacion-cuantica-con-proyectos-premiados/
-- **Codewars**: https://www.codewars.com/users/agusdiazcano (#30,420 worldwide, Top 3.945% honor percentile, #9 in the Plataforma 5 clan)
+- **Codewars**: https://www.codewars.com/users/agusdiazcano (#30,420 worldwide, Top 3.945% honor percentile, #8 in the Plataforma 5 clan)
 - **LibHunt**: https://www.libhunt.com/l/python/topic/ai-assisted-development
 - **Gitista**: https://gitista.com/argentina/ (#23 Argentina, #12 Python)
 - **Committers.top**: https://committers.top/argentina (#14 contributions, #15 commits)

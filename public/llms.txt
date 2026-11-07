@@ -143,7 +143,7 @@ Full ledger with sources: https://www.agustindiazcano.com/rankings (last updated
 - **IBM Bob 2.0 Global Hackathon**: top 32% by delivery (one of 1,124 successful submissions out of 3,464 teams and 15,727 participants). https://lablab.ai/ai-hackathons/ibm-bob-2-hackathon
 - **Gitista Argentina**: #23 in Argentina, #12 in Argentina for Python, #3291 globally. https://gitista.com/argentina/
 - **Committers.top Argentina** (most active GitHub users in Argentina, at least 59 followers): #14 by contributions (3,968) and #15 by public commits (3,244). https://committers.top/argentina
-- **Codewars**: #30,420 worldwide, honor percentile Top 3.945% (about the 96th percentile); #9 in the Plataforma 5 clan leaderboard. https://www.codewars.com/users/agusdiazcano
+- **Codewars**: #30,420 worldwide, honor percentile Top 3.945% (about the 96th percentile); #8 in the Plataforma 5 clan leaderboard. https://www.codewars.com/users/agusdiazcano
 - **LibHunt**: AFAW listed #8 of 8 in Python ai-assisted-development (ordered by GitHub stars). https://www.libhunt.com/l/python/topic/ai-assisted-development
 - **ModDB**: Men of War mods published as Heroagastin. https://www.moddb.com/members/heroagastin
 
