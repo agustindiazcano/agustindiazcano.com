@@ -359,10 +359,10 @@ const ProjectGrid = () => {
         // ROW 3
         {
             id: 10,
-            title: "M.Sc. Thesis AI/ML",
+            title: "MS Thesis AI/ML",
             slug: "ai-ml-research",
             subtitle: "View Thesis",
-            description: "LLM-Guided Reinforcement Learning for Legged Robot Navigation, UTN MSc, Jan 2026 - Present.",
+            description: "LLM-Guided Reinforcement Learning for Legged Robot Navigation, UTN MS Candidate, Systems Engineering, Jan 2026 - Present.",
             longDescription: "Investigating a hierarchical neuro-symbolic architecture for quadruped robots: an RBF-based perceptual layer generates interpretable concept activations, and an LLM resolves navigation decisions only in ambiguous cases where multiple concepts compete, analogous to the hierarchical escalation approach used by NVIDIA. Currently in the experimental phase, benchmarking RBF vs. MLP policies (curriculum learning, grid-based navigation) prior to full integration in MuJoCo.",
             tags: ["AI", "ML", "Neural Networks", "Python"],
             size: "medium",
@@ -796,14 +796,14 @@ const ProjectGrid = () => {
                             <>
                                 <div className="flex justify-between items-start mb-4">
                                     <div>
-                                        <motion.h3 className="font-display text-xl font-normal text-white">MSc in Engineering</motion.h3>
+                                        <motion.h3 className="font-display text-xl font-normal text-white">MS Candidate, Systems Engineering</motion.h3>
                                         <p className="text-[#888] text-sm">Universidad Tecnológica Nacional</p>
                                     </div>
                                     <span className="text-xs font-mono text-white/50 border border-white/10 px-2 py-1 rounded">Thesis Phase</span>
                                 </div>
 
                                 <p className="text-[#666] uppercase text-xs tracking-wider font-semibold mb-6">
-                                    Specialization in Computer Systems Engineering
+                                    Specialization (Posgraduate), Systems Engineering
                                 </p>
 
                                 <div className="space-y-3 text-sm text-[#888]">
@@ -872,7 +872,7 @@ const ProjectGrid = () => {
                     </motion.div>
 
                     {project.id === 4 && !isList && (
-                        <div className="absolute right-0 bottom-0 text-9xl font-bold text-[#222] opacity-20 -mb-4 -mr-4 select-none">MSc</div>
+                        <div className="absolute right-0 bottom-0 text-9xl font-bold text-[#222] opacity-20 -mb-4 -mr-4 select-none">MS</div>
                     )}
                 </motion.div>
                 {false && index === 2 && (

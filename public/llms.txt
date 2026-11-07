@@ -10,7 +10,7 @@
 
 Software Engineer | Python Developer with 4+ years of experience in software development, specializing in AI/ML and Backend Development (Python).
 
-I'm currently pursuing an M.Sc. in Computer Systems Engineering at UTN, focused on Artificial Intelligence and Data Analysis. My thesis investigates LLM-guided reinforcement learning for legged robot navigation, benchmarked in MuJoCo and grid-based environments. My technical focus is building backend architectures that integrate GenAI in production-realistic conditions, not just prototypes. I'm developing projects with Python, Retrieval-Augmented Generation (RAG), and the Model Context Protocol (MCP) to explore LLM orchestration and AI agent design.
+I'm currently an MS Candidate, Systems Engineering, at UTN, focused on Artificial Intelligence and Data Analysis. My thesis investigates LLM-guided reinforcement learning for legged robot navigation, benchmarked in MuJoCo and grid-based environments. My technical focus is building backend architectures that integrate GenAI in production-realistic conditions, not just prototypes. I'm developing projects with Python, Retrieval-Augmented Generation (RAG), and the Model Context Protocol (MCP) to explore LLM orchestration and AI agent design.
 
 Previously, Sole QA Owner and quality authority for Grupo GDU's e-commerce platforms. Responsible for the entire quality strategy of web and mobile across multiple high-traffic sites, covering a multi-million dollar online channel with hundreds of thousands of users. Held full Go/No-Go authority on production releases with no dedicated QA team. During my tenure, the platforms—previously unranked—achieved nominations for the eCommerce Awards Uruguay in 2024 and 2025.
 
@@ -21,8 +21,22 @@ In game development, I created full modifications for the Men of War series as a
 [View Full Profile](https://www.agustindiazcano.com/profile)
 
 ## Education
-**Master in Computer Systems Engineering (UTN)**
-A rigorous double-degree program consisting of a first specialization, followed by a full master's degree requiring a final thesis.
+**MS Candidate, Systems Engineering (UTN)**
+Master's degree, thesis phase. Second title of a double-titulation program, following the specialization and requiring a final thesis.
+
+**Specialization (Posgraduate), Systems Engineering (UTN)**
+First title of the same double-titulation program, awarded as a separate credential from the master's degree.
+
+**Licenciado en Administración (Universidad de Palermo, 2015 to 2022)**
+Management Sciences & Quantitative Methods. Equivalent to a German Diplom BS+Integrated MS.
+Licenciatura (B.S. / Integrated Master's equivalent).
+- Program Load: 176 credits/+2,600 academic hours (equivalent to a German Diplom-Kaufmann (Univ.) / European Integrated Master's, and exceeds the standard 120 credit/1,800hr US Bachelor’s).
+- Quantitative Coursework: Calculus I & II, Statistical Inference I & II, Financial Math, Financial Modeling, Risk Management, Quantitative Micro & Macroeconomics, Corporate Finance.
+
+**Analista en Administración (Universidad de Palermo, 2015 to 2020)**
+Management Sciences & Quantitative Methods. Equivalent to a 3 year European BS.
+- Program Load: 3 year undergraduate program, 132 credits / +1,900 contact hours (equivalent to a 3 year European Bachelor / 180 ECTS, and surpassing the standard 120 credit / 1,500 hour/1,800 US Bachelor's degree).
+- Quantitative Coursework: Calculus I & II, Statistical Inference I & II, Operations Research, Micro & Macroeconomics, Financial Mathematics, Corporate Finance.
 
 ## Professional Highlights
 - **QA Owner at GDU Sites**: Led quality assurance initiatives that resulted in the platform being nominated twice for the eCommerce Awards Uruguay (2024 and 2025).
@@ -52,7 +66,7 @@ A rigorous double-degree program consisting of a first specialization, followed 
     - Architecture: the whole simulation (`src/sim`) is pure TypeScript, free of rendering dependencies (enforced by ESLint and Vitest), running at a fixed 60 Hz step with seeded randomness, connected to Three.js (WebGL, GLSL shaders for water, sky and weather) through frame interpolation. All gameplay numbers live in validated JSON (zod). 3D asset licenses are verified in CI.
     - Stack: TypeScript, Vite, Three.js, GLSL, zod, Vitest, ESLint, Prettier, Rapier (deterministic Rust/WASM physics, used for the map 12 physics lab: balls, boxes, ragdolls), Rust + wasm-bindgen + wasm-pack (`crates/sim-core`: zombie separation and flow field in the game, ocean compared only), GitHub Pages and GitHub Actions, Steam planned.
     - Custom physics: O(1) constant-time collisions and gravity unified in a single solver. On top of it, fluids (waves, vortices, buoyancy) and optics (reflections, refraction, caustics, fog) are drawn with lightweight formulas in a single pass instead of heavy render passes. Used for game movement and collisions and for the water and light of the sea and sky (map 13).
-- **[M.Sc. Thesis, AI/ML Research](https://github.com/agustindiazcano/msc-thesis-neurosymbolic-llm-rl-navigation) (2026 to present)**: LLM-guided reinforcement learning for legged robot navigation (UTN). Hierarchical neuro-symbolic architecture: an RBF-based perceptual layer generates interpretable concept activations, and an LLM resolves navigation decisions only in ambiguous cases where multiple concepts compete. Currently benchmarking RBF vs. MLP policies (curriculum learning, grid-based navigation) before full integration in MuJoCo.
+- **[MS Thesis, AI/ML Research](https://github.com/agustindiazcano/msc-thesis-neurosymbolic-llm-rl-navigation) (2026 to present)**: LLM-guided reinforcement learning for legged robot navigation (UTN). Hierarchical neuro-symbolic architecture: an RBF-based perceptual layer generates interpretable concept activations, and an LLM resolves navigation decisions only in ambiguous cases where multiple concepts compete. Currently benchmarking RBF vs. MLP policies (curriculum learning, grid-based navigation) before full integration in MuJoCo.
 - **Astrophysics Data Simulations (2023)**: Robust simulations modeling complex astrophysics systems.
 - **LATAM E-commerce Ecosystem (2022)**: Scalable and localized e-commerce solution handling complex gateways.
 - **InsurTech Quoting Engine (2021)**: Real-time insurance premium quoting engine.
@@ -91,7 +105,7 @@ A rigorous double-degree program consisting of a first specialization, followed 
 - **Fuzzy Logic Expert System for QA Triage**: [View Repository](https://github.com/agustindiazcano/fuzzy-logic-expert-system-qa-triage)
 
 ### Knowledge-Based Systems & Fuzzy Logic Project
-**Course**: Intelligent Data Exploitation, UTN MSc (November 2024)
+**Course**: Intelligent Data Exploitation, UTN MS Candidate, Systems Engineering (November 2024)
 An Artificial Intelligence project applying classical knowledge-based systems methodology (METHONTOLOGY), rule-based inference, and fuzzy logic to reduce false positives in bug report triage for an e-commerce platform. Contributed as the domain expert consulted during the knowledge acquisition process.
 
 ## Personal Achievements

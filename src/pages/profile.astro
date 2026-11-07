@@ -291,14 +291,14 @@ const workExperience = [
 
 const education = [
     {
-        title: "MSc in Computer Systems Engineering",
+        title: "MS Candidate, Systems Engineering",
         institution: "Universidad Tecnológica Nacional (UTN)",
         hours: "700hs",
         period: "2024 to Present",
         category: "Graduate Studies",
         programUrl: "https://frba.utn.edu.ar/posgrado/maestria-en-ingenieria-en-sistemas-de-informacion/",
         description: [
-            "Double titulation program: Specialization in Computer Systems Engineering, followed by the Master's degree culminating in a final thesis.",
+            "Double titulation program: the Specialization (Posgraduate), Systems Engineering, is awarded first, followed by the MS degree culminating in a final thesis. This entry covers the MS degree (thesis phase).",
             "Postgraduate program accredited Category A by CONEAU (Argentina's national university accreditation commission — the highest rating awarded). 700 total hours across foundational, elective, and research components.",
             "69% of faculty (11 of 16 professors) hold a Doctoral degree, including the program's Director and Co-Director, both PhDs in Computer Science (Universidad Nacional de La Plata).",
             "Active research lines in Artificial Intelligence, Software Engineering, and Blockchain.",
@@ -317,14 +317,32 @@ const education = [
         ]
     },
     {
-        title: "BSc in Business Administration",
+        title: "Specialization (Posgraduate), Systems Engineering",
+        institution: "Universidad Tecnológica Nacional (UTN)",
+        period: "2024 to Present",
+        category: "Graduate Studies",
+        programUrl: "https://frba.utn.edu.ar/posgrado/maestria-en-ingenieria-en-sistemas-de-informacion/",
+        description: [
+            "First title of the UTN double titulation program in Systems Engineering, a separate credential from the MS degree that follows it.",
+            "Same CONEAU Category A accredited postgraduate program (Resolution 382/21), covering the foundational and elective coursework listed under the MS Candidate entry."
+        ],
+        documents: [
+            { label: "Curricular structure (UTN FRBA)", url: "https://frba.utn.edu.ar/posgrado/estructura-curricular-maestria-ingenieria-en-sistemas-de-informacion/", type: "link" }
+        ]
+    },
+    {
+        title: "Licenciado en Administración",
+        subtitle: "Management Sciences & Quantitative Methods",
+        equivalence: "Equivalent to a German Diplom BS+Integrated MS",
         institution: "Universidad de Palermo",
         hours: "2600hs",
         period: "2015 to 2022",
         category: "Undergraduate Studies",
         programUrl: "https://www.palermo.edu/negocios/licenciatura-administracion/plan.html",
         description: [
-            "Coursework: Statistics I & II, Calculus I & II, Financial Mathematics, Corporate Finance, Micro & Macroeconomics, Investment Projects, Cost Accounting."
+            "Licenciatura (B.S. / Integrated Master's equivalent).",
+            "Program Load: 176 credits/+2,600 academic hours (equivalent to a German Diplom-Kaufmann (Univ.) / European Integrated Master's, and exceeds the standard 120 credit/1,800hr US Bachelor’s).",
+            "Quantitative Coursework: Calculus I & II, Statistical Inference I & II, Financial Math, Financial Modeling, Risk Management, Quantitative Micro & Macroeconomics, Corporate Finance."
         ],
         documents: [
             { label: "Diploma (ID redacted) — Part 1", url: "https://github.com/agustindiazcano/credentials/blob/main/documents/bs-administration-1.png", type: "document" },
@@ -332,14 +350,29 @@ const education = [
         ]
     },
     {
-        title: "Full Stack Web Development Bootcamp",
+        title: "Analista en Administración",
+        subtitle: "Management Sciences & Quantitative Methods",
+        equivalence: "Equivalent to a 3 year European BS",
+        institution: "Universidad de Palermo",
+        hours: "1900hs",
+        period: "2015 to 2020",
+        category: "Undergraduate Studies",
+        programUrl: "https://www.palermo.edu/negocios/licenciatura-administracion/plan.html",
+        description: [
+            "Program Load: 3 year undergraduate program, 132 credits / +1,900 contact hours (equivalent to a 3 year European Bachelor / 180 ECTS, and surpassing the standard 120 credit / 1,500 hour/1,800 US Bachelor's degree).",
+            "Quantitative Coursework: Calculus I & II, Statistical Inference I & II, Operations Research, Micro & Macroeconomics, Financial Mathematics, Corporate Finance."
+        ],
+        documents: []
+    },
+    {
+        title: "Full Stack Web Development Bootcamp (Full Time - 800 Hours)",
         institution: "Plataforma 5",
         hours: "800hs",
         period: "2021",
         category: "Bootcamp",
         programUrl: "https://www.plataforma5.la/",
         description: [
-            "• <strong>The Journey (Before the AI Era):</strong> Began coding from scratch while taking final exams for my Bachelor's degree. Started with an Intro to Python course on Platzi in October, followed by an Intro to Programming course (HTML, CSS, JS, jQuery) at Plataforma 5 starting November 16th.",
+            "• <strong>The Journey (Before the AI Era):</strong> Began coding from scratch while taking final exams for my Licenciatura (Licenciado en Administración). Started with an Intro to Python course on Platzi in October, followed by an Intro to Programming course (HTML, CSS, JS, jQuery) at Plataforma 5 starting November 16th.",
             "• <strong>Admission & Rigor:</strong> Passed a strict technical admission exam consisting of a 1-hour live pair-programming interview with 5 coding exercises and screen sharing. Unlike many bootcamps, Plataforma 5 maintained a high rejection rate to ensure strong candidate quality and a high job placement rate. Completed 800+ intensive hours culminating in a real-world final project for Navent (Bumeran).",
             "• Within 6 months, secured first software role (Fintech Hello Auto, Spain) and was shipping pull requests to production (application used by final users).",
             "• Ranked #1 in a cohort of 40 on Codewars and top 10 historically across all alumni in algorithmic problem solving.",
@@ -354,7 +387,7 @@ const education = [
 
 <Layout 
     title="Profile | Agustin Diaz-Cano"
-    description="Professional profile, background, and experience of Agustin Diaz-Cano, Software Engineer and MSc Candidate."
+    description="Professional profile, background, and experience of Agustin Diaz-Cano, Software Engineer and MS Candidate, Systems Engineering."
 >
     <CSSBlackHole />
     <main
@@ -405,7 +438,7 @@ const education = [
                         
                         <div class="text-[#ddd] text-base md:text-lg leading-relaxed font-light space-y-5 mb-10 text-left">
                             <p>Software Engineer | Python Developer with 4+ years of experience in software development, specializing in AI/ML and Backend Development (Python).</p>
-                            <p>I'm currently pursuing an M.Sc. in Computer Systems Engineering at UTN, focused on Artificial Intelligence and Data Analysis. My technical focus is building backend architectures that integrate GenAI in production-realistic conditions, not just prototypes. I'm developing projects with Python, Retrieval-Augmented Generation (RAG), and the Model Context Protocol (MCP) to explore LLM orchestration and AI agent design.</p>
+                            <p>I'm currently an MS Candidate, Systems Engineering, at UTN, focused on Artificial Intelligence and Data Analysis. My technical focus is building backend architectures that integrate GenAI in production-realistic conditions, not just prototypes. I'm developing projects with Python, Retrieval-Augmented Generation (RAG), and the Model Context Protocol (MCP) to explore LLM orchestration and AI agent design.</p>
                             <p>Previously, Sole QA Owner and quality authority for Grupo GDU's e-commerce platforms. Responsible for the entire quality strategy of web and mobile across multiple high-traffic sites, covering a multi-million dollar online channel with hundreds of thousands of users. Held full Go/No-Go authority on production releases with no dedicated QA team. During my tenure, the platforms—previously unranked—achieved nominations for the eCommerce Awards Uruguay in 2024 and 2025.</p>
                             <p>Transitioned from zero coding background in the pre-AI era. Wrote my first line of code in October 2020, received a job offer on May 14, 2021, and shipped my first production PR in June 2021 at an international fintech. Participated in more than 10 projects that reached production.</p>
                             <p>In game development, I created full modifications for the Men of War series as a solo developer, reaching over 200,000 downloads. Only a small percentage of Steam games, mods, and mobile apps (typically under 2-5%, and often closer to 1% for the 100k threshold) ever reach that level of adoption.</p>
@@ -432,7 +465,7 @@ const education = [
                         </p>
                         <div id="about-extra" class="hidden md:block space-y-4">
                             <p>
-                                I'm currently pursuing an M.Sc. in Computer Systems Engineering at UTN, focused on Artificial Intelligence and Data Analysis. My technical focus is building backend architectures that integrate GenAI in production-realistic conditions, not just prototypes. I'm developing projects with Python, Retrieval-Augmented Generation (RAG), and the Model Context Protocol (MCP) to explore LLM orchestration and AI agent design.
+                                I'm currently an MS Candidate, Systems Engineering, at UTN, focused on Artificial Intelligence and Data Analysis. My technical focus is building backend architectures that integrate GenAI in production-realistic conditions, not just prototypes. I'm developing projects with Python, Retrieval-Augmented Generation (RAG), and the Model Context Protocol (MCP) to explore LLM orchestration and AI agent design.
                             </p>
                             <p>
                                 Previously, Sole QA Owner and quality authority for Grupo GDU's e-commerce platforms. Responsible for the entire quality strategy of web and mobile across multiple high-traffic sites, covering a multi-million dollar online channel with hundreds of thousands of users. Held full Go/No-Go authority on production releases with no dedicated QA team. During my tenure, the platforms—previously unranked—achieved nominations for the eCommerce Awards Uruguay in 2024 and 2025.
@@ -560,6 +593,8 @@ const education = [
                                                 <h4 class="text-white font-thin text-base mb-1 group-hover:text-blue-400 transition-colors">
                                                     {edu.title}
                                                 </h4>
+                                                {edu.subtitle && <div class="text-xs text-white mb-0.5">{edu.subtitle}</div>}
+                                                {edu.equivalence && <div class="text-xs text-white mb-1">{edu.equivalence}</div>}
                                                 <a href={edu.programUrl} target="_blank" rel="noopener noreferrer" class="text-sm text-[#888] hover:text-white transition-colors flex items-center gap-1.5 w-fit" onclick="event.stopPropagation()">
                                                     <span>{edu.institution}</span>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -587,27 +622,29 @@ const education = [
                                                 ))}
                                             </div>
 
-                                            <div class="mt-5 pt-4 border-t border-[#1c1c1c]">
-                                                <div class="flex flex-wrap items-center gap-2">
-                                                    {edu.documents.map((doc) => (
-                                                        <a
-                                                            href={doc.url}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            class="inline-flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-md border border-[#262626] bg-[#161616] text-[#999] hover:text-white hover:bg-[#222] transition-colors"
-                                                        >
-                                                            <span class="opacity-80">
-                                                                {doc.type === "link" ? (
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-                                                                ) : (
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
-                                                                )}
-                                                            </span>
-                                                            <span>{doc.label}</span>
-                                                        </a>
-                                                    ))}
+                                            {edu.documents && edu.documents.length > 0 && (
+                                                <div class="mt-5 pt-4 border-t border-[#1c1c1c]">
+                                                    <div class="flex flex-wrap items-center gap-2">
+                                                        {edu.documents.map((doc) => (
+                                                            <a
+                                                                href={doc.url}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                class="inline-flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-md border border-[#262626] bg-[#161616] text-[#999] hover:text-white hover:bg-[#222] transition-colors"
+                                                            >
+                                                                <span class="opacity-80">
+                                                                    {doc.type === "link" ? (
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                                                                    ) : (
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                                                    )}
+                                                                </span>
+                                                                <span>{doc.label}</span>
+                                                            </a>
+                                                        ))}
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            )}
                                         </div>
                                     </details>
                                 ))

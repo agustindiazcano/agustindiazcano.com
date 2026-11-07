@@ -1,7 +1,7 @@
 # Agustin Diaz-Cano - Portfolio (`agustinweb`)
 
 ## Project Description
-Personal website and portfolio of **Agustin Diaz-Cano**, Software Engineer and MSc Candidate.
+Personal website and portfolio of **Agustin Diaz-Cano**, Software Engineer and MS Candidate, Systems Engineering.
 
 - **Production URL**: [agustindiazcano.com](https://www.agustindiazcano.com)
 - **Deployment**: Vercel

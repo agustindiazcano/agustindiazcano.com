@@ -1,98 +1,275 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
+import CSSBlackHole from "../components/CSSBlackHole.astro";
 import usage from "../data/claude-usage/current.json";
 
 const agents = [
   { id: "claude", name: "Claude Code", short: "CC", color: "#d6a47e", tokens: usage.claudeTotalTokens, sessions: usage.sessions, note: "Anthropic", icon: "/icons/agents/claude.svg" },
-  { id: "codex", name: "Codex", short: "CX", color: "#80d3bf", tokens: usage.codex.totalTokens, sessions: usage.codex.sessions, note: "OpenAI", icon: "/icons/agents/codex.svg" },
   { id: "antigravity", name: "Antigravity", short: "AG", color: "#a99bf2", tokens: usage.antigravity.totalTokens, sessions: usage.antigravity.sessions, note: "Google", icon: "/icons/agents/antigravity.svg" },
+  { id: "codex", name: "Codex", short: "CX", color: "#80d3bf", tokens: usage.codex.totalTokens, sessions: usage.codex.sessions, note: "OpenAI", icon: "/icons/agents/codex.svg" },
   { id: "metamuse", name: "Meta Muse", short: "MM", color: "#6ea8fe", tokens: usage.metamuse.totalTokens, sessions: usage.metamuse.sessions, note: "Meta", icon: "/icons/agents/metamuse.svg" },
   { id: "grok", name: "Grok", short: "GK", color: "#ededed", tokens: usage.grok.totalTokens, sessions: usage.grok.sessions, note: "xAI", icon: "/icons/agents/grok.svg" },
   { id: "cursor", name: "Cursor", short: "CU", color: "#ff9d6b", tokens: usage.cursor.totalTokens, sessions: usage.cursor.sessions, note: "Anysphere", icon: "/icons/agents/cursor.svg" },
 ];
+
 const total = agents.reduce((sum, agent) => sum + agent.tokens, 0);
 const sessions = agents.reduce((sum, agent) => sum + agent.sessions, 0);
 const format = (value: number) => value >= 1e9 ? `${(value / 1e9).toFixed(2)}B` : `${(value / 1e6).toFixed(1)}M`;
 const medianMonths = Math.round(total / 51e6);
 const powerMonths = Math.round(total / 380e6);
 const source = "https://jellyfish.co/blog/is-tokenmaxxing-cost-effective-new-data-from-jellyfish-explains/";
+const linkClass = "inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-md border border-[#262626] bg-[#161616] text-[#999] hover:text-white hover:bg-[#222] transition-colors font-mono";
 ---
 
-<Layout title="AI Usage Dashboard | Agustin Diaz-Cano" description="Explore Agustin Diaz-Cano's 30-day AI agent token usage across Claude Code, Codex, Antigravity, Meta Muse, Grok and Cursor, with comparisons to Jellyfish research." compactHeader>
-  <main class="usage-page">
-    <div class="dashboard">
-      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">HOME</a><span>/</span><span>AI USAGE</span></nav>
+<Layout
+  title="AI Usage Dashboard | Agustin Diaz-Cano"
+  description="Explore Agustin Diaz-Cano's 30-day AI agent token usage across Claude Code, Antigravity, Codex, Meta Muse, Grok and Cursor, alongside the AFAW multi-agent methodology and Jellyfish benchmarks."
+>
+  <CSSBlackHole />
+  <main class="min-h-screen max-w-[1100px] mx-auto px-6 pb-16 relative z-10">
+    <nav class="flex items-center gap-2 text-xs font-mono text-[#666] mb-6 pt-2" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-white transition-colors">HOME</a>
+      <span>/</span>
+      <span class="text-[#888]">AI USAGE</span>
+    </nav>
 
-      <header class="hero">
+    {/* Header + filters */}
+    <header class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-5">
+      <div>
+        <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-white mb-1">AI Usage</h1>
+        <p class="text-[#888] text-sm max-w-xl leading-relaxed">
+          Multi-model token telemetry across 30 days of active software engineering.
+          <span class="font-mono text-[11px] text-[#555] block mt-1">Last 30 days · {usage.period}</span>
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center gap-1.5" role="group" aria-label="Agent filter">
+        <button type="button" class="filter-btn active px-2.5 py-1 rounded-lg border border-white bg-white text-black font-mono text-xs transition-colors cursor-pointer" data-agent="all" aria-pressed="true">All</button>
+        {agents.map(agent => (
+          <button type="button" class="filter-btn px-2.5 py-1 rounded-lg border border-[#222] bg-[#111] text-[#888] hover:text-white hover:border-[#444] font-mono text-xs transition-colors flex items-center gap-1.5 cursor-pointer" data-agent={agent.id} aria-pressed="false">
+            <span class="inline-block w-2 h-2 rounded-full" style={`background-color: ${agent.color}`}></span>
+            {agent.name}
+          </button>
+        ))}
+      </div>
+    </header>
+
+    {/* Stats strip */}
+    <section class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-[#222] border border-[#222] rounded-2xl overflow-hidden mb-4" aria-label="Usage overview" aria-live="polite">
+      <div class="bg-[#111] p-5">
+        <span class="font-mono text-[10px] uppercase tracking-wider text-[#666]">Total tokens</span>
+        <div id="total-value" class="text-3xl md:text-4xl font-bold font-mono tracking-tight text-white mt-1">{format(total)}</div>
+        <p id="total-exact" class="text-[11px] font-mono text-[#666] mt-1">{total.toLocaleString("en-US")} processed tokens</p>
+      </div>
+      <div class="bg-[#111] p-5">
+        <span class="font-mono text-[10px] uppercase tracking-wider text-[#666]">Sessions</span>
+        <div id="session-value" class="text-3xl md:text-4xl font-bold font-mono tracking-tight text-white mt-1">{sessions}</div>
+        <p class="text-[11px] font-mono text-[#666] mt-1">Interactive workflows</p>
+      </div>
+      <div class="bg-[#111] p-5">
+        <span class="font-mono text-[10px] uppercase tracking-wider text-[#666]">Agents</span>
+        <div id="agent-value" class="text-3xl md:text-4xl font-bold font-mono tracking-tight text-white mt-1">{String(agents.length).padStart(2, "0")}</div>
+        <p id="agent-caption" class="text-[11px] font-mono text-[#666] mt-1">In this snapshot</p>
+      </div>
+      <div class="bg-[#111] p-5">
+        <span class="font-mono text-[10px] uppercase tracking-wider text-[#666]">Equivalent to</span>
+        <div class="mt-1 font-mono text-white">
+          <span id="median-months" class="text-2xl font-bold">{medianMonths}</span><span class="text-xs text-[#888]"> mo · median dev (51M/mo)</span>
+        </div>
+        <div class="font-mono text-white">
+          <span id="power-months" class="text-2xl font-bold">{powerMonths}</span><span class="text-xs text-[#888]"> mo · power dev (380M/mo)</span>
+        </div>
+      </div>
+    </section>
+
+    {/* Breakdown: one stacked bar and one list */}
+    <section class="bg-[#111] border border-[#222] rounded-2xl p-5 mb-4" aria-labelledby="breakdown-heading">
+      <div class="flex items-center justify-between mb-3">
+        <h2 id="breakdown-heading" class="font-mono text-xs uppercase tracking-wider text-[#888]">Share by agent</h2>
+        <span class="text-[10px] font-mono text-[#555]">Tokens · sessions · share</span>
+      </div>
+      <div class="h-3 rounded-full bg-[#1c1c1c] overflow-hidden flex gap-0.5 mb-5" aria-label="Share of combined tokens by agent">
+        {agents.map(agent => (
+          <span style={`width:${(agent.tokens / total) * 100}%; background-color:${agent.color}`} title={`${agent.name}: ${((agent.tokens / total) * 100).toFixed(1)}%`}></span>
+        ))}
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+        {agents.map(agent => {
+          const share = total > 0 ? (agent.tokens / total) * 100 : 0;
+          return (
+            <div data-agent-row={agent.id} class="transition-opacity">
+              <div class="flex items-center justify-between gap-3 mb-1.5">
+                <div class="flex items-center gap-2.5 min-w-0">
+                  <img src={agent.icon} alt={`${agent.name} logo`} width="16" height="16" loading="lazy" class="opacity-90 flex-shrink-0" />
+                  <span class="text-sm font-semibold text-white truncate">{agent.name}</span>
+                  <span class="text-[11px] font-mono text-[#555] hidden sm:inline">{agent.note}</span>
+                </div>
+                <div class="flex items-center gap-3 font-mono text-xs flex-shrink-0">
+                  <span class="text-white font-semibold">{agent.tokens > 0 ? format(agent.tokens) : "n/a"}</span>
+                  <span class="text-[#666] w-20 text-right">{agent.sessions} {agent.sessions === 1 ? "session" : "sessions"}</span>
+                  <span class="text-[#aaa] w-12 text-right">{share.toFixed(1)}%</span>
+                </div>
+              </div>
+              <div class="h-1.5 rounded-full bg-[#181818] overflow-hidden">
+                <div class="h-full rounded-full" style={`width:${share}%; background-color:${agent.color}`}></div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <p class="text-[11px] text-[#555] mt-5 pt-3 border-t border-[#1c1c1c] leading-relaxed">
+        Aggregates local JSONL transcripts and cache snapshots (cached tokens included). Cursor is tracked server-side, so it exposes no local token counters.
+      </p>
+    </section>
+
+    {/* Benchmark and source in one card */}
+    <section class="bg-[#111] border border-[#222] rounded-2xl p-5 mb-4" aria-labelledby="benchmark-heading">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <h1>AI Usage<span class="accent">.</span></h1>
-        </div>
-        <div class="hero-aside"><span>THE CURRENT WINDOW</span><strong>Last 30 days</strong><small>Snapshot period · {usage.period}</small></div>
-      </header>
-
-      <section aria-label="Filter usage by agent" class="filter-line">
-        <div class="filters" role="group" aria-label="Agent filter">
-          <button type="button" class="filter active" data-agent="all" aria-pressed="true">All agents</button>
-          {agents.map(agent => <button type="button" class="filter" data-agent={agent.id} aria-pressed="false"><span class="filter-dot" style={`--agent-color:${agent.color}`}></span>{agent.name}</button>)}
-        </div>
-      </section>
-
-      <section class="overview" aria-label="Usage overview" aria-live="polite">
-        <article class="total-card">
-          <div class="card-top"><span class="section-kicker">TOTAL TOKENS</span><span class="tiny-tag">30 DAYS</span></div>
-          <div class="big-number"><span id="total-value">{format(total)}</span><span class="unit"> tokens</span></div>
-          <p id="total-exact" class="muted">{total.toLocaleString("en-US")} processed tokens</p>
-          <div class="total-foot"><span><span class="live-dot"></span> <span id="selection-label">ALL AGENTS</span></span></div>
-        </article>
-        <article class="small-card"><span class="section-kicker">SESSIONS</span><strong id="session-value">{sessions}</strong><span class="muted">Recorded activity</span><span class="card-index">01 / 02</span></article>
-        <article class="small-card"><span class="section-kicker">ACTIVE AGENTS</span><strong id="agent-value">{String(agents.length).padStart(2, "0")}</strong><span class="muted" id="agent-caption">In this snapshot</span><span class="card-index">02 / 02</span></article>
-      </section>
-
-      <section class="breakdown section-space" aria-labelledby="breakdown-heading">
-        <div class="section-heading"><div><p id="breakdown-heading" class="eyebrow">01 <span class="slash">/</span> THE BREAKDOWN</p></div></div>
-        <div class="breakdown-grid">
-          <div class="share-card">
-            <div class="card-top"><span class="section-kicker">SHARE OF TOTAL</span><span class="tiny-tag">BY AGENT</span></div>
-            <div class="stacked-bar" aria-label="Share of combined tokens by agent">{agents.map(agent => <span style={`width:${agent.tokens / total * 100}%; background:${agent.color}`} title={`${agent.name}: ${(agent.tokens / total * 100).toFixed(1)}%`}></span>)}</div>
-            <div class="share-legend">{agents.map(agent => <div><span><i style={`--agent-color:${agent.color}`}></i>{agent.name}</span><strong>{(agent.tokens / total * 100).toFixed(1)}%</strong></div>)}</div>
-            <p class="chart-note">Shares always refer to the combined total. Cursor usage is tracked server-side, so local records carry no token counts.</p>
-          </div>
-          <div class="agent-list">{agents.map(agent => <article class="agent-row" data-agent-row={agent.id} style={`--agent-color:${agent.color}`}>
-            <div class="agent-icon"><img src={agent.icon} alt={`${agent.name} logo`} width="22" height="22" loading="lazy" /></div><div class="agent-info"><div class="agent-name">{agent.name}<span>{agent.note}</span></div><div class="agent-bar"><span style={`width:${agent.tokens / total * 100}%`}></span></div></div><div class="agent-numbers"><strong>{agent.tokens > 0 ? format(agent.tokens) : "n/a"}</strong><span>{agent.sessions} sessions</span></div>
-          </article>)}</div>
-        </div>
-      </section>
-
-      <section class="benchmark section-space" aria-labelledby="benchmark-heading">
-        <div class="section-heading"><div><p class="eyebrow">02 <span class="slash">/</span> PUT IT IN CONTEXT</p><h2 id="benchmark-heading" class="context-heading">A comparison with observed AI coding usage in Jellyfish's Q1 2026 research.</h2></div></div>
-        <div class="benchmark-grid">
-          <div class="pyramid-card">
-            <div class="card-top"><span class="section-kicker">MONTHLY TOKEN USAGE</span><span class="tiny-tag">ILLUSTRATIVE</span></div>
-            <div class="pyramid-layout">
-              <div class="pyramid" aria-hidden="true"><div class="pyramid-lines"></div><span class="pyramid-top">P90</span><span class="pyramid-bottom">P50</span></div>
-              <div class="pyramid-labels"><div><span>90TH PERCENTILE</span><strong>380M</strong><small>Power user / month</small></div><div><span>50TH PERCENTILE</span><strong>51M</strong><small>Median developer / month</small></div></div>
+          <h2 id="benchmark-heading" class="font-mono text-xs uppercase tracking-wider text-[#888] mb-4">Token pyramid · Jellyfish Q1 2026</h2>
+          <div class="flex flex-col items-center gap-1 font-mono text-center" role="img" aria-label="Pyramid of monthly AI coding token usage per developer: below median, median to 90th percentile, 90th percentile and above, and this portfolio at the top">
+            <div class="w-[38%] min-w-[120px] rounded-md bg-white text-black py-2 px-1">
+              <div id="pyr-you" class="text-sm font-bold">{format(total)}</div>
+              <div class="text-[10px]"><span id="pyr-mult">{(total / 380e6).toFixed(0)}</span>x P90 · observed here</div>
+            </div>
+            <div class="w-[58%] rounded-md bg-[#d6d6d6]/80 text-black py-2 px-1">
+              <div class="text-sm font-bold">380M+ / mo</div>
+              <div class="text-[10px]">Top 10% · 90th percentile and above</div>
+            </div>
+            <div class="w-[80%] rounded-md bg-[#777] text-white py-2 px-1">
+              <div class="text-sm font-bold">51M to 380M / mo</div>
+              <div class="text-[10px]">Median to 90th percentile</div>
+            </div>
+            <div class="w-full rounded-md bg-[#2a2a2a] text-white py-2 px-1">
+              <div class="text-sm font-bold">Under 51M / mo</div>
+              <div class="text-[10px]">Below the median developer</div>
             </div>
           </div>
-          <div class="comparison-card">
-            <div class="card-top"><span class="section-kicker">SELECTED USAGE COMPARED</span><span class="tiny-tag" id="compare-label">ALL AGENTS</span></div>
-            <div class="compare-item"><div><strong id="median-months">{medianMonths}</strong><span> months</span></div><p>of a median developer's usage <span>at 51M tokens / month</span></p></div>
-            <div class="compare-item"><div><strong id="power-months">{powerMonths}</strong><span> months</span></div><p>of a 90th-percentile user's usage <span>at 380M tokens / month</span></p></div>
+          <p class="text-[11px] text-[#555] mt-3 leading-relaxed">Jellyfish publishes only the 50th (51M) and 90th (380M) percentile token figures, so the pyramid shows those three bands and does not invent finer tiers. The top block is this portfolio's 30-day total.</p>
+        </div>
+        <div class="text-sm text-[#888] leading-relaxed">
+          <p>
+            Jellyfish analyzed AI coding activity from <strong class="text-white font-medium">12,000 developers across 200 companies</strong> in Q1 2026. These are reference rates, not a global ranking.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-3">
+            <a href={source} target="_blank" rel="noopener noreferrer" class={linkClass}>Research paper <span aria-hidden="true">↗</span></a>
+            <a href="https://jellyfish.co/state-of-ai-software-engineering/" target="_blank" rel="noopener noreferrer" class={linkClass}>Research hub <span aria-hidden="true">↗</span></a>
+            <a href="https://jellyfish.co/blog/are-ai-coding-tools-making-companies-more-productive/" target="_blank" rel="noopener noreferrer" class={linkClass}>Engineering analysis <span aria-hidden="true">↗</span></a>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="research section-space" aria-labelledby="research-heading">
-        <div class="section-heading"><div><p id="research-heading" class="eyebrow">03 <span class="slash">/</span> THE RESEARCH</p></div></div>
-        <div class="research-grid">
-          <article class="research-main"><span class="tiny-tag">JELLYFISH RESEARCH · APRIL 2026</span><h3>Is “tokenmaxxing” cost effective?</h3><p>Jellyfish analyzed AI coding activity from <strong>12,000 developers across 200 companies</strong> in Q1 2026. The study reports a median of 51 million tokens per month and approximately 380 million at the 90th percentile.</p><a href={source} target="_blank" rel="noopener noreferrer">Read the original research <span aria-hidden="true">↗</span></a></article>
-          <aside class="research-side"><span class="section-kicker">READING THE DATA</span><p>The benchmarks describe Jellyfish's sample in Q1 2026. The data here combines local records from five tools plus Cursor activity, including cached tokens; Cursor exposes no local token counters and coverage and accounting can differ.</p><div class="source-links"><a href="https://jellyfish.co/state-of-ai-software-engineering/" target="_blank" rel="noopener noreferrer">Jellyfish research hub ↗</a><a href="https://jellyfish.co/blog/are-ai-coding-tools-making-companies-more-productive/" target="_blank" rel="noopener noreferrer">Related engineering analysis ↗</a></div></aside>
+    {/* AFAW: compact flow and two cards */}
+    <section class="mb-10" aria-labelledby="methodology-heading">
+      <h2 id="methodology-heading" class="font-mono text-xs uppercase tracking-wider text-[#888] mb-1">AFAW: architecture and methodology</h2>
+      <p class="text-[#888] text-sm mb-4">Multi-agent orchestration, deterministic validation, and autonomous pipelines.</p>
+
+      <div class="bg-[#111] border border-[#222] rounded-2xl p-6 md:p-8 mb-4">
+        <div class="flex items-center justify-between mb-8 pb-4 border-b border-[#1c1c1c]">
+          <span class="font-mono text-xs uppercase tracking-wider text-[#666]">ARCHITECTURE DIAGRAM</span>
+          <span class="text-[10px] font-mono border border-[#333] text-[#888] px-2 py-0.5 rounded-full">AFAW FLOW</span>
         </div>
-      </section>
-      <div class="page-end"><span>BUILT FROM REAL WORKFLOWS</span><a href="/">BACK TO HOME ↗</a></div>
+
+        <div class="max-w-3xl mx-auto flex flex-col items-center" aria-label="AFAW methodology architecture flowchart">
+          <div class="w-full bg-[#161616] border border-[#2c2c2c] rounded-xl p-5 text-center hover:border-[#444] transition-colors">
+            <div class="flex items-center justify-center gap-2.5 text-white font-medium text-sm md:text-base">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span>Technical Director</span>
+            </div>
+            <p class="text-xs font-mono text-[#888] mt-1.5">
+              Defines objectives, writes prompts, and decides what to integrate
+            </p>
+          </div>
+
+          <div class="py-2.5 text-[#555]" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 w-full">
+            <div class="bg-[#161616] border border-[#2c2c2c] rounded-xl p-4 text-center hover:border-[#444] transition-colors">
+              <div class="flex items-center justify-center gap-2 text-white font-medium text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#aaa]"><rect width="18" height="12" x="3" y="6" rx="2"/><path d="M9 12h.01"/><path d="M15 12h.01"/><path d="M12 2v4"/><path d="M2 12h1"/><path d="M21 12h1"/></svg>
+                <span>Agent A</span>
+              </div>
+              <p class="text-xs font-mono text-[#777] mt-1">Dedicated branch &amp; worktree</p>
+            </div>
+            <div class="bg-[#161616] border border-[#2c2c2c] rounded-xl p-4 text-center hover:border-[#444] transition-colors">
+              <div class="flex items-center justify-center gap-2 text-white font-medium text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#aaa]"><rect width="18" height="12" x="3" y="6" rx="2"/><path d="M9 12h.01"/><path d="M15 12h.01"/><path d="M12 2v4"/><path d="M2 12h1"/><path d="M21 12h1"/></svg>
+                <span>Agent B</span>
+              </div>
+              <p class="text-xs font-mono text-[#777] mt-1">Dedicated branch &amp; worktree</p>
+            </div>
+            <div class="bg-[#161616] border border-[#2c2c2c] rounded-xl p-4 text-center hover:border-[#444] transition-colors">
+              <div class="flex items-center justify-center gap-2 text-white font-medium text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#aaa]"><rect width="18" height="12" x="3" y="6" rx="2"/><path d="M9 12h.01"/><path d="M15 12h.01"/><path d="M12 2v4"/><path d="M2 12h1"/><path d="M21 12h1"/></svg>
+                <span>Agent C</span>
+              </div>
+              <p class="text-xs font-mono text-[#777] mt-1">Dedicated branch &amp; worktree</p>
+            </div>
+          </div>
+
+          <div class="py-2.5 text-[#555]" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+          </div>
+
+          <div class="w-full bg-[#161616] border border-[#2c2c2c] rounded-xl p-5 text-center hover:border-[#444] transition-colors">
+            <div class="flex items-center justify-center gap-2.5 text-white font-medium text-sm md:text-base">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+              <span>Deterministic Validation</span>
+            </div>
+            <p class="text-xs font-mono text-[#888] mt-1.5">
+              Tests, CI, red-first, mutation testing, and state checks
+            </p>
+          </div>
+
+          <div class="py-2.5 text-[#555]" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+          </div>
+
+          <div class="w-full bg-[#161616] border border-[#2c2c2c] rounded-xl p-4 text-center hover:border-[#444] transition-colors">
+            <div class="flex items-center justify-center gap-2.5 text-white font-medium text-sm md:text-base">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 9v12"/><path d="M18 15V9a9 9 0 0 0-9-9"/></svg>
+              <span>Human Review &amp; Approval</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <article class="bg-[#111] border border-[#222] rounded-2xl p-5 flex flex-col justify-between">
+          <div>
+            <h3 class="text-sm font-semibold text-white mb-2">AFAW: Human-Directed Orchestration</h3>
+            <p class="text-sm text-[#888] leading-relaxed">
+              A terminal per agent with targeted roles and tasks. Agents write code in isolated git worktrees; automated suites verify correctness and regression safety before merge.
+            </p>
+          </div>
+          <a href="https://github.com/agustindiazcano/afaw-anti-fragile-agentic-workflow" target="_blank" rel="noopener noreferrer" class={`${linkClass} mt-4 w-fit`}>
+            <span>afaw-anti-fragile-agentic-workflow</span><span aria-hidden="true">↗</span>
+          </a>
+        </article>
+
+        <article class="bg-[#111] border border-[#222] rounded-2xl p-5 flex flex-col justify-between">
+          <div>
+            <h3 class="text-sm font-semibold text-white mb-2">AFAW Engine: Automated Variant</h3>
+            <p class="text-sm text-[#888] leading-relaxed">
+              Autonomous lifecycle with <strong class="text-white font-medium">GitLab Duo</strong>, <strong class="text-white font-medium">self-healing CI/CD</strong>, rule-based integration decisions and continuous deployment. At this volume it is estimated at about <strong class="text-white font-mono font-medium">500 USD daily</strong> in inference tokens.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <a href="https://github.com/agustindiazcano/afaw-engine-gitlab" target="_blank" rel="noopener noreferrer" class={linkClass}><span>afaw-engine-gitlab</span><span aria-hidden="true">↗</span></a>
+            <a href="https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43344247/showcase/-/merge_requests/137" target="_blank" rel="noopener noreferrer" class={linkClass}><span>GitLab MR #137</span><span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="pt-8 border-t border-[#222]">
       <Footer />
     </div>
   </main>
+
   <script is:inline type="application/json" id="usage-dashboard-data" set:html={JSON.stringify(agents).replace(/</g, "\\u003c")} />
 </Layout>
 
@@ -103,46 +280,39 @@ const source = "https://jellyfish.co/blog/is-tokenmaxxing-cost-effective-new-dat
     const agents = JSON.parse(dataElement.textContent || "[]") as { id: string; name: string; tokens: number; sessions: number }[];
     const format = (value: number) => value >= 1e9 ? `${(value / 1e9).toFixed(2)}B` : `${(value / 1e6).toFixed(1)}M`;
     const set = (id: string, value: string) => { const element = document.getElementById(id); if (element) element.textContent = value; };
-    document.querySelectorAll<HTMLButtonElement>(".filter[data-agent]").forEach(button => button.addEventListener("click", () => {
-      const selected = button.dataset.agent === "all" ? agents : agents.filter(agent => agent.id === button.dataset.agent);
-      const tokens = selected.reduce((sum, agent) => sum + agent.tokens, 0);
-      const sessions = selected.reduce((sum, agent) => sum + agent.sessions, 0);
-      const label = button.dataset.agent === "all" ? "ALL AGENTS" : selected[0].name.toUpperCase();
-      document.querySelectorAll<HTMLButtonElement>(".filter[data-agent]").forEach(item => { const active = item === button; item.classList.toggle("active", active); item.setAttribute("aria-pressed", String(active)); });
-      document.querySelectorAll<HTMLElement>("[data-agent-row]").forEach(row => row.classList.toggle("dimmed", button.dataset.agent !== "all" && row.dataset.agentRow !== button.dataset.agent));
-      set("total-value", format(tokens)); set("total-exact", tokens.toLocaleString("en-US") + " processed tokens");
-      set("selection-label", label); set("session-value", String(sessions)); set("agent-value", String(selected.length).padStart(2, "0"));
-      set("agent-caption", selected.length === 1 ? "Selected agent" : "In this snapshot"); set("compare-label", label);
-      set("median-months", String(Math.round(tokens / 51e6))); set("power-months", String(Math.round(tokens / 380e6)));
-    }));
+
+    document.querySelectorAll<HTMLButtonElement>(".filter-btn[data-agent]").forEach(button => {
+      button.addEventListener("click", () => {
+        const selected = button.dataset.agent === "all" ? agents : agents.filter(agent => agent.id === button.dataset.agent);
+        const tokens = selected.reduce((sum, agent) => sum + agent.tokens, 0);
+        const sessions = selected.reduce((sum, agent) => sum + agent.sessions, 0);
+
+        document.querySelectorAll<HTMLButtonElement>(".filter-btn[data-agent]").forEach(item => {
+          const active = item === button;
+          item.classList.toggle("bg-white", active);
+          item.classList.toggle("text-black", active);
+          item.classList.toggle("border-white", active);
+          item.classList.toggle("bg-[#111]", !active);
+          item.classList.toggle("text-[#888]", !active);
+          item.classList.toggle("border-[#222]", !active);
+          item.setAttribute("aria-pressed", String(active));
+        });
+
+        document.querySelectorAll<HTMLElement>("[data-agent-row]").forEach(row => {
+          const dimmed = button.dataset.agent !== "all" && row.dataset.agentRow !== button.dataset.agent;
+          row.classList.toggle("opacity-25", dimmed);
+        });
+
+        set("total-value", format(tokens));
+        set("total-exact", tokens.toLocaleString("en-US") + " processed tokens");
+        set("session-value", String(sessions));
+        set("agent-value", String(selected.length).padStart(2, "0"));
+        set("agent-caption", selected.length === 1 ? "Selected agent" : "In this snapshot");
+        set("pyr-you", format(tokens));
+        set("pyr-mult", String(Math.round(tokens / 380e6)));
+        set("median-months", String(Math.round(tokens / 51e6)));
+        set("power-months", String(Math.round(tokens / 380e6)));
+      });
+    });
   });
 </script>
-
-<style>
-  .usage-page { color:#eee; background:#0a0c0c; min-height:100vh; padding:0 22px 64px; }
-  .dashboard { max-width:1120px; margin:auto; }
-  .breadcrumb { display:flex; gap:12px; align-items:center; padding:16px 0 24px; font:10px 'JetBrains Mono',monospace; letter-spacing:.12em; color:#63736d; }
-  .breadcrumb a:hover,.page-end a:hover { color:#a4edd6; }
-  .hero { display:flex; justify-content:space-between; align-items:start; gap:40px; border-bottom:1px solid #24312d; padding-bottom:32px; }
-  .eyebrow,.section-kicker { font:10px 'JetBrains Mono',monospace; letter-spacing:.13em; color:#84a69a; }
-  .eyebrow { display:flex; align-items:center; gap:10px; margin:0 0 18px; }
-  .slash { color:#4c6c61; }
-  .live-dot { display:inline-block; width:7px; height:7px; border-radius:50%; background:#83e0bc; box-shadow:0 0 12px #83e0bc88; }
-  h1 { font-size:clamp(56px,9vw,110px); line-height:.94; letter-spacing:-.075em; font-weight:500; margin:0; }
-  .accent { color:#80d5b7; }
-  .hero-copy { max-width:510px; color:#9aa9a2; font-size:16px; line-height:1.7; margin:22px 0 0; }
-  .hero-aside { flex-shrink:0; border-left:1px solid #34463f; padding:3px 0 3px 20px; display:grid; gap:8px; }
-  .hero-aside span,.hero-aside small { font:10px 'JetBrains Mono',monospace; color:#7d9087; }.hero-aside strong { font-size:18px; font-weight:500; }
-  .filter-line { display:flex; justify-content:flex-end; align-items:center; gap:20px; padding:24px 0 22px; }
-  .filters { display:flex; flex-wrap:wrap; gap:6px; }.filter { background:#111715; color:#9aaba3; border:1px solid #283530; border-radius:5px; padding:10px 13px; font:11px 'JetBrains Mono',monospace; cursor:pointer; transition:.2s; }.filter:hover,.filter.active { background:#d2f1e3; border-color:#d2f1e3; color:#102018; }.filter:focus-visible { outline:2px solid #a0f3d0; outline-offset:3px; }.filter-dot,.share-legend i { display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--agent-color); margin-right:7px; }
-  .overview { display:grid; grid-template-columns:2fr 1fr 1fr; gap:10px; }.total-card,.small-card,.share-card,.agent-row,.pyramid-card,.comparison-card,.research-main,.research-side { border:1px solid #26342f; background:#111815; border-radius:8px; }.total-card { padding:24px; background:radial-gradient(ellipse at 90% 10%,#203e32 0,transparent 57%),#111a16; }.card-top { display:flex; justify-content:space-between; align-items:center; gap:10px; }.tiny-tag { color:#9db8aa; border:1px solid #344a40; border-radius:3px; padding:5px 7px; font:9px 'JetBrains Mono',monospace; letter-spacing:.08em; }.big-number { font-size:clamp(44px,6vw,76px); line-height:1; letter-spacing:-.065em; margin-top:40px; }.big-number .unit { font-size:15px; letter-spacing:0; color:#96a99f; }.muted { color:#82948a; font-size:12px; }.total-foot { border-top:1px solid #2c4438; margin-top:26px; padding-top:15px; display:flex; justify-content:space-between; gap:10px; color:#83a594; font:9px 'JetBrains Mono',monospace; letter-spacing:.08em; }.small-card { position:relative; padding:24px; display:flex; flex-direction:column; min-height:235px; }.small-card strong { font-size:48px; font-weight:400; letter-spacing:-.05em; margin-top:44px; }.card-index { position:absolute; bottom:24px; right:22px; color:#4d6257; font:9px 'JetBrains Mono',monospace; }
-  .section-space { margin-top:100px; }.section-heading { display:flex; justify-content:space-between; align-items:end; gap:35px; margin-bottom:28px; }.section-heading h2 { font-size:clamp(30px,4vw,48px); line-height:1.1; letter-spacing:-.055em; font-weight:500; margin:0; }.section-heading h2.context-heading { max-width:560px; color:#a9bcb0; font-size:15px; line-height:1.6; letter-spacing:0; }.section-heading>p { max-width:260px; color:#899b91; font-size:13px; line-height:1.6; }.serif-accent { font-family:Georgia,serif; font-weight:400; font-style:italic; color:#a5ddc6; letter-spacing:-.04em; }
-  .breakdown-grid { display:grid; grid-template-columns:1fr 1.45fr; gap:10px; }.share-card,.pyramid-card,.comparison-card { padding:24px; }.stacked-bar { display:flex; height:12px; overflow:hidden; border-radius:3px; margin:43px 0 25px; gap:2px; }.stacked-bar span { min-width:2px; }.share-legend { display:grid; gap:13px; }.share-legend div { display:flex; justify-content:space-between; color:#aab8b0; font-size:12px; }.share-legend strong { font:12px 'JetBrains Mono',monospace; color:#e5eee9; }.chart-note,.data-note { color:#788c81; font-size:11px; line-height:1.65; }.chart-note { margin-top:28px; }.data-note { margin:15px 0 0; max-width:850px; }.agent-list { display:grid; gap:8px; }.agent-row { display:flex; align-items:center; gap:16px; padding:18px; transition:opacity .2s; }.agent-row.dimmed { opacity:.3; }.agent-icon img { width:22px; height:22px; display:block; color:#fff; }
-  .agent-icon { display:grid; place-items:center; width:42px; height:42px; flex-shrink:0; border:1px solid color-mix(in srgb,var(--agent-color) 35%,transparent); border-radius:5px; color:var(--agent-color); background:color-mix(in srgb,var(--agent-color) 8%,transparent); font:11px 'JetBrains Mono',monospace; }.agent-info { flex:1; min-width:0; }.agent-name { font-size:13px; }.agent-name span { display:block; font:10px 'JetBrains Mono',monospace; color:#71877a; margin-top:4px; }.agent-bar { background:#26342d; height:3px; margin-top:12px; }.agent-bar span { display:block; height:100%; min-width:3px; background:var(--agent-color); }.agent-numbers { display:grid; gap:5px; text-align:right; white-space:nowrap; }.agent-numbers strong { font:16px 'JetBrains Mono',monospace; }.agent-numbers span { font-size:10px; color:#81948a; }
-  .benchmark-grid { display:grid; grid-template-columns:1.05fr 1fr; gap:10px; }.pyramid-layout { display:flex; justify-content:center; align-items:center; gap:38px; padding:42px 0 20px; }.pyramid { width:190px; height:210px; background:linear-gradient(0deg,#25463a,#9be1c4); clip-path:polygon(50% 0,100% 100%,0 100%); position:relative; }.pyramid-lines { position:absolute; inset:0; background:repeating-linear-gradient(0deg,transparent 0,transparent 50px,#0d1a1455 51px,#0d1a1455 52px); }.pyramid-top,.pyramid-bottom { position:absolute; left:0; right:0; text-align:center; font:10px 'JetBrains Mono',monospace; color:#0d2117; }.pyramid-top { top:100px; }.pyramid-bottom { bottom:20px; color:#bbdece; }.pyramid-labels { display:flex; flex-direction:column; gap:32px; }.pyramid-labels div { display:grid; gap:6px; }.pyramid-labels span { font:9px 'JetBrains Mono',monospace; color:#87aa98; }.pyramid-labels strong { font:24px 'JetBrains Mono',monospace; }.pyramid-labels small { color:#84988c; font-size:11px; }.pyramid-caption,.compare-foot { border-top:1px solid #293a31; padding-top:15px; color:#7e9487; font:10px 'JetBrains Mono',monospace; line-height:1.6; }.compare-item { display:flex; align-items:center; gap:20px; padding:27px 0; border-bottom:1px solid #293a31; }.compare-item div { white-space:nowrap; min-width:145px; }.compare-item strong { font:38px 'JetBrains Mono',monospace; letter-spacing:-.06em; color:#afe6cd; }.compare-item div span { font-size:12px; color:#9fb1a6; }.compare-item p { font-size:12px; color:#d1dfd6; line-height:1.5; }.compare-item p span { display:block; color:#7f9487; }.compare-foot { border:0; }.equivalent { display:flex; gap:18px; align-items:center; margin-top:10px; border:1px solid #30483b; border-radius:8px; padding:20px 24px; background:#17271f; }.equivalent-icon { font-size:24px; color:#9ce0c0; }.equivalent p { font-size:13px; color:#a9bcb0; line-height:1.6; margin:0; }.equivalent strong { color:#e7f3eb; }
-  .detail-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-top:10px; }.detail-card { background:#0f1512; border:1px solid #26342f; border-radius:8px; padding:19px; transition:opacity .2s; min-width:0; }.detail-card.dimmed { opacity:.3; }.detail-title { font:10px 'JetBrains Mono',monospace; color:#d8e8de; }.detail-title>span:last-child { float:right; color:#6c8276; font-size:9px; }.detail-dot { display:inline-block; width:7px; height:7px; background:var(--agent-color); border-radius:50%; margin-right:6px; }.detail-card dl { margin:17px 0 0; }.detail-card dl div { display:flex; justify-content:space-between; gap:8px; padding:5px 0; font-size:11px; }.detail-card dt { color:#83988b; }.detail-card dd { margin:0; color:#dbe8df; text-align:right; overflow-wrap:anywhere; }.detail-card p { font-size:10px; color:#81968a; margin:12px 0 0; }
-  .research-grid { display:grid; grid-template-columns:1.35fr 1fr; gap:10px; }.research-main,.research-side { padding:30px; }.research-main h3,.research-side h3 { font-size:24px; font-weight:500; line-height:1.2; letter-spacing:-.03em; margin:24px 0 16px; }.research-main p,.research-side p { color:#9aaba1; font-size:13px; line-height:1.8; }.research-main strong { color:#e1eee6; }.research-main>a,.source-links a { display:inline-block; color:#a5e7c9; font:11px 'JetBrains Mono',monospace; margin-top:18px; }.research-main>a:hover,.source-links a:hover { text-decoration:underline; }.research-side { background:#0d1310; }.research-side h3 { font-size:19px; }.source-links { border-top:1px solid #26342f; display:flex; flex-direction:column; margin-top:20px; }.page-end { display:flex; justify-content:space-between; border-top:1px solid #26342f; padding:35px 0 65px; margin-top:100px; color:#6d8578; font:10px 'JetBrains Mono',monospace; letter-spacing:.08em; }
-  @media(max-width:760px) { .breadcrumb { padding:16px 0 24px; }.hero { display:block; padding-bottom:30px; }.hero-aside { margin-top:22px; }.filter-line,.section-heading { display:block; }.filters { margin-top:0; }.filter { padding:9px 10px; }.overview { grid-template-columns:1fr 1fr; }.total-card { grid-column:1 / -1; }.small-card { min-height:155px; padding:18px; }.small-card strong { margin-top:25px; font-size:38px; }.section-space { margin-top:72px; }.section-heading>p { margin-top:16px; }.breakdown-grid,.benchmark-grid,.research-grid { grid-template-columns:1fr; }.agent-row { padding:15px 12px; gap:10px; }.agent-icon { width:36px; height:36px; }.agent-numbers strong { font-size:13px; }.pyramid-layout { gap:22px; }.pyramid { width:150px; height:170px; }.pyramid-top { top:80px; }.pyramid-labels strong { font-size:20px; }.research-main,.research-side { padding:23px; }.page-end { margin-top:70px; }.total-foot { font-size:8px; } }
-  @media(max-width:370px) { .usage-page { padding-left:16px; padding-right:16px; }.filter { font-size:10px; }.pyramid { width:120px; height:145px; }.pyramid-top { top:68px; }.compare-item { gap:8px; }.compare-item div { min-width:120px; }.compare-item strong { font-size:31px; } }
-  @media(max-width:760px) { .detail-grid { grid-template-columns:1fr; } }
-</style>
