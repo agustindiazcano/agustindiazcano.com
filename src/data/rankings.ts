@@ -14,12 +14,14 @@ export type RankingTier = {
     entries: RankingEntry[];
 };
 
+export const rankingsLastUpdated = "2026-11-07";
+
 /**
  * Only entries with a verifiable external source belong here.
  * To add a row: confirm the position on the source page, then add it with the date checked (YYYY-MM).
  *
  * Pending (need exact source URL + screenshot before adding):
- * Gitista Argentina, Committers.top Argentina, LibHunt (AFAW), Codewars, VibeCodeStats, Trendshift, UNICEN news note.
+ * Committers.top Argentina, LibHunt (AFAW), Codewars, VibeCodeStats, Trendshift, UNICEN news note.
  */
 export const rankingTiers: RankingTier[] = [
     {
@@ -50,6 +52,21 @@ export const rankingTiers: RankingTier[] = [
                 url: "https://lablab.ai/u/@agustin_diazcano6/ai-hackathons/ibm-bob-2-hackathon/certificate",
                 source: "lablab.ai",
                 checked: "2026-11",
+            },
+        ],
+    },
+    {
+        id: "engineering",
+        title: "Engineering and open source rankings",
+        description: "Automated rankings computed from public GitHub activity.",
+        entries: [
+            {
+                platform: "Gitista Argentina",
+                metric: "#23 in Argentina",
+                detail: "724 total contributions (690 pull requests) across 34 repositories. Global rank on Gitista: 3291.",
+                url: "https://gitista.com/argentina/",
+                source: "gitista.com",
+                checked: "2026-11-07",
             },
         ],
     },

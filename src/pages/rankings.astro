@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
 import CSSBlackHole from "../components/CSSBlackHole.astro";
-import { rankingTiers } from "../data/rankings";
+import { rankingTiers, rankingsLastUpdated } from "../data/rankings";
 
 const siteUrl = "https://www.agustindiazcano.com";
 const pageUrl = `${siteUrl}/rankings`;
@@ -20,6 +20,7 @@ const schema = {
             name: title,
             description,
             inLanguage: "en",
+            dateModified: rankingsLastUpdated,
             isPartOf: { "@type": "WebSite", url: siteUrl },
             about: { "@type": "Person", name: "Agustin Diaz-Cano", url: siteUrl },
             mainEntity: { "@id": `${pageUrl}#list` },
@@ -63,7 +64,7 @@ const schema = {
                 External evidence for the work of Agustin Diaz-Cano. Every row names the metric, the platform and the date it was checked, and links to the original source so it can be verified in one click.
             </p>
             <p class="font-mono text-[11px] text-[#555] mt-3">
-                Positions on third-party platforms change over time. Dates show when each entry was last checked.
+                Last updated <time datetime={rankingsLastUpdated}>{rankingsLastUpdated}</time>. Positions on third-party platforms change over time; each entry shows when it was checked.
             </p>
         </header>
 
