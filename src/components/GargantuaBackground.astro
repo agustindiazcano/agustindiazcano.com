@@ -42,10 +42,20 @@ const { isHome = true } = Astro.props;
     </div>
 
     <!-- Blur overlay directly over black hole simulation (smoothly clears in rabbit cinema mode) -->
-    <div id="gargantua-blur-overlay" class="absolute inset-0 pointer-events-none transition-all duration-700" aria-hidden="true"></div>
+    <div 
+        id="gargantua-blur-overlay" 
+        class="absolute inset-0 pointer-events-none transition-all duration-700 z-10" 
+        style="backdrop-filter: blur(6.5px); -webkit-backdrop-filter: blur(6.5px);"
+        aria-hidden="true"
+    ></div>
 
     <!-- Dark dim overlay for content contrast (smoothly clears in rabbit cinema mode) -->
-    <div id="gargantua-dim-overlay" class="absolute inset-0 pointer-events-none transition-all duration-700" aria-hidden="true"></div>
+    <div 
+        id="gargantua-dim-overlay" 
+        class="absolute inset-0 pointer-events-none transition-all duration-700 z-20" 
+        style="background: rgba(0, 0, 0, 0.16);"
+        aria-hidden="true"
+    ></div>
 </div>
 
 <!-- Interactive Drag Layer (Active in White Rabbit Cinema Mode) -->
@@ -165,15 +175,17 @@ const { isHome = true } = Astro.props;
     }
 
     #gargantua-blur-overlay {
-        backdrop-filter: blur(var(--overlay-blur));
-        -webkit-backdrop-filter: blur(var(--overlay-blur));
+        backdrop-filter: blur(var(--overlay-blur, 6.5px)) !important;
+        -webkit-backdrop-filter: blur(var(--overlay-blur, 6.5px)) !important;
         transform: translateZ(0);
         will-change: backdrop-filter;
+        z-index: 10;
     }
 
     #gargantua-dim-overlay {
-        background: rgba(0, 0, 0, var(--overlay-dim));
+        background: rgba(0, 0, 0, var(--overlay-dim, 0.16)) !important;
         transform: translateZ(0);
+        z-index: 20;
     }
 
     :global(html.rabbit-cinema-active) #rabbit-cinema-hud {
@@ -696,6 +708,26 @@ const { isHome = true } = Astro.props;
             }
         }
 
+        function activateCssFallback() {
+            state.engine = 'css';
+            if (canvas) canvas.style.display = 'none';
+            const cssViewport = document.getElementById('gargantua-css-viewport');
+            if (cssViewport) {
+                cssViewport.classList.remove('opacity-0', 'pointer-events-none');
+                cssViewport.classList.add('opacity-100');
+            }
+            applyStyles();
+        }
+
+        if (!gl || !program) {
+            activateCssFallback();
+        } else if (canvas) {
+            canvas.addEventListener('webglcontextlost', (e) => {
+                e.preventDefault();
+                activateCssFallback();
+            });
+        }
+
         function resize() {
             if (!canvas || !gl) return;
             const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
@@ -730,6 +762,17 @@ const { isHome = true } = Astro.props;
             // The blur is always active at state.blur (6.5px) without modification
             root.style.setProperty('--overlay-blur', `${state.blur}px`);
             root.style.setProperty('--overlay-dim', `${(state.dim / 100).toFixed(2)}`);
+
+            const blurEl = document.getElementById('gargantua-blur-overlay');
+            if (blurEl) {
+                blurEl.style.setProperty('backdrop-filter', `blur(${state.blur}px)`, 'important');
+                blurEl.style.setProperty('-webkit-backdrop-filter', `blur(${state.blur}px)`, 'important');
+            }
+
+            const dimEl = document.getElementById('gargantua-dim-overlay');
+            if (dimEl) {
+                dimEl.style.setProperty('background-color', `rgba(0, 0, 0, ${(state.dim / 100).toFixed(2)})`, 'important');
+            }
 
             const seconds = Math.max(6, (8.0 / Math.max(0.05, state.speed))).toFixed(1);
             const tiltDeg = (90 - (state.pitch * 180 / Math.PI)).toFixed(2);
@@ -1040,7 +1083,7 @@ const { isHome = true } = Astro.props;
                 state.offsetY += (targetOffsetY - state.offsetY) * 0.06;
             }
 
-            if (gl && program) {
+            if (gl && program && state.engine === 'webgl') {
                 gl.useProgram(program);
                 gl.uniform2f(uniforms.res, canvas.width, canvas.height);
                 gl.uniform1f(uniforms.time, now * 0.001);
@@ -1096,7 +1139,16 @@ const { isHome = true } = Astro.props;
         }
     }
 
-    // Astro lifecycle hooks for ClientRouter
-    document.addEventListener('astro:page-load', initGargantuaEngine);
+    // Astro lifecycle hooks & immediate execution
+    function triggerInit() {
+        initGargantuaEngine();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', triggerInit);
+    } else {
+        triggerInit();
+    }
+    document.addEventListener('astro:page-load', triggerInit);
     document.addEventListener('astro:before-swap', cleanupGargantuaEngine);
 </script>
