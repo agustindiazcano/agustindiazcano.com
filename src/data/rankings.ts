@@ -46,6 +46,22 @@ export const rankingTiers: RankingTier[] = [
                 source: "qollab.xyz",
                 checked: "2026-11-07",
             },
+            {
+                platform: "Uruguay eCommerce Awards 2025 (eCommerce Institute)",
+                metric: "Nomination: 3 sites among the finalists",
+                detail: "Disco Uy, Geant and Devoto Uy were nominated after the platform migrations, with Agustin Diaz-Cano as QA Automation Owner.",
+                url: "https://ecommerceday.org.uy/2025/wp-content/uploads/2025/09/Comunicado-finalistas-del-eCommerce-Award-Uruguay-2025.pdf",
+                source: "ecommerceday.org.uy",
+                checked: "2026-11-07",
+            },
+            {
+                platform: "Uruguay eCommerce Awards 2024 (eCommerce Institute)",
+                metric: "Nomination: 3 sites among the finalists",
+                detail: "Disco Uy, Geant and Devoto Uy were nominated for the first time, with Agustin Diaz-Cano as QA Automation Owner.",
+                url: "https://ecommerceday.org.uy/2024/se-conocieron-los-finalistas-de-los-ecommerce-awards-uruguay-2024/",
+                source: "ecommerceday.org.uy",
+                checked: "2026-11-07",
+            },
         ],
     },
     {
