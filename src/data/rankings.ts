@@ -61,9 +61,17 @@ export const rankingTiers: RankingTier[] = [
         description: "Automated rankings computed from public GitHub activity.",
         entries: [
             {
-                platform: "Committers.top Argentina",
-                metric: "#15 in Argentina (all contributions)",
-                detail: "3,244 contributions over the past year, among the 256 most active GitHub users in Argentina. List generated 2026-11-05.",
+                platform: "Committers.top Argentina: Contributions",
+                metric: "#14 in Argentina (contributions)",
+                detail: "3,968 contributions over the past year, among the 256 most active GitHub users in Argentina.",
+                url: "https://committers.top/argentina",
+                source: "committers.top",
+                checked: "2026-11-07",
+            },
+            {
+                platform: "Committers.top Argentina: Commits",
+                metric: "#15 in Argentina (public commits)",
+                detail: "3,244 public commits over the past year. List generated 2026-11-05.",
                 url: "https://committers.top/argentina",
                 source: "committers.top",
                 checked: "2026-11-07",
