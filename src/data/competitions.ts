@@ -6,7 +6,7 @@ export const competitionTiers: RankingTier[] = [
     {
         id: "hackathons",
         title: "Hackathons",
-        description: "Hackathon results and verified participation.",
+        description: "One entry per event, with results and verified participation.",
         entries: [
             {
                 platform: "Qollab x IonQ Global Quantum Hackathon (Argentina)",
@@ -15,14 +15,7 @@ export const competitionTiers: RankingTier[] = [
                 url: "https://exa.unicen.edu.ar/la-sede-unicen-se-destaco-en-el-hackathon-mundial-de-computacion-cuantica-con-proyectos-premiados/",
                 source: "exa.unicen.edu.ar",
                 checked: "2026-11-07",
-            },
-            {
-                platform: "Qollab: UNICEN node results",
-                metric: "Official node results page",
-                detail: "Winners of the Argentina node of the Qollab x IonQ Hackathon 2026, hosted by UNICEN.",
-                url: "https://qollab.xyz/explore/hackathon-2026/unicen",
-                source: "qollab.xyz",
-                checked: "2026-11-07",
+                links: [{ label: "Qollab node results", url: "https://qollab.xyz/explore/hackathon-2026/unicen" }],
             },
             {
                 platform: "IBM Bob 2.0 Global Hackathon (lablab.ai)",
@@ -31,14 +24,7 @@ export const competitionTiers: RankingTier[] = [
                 url: "https://lablab.ai/ai-hackathons/ibm-bob-2-hackathon",
                 source: "lablab.ai",
                 checked: "2026-11",
-            },
-            {
-                platform: "IBM Bob 2.0 certificate",
-                metric: "Verified participation certificate",
-                detail: "Official certificate issued on the hackathon platform.",
-                url: "https://lablab.ai/u/@agustin_diazcano6/ai-hackathons/ibm-bob-2-hackathon/certificate",
-                source: "lablab.ai",
-                checked: "2026-11",
+                links: [{ label: "Participation certificate", url: "https://lablab.ai/u/@agustin_diazcano6/ai-hackathons/ibm-bob-2-hackathon/certificate" }],
             },
         ],
     },
