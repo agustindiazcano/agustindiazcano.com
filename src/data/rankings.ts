@@ -63,8 +63,16 @@ export const rankingTiers: RankingTier[] = [
             {
                 platform: "Gitista Argentina",
                 metric: "#23 in Argentina",
-                detail: "724 total contributions (690 pull requests) across 34 repositories. Global rank on Gitista: 3291.",
+                detail: "724 total contributions (690 pull requests) across 34 repositories.",
                 url: "https://gitista.com/argentina/",
+                source: "gitista.com",
+                checked: "2026-11-07",
+            },
+            {
+                platform: "Gitista Global",
+                metric: "#3291 worldwide",
+                detail: "Global rank on Gitista, with 61 followers on GitHub.",
+                url: "https://gitista.com/search/?country=AR&handle=agustindiazcano",
                 source: "gitista.com",
                 checked: "2026-11-07",
             },
