@@ -41,8 +41,8 @@ const llmContext = fs.readFileSync("public/llms-full.txt", "utf-8");
     >
         {/* Persistent header — lives outside the swap zone, never re-rendered */}
         <div class="w-full px-6 pt-4 md:pt-8">
-            <div class="max-w-[1200px] mx-auto">
-                <Header className={compactHeader ? "!mb-0" : ""} />
+            <div class={Astro.url.pathname === "/" ? "max-w-[1200px] mx-auto" : "w-full"}>
+                <Header className={compactHeader ? "!mb-0" : ""} compact={Astro.url.pathname !== "/"} />
             </div>
         </div>
 

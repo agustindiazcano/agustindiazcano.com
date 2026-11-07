@@ -31,6 +31,11 @@ const links: { name: string; href: string; match: string; icon?: string; target?
     },
 ];
 
+interface Props {
+    compact?: boolean;
+}
+const { compact = false } = Astro.props;
+
 const socialLinks = [
     {
         name: "GitHub",
@@ -95,16 +100,16 @@ const socialLinks = [
 
         {/* Floating tooltip above rabbit */}
         <div
-            class="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-hover:-translate-y-1 transition-all duration-200 z-50 whitespace-nowrap px-2.5 py-1 text-xs font-mono tracking-tight text-white bg-[#111] border border-[#333] rounded-md shadow-lg shadow-black/60 hidden md:flex items-center"
+            class="pointer-events-none absolute top-full mt-2 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-hover:translate-y-1 transition-all duration-200 z-50 whitespace-nowrap px-2.5 py-1 text-xs font-mono tracking-tight text-white bg-[#111] border border-[#333] rounded-md shadow-lg shadow-black/60 hidden md:flex items-center"
         >
             <span>Follow the white rabbit</span>
-            <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#111] border-b border-r border-[#333] rotate-45"></div>
+            <div class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#111] border-t border-l border-[#333] rotate-45"></div>
         </div>
     </div>
     <a
 
         href="/agents-usage"
-        class="md:hidden self-center flex items-center gap-1 px-2.5 py-2 rounded-full border border-[#222] bg-[#111] text-[11px] font-mono text-[#999] transition-colors hover:text-white hover:border-[#68d6ba]"
+        class={`${compact ? "lg:hidden" : "md:hidden"} self-center flex items-center gap-1 px-2.5 py-2 rounded-full border border-[#222] bg-[#111] text-[11px] font-mono text-[#999] transition-colors hover:text-white hover:border-[#68d6ba]`}
     >AI Usage <span aria-hidden="true">&#8599;</span></a>
 
 </nav>

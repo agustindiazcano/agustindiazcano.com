@@ -13,6 +13,7 @@ const agents = [
   { id: "cursor", name: "Cursor", short: "CU", color: "#ff9d6b", tokens: usage.cursor.totalTokens, sessions: usage.cursor.sessions, note: "Anysphere", icon: "/icons/agents/cursor.svg" },
 ];
 
+const ranked = [...agents].sort((a, b) => b.tokens - a.tokens);
 const total = agents.reduce((sum, agent) => sum + agent.tokens, 0);
 const sessions = agents.reduce((sum, agent) => sum + agent.sessions, 0);
 const format = (value: number) => value >= 1e9 ? `${(value / 1e9).toFixed(2)}B` : `${(value / 1e6).toFixed(1)}M`;
@@ -27,7 +28,7 @@ const linkClass = "inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-
   description="Explore Agustin Diaz-Cano's 30-day AI agent token usage across Claude Code, Antigravity, Codex, Meta Muse, Grok and Cursor, alongside the AFAW multi-agent methodology and Jellyfish benchmarks."
 >
   <CSSBlackHole />
-  <main class="min-h-screen max-w-[1100px] mx-auto px-6 pb-16 relative z-10">
+  <main class="min-h-screen max-w-[1200px] mx-auto px-6 min-[1248px]:px-0 pb-16 relative z-10">
     <nav class="flex items-center gap-2 text-xs font-mono text-[#666] mb-6 pt-2" aria-label="Breadcrumb">
       <a href="/" class="hover:text-white transition-colors">HOME</a>
       <span>/</span>
@@ -38,10 +39,7 @@ const linkClass = "inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-
     <header class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-5">
       <div>
         <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-white mb-1">AI Usage</h1>
-        <p class="text-[#888] text-sm max-w-xl leading-relaxed">
-          Multi-model token telemetry across 30 days of active software engineering.
-          <span class="font-mono text-[11px] text-[#555] block mt-1">Last 30 days · {usage.period}</span>
-        </p>
+        <p class="font-mono text-[11px] text-[#555]">Last 30 days · {usage.period}</p>
       </div>
       <div class="flex flex-wrap items-center gap-1.5" role="group" aria-label="Agent filter">
         <button type="button" class="filter-btn active px-2.5 py-1 rounded-lg border border-white bg-white text-black font-mono text-xs transition-colors cursor-pointer" data-agent="all" aria-pressed="true">All</button>
@@ -89,12 +87,12 @@ const linkClass = "inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-
         <span class="text-[10px] font-mono text-[#555]">Tokens · sessions · share</span>
       </div>
       <div class="h-3 rounded-full bg-[#1c1c1c] overflow-hidden flex gap-0.5 mb-5" aria-label="Share of combined tokens by agent">
-        {agents.map(agent => (
+        {ranked.map(agent => (
           <span style={`width:${(agent.tokens / total) * 100}%; background-color:${agent.color}`} title={`${agent.name}: ${((agent.tokens / total) * 100).toFixed(1)}%`}></span>
         ))}
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-        {agents.map(agent => {
+        {ranked.map(agent => {
           const share = total > 0 ? (agent.tokens / total) * 100 : 0;
           return (
             <div data-agent-row={agent.id} class="transition-opacity">
@@ -254,7 +252,7 @@ const linkClass = "inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-
           <div>
             <h3 class="text-sm font-semibold text-white mb-2">AFAW Engine: Automated Variant</h3>
             <p class="text-sm text-[#888] leading-relaxed">
-              Autonomous lifecycle with <strong class="text-white font-medium">GitLab Duo</strong>, <strong class="text-white font-medium">self-healing CI/CD</strong>, rule-based integration decisions and continuous deployment. At this volume it is estimated at about <strong class="text-white font-mono font-medium">500 USD daily</strong> in inference tokens.
+              Autonomous lifecycle with <strong class="text-white font-medium">GitLab Duo</strong>, <strong class="text-white font-medium">self-healing CI/CD</strong>, rule-based integration decisions and continuous deployment. Experiments ran for <strong class="text-white font-medium">48 hours</strong>, with successful autonomous merge requests executed by the agent at an approximate cost of <strong class="text-white font-mono font-medium">420 GitLab credits (USD 420)</strong>.
             </p>
           </div>
           <div class="flex flex-wrap gap-2 mt-4">

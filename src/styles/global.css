@@ -25,6 +25,45 @@
   --font-display: "Raleway", "Josefin Sans", sans-serif;
 }
 
+/* Large screens: scale the whole UI so it keeps the laptop look and feel
+   (same effect as browser zoom). Tune the factors here. */
+:root {
+  --ui-zoom: 1;
+}
+
+@media (min-width: 1800px) {
+  :root {
+    --ui-zoom: 1.25;
+  }
+}
+
+@media (min-width: 2400px) {
+  :root {
+    --ui-zoom: 1.5;
+  }
+}
+
+@media (min-width: 3200px) {
+  :root {
+    --ui-zoom: 2;
+  }
+}
+
+html {
+  zoom: var(--ui-zoom);
+  /* Hidden hover popovers can extend past the viewport edge: never show a horizontal scrollbar */
+  overflow-x: hidden;
+}
+
+/* vh units are not scaled by CSS zoom: compensate so full-height sections do not overflow */
+.min-h-screen {
+  min-height: calc(100vh / var(--ui-zoom));
+}
+
+.h-screen {
+  height: calc(100vh / var(--ui-zoom));
+}
+
 body {
   background-color: var(--color-background);
   color: var(--color-foreground);
