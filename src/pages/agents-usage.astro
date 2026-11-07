@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PageNav from "../components/PageNav.astro";
 import Footer from "../components/Footer.astro";
 import CSSBlackHole from "../components/CSSBlackHole.astro";
 import usage from "../data/claude-usage/current.json";
@@ -29,11 +30,7 @@ const linkClass = "inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-
 >
   <CSSBlackHole />
   <main class="min-h-screen max-w-[1200px] mx-auto px-6 min-[1248px]:px-0 pb-16 relative z-10">
-    <nav class="flex items-center gap-2 text-xs font-mono text-[#666] mb-6 pt-2" aria-label="Breadcrumb">
-      <a href="/" class="hover:text-white transition-colors">HOME</a>
-      <span>/</span>
-      <span class="text-[#888]">AI USAGE</span>
-    </nav>
+    <PageNav items={[{ label: "AI Usage" }]} backHref="/" />
 
     {/* Header + filters */}
     <header class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-5">

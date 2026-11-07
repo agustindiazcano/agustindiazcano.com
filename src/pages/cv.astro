@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PageNav from "../components/PageNav.astro";
 import Footer from "../components/Footer.astro";
 import CSSBlackHole from "../components/CSSBlackHole.astro";
 ---
@@ -10,6 +11,7 @@ import CSSBlackHole from "../components/CSSBlackHole.astro";
 >
     <CSSBlackHole />
     <main class="min-h-screen max-w-[800px] mx-auto px-6 pb-20 flex flex-col relative z-10">
+        <PageNav items={[{ label: "CV" }]} backHref="/" />
 
         <section class="mb-12">
             <h2 class="text-3xl font-bold tracking-tight text-white mb-3">

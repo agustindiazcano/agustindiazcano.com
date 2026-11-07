@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PageNav from "../components/PageNav.astro";
 import Footer from "../components/Footer.astro";
 import CSSBlackHole from "../components/CSSBlackHole.astro";
 
@@ -27,6 +28,7 @@ const posts = [
 >
   <CSSBlackHole />
   <main class="page-fade-in min-h-screen max-w-[800px] mx-auto px-6 pb-20 relative z-10">
+        <PageNav items={[{ label: "Writing" }]} backHref="/" />
 
     <section class="mb-8 md:mb-12">
       <h2 class="text-3xl font-bold tracking-tight text-white mb-3 text-center md:text-left">Writing</h2>

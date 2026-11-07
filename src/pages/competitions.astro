@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PageNav from "../components/PageNav.astro";
 import Footer from "../components/Footer.astro";
 import CSSBlackHole from "../components/CSSBlackHole.astro";
 import RankingTierList from "../components/RankingTierList.astro";
@@ -53,12 +54,7 @@ const schema = {
     <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, "\\u003c")} />
     <CSSBlackHole />
     <main class="page-fade-in min-h-screen max-w-[800px] mx-auto px-6 pb-20 relative z-10">
-        <nav class="flex items-center gap-2 text-xs font-mono text-[#666] mb-6 pt-2" aria-label="Breadcrumb">
-            <a href="/" class="hover:text-white transition-colors">HOME</a>
-            <span aria-hidden="true">/</span>
-            <span class="text-[#888]" aria-current="page">COMPETITIONS</span>
-        </nav>
-
+        <PageNav items={[{ label: "Competitions" }]} backHref="/" />
         <header class="mb-12">
             <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-white mb-3">Competitions</h1>
             <p class="text-[#888] leading-relaxed">

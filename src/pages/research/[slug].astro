@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import PageNav from "../../components/PageNav.astro";
 import Footer from "../../components/Footer.astro";
 
 export async function getStaticPaths() {
@@ -38,13 +39,7 @@ const { pub } = Astro.props;
 >
     <main class="min-h-screen max-w-[1000px] mx-auto px-6 pb-20 pt-12">
 
-        <div class="mb-8">
-            <a
-                href="/research"
-                class="text-[#666] hover:text-white transition-colors text-sm inline-flex items-center gap-1"
-                >← Back to Research</a
-            >
-        </div>
+<PageNav items={[{ label: "Research", href: "/research" }, { label: pub.title }]} backHref="/research" />
 
         <header class="mb-12">
             <h1 class="text-3xl md:text-5xl font-bold tracking-tight text-white mb-6 leading-tight">

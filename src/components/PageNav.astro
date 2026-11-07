@@ -1,0 +1,56 @@
+---
+interface Item {
+    label: string;
+    href?: string;
+}
+
+interface Props {
+    items: Item[];
+    backHref?: string;
+    class?: string;
+}
+
+const { items, backHref = "/", class: className = "" } = Astro.props;
+const trail: Item[] = [{ label: "Home", href: "/" }, ...items];
+---
+
+<div class:list={["flex flex-wrap items-center gap-x-4 gap-y-2 mb-6 pt-2", className]}>
+    <a
+        href={backHref}
+        data-back-button
+        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-[#222] bg-[#111] text-xs font-mono text-[#aaa] transition-colors hover:text-white hover:border-[#68d6ba] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#68d6ba]"
+    >
+        <span aria-hidden="true">←</span> Back
+    </a>
+    <nav class="flex items-center gap-2 text-xs font-mono text-[#666] uppercase" aria-label="Breadcrumb">
+        {
+            trail.map((item, index) => {
+                const isLast = index === trail.length - 1;
+                return (
+                    <>
+                        {index > 0 && <span aria-hidden="true">/</span>}
+                        {item.href && !isLast ? (
+                            <a href={item.href} class="hover:text-white transition-colors">{item.label}</a>
+                        ) : (
+                            <span class="text-[#888]" aria-current={isLast ? "page" : undefined}>{item.label}</span>
+                        )}
+                    </>
+                );
+            })
+        }
+    </nav>
+</div>
+
+<script>
+    document.addEventListener("click", (event) => {
+        const target = event.target as Element | null;
+        const button = target?.closest("[data-back-button]");
+        if (!button) return;
+        const softNavigated = ((history.state as { index?: number } | null)?.index ?? 0) > 0;
+        const cameFromSite = document.referrer.startsWith(location.origin);
+        if (softNavigated || cameFromSite) {
+            event.preventDefault();
+            history.back();
+        }
+    });
+</script>
