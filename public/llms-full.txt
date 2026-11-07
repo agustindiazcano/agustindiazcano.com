@@ -28,4 +28,5 @@ In game development, I created full modifications for the Men of War series as a
 - **Portfolio**: https://www.agustindiazcano.com
 - **GitHub**: https://github.com/agustindiazcano
 - **LinkedIn**: https://linkedin.com/in/agustindiazcano
+- **Qollab (quantum computing platform)**: https://qollab.xyz/u/agustindiazcano
 - **Writing**: https://www.agustindiazcano.com/writing

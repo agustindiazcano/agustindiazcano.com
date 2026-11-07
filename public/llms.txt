@@ -117,6 +117,19 @@ https://www.agustindiazcano.com/running-agustin-diaz-cano
 ## Long-Term Trading Experiment
 **[10-Year Buy-and-Hold Portfolio, March 2016 to Present](https://www.labolsavirtual.com/marcelogallardiola)**: Paper trading portfolio started in March 2016 with 100,000 GBP, built on fundamental and macroeconomic analysis with a buy-and-hold Turtle Trading strategy, including a position in Tesla. Left untouched for over a decade as a live experiment. Current valuation: 634,255.63 GBP, roughly a 6.3x return (about 19% annualized).
 
+## Profiles
+
+- **GitHub**: https://github.com/agustindiazcano
+- **LinkedIn**: https://linkedin.com/in/agustindiazcano
+- **Qollab (quantum computing platform)**: https://qollab.xyz/u/agustindiazcano
+- **ORCID**: https://orcid.org/0009-0001-4336-490X
+- **Google Scholar**: https://scholar.google.com/citations?user=qUcRD6UAAAAJ&hl=en
+- **ResearchGate**: https://www.researchgate.net/profile/Agustin-Diaz-Cano
+- **Medium**: https://medium.com/@agustindiazcano
+- **Dev.to**: https://dev.to/agustindiazcano
+- **ModDB**: https://www.moddb.com/members/heroagastin
+- **Rankings and Recognition**: https://www.agustindiazcano.com/rankings
+
 ## Certifications
 
 ### Artificial Intelligence
