@@ -15,16 +15,16 @@
     "recordedSince": "10-12"
   },
   "antigravity": {
-    "totalTokens": 1612116841,
-    "sessions": 112,
-    "turns": 12338,
-    "inputTokens": 85128968,
-    "cachedInputTokens": 1520690948,
-    "outputTokens": 6296925
+    "totalTokens": 1689003905,
+    "sessions": 114,
+    "turns": 12924,
+    "inputTokens": 88573199,
+    "cachedInputTokens": 1593668928,
+    "outputTokens": 6761778
   },
   "combined": {
-    "totalTokens": "10.60b",
-    "sessions": 337
+    "totalTokens": "10.68b",
+    "sessions": 339
   },
   "claudeTotalTokens": 7908519791,
   "metamuse": {
