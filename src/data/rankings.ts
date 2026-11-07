@@ -21,7 +21,7 @@ export const rankingsLastUpdated = "2026-11-07";
  * To add a row: confirm the position on the source page, then add it with the date checked (YYYY-MM).
  *
  * Pending (need exact source URL + screenshot before adding):
- * Committers.top Argentina, LibHunt (AFAW), Codewars, VibeCodeStats, Trendshift, UNICEN news note.
+ * LibHunt (AFAW), Codewars, VibeCodeStats, Trendshift, UNICEN news note.
  */
 export const rankingTiers: RankingTier[] = [
     {
@@ -60,6 +60,14 @@ export const rankingTiers: RankingTier[] = [
         title: "Engineering and open source rankings",
         description: "Automated rankings computed from public GitHub activity.",
         entries: [
+            {
+                platform: "Committers.top Argentina",
+                metric: "#15 in Argentina (all contributions)",
+                detail: "3,244 contributions over the past year, among the 256 most active GitHub users in Argentina. List generated 2026-11-05.",
+                url: "https://committers.top/argentina",
+                source: "committers.top",
+                checked: "2026-11-07",
+            },
             {
                 platform: "Gitista Argentina",
                 metric: "#23 in Argentina",
