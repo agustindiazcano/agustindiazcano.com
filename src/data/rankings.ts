@@ -27,7 +27,7 @@ export const rankingsLastUpdated = "2026-11-07";
 export const rankingTiers: RankingTier[] = [
     {
         id: "awards",
-        title: "Competitive awards and hackathons",
+        title: "Honors & Awards",
         description: "Results evaluated by juries or platform-wide submission counts.",
         entries: [
             {
