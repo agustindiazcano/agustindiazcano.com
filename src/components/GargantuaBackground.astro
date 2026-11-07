@@ -1,0 +1,1102 @@
+---
+// Gargantua Black Hole Background Component (WebGL Raymarching + CSS3 GPU)
+// Equipped with White Rabbit Cinematic Mode, random load selection (Mode 1 vs Mode 2), and 3D manipulation.
+export interface Props {
+    isHome?: boolean;
+}
+const { isHome = true } = Astro.props;
+---
+
+<div id="gargantua-container" class="fixed inset-0 w-full h-[100vh] -z-10 bg-black overflow-hidden pointer-events-none">
+    <!-- SVG Displacement filter for pure CSS mode -->
+    <svg class="hidden" width="0" height="0" aria-hidden="true">
+        <defs>
+            <filter id="gargantua-plasma-filter" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.018 0.045" numOctaves="3" seed="14" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="18" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- MOTOR 1: WebGL Canvas Raymarching -->
+    <canvas id="gargantua-webgl-canvas" class="absolute inset-0 w-full h-full block"></canvas>
+
+    <!-- MOTOR 2: Pure CSS GPU-Composited + SVG -->
+    <div id="gargantua-css-viewport" class="absolute inset-0 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500 overflow-hidden">
+        <div class="gargantua-css-rig" id="gargantua-css-rig">
+            <div class="css-cinema-bloom"></div>
+            <div class="css-anamorphic-streak"></div>
+            <div class="css-gravitational-halo">
+                <div class="css-halo-flow"></div>
+            </div>
+            <div class="css-event-horizon"></div>
+            <div class="css-lower-lensing-wrap"></div>
+            <div class="css-accretion-plane">
+                <div class="css-accretion-matter">
+                    <div class="css-plasma-filaments"></div>
+                    <div class="css-plasma-inner-shear"></div>
+                    <div class="css-doppler-beaming"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blur overlay directly over black hole simulation (smoothly clears in rabbit cinema mode) -->
+    <div id="gargantua-blur-overlay" class="absolute inset-0 pointer-events-none transition-all duration-700" aria-hidden="true"></div>
+
+    <!-- Dark dim overlay for content contrast (smoothly clears in rabbit cinema mode) -->
+    <div id="gargantua-dim-overlay" class="absolute inset-0 pointer-events-none transition-all duration-700" aria-hidden="true"></div>
+</div>
+
+<!-- Interactive Drag Layer (Active in White Rabbit Cinema Mode) -->
+<div id="gargantua-drag-layer" class="fixed inset-0 z-20 pointer-events-none cursor-grab active:cursor-grabbing transition-colors duration-200" title="Click and drag to orbit Sagittarius A* (Sgr A*)"></div>
+
+<!-- WHITE RABBIT CINEMATIC CONTROLLER (Reveals when clicking Follow the White Rabbit) -->
+<div id="rabbit-cinema-hud" class="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 font-mono text-xs select-none pointer-events-none opacity-0 translate-y-6 transition-all duration-500 w-[96vw] sm:w-auto max-w-4xl flex flex-col items-center gap-2">
+    
+    <!-- Sagittarius A* (Sgr A*) Curiosity Fact Note -->
+    <div class="pointer-events-auto flex items-center gap-2 text-[9px] sm:text-[10px] text-[#888] font-mono tracking-tight bg-[#0c0c0c]/85 backdrop-blur-md px-3.5 py-1 rounded-full border border-[#222] shadow-[0_4px_16px_rgba(0,0,0,0.6)] text-center max-w-full">
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-[#68d6ba] shrink-0 animate-pulse"></span>
+        <span class="truncate sm:whitespace-normal">
+            <strong class="text-[#ededed]">Sagittarius A* (Sgr A*)</strong> &bull; Supermassive black hole at the center of the Milky Way (~4.1M solar masses, 26,000 ly from Earth)
+        </span>
+        <span id="rabbit-mode-badge" class="text-[#68d6ba] font-mono font-medium shrink-0 ml-1 hidden md:inline">Mode 2 // Doppler</span>
+    </div>
+
+    <!-- Sleek Floating Bottom Control Bar -->
+    <div class="pointer-events-auto bg-[#0c0c0c]/92 backdrop-blur-2xl border border-[#262626] rounded-full px-2.5 py-1.5 sm:px-3.5 sm:py-2 shadow-[0_16px_40px_rgba(0,0,0,0.9)] flex items-center justify-center gap-2 sm:gap-2.5 max-w-full overflow-x-auto">
+        
+        <!-- Sgr A* Icon Tag -->
+        <div class="hidden lg:flex items-center gap-1.5 text-[#ededed] pr-1 border-r border-[#222]">
+            <span class="text-[#68d6ba]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M13 16a3 3 0 0 1 2.24 5"/><path d="M18 12h.01"/><path d="M18 21h-8a4 4 0 0 1-4-4 7 7 0 0 1 7-7h.2L9.6 6.4a1 1 0 1 1 2.8-2.8L15.8 7h.2c3.3 0 6 2.7 6 6v1a2 2 0 0 1-2 2h-1a3 3 0 0 0-3 3"/><path d="M20 8.54V4a2 2 0 1 0-4 0v3"/><path d="M7.612 12.524a3 3 0 1 0-1.6 4.3"/>
+                </svg>
+            </span>
+            <span class="text-[10px] font-semibold tracking-wider whitespace-nowrap">Sgr A*</span>
+        </div>
+
+        <!-- Mode Selector Segment -->
+        <div class="flex items-center bg-[#050505] p-0.5 rounded-full border border-[#222] shrink-0">
+            <button 
+                id="rabbit-btn-mode1" 
+                type="button"
+                class="px-2.5 py-1 rounded-full text-[10px] font-medium transition cursor-pointer text-[#888] hover:text-white text-center"
+                title="Switch to Mode 1 // Radiant"
+            >
+                Radiant
+            </button>
+            <button 
+                id="rabbit-btn-mode2" 
+                type="button"
+                class="px-2.5 py-1 rounded-full text-[10px] font-semibold transition border cursor-pointer bg-white text-black shadow-sm text-center"
+                title="Switch to Mode 2 // Doppler"
+            >
+                Doppler
+            </button>
+        </div>
+
+        <div class="w-px h-3.5 bg-[#262626] shrink-0"></div>
+
+        <!-- Zoom Control (In / Out + Mini Slider) -->
+        <div class="flex items-center gap-1.5 bg-[#121212] px-2 py-1 rounded-full border border-[#222] shrink-0">
+            <span class="text-[9px] text-[#777] uppercase font-mono hidden sm:inline">Zoom</span>
+            <button id="rabbit-zoom-out" type="button" class="w-5 h-5 rounded-full bg-[#1e1e1e] hover:bg-[#2a2a2a] text-[#ccc] hover:text-white font-mono flex items-center justify-center cursor-pointer active:scale-95 text-xs transition" title="Zoom out">-</button>
+            <input id="rabbit-ctrl-zoom" type="range" min="0.30" max="2.20" step="0.05" value="0.60" class="hud-slider w-14 sm:w-20" />
+            <button id="rabbit-zoom-in" type="button" class="w-5 h-5 rounded-full bg-[#1e1e1e] hover:bg-[#2a2a2a] text-[#ccc] hover:text-white font-mono flex items-center justify-center cursor-pointer active:scale-95 text-xs transition" title="Zoom in">+</button>
+            <span id="rabbit-val-zoom" class="text-[#68d6ba] font-mono text-[10px] w-8 text-center">0.60x</span>
+        </div>
+
+        <!-- Auto Orbit & Speed Control -->
+        <div class="flex items-center gap-1.5 bg-[#121212] px-2 py-1 rounded-full border border-[#222] shrink-0">
+            <button 
+                id="rabbit-btn-autocam" 
+                type="button"
+                class="px-2 py-0.5 rounded-full text-[9px] font-mono font-medium transition border cursor-pointer bg-[#181818] text-[#68d6ba] border-[#68d6ba]/40 shadow-[0_0_8px_rgba(104,214,186,0.15)]"
+                title="Toggle Auto Orbit"
+            >
+                AUTO: ON
+            </button>
+            <input id="rabbit-ctrl-camspeed" type="range" min="0.05" max="2.0" step="0.05" value="0.65" class="hud-slider w-10 sm:w-16" title="Orbit Speed" />
+            <span id="rabbit-val-camspeed" class="text-[10px] font-mono text-[#68d6ba] w-7 text-center">0.65x</span>
+        </div>
+
+        <!-- Reset Camera -->
+        <button 
+            id="rabbit-reset-cam-btn" 
+            type="button" 
+            class="p-1.5 rounded-full bg-[#161616] hover:bg-[#222] border border-[#262626] hover:border-[#383838] text-[#888] hover:text-white transition cursor-pointer shrink-0" 
+            title="Reset Camera View"
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
+            </svg>
+        </button>
+
+        <div class="w-px h-3.5 bg-[#262626] shrink-0"></div>
+
+        <!-- Exit Cinema Mode Button -->
+        <button 
+            id="rabbit-cinema-exit-btn" 
+            type="button"
+            class="px-2.5 py-1 rounded-full bg-[#161616] hover:bg-[#222] border border-[#262626] hover:border-[#383838] text-[#ccc] hover:text-white text-[11px] font-medium flex items-center gap-1.5 transition cursor-pointer shrink-0"
+            title="Exit Cinema Mode (Esc)"
+        >
+            <span>Exit</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[#777]">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+    </div>
+</div>
+
+<style>
+    :root {
+        --overlay-blur: 6.5px;
+        --overlay-dim: 0.16;
+        --css-orbit-duration: 160s;
+        --css-tilt: 79deg;
+        --css-roll: -12deg;
+        --css-yaw: 0deg;
+        --css-zoom: 0.6;
+        --css-doppler: 1.5;
+        --css-exposure: 1.05;
+    }
+
+    #gargantua-blur-overlay {
+        backdrop-filter: blur(var(--overlay-blur));
+        -webkit-backdrop-filter: blur(var(--overlay-blur));
+        transform: translateZ(0);
+        will-change: backdrop-filter;
+    }
+
+    #gargantua-dim-overlay {
+        background: rgba(0, 0, 0, var(--overlay-dim));
+        transform: translateZ(0);
+    }
+
+    :global(html.rabbit-cinema-active) #rabbit-cinema-hud {
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        transform: translate(-50%, 0) !important;
+    }
+
+    :global(html.rabbit-cinema-active) #gargantua-drag-layer {
+        pointer-events: auto !important;
+    }
+
+    /* Range slider custom styling */
+    .hud-slider {
+        -webkit-appearance: none;
+        appearance: none;
+        height: 4px;
+        border-radius: 999px;
+        background: #222222;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .hud-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #ededed;
+        border: 1px solid #444444;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+        transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+    }
+
+    .hud-slider::-webkit-slider-thumb:hover {
+        transform: scale(1.2);
+        background: #ffffff;
+        border-color: #68d6ba;
+    }
+
+    /* CSS ENGINE STYLES */
+    #gargantua-css-viewport {
+        perspective: 1600px;
+        background: radial-gradient(circle at 50% 50%, #160903 0%, #060309 48%, #000000 100%);
+    }
+
+    .gargantua-css-rig {
+        position: relative;
+        width: min(82vw, 760px);
+        height: min(82vw, 760px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform-style: preserve-3d;
+        transform: scale3d(var(--css-zoom), var(--css-zoom), 1) rotateZ(var(--css-roll)) rotateY(var(--css-yaw)) translateZ(0);
+        will-change: transform;
+        filter: brightness(var(--css-exposure)) contrast(1.12);
+    }
+
+    .css-cinema-bloom {
+        position: absolute;
+        width: 120%;
+        height: 60%;
+        border-radius: 50%;
+        background: radial-gradient(ellipse at center, rgba(255, 195, 120, 0.28) 0%, rgba(235, 105, 30, 0.14) 42%, rgba(120, 30, 5, 0.04) 70%, transparent 85%);
+        filter: blur(36px);
+        transform: translateZ(0);
+        pointer-events: none;
+    }
+
+    .css-anamorphic-streak {
+        position: absolute;
+        width: 150vw;
+        height: 2px;
+        background: linear-gradient(90deg, transparent 0%, rgba(255, 170, 90, 0.08) 20%, rgba(255, 225, 180, 0.45) 45%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 180, 100, 0.35) 55%, rgba(255, 140, 60, 0.05) 80%, transparent 100%);
+        box-shadow: 0 0 18px 2px rgba(255, 185, 100, 0.35);
+        pointer-events: none;
+        z-index: 30;
+        mix-blend-mode: screen;
+    }
+
+    .css-gravitational-halo {
+        position: absolute;
+        width: 37%;
+        height: 36.5%;
+        border-radius: 50%;
+        z-index: 8;
+        background: radial-gradient(circle at 50% 50%, transparent 57.5%, rgba(255, 255, 255, 0.95) 60.5%, rgba(255, 225, 155, 0.92) 63.5%, rgba(255, 145, 50, 0.78) 68%, rgba(195, 55, 10, 0.42) 74%, transparent 83%);
+        box-shadow: 0 0 35px rgba(255, 150, 50, 0.55), inset 0 0 22px rgba(255, 175, 85, 0.45);
+        transform: scaleX(1.05) translateZ(0);
+        filter: url(#gargantua-plasma-filter) blur(1.2px);
+    }
+
+    .css-halo-flow {
+        position: absolute;
+        inset: -12%;
+        border-radius: 50%;
+        background: conic-gradient(from 0deg, rgba(255, 245, 220, 0.5) 0deg, rgba(255, 160, 60, 0.15) 60deg, rgba(255, 230, 170, 0.45) 130deg, rgba(180, 60, 10, 0.1) 210deg, rgba(255, 250, 230, 0.55) 290deg, rgba(255, 160, 60, 0.2) 340deg, rgba(255, 245, 220, 0.5) 360deg);
+        -webkit-mask-image: radial-gradient(circle, transparent 55%, #000 61%, #000 71%, transparent 79%);
+        mask-image: radial-gradient(circle, transparent 55%, #000 61%, #000 71%, transparent 79%);
+        mix-blend-mode: color-dodge;
+        will-change: transform;
+        animation: gpu-majestic-spin calc(var(--css-orbit-duration) * 1.35) linear infinite;
+    }
+
+    .css-event-horizon {
+        position: absolute;
+        width: 24.5%;
+        height: 24.5%;
+        border-radius: 50%;
+        background: #000000;
+        z-index: 15;
+        box-shadow: -2px 0 6px 1px rgba(255, 252, 240, 0.95), 0 0 12px 2px rgba(255, 205, 120, 0.75), 0 0 28px 6px rgba(255, 115, 25, 0.45), inset 0 0 16px 8px #000000;
+        transform: translateZ(0);
+    }
+
+    .css-lower-lensing-wrap {
+        position: absolute;
+        width: 36.5%;
+        height: 36%;
+        border-radius: 50%;
+        z-index: 18;
+        clip-path: polygon(-10% 54%, 110% 54%, 110% 115%, -10% 115%);
+        background: radial-gradient(circle at 50% 48%, transparent 58%, rgba(255, 250, 230, 0.88) 61%, rgba(255, 185, 95, 0.78) 65%, rgba(225, 90, 20, 0.48) 71%, transparent 80%);
+        filter: url(#gargantua-plasma-filter) blur(1.5px);
+        transform: translateY(1.8%) scaleX(1.03) translateZ(0);
+        pointer-events: none;
+    }
+
+    .css-accretion-plane {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        transform: rotateX(var(--css-tilt)) translateZ(0);
+        transform-style: preserve-3d;
+        z-index: 22;
+        pointer-events: none;
+    }
+
+    .css-accretion-matter {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        -webkit-mask-image: radial-gradient(circle, transparent 23.2%, rgba(0,0,0,0.85) 24.6%, #000 26.5%, #000 54%, rgba(0,0,0,0.45) 65%, transparent 74%);
+        mask-image: radial-gradient(circle, transparent 23.2%, rgba(0,0,0,0.85) 24.6%, #000 26.5%, #000 54%, rgba(0,0,0,0.45) 65%, transparent 74%);
+        background: radial-gradient(circle, transparent 23%, #ffffff 25.2%, #fff4d2 28.5%, #ffcb74 35%, #f27d24 44%, #a82e08 55%, #3d0b02 65%, transparent 73%);
+        filter: url(#gargantua-plasma-filter);
+        transform: translateZ(0);
+    }
+
+    .css-plasma-filaments {
+        position: absolute;
+        inset: -4%;
+        border-radius: 50%;
+        background:
+            repeating-radial-gradient(circle at 50% 50%, rgba(255, 250, 235, 0.32) 0px, rgba(255, 195, 100, 0.12) 5px, rgba(20, 4, 0, 0.55) 11px, rgba(255, 165, 65, 0.28) 17px, rgba(10, 2, 0, 0.45) 23px, rgba(255, 235, 185, 0.35) 29px),
+            conic-gradient(from 0deg, rgba(255, 255, 255, 0.55) 0deg, rgba(255, 175, 75, 0.2) 55deg, rgba(255, 235, 180, 0.5) 110deg, rgba(140, 40, 5, 0.25) 175deg, rgba(255, 240, 200, 0.6) 240deg, rgba(210, 85, 15, 0.2) 305deg, rgba(255, 255, 255, 0.55) 360deg);
+        mix-blend-mode: overlay;
+        will-change: transform;
+        animation: gpu-majestic-spin var(--css-orbit-duration) linear infinite;
+    }
+
+    .css-plasma-inner-shear {
+        position: absolute;
+        inset: 12%;
+        border-radius: 50%;
+        background: conic-gradient(from 180deg, transparent 0deg, rgba(255, 255, 255, 0.65) 45deg, transparent 105deg, rgba(255, 200, 110, 0.5) 165deg, transparent 230deg, rgba(255, 250, 225, 0.7) 295deg, transparent 360deg);
+        filter: blur(6px);
+        mix-blend-mode: soft-light;
+        will-change: transform;
+        animation: gpu-majestic-spin calc(var(--css-orbit-duration) * 0.62) linear infinite;
+    }
+
+    .css-doppler-beaming {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: linear-gradient(90deg, rgba(235, 245, 255, calc(0.75 * var(--css-doppler))) 8%, rgba(255, 220, 155, calc(0.25 * var(--css-doppler))) 42%, rgba(15, 2, 0, calc(0.72 * var(--css-doppler))) 86%);
+        mix-blend-mode: soft-light;
+        pointer-events: none;
+    }
+
+    @keyframes gpu-majestic-spin {
+        0% { transform: rotate3d(0, 0, 1, 0deg); }
+        100% { transform: rotate3d(0, 0, 1, 360deg); }
+    }
+</style>
+
+<script>
+    // Gargantua Engine & White Rabbit Cinema Controller
+    let animationFrameId = null;
+    let resizeListener = null;
+
+    function initGargantuaEngine() {
+        const canvas = document.getElementById('gargantua-webgl-canvas') as HTMLCanvasElement | null;
+        if (!canvas) return;
+
+        // MODE 1 & MODE 2 DEFINITIONS
+        const MODE_1 = {
+            id: 1,
+            name: "Mode 1 // Radiant",
+            camDist: 13.5,
+            zoom: 0.57,
+            offsetY: 0.06,
+            blur: 6.5,
+            dim: 0,
+            autoCam: true,
+            camSpeed: 0.85,
+            exposure: 1.95,
+            doppler: 0.0,
+            speed: 0.05
+        };
+
+        const MODE_2 = {
+            id: 2,
+            name: "Mode 2 // Doppler",
+            camDist: 12.7,
+            zoom: 0.60,
+            offsetY: 0.06,
+            blur: 6.5,
+            dim: 16,
+            autoCam: true,
+            camSpeed: 0.65,
+            exposure: 1.05,
+            doppler: 1.5,
+            speed: 0.05
+        };
+
+        // Random mode on site load (50% probability Mode 1, 50% Mode 2) unless manually picked
+        let activeModeId = Math.random() < 0.5 ? 1 : 2;
+        const savedMode = sessionStorage.getItem('gargantua-chosen-mode');
+        if (savedMode === '1' || savedMode === '2') {
+            activeModeId = parseInt(savedMode, 10);
+        }
+
+        let currentPreset = activeModeId === 1 ? { ...MODE_1 } : { ...MODE_2 };
+
+        let state = {
+            engine: 'webgl',
+            speed: currentPreset.speed,
+            doppler: currentPreset.doppler,
+            exposure: currentPreset.exposure,
+            blur: currentPreset.blur,
+            dim: currentPreset.dim,
+            autoCam: currentPreset.autoCam,
+            camSpeed: currentPreset.camSpeed,
+            camDist: currentPreset.camDist,
+            zoom: currentPreset.zoom,
+            offsetY: currentPreset.offsetY,
+            pitch: 0.14,
+            roll: -0.21,
+            yaw: 0.0,
+            isCinema: false
+        };
+
+        let targetPitch = state.pitch;
+        let targetRoll = state.roll;
+        let targetYaw = state.yaw;
+        let targetZoom = state.zoom;
+        let targetCamDist = state.camDist;
+        let targetOffsetY = state.offsetY;
+        let camPhase = 0.0;
+
+        // WebGL Setup
+        const gl = canvas.getContext('webgl', {
+            alpha: false,
+            antialias: false,
+            depth: false,
+            stencil: false,
+            powerPreference: 'high-performance'
+        }) || canvas.getContext('experimental-webgl') as WebGLRenderingContext | null;
+
+        const vsSource = `
+            attribute vec2 a_position;
+            void main() {
+                gl_Position = vec4(a_position, 0.0, 1.0);
+            }
+        `;
+
+        const fsSource = `
+            #ifdef GL_FRAGMENT_PRECISION_HIGH
+            precision highp float;
+            #else
+            precision mediump float;
+            #endif
+
+            uniform vec2 u_resolution;
+            uniform float u_time;
+            uniform float u_speed;
+            uniform float u_doppler;
+            uniform float u_exposure;
+            uniform float u_pitch;
+            uniform float u_roll;
+            uniform float u_yaw;
+            uniform float u_zoom;
+            uniform float u_camDist;
+            uniform float u_offsetY;
+
+            float hash(vec2 p) {
+                p = fract(p * vec2(123.34, 456.21));
+                p += dot(p, p + 45.32);
+                return fract(p.x * p.y);
+            }
+
+            float noise(vec2 p) {
+                vec2 i = floor(p);
+                vec2 f = fract(p);
+                f = f * f * (3.0 - 2.0 * f);
+                float a = hash(i);
+                float b = hash(i + vec2(1.0, 0.0));
+                float c = hash(i + vec2(0.0, 1.0));
+                float d = hash(i + vec2(1.0, 1.0));
+                return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+            }
+
+            float fbm(vec2 p) {
+                float v = 0.0;
+                float a = 0.5;
+                mat2 rot = mat2(0.8, 0.6, -0.6, 0.8);
+                for (int i = 0; i < 4; i++) {
+                    v += a * noise(p);
+                    p = rot * p * 2.03 + vec2(13.7, 7.1);
+                    a *= 0.5;
+                }
+                return v;
+            }
+
+            vec3 blackbodyPalette(float temp, float redshift) {
+                vec3 c1 = vec3(0.18, 0.02, 0.002);
+                vec3 c2 = vec3(0.88, 0.25, 0.03);
+                vec3 c3 = vec3(1.00, 0.76, 0.36);
+                vec3 c4 = vec3(1.00, 0.98, 0.94);
+
+                vec3 col = mix(c1, c2, smoothstep(0.0, 0.4, temp));
+                col = mix(col, c3, smoothstep(0.35, 0.78, temp));
+                col = mix(col, c4, smoothstep(0.75, 1.15, temp));
+
+                vec3 blueShift = vec3(0.92, 0.97, 1.12);
+                vec3 redShift  = vec3(1.10, 0.60, 0.35);
+                col *= mix(redShift, blueShift, clamp(redshift * 0.5 + 0.5, 0.0, 1.0));
+                return col;
+            }
+
+            vec3 sampleAccretionDisk(vec3 pos, float t) {
+                float r = length(pos.xz);
+                float innerRadius = 2.55;
+                float outerRadius = 9.2;
+
+                if (r < innerRadius || r > outerRadius) return vec3(0.0);
+
+                float radialFade = smoothstep(innerRadius, innerRadius + 0.55, r) *
+                                   (1.0 - smoothstep(outerRadius - 3.8, outerRadius, r));
+
+                float angle = atan(pos.z, pos.x);
+                float angularVel = 2.8 / pow(r, 1.15);
+                float phase = angle + t * angularVel;
+
+                vec2 polarUV = vec2(r * 2.4, phase * 1.5 + r * 1.9);
+                float n1 = fbm(polarUV);
+                float n2 = fbm(vec2(r * 5.2 - t * 0.3, phase * 3.0));
+
+                float rings = sin(r * 14.0 + n1 * 4.5) * 0.5 + 0.5;
+                float streaks = mix(n1, n2, 0.55) * (0.65 + 0.35 * rings);
+
+                float temp = pow(1.0 - clamp((r - innerRadius) / (outerRadius - innerRadius), 0.0, 1.0), 1.45);
+                temp = temp * 0.78 + streaks * 0.52;
+
+                vec3 camRight = vec3(cos(u_yaw), 0.0, -sin(u_yaw));
+                float beaming = -dot(normalize(pos), camRight);
+                float dopplerFactor = 1.0 + u_doppler * 0.78 * beaming;
+                dopplerFactor = max(0.18, pow(dopplerFactor, 2.1));
+
+                vec3 color = blackbodyPalette(temp, beaming * u_doppler);
+                float density = radialFade * smoothstep(0.18, 0.88, streaks);
+
+                return color * density * dopplerFactor * 2.35;
+            }
+
+            void main() {
+                vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution.xy) / min(u_resolution.x, u_resolution.y);
+                uv.y -= u_offsetY;
+                uv /= u_zoom;
+
+                float cr = cos(u_roll);
+                float sr = sin(u_roll);
+                uv = mat2(cr, -sr, sr, cr) * uv;
+
+                float camDist = u_camDist;
+                float cp = cos(u_pitch);
+                float sp = sin(u_pitch);
+                float cy = cos(u_yaw);
+                float sy = sin(u_yaw);
+
+                vec3 ro = vec3(camDist * cp * sy, camDist * sp, -camDist * cp * cy);
+                vec3 forward = normalize(-ro);
+                vec3 worldUp = vec3(0.0, 1.0, 0.0);
+                vec3 right = normalize(cross(worldUp, forward));
+                vec3 up = cross(forward, right);
+
+                vec3 rd = normalize(forward + uv.x * right + uv.y * up);
+
+                vec3 pos = ro;
+                vec3 dir = rd;
+                vec3 accumColor = vec3(0.0);
+                float t = u_time * u_speed;
+
+                float rs = 1.95;
+                float minR = 100.0;
+                bool swallowed = false;
+
+                for (int i = 0; i < 76; i++) {
+                    float r = length(pos);
+                    minR = min(minR, r);
+
+                    if (r < rs) {
+                        swallowed = true;
+                        break;
+                    }
+                    if (i > 10 && dot(pos, dir) > 0.0 && r > max(camDist, 20.0) + 3.0) break;
+
+                    float stepSize = max(0.055, r * 0.048);
+                    vec3 gravityAccel = -1.65 * (rs / (r * r * r)) * pos;
+                    vec3 nextDir = normalize(dir + gravityAccel * stepSize);
+                    vec3 nextPos = pos + nextDir * stepSize;
+
+                    if (pos.y * nextPos.y <= 0.0) {
+                        float frac = abs(pos.y) / (abs(pos.y) + abs(nextPos.y) + 0.0001);
+                        vec3 hitPos = mix(pos, nextPos, frac);
+                        vec3 diskSample = sampleAccretionDisk(hitPos, t);
+                        accumColor += diskSample * 0.92;
+                    }
+
+                    float planeDist = abs(pos.y);
+                    if (planeDist < 0.65 && r > 2.45 && r < 8.5) {
+                        float volWeight = exp(-planeDist * 6.5) * stepSize * 0.28;
+                        accumColor += sampleAccretionDisk(vec3(pos.x, 0.0, pos.z), t) * volWeight;
+                    }
+
+                    pos = nextPos;
+                    dir = nextDir;
+                }
+
+                float photonRingDist = abs(minR - rs * 1.06);
+                float photonRing = exp(-photonRingDist * 26.0) * 1.15;
+                float photonAsymmetry = 1.0 - 0.45 * u_doppler * (uv.x / (length(uv) + 0.1));
+                accumColor += vec3(1.0, 0.88, 0.62) * photonRing * clamp(photonAsymmetry, 0.4, 1.6);
+
+                if (!swallowed) {
+                    vec2 starUV = dir.xy / (abs(dir.z) + 0.4) * 160.0;
+                    float starVal = pow(hash(floor(starUV)), 28.0);
+                    float starMask = smoothstep(rs * 1.15, rs * 1.8, minR);
+                    accumColor += vec3(0.85, 0.9, 1.0) * starVal * starMask * 0.45;
+                }
+
+                float centerGlow = exp(-length(uv) * 2.6) * 0.12;
+                float anamorphic = exp(-abs(uv.y) * 38.0) * exp(-abs(uv.x) * 1.6) * 0.18;
+                accumColor += vec3(1.0, 0.65, 0.28) * (centerGlow + anamorphic);
+
+                accumColor *= u_exposure;
+                vec3 x = max(vec3(0.0), accumColor - 0.004);
+                vec3 finalColor = (x * (6.2 * x + 0.5)) / (x * (6.2 * x + 1.7) + 0.06);
+
+                gl_FragColor = vec4(finalColor, 1.0);
+            }
+        `;
+
+        let program: WebGLProgram | null = null;
+        let uniforms: Record<string, WebGLUniformLocation | null> = {};
+
+        if (gl) {
+            function compile(type: number, src: string) {
+                const s = gl.createShader(type);
+                if (!s) return null;
+                gl.shaderSource(s, src);
+                gl.compileShader(s);
+                if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+                    console.error('Shader compile error:', gl.getShaderInfoLog(s));
+                    return null;
+                }
+                return s;
+            }
+
+            const vs = compile(gl.VERTEX_SHADER, vsSource);
+            const fs = compile(gl.FRAGMENT_SHADER, fsSource);
+            if (vs && fs) {
+                program = gl.createProgram();
+                if (program) {
+                    gl.attachShader(program, vs);
+                    gl.attachShader(program, fs);
+                    gl.linkProgram(program);
+                    gl.useProgram(program);
+
+                    const quad = gl.createBuffer();
+                    gl.bindBuffer(gl.ARRAY_BUFFER, quad);
+                    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+                        -1, -1,  1, -1, -1,  1,
+                        -1,  1,  1, -1,  1,  1
+                    ]), gl.STATIC_DRAW);
+
+                    const posLoc = gl.getAttribLocation(program, 'a_position');
+                    gl.enableVertexAttribArray(posLoc);
+                    gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+                    uniforms = {
+                        res: gl.getUniformLocation(program, 'u_resolution'),
+                        time: gl.getUniformLocation(program, 'u_time'),
+                        speed: gl.getUniformLocation(program, 'u_speed'),
+                        doppler: gl.getUniformLocation(program, 'u_doppler'),
+                        exposure: gl.getUniformLocation(program, 'u_exposure'),
+                        pitch: gl.getUniformLocation(program, 'u_pitch'),
+                        roll: gl.getUniformLocation(program, 'u_roll'),
+                        yaw: gl.getUniformLocation(program, 'u_yaw'),
+                        zoom: gl.getUniformLocation(program, 'u_zoom'),
+                        camDist: gl.getUniformLocation(program, 'u_camDist'),
+                        offsetY: gl.getUniformLocation(program, 'u_offsetY')
+                    };
+                }
+            }
+        }
+
+        function resize() {
+            if (!canvas || !gl) return;
+            const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
+            canvas.width = Math.floor(window.innerWidth * dpr);
+            canvas.height = Math.floor(window.innerHeight * dpr);
+            gl.viewport(0, 0, canvas.width, canvas.height);
+        }
+
+        window.removeEventListener('resize', resizeListener);
+        resizeListener = resize;
+        window.addEventListener('resize', resizeListener);
+        resize();
+
+        // DOM Elements
+        const root = document.documentElement;
+        const dragLayer = document.getElementById('gargantua-drag-layer');
+        const cinemaHud = document.getElementById('rabbit-cinema-hud');
+        const exitCinemaBtn = document.getElementById('rabbit-cinema-exit-btn');
+        const modeBadge = document.getElementById('rabbit-mode-badge');
+        const btnMode1 = document.getElementById('rabbit-btn-mode1');
+        const btnMode2 = document.getElementById('rabbit-btn-mode2');
+        const ctrlZoom = document.getElementById('rabbit-ctrl-zoom') as HTMLInputElement | null;
+        const valZoom = document.getElementById('rabbit-val-zoom');
+        const btnZoomIn = document.getElementById('rabbit-zoom-in');
+        const btnZoomOut = document.getElementById('rabbit-zoom-out');
+        const btnAutoCam = document.getElementById('rabbit-btn-autocam');
+        const ctrlCamSpeed = document.getElementById('rabbit-ctrl-camspeed') as HTMLInputElement | null;
+        const valCamSpeed = document.getElementById('rabbit-val-camspeed');
+        const btnResetCam = document.getElementById('rabbit-reset-cam-btn');
+
+        function applyStyles() {
+            // The blur is always active at state.blur (6.5px) without modification
+            root.style.setProperty('--overlay-blur', `${state.blur}px`);
+            root.style.setProperty('--overlay-dim', `${(state.dim / 100).toFixed(2)}`);
+
+            const seconds = Math.max(6, (8.0 / Math.max(0.05, state.speed))).toFixed(1);
+            const tiltDeg = (90 - (state.pitch * 180 / Math.PI)).toFixed(2);
+            const rollDeg = (state.roll * 180 / Math.PI).toFixed(2);
+            const yawDeg = (Math.sin(state.yaw) * 22).toFixed(2);
+
+            root.style.setProperty('--css-orbit-duration', `${seconds}s`);
+            root.style.setProperty('--css-tilt', `${Math.max(52, Math.min(88, parseFloat(tiltDeg)))}deg`);
+            root.style.setProperty('--css-roll', `${rollDeg}deg`);
+            root.style.setProperty('--css-yaw', `${yawDeg}deg`);
+            root.style.setProperty('--css-zoom', (state.zoom * (14.0 / state.camDist)).toFixed(3));
+            root.style.setProperty('--css-doppler', state.doppler.toString());
+            root.style.setProperty('--css-exposure', state.exposure.toString());
+        }
+
+        function updateModeUI() {
+            if (!btnMode1 || !btnMode2) return;
+            if (activeModeId === 1) {
+                btnMode1.className = 'px-2.5 py-1 rounded-full text-[10px] font-semibold transition border cursor-pointer bg-white text-black shadow-sm text-center';
+                btnMode2.className = 'px-2.5 py-1 rounded-full text-[10px] font-medium transition border border-transparent cursor-pointer text-[#888] hover:text-white text-center';
+                if (modeBadge) modeBadge.textContent = 'Mode 1 // Radiant';
+            } else {
+                btnMode2.className = 'px-2.5 py-1 rounded-full text-[10px] font-semibold transition border cursor-pointer bg-white text-black shadow-sm text-center';
+                btnMode1.className = 'px-2.5 py-1 rounded-full text-[10px] font-medium transition border border-transparent cursor-pointer text-[#888] hover:text-white text-center';
+                if (modeBadge) modeBadge.textContent = 'Mode 2 // Doppler';
+            }
+
+            if (ctrlZoom) ctrlZoom.value = state.zoom.toString();
+            if (valZoom) valZoom.textContent = `${state.zoom.toFixed(2)}x`;
+            if (ctrlCamSpeed) ctrlCamSpeed.value = state.camSpeed.toString();
+            if (valCamSpeed) valCamSpeed.textContent = `${state.camSpeed.toFixed(2)}x`;
+
+            if (btnAutoCam) {
+                if (state.autoCam) {
+                    btnAutoCam.className = 'px-2 py-0.5 rounded-full text-[9px] font-mono font-medium transition border cursor-pointer bg-[#181818] text-[#68d6ba] border-[#68d6ba]/40 shadow-[0_0_8px_rgba(104,214,186,0.15)]';
+                    btnAutoCam.textContent = 'AUTO: ON';
+                } else {
+                    btnAutoCam.className = 'px-2 py-0.5 rounded-full text-[9px] font-mono font-medium transition border cursor-pointer bg-[#141414] text-[#666] border-[#222] hover:text-[#999]';
+                    btnAutoCam.textContent = 'AUTO: OFF';
+                }
+            }
+        }
+
+        function setMode(modeId: 1 | 2) {
+            activeModeId = modeId;
+            sessionStorage.setItem('gargantua-chosen-mode', modeId.toString());
+            const preset = modeId === 1 ? MODE_1 : MODE_2;
+
+            state.speed = preset.speed;
+            state.doppler = preset.doppler;
+            state.exposure = preset.exposure;
+            state.blur = preset.blur;
+            state.dim = preset.dim;
+            state.autoCam = preset.autoCam;
+            state.camSpeed = preset.camSpeed;
+            state.camDist = preset.camDist;
+            state.zoom = preset.zoom;
+            state.offsetY = preset.offsetY;
+
+            targetCamDist = preset.camDist;
+            targetZoom = preset.zoom;
+            targetOffsetY = preset.offsetY;
+
+            updateModeUI();
+            applyStyles();
+        }
+
+        function setCinemaMode(active: boolean) {
+            state.isCinema = active;
+            const mainContent = document.getElementById('home-main-content');
+            const headerContainer = document.getElementById('site-header-container');
+            const floatingUsage = document.getElementById('home-floating-usage');
+
+            if (active) {
+                root.classList.add('rabbit-cinema-active');
+                if (dragLayer) {
+                    dragLayer.classList.remove('pointer-events-none');
+                    dragLayer.classList.add('pointer-events-auto');
+                }
+                if (mainContent) {
+                    mainContent.style.setProperty('opacity', '0', 'important');
+                    mainContent.style.setProperty('visibility', 'hidden', 'important');
+                    mainContent.style.setProperty('pointer-events', 'none', 'important');
+                }
+                if (headerContainer) {
+                    headerContainer.style.setProperty('opacity', '0', 'important');
+                    headerContainer.style.setProperty('visibility', 'hidden', 'important');
+                    headerContainer.style.setProperty('pointer-events', 'none', 'important');
+                }
+                if (floatingUsage) {
+                    floatingUsage.style.setProperty('opacity', '0', 'important');
+                    floatingUsage.style.setProperty('visibility', 'hidden', 'important');
+                    floatingUsage.style.setProperty('pointer-events', 'none', 'important');
+                }
+            } else {
+                root.classList.remove('rabbit-cinema-active');
+                if (dragLayer) {
+                    dragLayer.classList.add('pointer-events-none');
+                    dragLayer.classList.remove('pointer-events-auto');
+                }
+                if (mainContent) {
+                    mainContent.style.removeProperty('opacity');
+                    mainContent.style.removeProperty('visibility');
+                    mainContent.style.removeProperty('pointer-events');
+                }
+                if (headerContainer) {
+                    headerContainer.style.removeProperty('opacity');
+                    headerContainer.style.removeProperty('visibility');
+                    headerContainer.style.removeProperty('pointer-events');
+                }
+                if (floatingUsage) {
+                    floatingUsage.style.removeProperty('opacity');
+                    floatingUsage.style.removeProperty('visibility');
+                    floatingUsage.style.removeProperty('pointer-events');
+                }
+            }
+            applyStyles();
+        }
+
+        function toggleCinemaMode() {
+            setCinemaMode(!state.isCinema);
+        }
+
+        // Initialize UI with initial preset
+        updateModeUI();
+        applyStyles();
+
+        // Check if navigated with ?rabbit=cinema
+        try {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('rabbit') === 'cinema') {
+                setCinemaMode(true);
+                window.history.replaceState({}, '', '/');
+            }
+        } catch (_) {}
+
+        // Event listeners for White Rabbit Cinema activation
+        const onToggleCinema = () => toggleCinemaMode();
+        window.addEventListener('toggle-rabbit-cinema', onToggleCinema);
+
+        cinemaHud?.addEventListener('pointerdown', (e) => e.stopPropagation());
+        exitCinemaBtn?.addEventListener('click', () => setCinemaMode(false));
+
+        // ESC key exits cinema mode
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape' && state.isCinema) {
+                setCinemaMode(false);
+            }
+        };
+        window.addEventListener('keydown', onKeyDown);
+
+        // Mode switch buttons
+        btnMode1?.addEventListener('click', () => setMode(1));
+        btnMode2?.addEventListener('click', () => setMode(2));
+
+        // Zoom Controls
+        ctrlZoom?.addEventListener('input', (e) => {
+            state.zoom = parseFloat((e.target as HTMLInputElement).value);
+            targetZoom = state.zoom;
+            if (valZoom) valZoom.textContent = `${state.zoom.toFixed(2)}x`;
+            applyStyles();
+        });
+
+        btnZoomIn?.addEventListener('click', () => {
+            state.zoom = Math.min(2.20, state.zoom + 0.10);
+            targetZoom = state.zoom;
+            if (ctrlZoom) ctrlZoom.value = state.zoom.toString();
+            if (valZoom) valZoom.textContent = `${state.zoom.toFixed(2)}x`;
+            applyStyles();
+        });
+
+        btnZoomOut?.addEventListener('click', () => {
+            state.zoom = Math.max(0.30, state.zoom - 0.10);
+            targetZoom = state.zoom;
+            if (ctrlZoom) ctrlZoom.value = state.zoom.toString();
+            if (valZoom) valZoom.textContent = `${state.zoom.toFixed(2)}x`;
+            applyStyles();
+        });
+
+        // Auto Cam Toggle & Speed
+        btnAutoCam?.addEventListener('click', () => {
+            state.autoCam = !state.autoCam;
+            updateModeUI();
+        });
+
+        ctrlCamSpeed?.addEventListener('input', (e) => {
+            state.camSpeed = parseFloat((e.target as HTMLInputElement).value);
+            if (valCamSpeed) valCamSpeed.textContent = `${state.camSpeed.toFixed(2)}x`;
+            if (!state.autoCam) {
+                state.autoCam = true;
+                updateModeUI();
+            }
+        });
+
+        btnResetCam?.addEventListener('click', () => {
+            const preset = activeModeId === 1 ? MODE_1 : MODE_2;
+            targetPitch = 0.14;
+            targetRoll = -0.21;
+            targetYaw = 0.0;
+            targetZoom = preset.zoom;
+            targetCamDist = preset.camDist;
+            targetOffsetY = preset.offsetY;
+            state.zoom = preset.zoom;
+            state.camDist = preset.camDist;
+            state.offsetY = preset.offsetY;
+            if (ctrlZoom) ctrlZoom.value = state.zoom.toString();
+            if (valZoom) valZoom.textContent = `${state.zoom.toFixed(2)}x`;
+            applyStyles();
+        });
+
+        // Pointer Dragging for Orbiting
+        let isDragging = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        const onPointerDown = (e: PointerEvent) => {
+            if (!state.isCinema && !e.shiftKey) return;
+            isDragging = true;
+            lastX = e.clientX;
+            lastY = e.clientY;
+        };
+
+        const onPointerMove = (e: PointerEvent) => {
+            if (!isDragging) return;
+            const dx = e.clientX - lastX;
+            const dy = e.clientY - lastY;
+            lastX = e.clientX;
+            lastY = e.clientY;
+
+            targetYaw += dx * 0.0045;
+            targetRoll = Math.max(-0.85, Math.min(0.85, targetRoll + dx * 0.0028));
+            targetPitch = Math.max(-0.45, Math.min(0.58, targetPitch + dy * 0.0032));
+        };
+
+        const onPointerUp = () => {
+            isDragging = false;
+        };
+
+        window.addEventListener('pointerdown', onPointerDown);
+        window.addEventListener('pointermove', onPointerMove);
+        window.addEventListener('pointerup', onPointerUp);
+
+        // Wheel Zoom (Always active in Cinema mode or when holding Shift)
+        const onWheel = (e: WheelEvent) => {
+            if (state.isCinema || e.shiftKey) {
+                // Adjust zoom optical FOV smoothly with mouse wheel
+                const zoomDelta = -e.deltaY * 0.001;
+                state.zoom = Math.max(0.30, Math.min(2.20, state.zoom + zoomDelta));
+                targetZoom = state.zoom;
+                if (ctrlZoom) ctrlZoom.value = state.zoom.toString();
+                if (valZoom) valZoom.textContent = `${state.zoom.toFixed(2)}x`;
+                applyStyles();
+            }
+        };
+        window.addEventListener('wheel', onWheel, { passive: true });
+
+        // Touch Pinch-to-zoom support
+        let initialPinchDist = 0;
+        let initialPinchZoom = 0;
+
+        window.addEventListener('touchstart', (e: TouchEvent) => {
+            if (state.isCinema && e.touches.length === 2) {
+                initialPinchDist = Math.hypot(
+                    e.touches[0].clientX - e.touches[1].clientX,
+                    e.touches[0].clientY - e.touches[1].clientY
+                );
+                initialPinchZoom = state.zoom;
+            }
+        }, { passive: true });
+
+        window.addEventListener('touchmove', (e: TouchEvent) => {
+            if (state.isCinema && e.touches.length === 2 && initialPinchDist > 0) {
+                const currentDist = Math.hypot(
+                    e.touches[0].clientX - e.touches[1].clientX,
+                    e.touches[0].clientY - e.touches[1].clientY
+                );
+                const scaleFactor = currentDist / initialPinchDist;
+                state.zoom = Math.max(0.30, Math.min(2.20, initialPinchZoom * scaleFactor));
+                targetZoom = state.zoom;
+                if (ctrlZoom) ctrlZoom.value = state.zoom.toString();
+                if (valZoom) valZoom.textContent = `${state.zoom.toFixed(2)}x`;
+                applyStyles();
+            }
+        }, { passive: true });
+
+        // Animation Loop
+        let prevTime = performance.now();
+
+        function render(now: number) {
+            const dt = Math.min(0.1, (now - prevTime) * 0.001);
+            prevTime = now;
+
+            if (state.autoCam && !isDragging) {
+                camPhase += dt * state.camSpeed * 0.65;
+                targetYaw += dt * state.camSpeed * 0.38;
+                state.pitch = 0.14 + Math.sin(camPhase * 0.85) * 0.18;
+                state.roll = -0.21 + Math.cos(camPhase * 0.55) * 0.22;
+                state.yaw += (targetYaw - state.yaw) * 0.06;
+                state.zoom = targetZoom * (1.0 + Math.sin(camPhase * 0.4) * 0.05);
+                state.camDist = targetCamDist + Math.sin(camPhase * 0.35) * 0.6;
+                state.offsetY += (targetOffsetY - state.offsetY) * 0.06;
+            } else {
+                state.pitch += (targetPitch - state.pitch) * 0.06;
+                state.roll += (targetRoll - state.roll) * 0.06;
+                state.yaw += (targetYaw - state.yaw) * 0.06;
+                state.zoom += (targetZoom - state.zoom) * 0.06;
+                state.camDist += (targetCamDist - state.camDist) * 0.06;
+                state.offsetY += (targetOffsetY - state.offsetY) * 0.06;
+            }
+
+            if (gl && program) {
+                gl.useProgram(program);
+                gl.uniform2f(uniforms.res, canvas.width, canvas.height);
+                gl.uniform1f(uniforms.time, now * 0.001);
+                gl.uniform1f(uniforms.speed, state.speed);
+                gl.uniform1f(uniforms.doppler, state.doppler);
+                gl.uniform1f(uniforms.exposure, state.exposure);
+                gl.uniform1f(uniforms.pitch, state.pitch);
+                gl.uniform1f(uniforms.roll, state.roll);
+                gl.uniform1f(uniforms.yaw, state.yaw);
+                gl.uniform1f(uniforms.zoom, state.zoom);
+                gl.uniform1f(uniforms.camDist, state.camDist);
+                gl.uniform1f(uniforms.offsetY, state.offsetY);
+
+                gl.drawArrays(gl.TRIANGLES, 0, 6);
+            } else {
+                applyStyles();
+            }
+
+            animationFrameId = requestAnimationFrame(render);
+        }
+
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        animationFrameId = requestAnimationFrame(render);
+    }
+
+    function cleanupGargantuaEngine() {
+        if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+            animationFrameId = null;
+        }
+        if (resizeListener) {
+            window.removeEventListener('resize', resizeListener);
+            resizeListener = null;
+        }
+        document.documentElement.classList.remove('rabbit-cinema-active');
+        const mainContent = document.getElementById('home-main-content');
+        if (mainContent) {
+            mainContent.style.removeProperty('opacity');
+            mainContent.style.removeProperty('visibility');
+            mainContent.style.removeProperty('pointer-events');
+        }
+        const headerContainer = document.getElementById('site-header-container');
+        if (headerContainer) {
+            headerContainer.style.removeProperty('opacity');
+            headerContainer.style.removeProperty('visibility');
+            headerContainer.style.removeProperty('pointer-events');
+        }
+        const floatingUsage = document.getElementById('home-floating-usage');
+        if (floatingUsage) {
+            floatingUsage.style.removeProperty('opacity');
+            floatingUsage.style.removeProperty('visibility');
+            floatingUsage.style.removeProperty('pointer-events');
+        }
+    }
+
+    // Astro lifecycle hooks for ClientRouter
+    document.addEventListener('astro:page-load', initGargantuaEngine);
+    document.addEventListener('astro:before-swap', cleanupGargantuaEngine);
+</script>

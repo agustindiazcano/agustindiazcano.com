@@ -40,7 +40,7 @@ const llmContext = fs.readFileSync("public/llms-full.txt", "utf-8");
         class="bg-background text-foreground antialiased selection:bg-success selection:text-white"
     >
         {/* Persistent header — lives outside the swap zone, never re-rendered */}
-        <div class="w-full px-6 pt-2 md:pt-2">
+        <div id="site-header-container" class="w-full px-6 pt-2 md:pt-2 transition-all duration-700">
             <div class={Astro.url.pathname === "/" ? "max-w-[1200px] mx-auto" : "w-full"}>
                 <Header className={compactHeader ? "!mb-0" : ""} compact={Astro.url.pathname !== "/"} />
             </div>
@@ -68,5 +68,17 @@ const llmContext = fs.readFileSync("public/llms-full.txt", "utf-8");
         overflow: hidden;
         clip: rect(1px, 1px, 1px, 1px); /* extra seguro */
         white-space: pre-wrap;
+    }
+
+    /* White Rabbit Cinematic Mode: hides website UI with a graceful fade */
+    html.rabbit-cinema-active #site-header-container,
+    html.rabbit-cinema-active #home-floating-usage,
+    html.rabbit-cinema-active #home-main-content,
+    html.rabbit-cinema-active [aria-label="Back to top"] {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        transform: scale(0.985) translateY(10px) !important;
+        transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
 </style>

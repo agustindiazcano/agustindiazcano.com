@@ -87,16 +87,14 @@ const socialLinks = [
         ))
     }
     <div class="relative group flex items-center self-center">
-        <a
+        <button
             id="nav-rabbit-btn"
-            href="https://agustindiazcano.github.io/zombie-horde-survivors/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="nav-rabbit text-[#666] hover:text-white transition-all duration-300 p-2 rounded-full border border-[#222] bg-[#111] hover:border-[#444] hover:bg-[#1a1a1a] flex items-center justify-center"
+            type="button"
+            class="nav-rabbit text-[#666] hover:text-white transition-all duration-300 p-2 rounded-full border border-[#222] bg-[#111] hover:border-[#444] hover:bg-[#1a1a1a] flex items-center justify-center cursor-pointer"
             aria-label="Follow the white rabbit"
         >
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 16a3 3 0 0 1 2.24 5"/><path d="M18 12h.01"/><path d="M18 21h-8a4 4 0 0 1-4-4 7 7 0 0 1 7-7h.2L9.6 6.4a1 1 0 1 1 2.8-2.8L15.8 7h.2c3.3 0 6 2.7 6 6v1a2 2 0 0 1-2 2h-1a3 3 0 0 0-3 3"/><path d="M20 8.54V4a2 2 0 1 0-4 0v3"/><path d="M7.612 12.524a3 3 0 1 0-1.6 4.3"/></svg>
-        </a>
+        </button>
 
         {/* Floating tooltip above rabbit */}
         <div
@@ -163,6 +161,23 @@ const socialLinks = [
     // Run immediately on hard load
     updateActiveNav();
 
+    function bindNavRabbit() {
+        const btn = document.getElementById("nav-rabbit-btn");
+        if (!btn) return;
+        btn.onclick = (e) => {
+            e.preventDefault();
+            if (window.location.pathname === "/") {
+                window.dispatchEvent(new CustomEvent("toggle-rabbit-cinema"));
+            } else {
+                window.location.href = "/?rabbit=cinema";
+            }
+        };
+    }
+    bindNavRabbit();
+
     // Re-run after every View Transition swap
-    document.addEventListener("astro:page-load", updateActiveNav);
+    document.addEventListener("astro:page-load", () => {
+        updateActiveNav();
+        bindNavRabbit();
+    });
 </script>
