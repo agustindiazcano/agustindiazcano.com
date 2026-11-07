@@ -57,7 +57,7 @@ Management Sciences & Quantitative Methods. Equivalent to a 3 year European BS.
     - [Live Demo](https://ibm-bob-mcp-agent-guard.vercel.app/) | [Video Demo](https://www.youtube.com/watch?v=m64qdd1axV0&t=6s) | [Hackathon Certificate](https://lablab.ai/u/@agustin_diazcano6/ai-hackathons/ibm-bob-2-hackathon/certificate)
 - **[Quantum Computing: Windfarm Optimization (QWind)](https://github.com/agustindiazcano/qwind-qaoa-windfarm) (2026)**: Constraint-preserving XY-mixer QAOA for wind farm curtailment, executed on a real quantum computer (IonQ Forte 1). Chooses exactly K active turbines out of N (search space C(N, K)) by minimizing a wake-physics cost Hamiltonian with a variational circuit that preserves the number of active turbines by symmetry.
     - Stack: Python, Qiskit 2.5, QAOA, QUBO, Ising Hamiltonians, NumPy, SciPy (COBYLA), Pytest (150+ tests), GitHub Actions, ERA5 / Open-Meteo API, SCADA wind datasets (Zenodo).
-    - [Live](https://agustindiazcano.github.io/qwind-qaoa-windfarm/) | [Video](https://www.youtube.com/watch?v=UGVkgYGXkF4) | [Repository](https://github.com/agustindiazcano/qwind-qaoa-windfarm) | [Qollab](https://qollab.xyz/u/agustindiazcano/qwind)
+    - [Live](https://agustindiazcano.github.io/qwind-qaoa-windfarm/) | [Video](https://www.youtube.com/watch?v=UGVkgYGXkF4) | [Repository](https://github.com/agustindiazcano/qwind-qaoa-windfarm) | [Qollab](https://qollab.xyz/u/agustindiazcano/qwind) | [UNICEN news](https://exa.unicen.edu.ar/la-sede-unicen-se-destaco-en-el-hackathon-mundial-de-computacion-cuantica-con-proyectos-premiados/)
 - **[Argentina 2056: Data Visualization and Economic Analysis](https://github.com/agustindiazcano/arg-2056-udesa) (2026)**: Macroeconomic data visualization platform and 3D geospatial viewer of the 1817 Andes crossing. [Live Demo](https://argentina2056.vercel.app/)
     - Stack: TypeScript, React, Vite, Zustand, Three.js, ECharts, MapLibre GL, GSAP, Python, NumPy, jsonschema, pytest, Vitest, Playwright, axe, GitHub Actions, Vercel.
     - Data pipeline: automated Python ingestion from the World Bank (REST), IMF (SDMX) and Argentine Secretariats of Energy/Agriculture (CKAN), normalized to constant 2015 USD; manual extraction from official PDFs (INDEC, Mining Secretariat) with automated integrity tests. The frontend has zero hardcoded numbers: it only consumes versioned JSON datasets, keeping traceability of sources, dates and units.
@@ -129,10 +129,23 @@ https://www.agustindiazcano.com/running-agustin-diaz-cano
 - **ResearchGate**: https://www.researchgate.net/profile/Agustin-Diaz-Cano
 - **Medium**: https://medium.com/@agustindiazcano
 - **Dev.to**: https://dev.to/agustindiazcano
+- **Codewars**: https://www.codewars.com/users/agusdiazcano
 - **X (Twitter)**: https://x.com/adiazcano_
 - **X (Twitter), second account**: https://x.com/agustinbowie
 - **ModDB**: https://www.moddb.com/members/heroagastin
 - **Rankings and Recognition**: https://www.agustindiazcano.com/rankings
+
+## Rankings and Recognition
+
+Full ledger with sources: https://www.agustindiazcano.com/rankings (last updated 2026-11-07)
+
+- **Qollab x IonQ Global Quantum Hackathon (UNICEN node)**: QWind (Agustin Diaz-Cano and Baltazar Salerno) shared 3rd place and received Best of Quantum Impact. Source: https://exa.unicen.edu.ar/la-sede-unicen-se-destaco-en-el-hackathon-mundial-de-computacion-cuantica-con-proyectos-premiados/
+- **IBM Bob 2.0 Global Hackathon**: top 32% by delivery (one of 1,124 successful submissions out of 3,464 teams and 15,727 participants). https://lablab.ai/ai-hackathons/ibm-bob-2-hackathon
+- **Gitista Argentina**: #23 in Argentina, #12 in Argentina for Python, #3291 globally. https://gitista.com/argentina/
+- **Committers.top Argentina** (most active GitHub users in Argentina, at least 59 followers): #14 by contributions (3,968) and #15 by public commits (3,244). https://committers.top/argentina
+- **Codewars**: #30,420 worldwide, honor percentile Top 3.945% (about the 96th percentile); #9 in the Plataforma 5 clan leaderboard. https://www.codewars.com/users/agusdiazcano
+- **LibHunt**: AFAW listed #8 of 8 in Python ai-assisted-development (ordered by GitHub stars). https://www.libhunt.com/l/python/topic/ai-assisted-development
+- **ModDB**: Men of War mods published as Heroagastin. https://www.moddb.com/members/heroagastin
 
 ## Colleagues
 

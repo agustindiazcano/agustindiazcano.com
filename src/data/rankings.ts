@@ -22,7 +22,7 @@ export const rankingsLastUpdated = "2026-11-07";
  * To add a row: confirm the position on the source page, then add it with the date checked (YYYY-MM).
  *
  * Pending (need exact source URL + screenshot before adding):
- * LibHunt (AFAW), Codewars, VibeCodeStats, Trendshift, UNICEN news note.
+ * VibeCodeStats, Trendshift.
  */
 export const rankingTiers: RankingTier[] = [
     {
@@ -31,12 +31,20 @@ export const rankingTiers: RankingTier[] = [
         description: "Results evaluated by juries or platform-wide submission counts.",
         entries: [
             {
-                platform: "Qollab x IonQ Global Quantum Hackathon",
-                metric: "QWind: quantum optimization project",
-                detail: "QAOA optimizer built with Baltazar Salerno and published on the Qollab showcase.",
+                platform: "Qollab x IonQ Global Quantum Hackathon (UNICEN node)",
+                metric: "Shared 3rd place and Best of Quantum Impact",
+                detail: "QWind, a wind farm optimizer using quantum algorithms, developed with Baltazar Salerno. Reported by the Facultad de Ciencias Exactas (UNICEN) as one of the awarded projects.",
+                url: "https://exa.unicen.edu.ar/la-sede-unicen-se-destaco-en-el-hackathon-mundial-de-computacion-cuantica-con-proyectos-premiados/",
+                source: "exa.unicen.edu.ar",
+                checked: "2026-11-07",
+            },
+            {
+                platform: "QWind on Qollab",
+                metric: "Project showcase",
+                detail: "QAOA wind farm optimizer published on the Qollab platform.",
                 url: "https://qollab.xyz/u/agustindiazcano/qwind",
                 source: "qollab.xyz",
-                checked: "2026-11",
+                checked: "2026-11-07",
             },
             {
                 platform: "IBM Bob 2.0 Global Hackathon (lablab.ai)",
@@ -101,6 +109,37 @@ export const rankingTiers: RankingTier[] = [
                 detail: "Position when filtering the Argentina ranking by the Python language.",
                 url: "https://gitista.com/argentina/",
                 source: "gitista.com",
+                checked: "2026-11-07",
+            },
+        ],
+    },
+    {
+        id: "algorithms",
+        title: "Algorithms and project discovery",
+        description: "Competitive programming standings and open source project indexes.",
+        entries: [
+            {
+                platform: "Codewars: global leaderboard",
+                metric: "#30,420 worldwide (honor percentile: Top 3.945%)",
+                detail: "Top 3.945% by honor is about the 96th percentile. 5 kyu, 1,132 honor, 263 kata completed.",
+                url: "https://www.codewars.com/users/agusdiazcano",
+                source: "codewars.com",
+                checked: "2026-11-07",
+            },
+            {
+                platform: "Codewars: Plataforma 5 clan",
+                metric: "#9 in the Plataforma 5 clan leaderboard",
+                detail: "Ranked by honor among all members of the Plataforma 5 programming bootcamp clan.",
+                url: "https://www.codewars.com/users/leaderboard/clan?clan=Plataforma+5",
+                source: "codewars.com",
+                checked: "2026-11-07",
+            },
+            {
+                platform: "LibHunt: Python ai-assisted-development",
+                metric: "Listed #8 of 8 projects",
+                detail: "AFAW (Anti-Fragile Agentic Workflow) is indexed in this topic, which is ordered by GitHub stars. It was also mentioned in a Show HN post on Hacker News (2026-09-30).",
+                url: "https://www.libhunt.com/l/python/topic/ai-assisted-development",
+                source: "libhunt.com",
                 checked: "2026-11-07",
             },
         ],
