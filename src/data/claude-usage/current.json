@@ -1,32 +1,32 @@
 {
-  "period": "10-08 to 11-06",
+  "period": "10-09 to 11-07",
   "favoriteModel": "claude-sonnet-5-5",
-  "totalTokens": "7.92b",
-  "sessions": 140,
+  "totalTokens": "7.91b",
+  "sessions": 139,
   "activeDays": "29/30",
-  "longestStreak": "21 days",
-  "currentStreak": "21 days",
+  "longestStreak": "22 days",
+  "currentStreak": "22 days",
   "codex": {
-    "totalTokens": 688656906,
+    "totalTokens": 694615850,
     "sessions": 61,
-    "inputTokens": 686916133,
-    "cachedInputTokens": 676321024,
-    "outputTokens": 1740773,
+    "inputTokens": 692850164,
+    "cachedInputTokens": 682245120,
+    "outputTokens": 1765686,
     "recordedSince": "10-12"
   },
   "antigravity": {
-    "totalTokens": 1464939501,
-    "sessions": 103,
-    "turns": 11234,
-    "inputTokens": 81106227,
-    "cachedInputTokens": 1378226894,
-    "outputTokens": 5606380
+    "totalTokens": 1612116841,
+    "sessions": 112,
+    "turns": 12338,
+    "inputTokens": 85128968,
+    "cachedInputTokens": 1520690948,
+    "outputTokens": 6296925
   },
   "combined": {
-    "totalTokens": "10.46b",
-    "sessions": 329
+    "totalTokens": "10.60b",
+    "sessions": 337
   },
-  "claudeTotalTokens": 7916894274,
+  "claudeTotalTokens": 7908519791,
   "metamuse": {
     "totalTokens": 382290213,
     "sessions": 23,
