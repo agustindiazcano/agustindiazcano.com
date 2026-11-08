@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import ProjectGrid from "../components/ProjectGrid.jsx";
 import Footer from "../components/Footer.astro";
 import ClaudeUsage from "../components/ClaudeUsage.astro";
+import HeaderActions from "../components/HeaderActions.astro";
 import GargantuaBackground from "../components/GargantuaBackground.astro";
 import LoadingScreen from "../components/LoadingScreen.astro";
 ---
@@ -15,8 +16,8 @@ import LoadingScreen from "../components/LoadingScreen.astro";
     <GargantuaBackground isHome={true} />
     {/* Floats to the right of the header from 1024px up (compact below 1300px), stacks above the grid otherwise */}
     <div id="home-floating-usage" class="w-full max-w-[1200px] mx-auto px-6 mb-3 flex flex-col items-end gap-1.5 relative z-20 lg:absolute lg:top-2 lg:right-6 lg:w-auto lg:max-w-none lg:mx-0 lg:px-0 lg:mb-0 transition-all duration-700">
+        <HeaderActions class="hidden lg:flex" />
         <ClaudeUsage />
-        <a href="/agents-usage" class="hidden md:flex md:w-48 min-[1300px]:w-64 items-center justify-between rounded-md md:rounded-lg border border-[#292929] bg-[#111] px-3 py-1.5 md:px-4 md:py-2.5 text-[10px] md:text-xs font-mono text-[#aaa] transition-colors hover:border-[#68d6ba] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#68d6ba]">AI Usage <span aria-hidden="true">↗</span></a>
     </div>
     <main
         id="home-main-content"
