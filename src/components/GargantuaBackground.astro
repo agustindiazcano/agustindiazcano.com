@@ -64,99 +64,57 @@ const { isHome = true } = Astro.props;
 <!-- WHITE RABBIT CINEMATIC CONTROLLER (Reveals when clicking Follow the White Rabbit) -->
 <div id="rabbit-cinema-hud" class="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 font-mono text-xs select-none pointer-events-none opacity-0 translate-y-6 transition-all duration-500 w-[96vw] sm:w-auto max-w-4xl flex flex-col items-center gap-2">
     
-    <!-- Sagittarius A* (Sgr A*) Curiosity Fact Note -->
-    <div class="pointer-events-auto flex items-center gap-2 text-[9px] sm:text-[10px] text-[#888] font-mono tracking-tight bg-[#0c0c0c]/85 backdrop-blur-md px-3.5 py-1 rounded-full border border-[#222] shadow-[0_4px_16px_rgba(0,0,0,0.6)] text-center max-w-full">
-        <span class="inline-block w-1.5 h-1.5 rounded-full bg-[#68d6ba] shrink-0 animate-pulse"></span>
+    <!-- Sagittarius A* (Sgr A*) fact note -->
+    <div class="pointer-events-auto flex items-center gap-2 text-[9px] sm:text-[10px] text-[#888] font-mono bg-[#111] px-3 py-1 border border-[#222] text-center max-w-full">
         <span class="truncate sm:whitespace-normal">
-            <strong class="text-[#ededed]">Sagittarius A* (Sgr A*)</strong> &bull; Supermassive black hole at the center of the Milky Way (~4.1M solar masses, 26,000 ly from Earth)
+            <strong class="text-white font-normal">Sagittarius A* (Sgr A*)</strong> &bull; Supermassive black hole at the center of the Milky Way (~4.1M solar masses, 26,000 ly from Earth)
         </span>
-        <span id="rabbit-mode-badge" class="text-[#68d6ba] font-mono font-medium shrink-0 ml-1 hidden md:inline">Mode 2 // Doppler</span>
+        <span id="rabbit-mode-badge" class="text-[#68d6ba] shrink-0 hidden md:inline">Mode 2 // Doppler</span>
     </div>
 
-    <!-- Sleek Floating Bottom Control Bar -->
-    <div class="pointer-events-auto bg-[#0c0c0c]/92 backdrop-blur-2xl border border-[#262626] rounded-full px-2.5 py-1.5 sm:px-3.5 sm:py-2 shadow-[0_16px_40px_rgba(0,0,0,0.9)] flex items-center justify-center gap-2 sm:gap-2.5 max-w-full overflow-x-auto">
-        
-        <!-- Sgr A* Icon Tag -->
-        <div class="hidden lg:flex items-center gap-1.5 text-[#ededed] pr-1 border-r border-[#222]">
-            <span class="text-[#68d6ba]">
-                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M13 16a3 3 0 0 1 2.24 5"/><path d="M18 12h.01"/><path d="M18 21h-8a4 4 0 0 1-4-4 7 7 0 0 1 7-7h.2L9.6 6.4a1 1 0 1 1 2.8-2.8L15.8 7h.2c3.3 0 6 2.7 6 6v1a2 2 0 0 1-2 2h-1a3 3 0 0 0-3 3"/><path d="M20 8.54V4a2 2 0 1 0-4 0v3"/><path d="M7.612 12.524a3 3 0 1 0-1.6 4.3"/>
-                </svg>
-            </span>
-            <span class="text-[10px] font-semibold tracking-wider whitespace-nowrap">Sgr A*</span>
+    <!-- Control bar -->
+    <div class="pointer-events-auto bg-[#111] border border-[#222] flex items-stretch max-w-full overflow-x-auto text-[10px] text-[#888]">
+
+        <!-- Mode -->
+        <div class="flex items-center gap-1 p-1.5 shrink-0">
+            <button id="rabbit-btn-mode1" type="button" class="px-2.5 py-1 border border-transparent text-[#888] hover:text-white cursor-pointer transition-colors" title="Switch to Mode 1 // Radiant">Radiant</button>
+            <button id="rabbit-btn-mode2" type="button" class="px-2.5 py-1 border border-white bg-white text-black cursor-pointer transition-colors" title="Switch to Mode 2 // Doppler">Doppler</button>
         </div>
 
-        <!-- Mode Selector Segment -->
-        <div class="flex items-center bg-[#050505] p-0.5 rounded-full border border-[#222] shrink-0">
-            <button 
-                id="rabbit-btn-mode1" 
-                type="button"
-                class="px-2.5 py-1 rounded-full text-[10px] font-medium transition cursor-pointer text-[#888] hover:text-white text-center"
-                title="Switch to Mode 1 // Radiant"
-            >
-                Radiant
-            </button>
-            <button 
-                id="rabbit-btn-mode2" 
-                type="button"
-                class="px-2.5 py-1 rounded-full text-[10px] font-semibold transition border cursor-pointer bg-white text-black shadow-sm text-center"
-                title="Switch to Mode 2 // Doppler"
-            >
-                Doppler
-            </button>
+        <!-- Zoom -->
+        <div class="flex items-center gap-2 px-3 border-l border-[#222] shrink-0">
+            <span class="uppercase text-[#666] hidden sm:inline">Zoom</span>
+            <button id="rabbit-zoom-out" type="button" class="hud-step" title="Zoom out" aria-label="Zoom out">-</button>
+            <input id="rabbit-ctrl-zoom" type="range" min="0.30" max="2.20" step="0.05" value="0.60" class="hud-slider w-14 sm:w-20" aria-label="Zoom" />
+            <button id="rabbit-zoom-in" type="button" class="hud-step" title="Zoom in" aria-label="Zoom in">+</button>
+            <span id="rabbit-val-zoom" class="text-white w-8 text-right">0.60x</span>
         </div>
 
-        <div class="w-px h-3.5 bg-[#262626] shrink-0"></div>
-
-        <!-- Zoom Control (In / Out + Mini Slider) -->
-        <div class="flex items-center gap-1.5 bg-[#121212] px-2 py-1 rounded-full border border-[#222] shrink-0">
-            <span class="text-[9px] text-[#777] uppercase font-mono hidden sm:inline">Zoom</span>
-            <button id="rabbit-zoom-out" type="button" class="w-5 h-5 rounded-full bg-[#1e1e1e] hover:bg-[#2a2a2a] text-[#ccc] hover:text-white font-mono flex items-center justify-center cursor-pointer active:scale-95 text-xs transition" title="Zoom out">-</button>
-            <input id="rabbit-ctrl-zoom" type="range" min="0.30" max="2.20" step="0.05" value="0.60" class="hud-slider w-14 sm:w-20" />
-            <button id="rabbit-zoom-in" type="button" class="w-5 h-5 rounded-full bg-[#1e1e1e] hover:bg-[#2a2a2a] text-[#ccc] hover:text-white font-mono flex items-center justify-center cursor-pointer active:scale-95 text-xs transition" title="Zoom in">+</button>
-            <span id="rabbit-val-zoom" class="text-[#68d6ba] font-mono text-[10px] w-8 text-center">0.60x</span>
+        <!-- Brightness -->
+        <div class="flex items-center gap-2 px-3 border-l border-[#222] shrink-0">
+            <span class="uppercase text-[#666] hidden sm:inline">Brightness</span>
+            <input id="rabbit-ctrl-exposure" type="range" min="0.40" max="3.00" step="0.05" value="1.05" class="hud-slider w-14 sm:w-20" aria-label="Brightness" />
+            <span id="rabbit-val-exposure" class="text-white w-8 text-right">1.05x</span>
         </div>
 
-        <!-- Auto Orbit & Speed Control -->
-        <div class="flex items-center gap-1.5 bg-[#121212] px-2 py-1 rounded-full border border-[#222] shrink-0">
-            <button 
-                id="rabbit-btn-autocam" 
-                type="button"
-                class="px-2 py-0.5 rounded-full text-[9px] font-mono font-medium transition border cursor-pointer bg-[#181818] text-[#68d6ba] border-[#68d6ba]/40 shadow-[0_0_8px_rgba(104,214,186,0.15)]"
-                title="Toggle Auto Orbit"
-            >
-                AUTO: ON
-            </button>
-            <input id="rabbit-ctrl-camspeed" type="range" min="0.05" max="2.0" step="0.05" value="0.65" class="hud-slider w-10 sm:w-16" title="Orbit Speed" />
-            <span id="rabbit-val-camspeed" class="text-[10px] font-mono text-[#68d6ba] w-7 text-center">0.65x</span>
+        <!-- Orbit -->
+        <div class="flex items-center gap-2 px-3 border-l border-[#222] shrink-0">
+            <button id="rabbit-btn-autocam" type="button" class="px-2 py-1 border border-[#68d6ba] text-[#68d6ba] cursor-pointer transition-colors" title="Toggle Auto Orbit">AUTO: ON</button>
+            <input id="rabbit-ctrl-camspeed" type="range" min="0.05" max="2.0" step="0.05" value="0.65" class="hud-slider w-10 sm:w-16" title="Orbit Speed" aria-label="Orbit speed" />
+            <span id="rabbit-val-camspeed" class="text-white w-8 text-right">0.65x</span>
         </div>
 
-        <!-- Reset Camera -->
-        <button 
-            id="rabbit-reset-cam-btn" 
-            type="button" 
-            class="p-1.5 rounded-full bg-[#161616] hover:bg-[#222] border border-[#262626] hover:border-[#383838] text-[#888] hover:text-white transition cursor-pointer shrink-0" 
-            title="Reset Camera View"
-        >
-            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Reset -->
+        <button id="rabbit-reset-cam-btn" type="button" class="px-3 border-l border-[#222] text-[#888] hover:text-white hover:bg-[#1a1a1a] cursor-pointer transition-colors shrink-0" title="Reset Camera View" aria-label="Reset camera view">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter">
                 <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
             </svg>
         </button>
 
-        <div class="w-px h-3.5 bg-[#262626] shrink-0"></div>
-
-        <!-- Exit Cinema Mode Button -->
-        <button 
-            id="rabbit-cinema-exit-btn" 
-            type="button"
-            class="px-2.5 py-1 rounded-full bg-[#161616] hover:bg-[#222] border border-[#262626] hover:border-[#383838] text-[#ccc] hover:text-white text-[11px] font-medium flex items-center gap-1.5 transition cursor-pointer shrink-0"
-            title="Exit Cinema Mode (Esc)"
-        >
+        <!-- Exit -->
+        <button id="rabbit-cinema-exit-btn" type="button" class="px-3 border-l border-[#222] text-[#ccc] hover:text-white hover:bg-[#1a1a1a] flex items-center gap-1.5 cursor-pointer transition-colors shrink-0" title="Exit Cinema Mode (Esc)">
             <span>Exit</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[#777]">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
+            <span aria-hidden="true" class="text-[#666]">Esc</span>
         </button>
     </div>
 </div>
@@ -202,9 +160,9 @@ const { isHome = true } = Astro.props;
     .hud-slider {
         -webkit-appearance: none;
         appearance: none;
-        height: 4px;
-        border-radius: 999px;
-        background: #222222;
+        height: 2px;
+        border-radius: 0;
+        background: #333333;
         outline: none;
         cursor: pointer;
     }
@@ -212,20 +170,37 @@ const { isHome = true } = Astro.props;
     .hud-slider::-webkit-slider-thumb {
         -webkit-appearance: none;
         appearance: none;
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
+        width: 8px;
+        height: 14px;
+        border-radius: 0;
         background: #ededed;
-        border: 1px solid #444444;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-        transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+        border: 0;
     }
 
-    .hud-slider::-webkit-slider-thumb:hover {
-        transform: scale(1.2);
-        background: #ffffff;
-        border-color: #68d6ba;
+    .hud-slider::-moz-range-thumb {
+        width: 8px;
+        height: 14px;
+        border-radius: 0;
+        background: #ededed;
+        border: 0;
     }
+
+    .hud-slider::-webkit-slider-thumb:hover { background: #68d6ba; }
+    .hud-slider::-moz-range-thumb:hover { background: #68d6ba; }
+
+    .hud-step {
+        width: 20px;
+        height: 20px;
+        border: 1px solid #222;
+        color: #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: color 0.15s, border-color 0.15s;
+    }
+
+    .hud-step:hover { color: #fff; border-color: #444; }
 
     /* CSS ENGINE STYLES */
     #gargantua-css-viewport {
@@ -767,6 +742,8 @@ const { isHome = true } = Astro.props;
         const ctrlCamSpeed = document.getElementById('rabbit-ctrl-camspeed') as HTMLInputElement | null;
         const valCamSpeed = document.getElementById('rabbit-val-camspeed');
         const btnResetCam = document.getElementById('rabbit-reset-cam-btn');
+        const ctrlExposure = document.getElementById('rabbit-ctrl-exposure') as HTMLInputElement | null;
+        const valExposure = document.getElementById('rabbit-val-exposure');
 
         function applyStyles() {
             // The blur is always active at state.blur (6.5px) without modification
@@ -801,26 +778,28 @@ const { isHome = true } = Astro.props;
         function updateModeUI() {
             if (!btnMode1 || !btnMode2) return;
             if (activeModeId === 1) {
-                btnMode1.className = 'px-2.5 py-1 rounded-full text-[10px] font-semibold transition border cursor-pointer bg-white text-black shadow-sm text-center';
-                btnMode2.className = 'px-2.5 py-1 rounded-full text-[10px] font-medium transition border border-transparent cursor-pointer text-[#888] hover:text-white text-center';
+                btnMode1.className = 'px-2.5 py-1 border border-white bg-white text-black cursor-pointer transition-colors';
+                btnMode2.className = 'px-2.5 py-1 border border-transparent text-[#888] hover:text-white cursor-pointer transition-colors';
                 if (modeBadge) modeBadge.textContent = 'Mode 1 // Radiant';
             } else {
-                btnMode2.className = 'px-2.5 py-1 rounded-full text-[10px] font-semibold transition border cursor-pointer bg-white text-black shadow-sm text-center';
-                btnMode1.className = 'px-2.5 py-1 rounded-full text-[10px] font-medium transition border border-transparent cursor-pointer text-[#888] hover:text-white text-center';
+                btnMode2.className = 'px-2.5 py-1 border border-white bg-white text-black cursor-pointer transition-colors';
+                btnMode1.className = 'px-2.5 py-1 border border-transparent text-[#888] hover:text-white cursor-pointer transition-colors';
                 if (modeBadge) modeBadge.textContent = 'Mode 2 // Doppler';
             }
 
             if (ctrlZoom) ctrlZoom.value = state.zoom.toString();
             if (valZoom) valZoom.textContent = `${state.zoom.toFixed(2)}x`;
+            if (ctrlExposure) ctrlExposure.value = state.exposure.toString();
+            if (valExposure) valExposure.textContent = `${state.exposure.toFixed(2)}x`;
             if (ctrlCamSpeed) ctrlCamSpeed.value = state.camSpeed.toString();
             if (valCamSpeed) valCamSpeed.textContent = `${state.camSpeed.toFixed(2)}x`;
 
             if (btnAutoCam) {
                 if (state.autoCam) {
-                    btnAutoCam.className = 'px-2 py-0.5 rounded-full text-[9px] font-mono font-medium transition border cursor-pointer bg-[#181818] text-[#68d6ba] border-[#68d6ba]/40 shadow-[0_0_8px_rgba(104,214,186,0.15)]';
+                    btnAutoCam.className = 'px-2 py-1 border border-[#68d6ba] text-[#68d6ba] cursor-pointer transition-colors';
                     btnAutoCam.textContent = 'AUTO: ON';
                 } else {
-                    btnAutoCam.className = 'px-2 py-0.5 rounded-full text-[9px] font-mono font-medium transition border cursor-pointer bg-[#141414] text-[#666] border-[#222] hover:text-[#999]';
+                    btnAutoCam.className = 'px-2 py-1 border border-[#222] text-[#666] hover:text-[#999] cursor-pointer transition-colors';
                     btnAutoCam.textContent = 'AUTO: OFF';
                 }
             }
@@ -937,6 +916,13 @@ const { isHome = true } = Astro.props;
         // Mode switch buttons
         btnMode1?.addEventListener('click', () => setMode(1));
         btnMode2?.addEventListener('click', () => setMode(2));
+
+        // Brightness (exposure) control
+        ctrlExposure?.addEventListener('input', (e) => {
+            state.exposure = parseFloat((e.target as HTMLInputElement).value);
+            if (valExposure) valExposure.textContent = `${state.exposure.toFixed(2)}x`;
+            applyStyles();
+        });
 
         // Zoom Controls
         ctrlZoom?.addEventListener('input', (e) => {
