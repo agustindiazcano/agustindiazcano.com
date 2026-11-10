@@ -14,6 +14,23 @@ const review = { calls: 0, total_tokens: 0 };
 let events = 0, first = null, last = null;
 const errors = [];
 
+// Direct API calls are not in local CLI session logs. Add the manually
+// reported figure from the tracked file next to this script; it must be
+// updated or zeroed when the reported API total changes.
+const api = { input_tokens: 0, output_tokens: 0, total_tokens: 0 };
+try {
+  const manual = JSON.parse(readFileSync(new URL('./meta-muse-api-usage.json', import.meta.url), 'utf8'));
+  for (const [field, key] of [['inputTokens', 'input_tokens'], ['outputTokens', 'output_tokens']]) {
+    const value = manual[field];
+    if (typeof value !== 'number' || !Number.isSafeInteger(value) || value < 0) throw new Error(`Invalid ${field} in meta-muse-api-usage.json`);
+    api[key] = value;
+  }
+  api.total_tokens = api.input_tokens + api.output_tokens;
+  totals.input_tokens += api.input_tokens;
+  totals.output_tokens += api.output_tokens;
+  totals.total_tokens += api.total_tokens;
+} catch (error) { errors.push(`meta-muse-api-usage.json: ${error.message}`); }
+
 function sessionIdFor(file) {
   const parts = file.split(/[\\/]/);
   const i = parts.lastIndexOf('sessions');
@@ -75,5 +92,5 @@ function scan(dir) {
 }
 
 try { scan(base); } catch (error) { errors.push(error.message); }
-console.log(JSON.stringify({ start: start.toISOString(), end: end.toISOString(), sessions: sessions.size, events, totals, models, daily, review, first, last, errors }, null, 2));
+console.log(JSON.stringify({ start: start.toISOString(), end: end.toISOString(), sessions: sessions.size, events, totals, api, models, daily, review, first, last, errors }, null, 2));
 if (errors.length) process.exitCode = 1;

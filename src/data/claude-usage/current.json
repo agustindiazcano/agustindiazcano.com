@@ -15,24 +15,27 @@
     "recordedSince": "10-12"
   },
   "antigravity": {
-    "totalTokens": 2431067277,
-    "sessions": 147,
-    "turns": 18839,
-    "inputTokens": 109002565,
-    "cachedInputTokens": 2312289002,
-    "outputTokens": 9775710
+    "totalTokens": 2432819537,
+    "sessions": 148,
+    "turns": 18886,
+    "inputTokens": 109167912,
+    "cachedInputTokens": 2313865009,
+    "outputTokens": 9786616
   },
   "combined": {
-    "totalTokens": "11.31b",
-    "sessions": 385
+    "totalTokens": "11.51b",
+    "sessions": 386
   },
   "claudeTotalTokens": 7689284247,
   "metamuse": {
-    "totalTokens": 384552524,
+    "totalTokens": 582105870,
     "sessions": 26,
-    "inputTokens": 382795389,
-    "cachedInputTokens": 365650040,
-    "outputTokens": 1757135,
+    "inputTokens": 574143616,
+    "cachedInputTokens": 366865348,
+    "outputTokens": 7962254,
+    "apiInputTokens": 190000000,
+    "apiOutputTokens": 6200000,
+    "apiTotalTokens": 196200000,
     "favoriteModel": "muse-wonder-1.0"
   },
   "grok": {

@@ -1,0 +1,6 @@
+{
+  "inputTokens": 190000000,
+  "outputTokens": 6200000,
+  "reportedAt": "2026-11-10",
+  "note": "Direct Meta Muse API calls reported manually; not present in local Muse session logs. This is an additive figure for the current reporting window: update or zero it when the reported API total changes, otherwise later 30-day windows will keep counting it."
+}

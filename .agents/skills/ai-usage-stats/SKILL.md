@@ -19,7 +19,7 @@ This master script executes the individual platform collectors in parallel/seque
 1. `node scripts/claude-usage.mjs`: Aggregates Claude Code session transcripts and cache snapshots.
 2. `node scripts/codex-usage.mjs`: Computes Codex session deltas from active/archived rollouts (includes cached input in input; output includes reasoning).
 3. `node scripts/antigravity-usage.mjs`: Reads `transcript.jsonl` under Antigravity brain directories (`~/.gemini/antigravity/brain` and `~/.gemini/antigravity-cli/brain`). Note that input and cache reads are separate in Antigravity (Total = input + cache + output).
-4. `node scripts/meta-muse-usage.mjs`: Scans `model_completed` session events in `~/.local/share/muse/sessions`. Input includes cache reads; output includes reasoning. Background reviews are tracked separately.
+4. `node scripts/meta-muse-usage.mjs`: Scans `model_completed` session events in `~/.local/share/muse/sessions`. Input includes cache reads; output includes reasoning. Background reviews are tracked separately. It also adds direct API calls (no local session log) from the manually reported `scripts/meta-muse-api-usage.json`; update or zero that file when the reported API total changes.
 5. `node scripts/grok-usage.mjs`: Scans turn snapshots from `~/.grok/sessions/**/updates.jsonl`. Input includes cache reads; output includes reasoning.
 6. `node scripts/cursor-usage.mjs`: Validates that Cursor metrics remain server-side only (`localCoverage: false`, 0 local tokens).
 
