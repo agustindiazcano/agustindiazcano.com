@@ -50,7 +50,31 @@ const rows = [
         white-space: nowrap;
     }
 
-    /* Below 1216px: one compact bar, AI Usage button first, then the usage data to its right */
+    /* Mobile (below 768px): the bar is as wide as the profile card, data spread evenly */
+    @media (max-width: 767px) {
+        .usage-glass {
+            width: 100%;
+        }
+        .usage-stats {
+            flex: 1;
+        }
+        .usage-stat {
+            flex: 1;
+            justify-content: center;
+        }
+    }
+
+    /* The bar is attached to the top edge of the profile card: no bottom border/radius, no drop shadow */
+    .usage-glass {
+        border-bottom: 0;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.18),
+            -3px -3px 10px rgba(255, 255, 255, 0.02);
+    }
+
+    /* One compact bar, AI Usage button first, then the usage data to its right */
     .usage-lead,
     .usage-period,
     .usage-stat {
@@ -91,37 +115,6 @@ const rows = [
     @media (min-width: 640px) {
         .usage-period {
             display: flex;
-        }
-    }
-
-    /* 1216px and up: compact two-row card. Row 1: AI Usage button + period. Row 2: tokens + sessions. */
-    @media (min-width: 1216px) {
-        .usage-glass {
-            display: grid;
-            grid-template-columns: auto auto;
-            width: auto;
-        }
-        .usage-stats {
-            display: contents;
-        }
-        .usage-lead,
-        .usage-period,
-        .usage-stat {
-            padding: 0.3rem 0.65rem;
-        }
-        .usage-period {
-            justify-content: flex-end;
-            font-size: 9px;
-            border-left: 0;
-        }
-        .usage-stat {
-            justify-content: space-between;
-            gap: 1rem;
-            border-left: 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .usage-stat:last-child {
-            border-left: 1px solid rgba(255, 255, 255, 0.08);
         }
     }
 
