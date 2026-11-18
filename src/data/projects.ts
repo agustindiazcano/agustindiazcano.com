@@ -5,6 +5,9 @@ export type Project = {
     tags: string[];
     year: string;
     githubUrl: string | null;
+    /** Optional external links shown as buttons on the home cards; a button is only rendered when its URL is set */
+    youtube?: string;
+    live?: string;
     image?: string;
 };
 

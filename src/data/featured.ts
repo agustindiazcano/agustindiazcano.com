@@ -3,6 +3,10 @@ export type FeaturedItem = {
     label: string;
     image: string;
     href: string;
+    /** Optional external links shown as buttons under the card title; a button is only rendered when its URL is set */
+    github?: string;
+    youtube?: string;
+    live?: string;
 };
 
 export const featured: FeaturedItem[] = [
@@ -11,6 +15,7 @@ export const featured: FeaturedItem[] = [
         label: "AI Agents",
         image: "/images/images-projects/1-mcp.png",
         href: "/projects/mcp-transactional-agent",
+        github: "https://github.com/agustindiazcano/mcp-transactional-agent",
     },
     {
         title: "Multi-Agent Mutation Testing",
@@ -29,6 +34,7 @@ export const featured: FeaturedItem[] = [
         label: "LLMs",
         image: "/images/images-projects/llm-optimization.png",
         href: "/projects/memory-constrained-llm-optimization",
+        github: "https://github.com/agustindiazcano/openai-llm-optimizers-parameter-golf",
     },
     {
         title: "Game Dev: Modding",

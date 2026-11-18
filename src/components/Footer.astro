@@ -114,9 +114,15 @@ const textColor = isHome ? "text-white/90" : "text-[#888]";
                         <span class="text-3xl font-bold text-white">{analytics.visitors}</span>
                     </div>
                     <div class="w-px h-12 bg-[#333]"></div>
-                    <div class="flex flex-col items-end">
+                    <div class="flex flex-col items-center">
                         <span class="text-sm text-[#aaa] mb-1">Page Views</span>
                         <span class="text-3xl font-bold text-white">{analytics.pageViews}</span>
+                    </div>
+                    <div class="w-px h-12 bg-[#333]"></div>
+                    {/* Unique countries: derived from the aggregated list, so it grows automatically with new countries */}
+                    <div class="flex flex-col items-end">
+                        <span class="text-sm text-[#aaa] mb-1">Countries</span>
+                        <span class="text-3xl font-bold text-white">{analytics.countries.length}</span>
                     </div>
                 </div>
                 

@@ -149,3 +149,33 @@ pre,
     transform: translateY(0);
   }
 }
+
+/* Small glass buttons under the featured card title (GitHub, YouTube icons and a text Live button) */
+.card-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.75rem;
+    min-width: 1.75rem;
+    padding: 0 0.45rem;
+    color: #d0d0d0;
+    border-radius: 0.5rem;
+    background: rgba(8, 8, 10, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    transition: color 0.4s ease, background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+.card-btn-text {
+    padding: 0 0.7rem;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+}
+.card-btn:hover,
+.card-btn:focus-visible {
+    color: #efd98a;
+    background-color: rgba(52, 52, 60, 0.85);
+    border-color: rgba(239, 217, 138, 0.4);
+    box-shadow: 0 0 12px rgba(239, 217, 138, 0.25);
+}
