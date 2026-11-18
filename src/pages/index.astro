@@ -141,17 +141,24 @@ import LoadingScreen from "../components/LoadingScreen.astro";
                 <h2 id="projects-title" class="font-display text-2xl text-white font-medium">Projects</h2>
                 <a href="/projects" class="text-sm text-[#888] hover:text-white transition-colors">View all</a>
             </div>
-            <ul class="divide-y divide-[#222] border-y border-[#222]">
-                {projects.slice(0, 6).map((project) => (
-                    <li>
-                        <a href={`/projects/${project.slug}`} class="flex items-baseline gap-4 py-3 group">
-                            <span class="shrink-0 w-20 text-xs font-mono text-[#555]">{project.year}</span>
-                            <span class="min-w-0 flex-1 truncate text-sm md:text-base text-[#ccc] group-hover:text-white transition-colors">{project.title}</span>
-                            <span class="hidden md:block shrink-0 max-w-[40%] truncate text-xs font-mono text-[#555]">{project.tags.slice(0, 3).join(" / ")}</span>
-                        </a>
-                    </li>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {projects.slice(0, 8).map((project) => (
+                    <a
+                        href={`/projects/${project.slug}`}
+                        class="group relative aspect-square rounded-xl overflow-hidden border border-[#222] bg-[#111] hover:border-[#444] transition-colors"
+                    >
+                        {project.image ? (
+                            <img src={project.image} alt={project.title} loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                        ) : (
+                            <div class="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-[#111] opacity-60"></div>
+                        )}
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                            <span class="block text-sm md:text-base font-medium text-white leading-snug line-clamp-3">{project.title}</span>
+                        </div>
+                    </a>
                 ))}
-            </ul>
+            </div>
         </section>
 
         <Footer isHome={true} />

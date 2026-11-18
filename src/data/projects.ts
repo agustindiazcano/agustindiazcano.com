@@ -5,6 +5,7 @@ export type Project = {
     tags: string[];
     year: string;
     githubUrl: string | null;
+    image?: string;
 };
 
 // Source for the /projects page and the home page projects section (mirrors [slug].astro)
@@ -12,6 +13,7 @@ export const projects: Project[] = [
         {
             title: "MCP Transactional Agent",
             slug: "mcp-transactional-agent",
+            image: "/images/images-projects/1-mcp.png",
             description: "Event-driven AI agentic engine. Features MCP tool sandboxing, RabbitMQ asynchronous routing, strict ACID idempotency, and LLM-as-a-Judge guardrails.",
             tags: ["AI", "LLMs", "PostgreSQL", "FastAPI", "RabbitMQ", "AWS Bedrock", "GCP Vertex AI", "LangGraph", "LangChain", "MCP", "RAG", "Groq", "Docker"],
             year: "2026",
@@ -36,6 +38,7 @@ export const projects: Project[] = [
         {
             title: "Memory-Constrained LLM Optimization (OpenAI Parameter Golf)",
             slug: "memory-constrained-llm-optimization",
+            image: "/images/images-projects/llm-optimization.png",
             description: "Exploration into memory-constrained LLM optimization using OpenAI APIs and parameter golf techniques.",
             tags: ["AI", "LLMs", "Optimization", "Python"],
             year: "2024",
@@ -92,6 +95,7 @@ export const projects: Project[] = [
         {
             title: "Game Dev: Modding",
             slug: "game-dev-modding",
+            image: "/images/images-projects/zombie-mod/call-to-arms-zombie-mod-1.png",
             description: "220,000+ Downloads. Combining Zombie Mod and HD Mod across Men of War series.",
             tags: ["Game Dev", "3D Modeling"],
             year: "2015",
