@@ -13,14 +13,11 @@ const { className = "", compact = false } = Astro.props;
 {compact ? (
 <header class={`w-full grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] items-center gap-3 lg:gap-6 mb-4 md:mb-10 text-center lg:text-left ${className}`}>
     <div class="flex flex-col items-center lg:items-start text-center lg:text-left">
-        <a href="/" class="group inline-block focus:outline-none">
-            <span class="block font-thin font-display tracking-normal leading-tight text-[1.5rem] md:text-[1.85rem] text-transparent bg-clip-text bg-gradient-to-b from-white to-[#777] group-hover:from-white group-hover:to-[#aaa] transition-colors duration-200">
+        <a href="/" class="brand-link group relative inline-block pb-1 focus:outline-none">
+            <span class="brand-text block font-thin font-display tracking-normal leading-tight text-[1.5rem] md:text-[1.85rem]">
                 Agustin Diaz-Cano
             </span>
         </a>
-        <p class="text-xs md:text-sm text-[#888] mb-0 font-normal tracking-wider font-display mt-0.5">
-            MS Candidate, Systems Engineering
-        </p>
     </div>
 
     <Navigation compact />
@@ -35,16 +32,13 @@ const { className = "", compact = false } = Astro.props;
     <div
         class="flex flex-col items-center lg:items-start text-center lg:text-left lg:absolute lg:top-2 lg:left-6 z-20 mb-3 lg:mb-0"
     >
-        <a href="/" class="group inline-block focus:outline-none">
+        <a href="/" class="brand-link group relative inline-block pb-1 focus:outline-none">
             <h1
-                class="font-thin font-display tracking-normal leading-tight text-[1.5rem] md:text-[1.85rem] text-transparent bg-clip-text bg-gradient-to-b from-white to-[#777] group-hover:from-white group-hover:to-[#aaa] transition-colors duration-200"
+                class="brand-text font-thin font-display tracking-normal leading-tight text-[1.5rem] md:text-[1.85rem]"
             >
                 Agustin Diaz-Cano
             </h1>
         </a>
-        <p class="text-xs md:text-sm text-[#888] mb-0 font-normal tracking-wider font-display mt-0.5">
-            MS Candidate, Systems Engineering
-        </p>
     </div>
 
     <div class="mb-3 md:mb-4 w-full flex justify-center">
@@ -52,3 +46,45 @@ const { className = "", compact = false } = Astro.props;
     </div>
 </header>
 )}
+
+<style>
+    /* Logo: white gradient text with an orange underline (the black hole halo).
+       On hover the text turns orange and the underline turns white. */
+    @property --brand-top {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #ffffff;
+    }
+    @property --brand-bottom {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #777777;
+    }
+    .brand-text {
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        background-image: linear-gradient(180deg, var(--brand-top), var(--brand-bottom));
+        transition: --brand-top 0.35s ease, --brand-bottom 0.35s ease;
+    }
+    .brand-link:hover .brand-text,
+    .brand-link:focus-visible .brand-text {
+        --brand-top: #e3b023;
+        --brand-bottom: #b8860b;
+    }
+    .brand-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 1px;
+        border-radius: 1px;
+        background-color: #e3b023;
+        transition: background-color 0.35s ease;
+    }
+    .brand-link:hover::after,
+    .brand-link:focus-visible::after {
+        background-color: #ffffff;
+    }
+</style>

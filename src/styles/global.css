@@ -20,9 +20,9 @@
   --color-success-light: #3291ff;
   --color-success-dark: #0761d1;
 
-  --font-sans: "Josefin Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Rubik", "Josefin Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
-  --font-display: "Raleway", "Josefin Sans", sans-serif;
+  --font-display: "Rubik", "Raleway", "Josefin Sans", sans-serif;
 }
 
 /* Large screens: scale the whole UI so it keeps the laptop look and feel
