@@ -75,7 +75,7 @@ import LoadingScreen from "../components/LoadingScreen.astro";
                     {featured.map((item) => (
                         <a
                             href={item.href}
-                            class="featured-card group relative shrink-0 snap-start aspect-square w-[calc((100%-1rem)/2)] md:w-[calc((100%-3rem)/4)] rounded-xl overflow-hidden border border-[#222] bg-[#111] hover:border-[#444] transition-colors"
+                            class="featured-card group relative shrink-0 snap-start aspect-[316/200] w-[calc((100%-1rem)/2)] md:w-[calc((100%-3rem)/4)] rounded-xl overflow-hidden border border-[#222] bg-[#111] hover:border-[#444] transition-colors"
                         >
                             <img src={item.image} alt={item.title} loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                             <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
@@ -145,7 +145,7 @@ import LoadingScreen from "../components/LoadingScreen.astro";
                 {projects.slice(0, 8).map((project) => (
                     <a
                         href={`/projects/${project.slug}`}
-                        class="group relative aspect-square rounded-xl overflow-hidden border border-[#222] bg-[#111] hover:border-[#444] transition-colors"
+                        class="group relative aspect-[316/200] rounded-xl overflow-hidden border border-[#222] bg-[#111] hover:border-[#444] transition-colors"
                     >
                         {project.image ? (
                             <img src={project.image} alt={project.title} loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />

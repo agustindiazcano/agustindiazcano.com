@@ -113,7 +113,7 @@ const { isHome = true } = Astro.props;
         <!-- Orbit -->
         <div class="order-6 lg:order-none basis-full lg:basis-auto flex items-center gap-2 px-3 py-2 lg:py-0">
             <button id="rabbit-btn-autocam" type="button" class="w-16 lg:w-auto shrink-0 px-2 py-1 border border-[#ffa647] text-[#ffa647] cursor-pointer transition-colors" title="Toggle Auto Orbit">AUTO: ON</button>
-            <input id="rabbit-ctrl-camspeed" type="range" min="0.0125" max="2.0" step="0.0125" value="0.1625" class="hud-slider flex-1 min-w-0 lg:flex-none lg:w-16" title="Orbit Speed" aria-label="Orbit speed" />
+            <input id="rabbit-ctrl-camspeed" type="range" min="0.00625" max="2.0" step="0.00625" value="0.24375" class="hud-slider flex-1 min-w-0 lg:flex-none lg:w-16" title="Orbit Speed" aria-label="Orbit speed" />
             <span id="rabbit-val-camspeed" class="text-white w-9 text-right shrink-0">0.65x</span>
         </div>
     </div>
@@ -370,10 +370,10 @@ const { isHome = true } = Astro.props;
             blur: 6.5,
             dim: 0,
             autoCam: true,
-            camSpeed: 0.2125,
+            camSpeed: 0.31875,
             exposure: 1.95,
             doppler: 0.0,
-            speed: 0.0125
+            speed: 0.01875
         };
 
         const MODE_2 = {
@@ -385,10 +385,10 @@ const { isHome = true } = Astro.props;
             blur: 6.5,
             dim: 16,
             autoCam: true,
-            camSpeed: 0.1625,
+            camSpeed: 0.24375,
             exposure: 1.05,
             doppler: 1.5,
-            speed: 0.0125
+            speed: 0.01875
         };
 
         // Random mode on site load (50% probability Mode 1, 50% Mode 2) unless manually picked
@@ -622,10 +622,14 @@ const { isHome = true } = Astro.props;
                     float photonAsymmetry = 1.0 - 0.45 * u_doppler * (uv.x / (length(uv) + 0.1));
                     accumColor += vec3(1.0, 0.88, 0.62) * photonRing * clamp(photonAsymmetry, 0.4, 1.6);
 
-                    vec2 starUV = dir.xy / (abs(dir.z) + 0.4) * 160.0;
-                    float starVal = pow(hash(floor(starUV)), 28.0);
-                    float starMask = smoothstep(rs * 1.15, rs * 1.8, minR);
-                    accumColor += vec3(0.85, 0.9, 1.0) * starVal * starMask * 0.45;
+                    // Background stars (the floating white dots). 0.0 = clean version, 0.45 = original look.
+                    const float STAR_INTENSITY = 0.0;
+                    if (STAR_INTENSITY > 0.0) {
+                        vec2 starUV = dir.xy / (abs(dir.z) + 0.4) * 160.0;
+                        float starVal = pow(hash(floor(starUV)), 28.0);
+                        float starMask = smoothstep(rs * 1.15, rs * 1.8, minR);
+                        accumColor += vec3(0.85, 0.9, 1.0) * starVal * starMask * STAR_INTENSITY;
+                    }
 
                     float centerGlow = exp(-length(uv) * 2.6) * 0.12;
                     float anamorphic = exp(-abs(uv.y) * 38.0) * exp(-abs(uv.x) * 1.6) * 0.18;
@@ -765,7 +769,7 @@ const { isHome = true } = Astro.props;
                 dimEl.style.setProperty('background-color', `rgba(0, 0, 0, ${(state.dim / 100).toFixed(2)})`, 'important');
             }
 
-            const seconds = Math.max(6, (8.0 / Math.max(0.0125, state.speed))).toFixed(1);
+            const seconds = Math.max(6, (8.0 / Math.max(0.00625, state.speed))).toFixed(1);
             const tiltDeg = (90 - (state.pitch * 180 / Math.PI)).toFixed(2);
             const rollDeg = (state.roll * 180 / Math.PI).toFixed(2);
             const yawDeg = (Math.sin(state.yaw) * 22).toFixed(2);
