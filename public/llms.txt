@@ -32,7 +32,7 @@ First title of the same double-titulation program, awarded as a separate credent
 **Licenciado en Administración (Universidad de Palermo, 2015 to 2022)**
 Management Sciences & Quantitative Methods. Equivalent to a German Diplom BS+Integrated MS.
 Licenciatura (B.S. / Integrated Master's equivalent).
-- Program Load: 176 credits/+2,600 academic hours (equivalent to a German Diplom-Kaufmann (Univ.) / European Integrated Master's, and exceeds the standard 120 credit/1,800hr US Bachelor’s).
+- Program Load: 176 class contact credits / 2,800+ class contact hours (equivalent to a German Diplom-Kaufmann (Univ.) / European Integrated Master's, and exceeds the standard 120 credit/1,800hr US Bachelor’s).
 - Quantitative Coursework: Calculus I & II, Statistical Inference I & II, Financial Math, Financial Modeling, Risk Management, Quantitative Micro & Macroeconomics, Corporate Finance.
 
 **Analista en Administración (Universidad de Palermo, 2015 to 2020)**
@@ -43,6 +43,27 @@ Management Sciences & Quantitative Methods. Equivalent to a 3 year European BS.
 ## Professional Highlights
 - **QA Owner at GDU Sites**: Led quality assurance initiatives that resulted in the platform being nominated twice for the eCommerce Awards Uruguay (2024 and 2025).
 - **Career Kickstart**: Learned programming from scratch and successfully secured a software engineering role for a company in Spain while still attending a coding bootcamp.
+
+## Timeline
+Career, education and personal milestones, newest first. Also listed on https://www.agustindiazcano.com/news
+
+- **Sep 2025**: Ran the Buenos Aires Marathon (42k) again, my second 42k marathon finish. https://www.agustindiazcano.com/running-agustin-diaz-cano
+- **2025**: Nominated for the Uruguay eCommerce Awards, with 3 sites among the finalists (Disco Uy, Geant and Devoto Uy), after the platform migrations. I was the QA Automation Owner. [Source](https://ecommerceday.org.uy/2025/wp-content/uploads/2025/09/Comunicado-finalistas-del-eCommerce-Award-Uruguay-2025.pdf)
+- **May 2024**: Started the MS in Information Systems Engineering at [UTN](https://frba.utn.edu.ar/).
+- **May 2024**: Started part-time as a Technical Code Reviewer for student full stack projects, for an e-learning company in Latin America (remote).
+- **2024**: Nominated for the Uruguay eCommerce Awards for the first time (Disco Uy, Geant and Devoto Uy). I was the QA Automation Owner. [Source](https://ecommerceday.org.uy/2024/se-conocieron-los-finalistas-de-los-ecommerce-awards-uruguay-2024/)
+- **Sep 2023**: Ran my first 42k: the Buenos Aires Marathon. https://www.agustindiazcano.com/running-agustin-diaz-cano
+- **Aug 2022**: Started as a Full Stack Developer at [Pocima](https://www.pocimadigital.com/) (Montevideo, Uruguay, remote).
+- **Jul 2022**: Graduated with a [Licenciatura en Administración](https://www.palermo.edu/negocios/licenciatura-administracion/plan.html) (Management Sciences & Quantitative Methods). 176 class contact credits and 2,800+ class contact hours, equivalent to a European BS plus an integrated master's degree.
+- **Jun 2021**: Shipped my first pull request to production.
+- **May 14, 2021**: Received a job offer from [Hello Auto](https://www.linkedin.com/company/hello-auto-insurance/) / Petroprix, my first software engineering role.
+- **Apr 2021**: Finished the [Plataforma 5](https://www.plataforma5.la/) Full Stack Bootcamp.
+- **Mar 2021**: Gave a talk on generative AI, GPT and deep learning at the bootcamp, 20 months before ChatGPT. [Read the write-up](https://www.agustindiazcano.com/writing/predicting-generative-ai-boom)
+- **Dec 2020**: Passed the coding challenge for the Plataforma 5 Full Stack Bootcamp.
+- **Dec 2020**: Completed the intermediate degree: Analista Universitario en Administración (Management Sciences & Quantitative Methods). 130 contact credits and 1,900 contact hours.
+- **2017**: Wrote a college research study forecasting that electric cars would reach almost 30% by 2022.
+- **2017**: Started investing in XRP, ETH and BTC, and began mining BTC.
+- **Mar 2016**: Started a [long-term portfolio experiment](https://www.labolsavirtual.com/marcelogallardiola), up 6x by 2026. A paper trading, buy-and-hold portfolio that started with 100,000 GBP and includes Tesla shares.
 
 ## Projects
 [View All Projects](https://www.agustindiazcano.com/projects)

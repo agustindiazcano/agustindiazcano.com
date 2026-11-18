@@ -4,6 +4,9 @@ import PageNav from "../components/PageNav.astro";
 import Footer from "../components/Footer.astro";
 import CSSBlackHole from "../components/CSSBlackHole.astro";
 
+import ViewSwitch from "../components/ViewSwitch.astro";
+import ItemsView from "../components/ItemsView.astro";
+
 const publications = [
     {
         title: "Artificial Intelligence Based Bug Triage System",
@@ -12,6 +15,13 @@ const publications = [
         date: "Nov 2024"
     }
 ];
+
+const items = publications.map((p) => ({
+    href: `/research/${p.slug}`,
+    title: p.title,
+    label: p.date,
+    aside: p.description,
+}));
 ---
 
 <Layout 
@@ -58,17 +68,12 @@ const publications = [
 
     {
       publications.length > 0 ? (
-        <ul class="divide-y divide-[#222] border-y border-[#222]">
-          {publications.map((pub) => (
-            <li>
-              <a href={`/research/${pub.slug}`} class="flex items-baseline gap-4 py-3 group">
-                <span class="shrink-0 w-24 text-xs font-mono text-[#555]">{pub.date}</span>
-                <span class="min-w-0 flex-1 truncate text-sm md:text-base text-[#ccc] group-hover:text-white transition-colors">{pub.title}</span>
-                <span class="hidden md:block shrink-0 max-w-[40%] truncate text-xs font-mono text-[#555]">{pub.description}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
+        <>
+          <div class="flex justify-end mb-4">
+            <ViewSwitch />
+          </div>
+          <ItemsView items={items} />
+        </>
       ) : (
         <p class="text-[#666] italic">Academic publications will be listed here soon.</p>
       )

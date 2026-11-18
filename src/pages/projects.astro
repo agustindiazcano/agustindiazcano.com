@@ -3,7 +3,17 @@ import Layout from "../layouts/Layout.astro";
 import PageNav from "../components/PageNav.astro";
 import Footer from "../components/Footer.astro";
 import CSSBlackHole from "../components/CSSBlackHole.astro";
+import ViewSwitch from "../components/ViewSwitch.astro";
+import ItemsView from "../components/ItemsView.astro";
 import { projects } from "../data/projects";
+
+const items = projects.map((p) => ({
+  href: `/projects/${p.slug}`,
+  title: p.title,
+  label: p.year,
+  aside: p.tags.slice(0, 3).join(" / "),
+  image: p.image,
+}));
 ---
 
 <Layout 
@@ -14,26 +24,14 @@ import { projects } from "../data/projects";
   <main class="page-fade-in min-h-screen max-w-[1200px] mx-auto px-6 pb-20 relative z-10">
         <PageNav items={[{ label: "Projects" }]} backHref="/" />
 
-    <section class="mb-8 md:mb-12">
-      <h2 class="text-3xl font-bold tracking-tight text-white mb-3 text-center md:text-left">
+    <section class="mb-8 md:mb-12 flex items-end justify-between gap-4">
+      <h2 class="text-3xl font-bold tracking-tight text-white text-center md:text-left">
         Projects
       </h2>
-
+      <ViewSwitch />
     </section>
 
-    <ul class="divide-y divide-[#222] border-y border-[#222]">
-      {
-        projects.map((project) => (
-          <li>
-            <a href={`/projects/${project.slug}`} class="flex items-baseline gap-4 py-3 group">
-              <span class="shrink-0 w-14 text-xs font-mono text-[#555]">{project.year}</span>
-              <span class="min-w-0 flex-1 truncate text-sm md:text-base text-[#ccc] group-hover:text-white transition-colors">{project.title}</span>
-              <span class="hidden md:block shrink-0 max-w-[40%] truncate text-xs font-mono text-[#555]">{project.tags.slice(0, 3).join(" / ")}</span>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+    <ItemsView items={items} />
 
     <div class="mt-32">
       <Footer />

@@ -9,7 +9,7 @@ export type Project = {
 };
 
 // Source for the /projects page and the home page projects section (mirrors [slug].astro)
-export const projects: Project[] = [
+const projectList: Project[] = [
         {
             title: "MCP Transactional Agent",
             slug: "mcp-transactional-agent",
@@ -112,3 +112,6 @@ export const projects: Project[] = [
             githubUrl: "https://github.com/agustindiazcano/agustindiazcano.com"
         }
 ];
+
+// Newest first. Array.sort is stable, so projects from the same year keep the order above.
+export const projects: Project[] = [...projectList].sort((a, b) => Number(b.year) - Number(a.year));

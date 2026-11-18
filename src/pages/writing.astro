@@ -4,7 +4,16 @@ import PageNav from "../components/PageNav.astro";
 import Footer from "../components/Footer.astro";
 import CSSBlackHole from "../components/CSSBlackHole.astro";
 
+import ViewSwitch from "../components/ViewSwitch.astro";
+import ItemsView from "../components/ItemsView.astro";
 import { posts } from "../data/blog";
+
+const items = posts.map((p) => ({
+  href: `/writing/${p.slug}`,
+  title: p.title,
+  label: p.date,
+  aside: p.description,
+}));
 ---
 
 <Layout 
@@ -15,26 +24,17 @@ import { posts } from "../data/blog";
   <main class="page-fade-in min-h-screen max-w-[1200px] mx-auto px-6 pb-20 relative z-10">
         <PageNav items={[{ label: "Blog" }]} backHref="/" />
 
-    <section class="mb-8 md:mb-12">
-      <h2 class="text-3xl font-bold tracking-tight text-white mb-3 text-center md:text-left">Blog</h2>
-      <p class="text-[#888] text-center md:text-left">
-        Opinion
-      </p>
+    <section class="mb-8 md:mb-12 flex items-end justify-between gap-4">
+      <div>
+        <h2 class="text-3xl font-bold tracking-tight text-white mb-3 text-center md:text-left">Blog</h2>
+        <p class="text-[#888] text-center md:text-left">
+          Opinion
+        </p>
+      </div>
+      <ViewSwitch />
     </section>
 
-    <ul class="divide-y divide-[#222] border-y border-[#222]">
-      {
-        posts.map((post) => (
-          <li>
-            <a href={`/writing/${post.slug}`} class="flex items-baseline gap-4 py-3 group">
-              <span class="shrink-0 w-24 text-xs font-mono text-[#555]">{post.date}</span>
-              <span class="min-w-0 flex-1 truncate text-sm md:text-base text-[#ccc] group-hover:text-white transition-colors">{post.title}</span>
-              <span class="hidden md:block shrink-0 max-w-[40%] truncate text-xs font-mono text-[#555]">{post.description}</span>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+    <ItemsView items={items} />
     <div class="mt-20">
       <Footer />
     </div>

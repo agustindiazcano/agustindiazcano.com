@@ -1,0 +1,100 @@
+---
+// Same items shown as image tiles (default, 4 per row) or as a one-line list. Pair with <ViewSwitch />.
+export interface Item {
+    href?: string;
+    title: string;
+    label: string;
+    aside?: string;
+    image?: string;
+}
+interface Props {
+    items: Item[];
+}
+const { items } = Astro.props;
+---
+
+<div id="items-view" data-view="grid">
+    {/* Image view: 2 / 3 / 4 per row */}
+    <div class="view-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {items.map((item) => {
+            const Tag = item.href ? "a" : "div";
+            const ext = item.href?.startsWith("http");
+            return (
+                <Tag
+                    href={item.href}
+                    target={ext ? "_blank" : undefined}
+                    rel={ext ? "noopener noreferrer" : undefined}
+                    class="group relative aspect-[316/200] rounded-xl overflow-hidden border border-[#222] bg-[#111] hover:border-[#444] transition-colors"
+                >
+                    {item.image ? (
+                        <img src={item.image} alt={item.title} loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    ) : (
+                        <div class="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-[#111] opacity-60"></div>
+                    )}
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/55 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4">
+                        <span class="block text-[10px] font-mono text-[#efd98a] mb-1">{item.label}</span>
+                        <span class="block text-xs md:text-sm lg:text-base font-medium text-white leading-snug line-clamp-3">{item.title}</span>
+                    </div>
+                </Tag>
+            );
+        })}
+    </div>
+
+    {/* List view */}
+    <ul class="view-list divide-y divide-[#222] border-y border-[#222]">
+        {items.map((item) => {
+            const Tag = item.href ? "a" : "div";
+            const ext = item.href?.startsWith("http");
+            return (
+                <li>
+                    <Tag href={item.href} target={ext ? "_blank" : undefined} rel={ext ? "noopener noreferrer" : undefined} class="flex items-baseline gap-4 py-3 group">
+                        <span class="shrink-0 w-24 text-xs font-mono text-[#555]">{item.label}</span>
+                        <span class="min-w-0 flex-1 truncate text-sm md:text-base text-[#ccc] group-hover:text-white transition-colors">{item.title}</span>
+                        {item.aside && <span class="hidden md:block shrink-0 max-w-[40%] truncate text-xs font-mono text-[#555]">{item.aside}</span>}
+                    </Tag>
+                </li>
+            );
+        })}
+    </ul>
+</div>
+
+<script is:inline>
+    // Restore the saved view before first paint (phones always get the image view: the switch is hidden there)
+    try {
+        var v = localStorage.getItem('itemsView');
+        if (v === 'list' || v === 'grid') document.getElementById('items-view').dataset.view = v;
+    } catch (e) {}
+</script>
+
+<style is:global>
+    #items-view[data-view="grid"] .view-list { display: none; }
+    #items-view[data-view="list"] .view-grid { display: none; }
+    @media (max-width: 639px) {
+        #items-view .view-list { display: none !important; }
+        #items-view .view-grid { display: grid !important; }
+    }
+</style>
+
+<script>
+    function setupItemsView() {
+        const root = document.getElementById('items-view');
+        const buttons = document.querySelectorAll<HTMLButtonElement>('[data-set-view]');
+        if (!root || !buttons.length) return;
+        const apply = (view: string) => {
+            root.dataset.view = view;
+            buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.setView === view)));
+        };
+        apply(root.dataset.view ?? 'grid');
+        buttons.forEach((b) => {
+            if (b.dataset.bound) return;
+            b.dataset.bound = 'true';
+            b.addEventListener('click', () => {
+                const view = b.dataset.setView ?? 'grid';
+                apply(view);
+                try { localStorage.setItem('itemsView', view); } catch (e) {}
+            });
+        });
+    }
+    document.addEventListener('astro:page-load', setupItemsView);
+</script>
