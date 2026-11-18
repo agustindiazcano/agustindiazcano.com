@@ -85,7 +85,7 @@ const socialLinks = [
                 rel={link.target === "_blank" ? "noopener noreferrer" : undefined}
                 data-nav-href={link.href}
                 data-nav-match={link.match}
-                class="nav-link nav-glass px-2.5 py-1.5 md:px-4 md:py-2 text-xs md:text-sm font-medium flex items-center gap-2"
+                class="nav-link nav-glass px-2.5 py-1.5 md:px-3 md:py-2 text-xs md:text-sm font-medium flex items-center gap-2"
             >
                 {link.icon && <Fragment set:html={link.icon} />}
                 <span>{link.name}</span>

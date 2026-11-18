@@ -53,7 +53,7 @@ const schema = {
 <Layout title={title} description={description} canonicalUrl={pageUrl}>
     <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, "\\u003c")} />
     <CSSBlackHole />
-    <main class="page-fade-in min-h-screen max-w-[800px] mx-auto px-6 pb-20 relative z-10">
+    <main class="page-fade-in min-h-screen max-w-[1200px] mx-auto px-6 pb-20 relative z-10">
         <PageNav items={[{ label: "Competitions" }]} backHref="/" />
         <header class="mb-12">
             <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-white mb-3">Competitions</h1>
