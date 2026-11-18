@@ -4,34 +4,19 @@ import PageNav from "../components/PageNav.astro";
 import Footer from "../components/Footer.astro";
 import CSSBlackHole from "../components/CSSBlackHole.astro";
 
-const posts = [
-  {
-    slug: "fundamental-principles",
-    title: "Fundamental Principles of Scientific Validation",
-    date: "Mar 3, 2026",
-    description:
-      "If you cannot describe the physical or logical mechanism driving the inner workings of a phenomenon, you do not have a theory, you have a statistical anecdote.",
-  },
-  {
-    slug: "predicting-generative-ai-boom",
-    title: "Predicting the Generative AI Boom: My Tech Presentation in March 2021",
-    date: "Mar 2021",
-    description:
-      "A timestamped, verifiable record of live engagement with generative AI technology and accurate forecasting of its trajectory, 20 months before ChatGPT.",
-  }
-];
+import { posts } from "../data/blog";
 ---
 
 <Layout 
-  title="Writing | Agustin Diaz-Cano"
+  title="Blog | Agustin Diaz-Cano"
   description="Technical notes, articles, and research on systems engineering, performance, and quantitative finance written by Agustin Diaz-Cano."
 >
   <CSSBlackHole />
   <main class="page-fade-in min-h-screen max-w-[800px] mx-auto px-6 pb-20 relative z-10">
-        <PageNav items={[{ label: "Writing" }]} backHref="/" />
+        <PageNav items={[{ label: "Blog" }]} backHref="/" />
 
     <section class="mb-8 md:mb-12">
-      <h2 class="text-3xl font-bold tracking-tight text-white mb-3 text-center md:text-left">Writing</h2>
+      <h2 class="text-3xl font-bold tracking-tight text-white mb-3 text-center md:text-left">Blog</h2>
       <p class="text-[#888] text-center md:text-left">
         Opinion
       </p>

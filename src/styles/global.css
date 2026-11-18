@@ -55,6 +55,38 @@ html {
   overflow-x: hidden;
 }
 
+/* Custom scrollbars: visible track, light rounded thumb that lights up in the site's orange accent */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-left: 1px solid #2a2a2a;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #8a8a8a, #6a6a6a);
+  border: 3px solid #1a1a1a;
+  border-radius: 999px;
+  transition: background 0.2s;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ffa647, #e0701a);
+}
+::-webkit-scrollbar-thumb:active {
+  background: #ffa647;
+}
+::-webkit-scrollbar-corner {
+  background: #1a1a1a;
+}
+/* Firefox has no pseudo-elements; Chromium uses the rules above (scrollbar-color would override them) */
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #8a8a8a #1a1a1a;
+  }
+}
+
 /* vh units are not scaled by CSS zoom: compensate so full-height sections do not overflow */
 .min-h-screen {
   min-height: calc(100vh / var(--ui-zoom));

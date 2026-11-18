@@ -13,17 +13,12 @@ const ProjectGrid = () => {
     const [categoryFilter, setCategoryFilter] = useState('all');
 
     useEffect(() => {
+        // No manual toggle: cards on desktop, compact list on mobile
         try {
-            const saved = localStorage.getItem('projectViewMode');
             if (window.matchMedia('(max-width: 767px)').matches) setViewMode('list');
-            else if (saved === 'list' || saved === 'cards') setViewMode(saved);
         } catch (e) {}
     }, []);
 
-    const changeViewMode = (mode) => {
-        setViewMode(mode);
-        try { localStorage.setItem('projectViewMode', mode); } catch (e) {}
-    };
     const isList = viewMode === 'list';
 
     useEffect(() => {
@@ -436,7 +431,7 @@ const ProjectGrid = () => {
         // ROW 4
         {
             id: 2,
-            title: "Game Dev: Modding Ecosystem",
+            title: "Game Dev: Modding",
             slug: "game-dev-modding",
             subtitle: "View Gameplay & Stats",
             description: "220,000+ Downloads. Combining Zombie Mod and HD Mod across Men of War series.",
@@ -538,7 +533,7 @@ const ProjectGrid = () => {
                     ]
                 }
             ],
-            longDescription: "A massive multiplayer mod ecosystem demonstrating the capacity to handle high concurrency and complex state synchronization. Replaces low-resolution assets with HD textures and detailed models while maintaining performance.",
+            longDescription: "A massive multiplayer mod demonstrating the capacity to handle high concurrency and complex state synchronization. Replaces low-resolution assets with HD textures and detailed models while maintaining performance.",
             tags: ["Game Dev", "3D Modeling"],
             size: "medium",
             stats: "220k+ Downloads",
@@ -566,7 +561,7 @@ const ProjectGrid = () => {
         },
         {
             id: 6,
-            title: "LATAM E-commerce Ecosystem",
+            title: "LATAM E-commerce",
             slug: "ecommerce-latam",
             subtitle: "View Case Study",
             description: "E-commerce platform for the Latin American market.",
@@ -650,30 +645,6 @@ const ProjectGrid = () => {
         */
     ];
 
-    // Rendered inside the header nav row (#view-toggle-slot) so it sits level with the nav buttons
-    const viewToggleSlot = mounted ? document.getElementById('view-toggle-slot') : null;
-
-    const viewToggle = (
-                <div className="hidden md:inline-flex items-center gap-1 p-1 bg-[#111] border border-[#222] rounded-full" role="group" aria-label="Project view mode">
-                    {[
-                        { mode: 'cards', label: 'Card view', icon: <><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></> },
-                        { mode: 'list', label: 'List view', icon: <><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></> }
-                    ].map(({ mode, label, icon }) => (
-                        <button
-                            key={mode}
-                            type="button"
-                            onClick={() => changeViewMode(mode)}
-                            aria-label={label}
-                            aria-pressed={viewMode === mode}
-                            title={label}
-                            className={`p-1.5 rounded-full cursor-pointer transition-colors ${viewMode === mode ? 'bg-[#222] text-white' : 'text-[#666] hover:text-white'}`}
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{icon}</svg>
-                        </button>
-                    ))}
-                </div>
-    );
-
     // Quick links shown next to the GitHub icon on each card
     const toWatchUrl = (url) => url.replace('youtube.com/embed/', 'youtube.com/watch?v=');
     const getVideoLink = (project) => {
@@ -742,13 +713,6 @@ const ProjectGrid = () => {
         </div>
     );
 
-    const headerControls = (
-        <>
-            {viewToggle}
-
-        </>
-    );
-
     // Column where each card starts in the 3-col grid, to open the hover preview towards free space
     const startsInLeftColumn = {};
     let gridCol = 0;
@@ -762,10 +726,6 @@ const ProjectGrid = () => {
     return (
         <div className="w-full mb-32">
 
-            {mounted && (viewToggleSlot
-                ? createPortal(headerControls, viewToggleSlot)
-                : <div className="flex justify-end gap-2 mb-4">{headerControls}</div>
-            )}
             <div className={`grid ${isList ? 'grid-cols-1 gap-2' : 'grid-cols-1 md:grid-cols-3 gap-6'}`}>
             {visibleProjects.map((project, index) => (
                 <React.Fragment key={project.id}>

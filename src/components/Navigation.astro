@@ -1,16 +1,16 @@
 ---
 const links: { name: string; href: string; match: string; icon?: string; target?: string }[] = [
     {
-        name: "Work",
+        name: "Home",
         href: "/",
         match: "exact",
     },
-    // {
-    //     name: "Projects",
-    //     href: "/projects",
-    //     match: "startsWith",
-    //     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>`,
-    // },
+    {
+        name: "Projects",
+        href: "/projects",
+        match: "startsWith",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>`,
+    },
     {
         name: "Profile",
         href: "/profile",
@@ -18,10 +18,16 @@ const links: { name: string; href: string; match: string; icon?: string; target?
         icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
     },
     {
-        name: "Writing",
+        name: "Blog",
         href: "/writing",
         match: "startsWith",
         icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>`,
+    },
+    {
+        name: "News",
+        href: "/news",
+        match: "startsWith",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>`,
     },
     {
         name: "Research",
@@ -107,7 +113,7 @@ const socialLinks = [
     <a
 
         href="/agents-usage"
-        class={`${compact ? "lg:hidden" : "md:hidden"} self-center flex items-center gap-1 px-2.5 py-2 rounded-full border border-[#222] bg-[#111] text-[11px] font-mono text-[#999] transition-colors hover:text-white hover:border-[#68d6ba]`}
+        class={`${compact ? "lg:hidden" : "md:hidden"} self-center flex items-center gap-1 px-2.5 py-2 rounded-full border border-[#222] bg-[#111] text-[11px] font-mono text-[#999] transition-colors hover:text-white hover:border-[#ffa647]`}
     >AI Usage <span aria-hidden="true">&#8599;</span></a>
 
 </nav>

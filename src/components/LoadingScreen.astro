@@ -5,8 +5,8 @@
 {/* Intro Blackout Curtain: plunged into total blackness crossing event horizon, then dissolves smoothly into normal site */}
 <div 
   id="gargantua-intro-blackout" 
-  class="fixed inset-0 bg-black pointer-events-none z-50 opacity-0 transition-opacity" 
-  style="transition-duration: 550ms; transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);"
+  class="fixed inset-0 bg-black pointer-events-none z-50 opacity-0"
+  style="will-change: opacity;"
   aria-hidden="true"
 ></div>
 
@@ -37,6 +37,20 @@
     visibility: hidden !important;
     pointer-events: none !important;
   }
+
+  /* Staggered reveal right after the intro: header, usage panel and content fade in together under the lifting curtain */
+  @keyframes introReveal {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+  html.intro-reveal #site-header-container,
+  html.intro-reveal #home-floating-usage,
+  html.intro-reveal #home-main-content {
+    animation: introReveal 900ms cubic-bezier(0.16, 1, 0.3, 1) both !important;
+    transition: none !important;
+  }
+  html.intro-reveal #home-floating-usage { animation-delay: 120ms !important; }
+  html.intro-reveal #home-main-content { animation-delay: 220ms !important; }
 </style>
 
 <script>
@@ -66,9 +80,11 @@
         try {
           sessionStorage.setItem("home-loaded", "true");
         } catch (e) {}
+        document.documentElement.classList.add("intro-reveal");
         document.documentElement.classList.remove("intro-active");
         document.documentElement.classList.add("skip-loading-screen");
         if (blackout) {
+          blackout.style.transition = 'opacity 550ms cubic-bezier(0.16, 1, 0.3, 1)';
           blackout.style.opacity = '0';
           setTimeout(() => { blackout.style.display = 'none'; }, 550);
         }

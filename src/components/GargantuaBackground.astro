@@ -69,7 +69,7 @@ const { isHome = true } = Astro.props;
         <span class="truncate sm:whitespace-normal">
             <strong class="text-white font-normal">Sagittarius A* (Sgr A*)</strong> &bull; Supermassive black hole at the center of the Milky Way (~4.1M solar masses, 26,000 ly from Earth)
         </span>
-        <span id="rabbit-mode-badge" class="text-[#68d6ba] shrink-0 hidden md:inline">Mode 2 // Doppler</span>
+        <span id="rabbit-mode-badge" class="text-[#ffa647] shrink-0 hidden md:inline">Mode 2 // Doppler</span>
     </div>
 
     <!-- Control bar: wrapped grid on small screens, single row from lg -->
@@ -112,7 +112,7 @@ const { isHome = true } = Astro.props;
 
         <!-- Orbit -->
         <div class="order-6 lg:order-none basis-full lg:basis-auto flex items-center gap-2 px-3 py-2 lg:py-0">
-            <button id="rabbit-btn-autocam" type="button" class="w-16 lg:w-auto shrink-0 px-2 py-1 border border-[#68d6ba] text-[#68d6ba] cursor-pointer transition-colors" title="Toggle Auto Orbit">AUTO: ON</button>
+            <button id="rabbit-btn-autocam" type="button" class="w-16 lg:w-auto shrink-0 px-2 py-1 border border-[#ffa647] text-[#ffa647] cursor-pointer transition-colors" title="Toggle Auto Orbit">AUTO: ON</button>
             <input id="rabbit-ctrl-camspeed" type="range" min="0.05" max="2.0" step="0.05" value="0.65" class="hud-slider flex-1 min-w-0 lg:flex-none lg:w-16" title="Orbit Speed" aria-label="Orbit speed" />
             <span id="rabbit-val-camspeed" class="text-white w-9 text-right shrink-0">0.65x</span>
         </div>
@@ -185,8 +185,8 @@ const { isHome = true } = Astro.props;
         border: 0;
     }
 
-    .hud-slider::-webkit-slider-thumb:hover { background: #68d6ba; }
-    .hud-slider::-moz-range-thumb:hover { background: #68d6ba; }
+    .hud-slider::-webkit-slider-thumb:hover { background: #ffa647; }
+    .hud-slider::-moz-range-thumb:hover { background: #ffa647; }
 
     .hud-step {
         width: 20px;
@@ -404,6 +404,7 @@ const { isHome = true } = Astro.props;
         const isIntroActive = document.documentElement.classList.contains('intro-active');
         let isIntroFlight = isIntroActive;
         let introStartTime = performance.now();
+        let introFirstFrame = true;
         let introDone = false;
         let introPauseTimer: ReturnType<typeof setTimeout> | null = null;
         let introHideTimer: ReturnType<typeof setTimeout> | null = null;
@@ -715,9 +716,12 @@ const { isHome = true } = Astro.props;
 
         function resize() {
             if (!canvas || !gl) return;
-            const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
-            canvas.width = Math.floor(window.innerWidth * dpr);
-            canvas.height = Math.floor(window.innerHeight * dpr);
+            // The scene is always covered by a ~6.5px backdrop blur, so rendering at half resolution is
+            // visually indistinguishable and cuts the per-frame fragment work by ~4x. The canvas is
+            // stretched to full size by CSS (w-full h-full), so the browser upscales it smoothly.
+            const RENDER_SCALE = 0.5;
+            canvas.width = Math.max(1, Math.floor(window.innerWidth * RENDER_SCALE));
+            canvas.height = Math.max(1, Math.floor(window.innerHeight * RENDER_SCALE));
             gl.viewport(0, 0, canvas.width, canvas.height);
         }
 
@@ -796,7 +800,7 @@ const { isHome = true } = Astro.props;
 
             if (btnAutoCam) {
                 if (state.autoCam) {
-                    btnAutoCam.className = 'px-2 py-1 border border-[#68d6ba] text-[#68d6ba] cursor-pointer transition-colors';
+                    btnAutoCam.className = 'px-2 py-1 border border-[#ffa647] text-[#ffa647] cursor-pointer transition-colors';
                     btnAutoCam.textContent = 'AUTO: ON';
                 } else {
                     btnAutoCam.className = 'px-2 py-1 border border-[#222] text-[#666] hover:text-[#999] cursor-pointer transition-colors';
@@ -1062,12 +1066,17 @@ const { isHome = true } = Astro.props;
             prevTime = now;
 
             if (isIntroFlight) {
+                // Start the clock on the first rendered frame so shader compile / first-frame hitches don't skip the animation
+                if (introFirstFrame) {
+                    introStartTime = now;
+                    introFirstFrame = false;
+                }
                 const elapsed = now - introStartTime;
-                const flightDuration = 1800;
+                const flightDuration = 2200;
                 const progress = Math.min(1.0, elapsed / flightDuration);
 
-                // Gravitational acceleration towards singularity (cosmic power ease-in)
-                const ease = Math.pow(progress, 2.2);
+                // Smooth gravitational acceleration (gentler than a hard power curve, no abrupt speed-up)
+                const ease = progress * progress * (3.0 - 2.0 * progress) * 0.35 + Math.pow(progress, 1.8) * 0.65;
 
                 const startCamDist = 28.0;
                 const endCamDist = 2.80;
@@ -1083,8 +1092,11 @@ const { isHome = true } = Astro.props;
 
                 const blackoutEl = document.getElementById('gargantua-intro-blackout');
                 if (blackoutEl) {
+                    // Driven per-frame by JS: disable CSS transition so it doesn't lag/flicker behind the value
+                    blackoutEl.style.transition = 'none';
                     if (progress > 0.78) {
-                        const blackoutProgress = Math.min(1.0, (progress - 0.78) / 0.22);
+                        const t = Math.min(1.0, (progress - 0.78) / 0.22);
+                        const blackoutProgress = t * t * (3.0 - 2.0 * t);
                         blackoutEl.style.opacity = blackoutProgress.toString();
                     } else {
                         blackoutEl.style.opacity = '0';
@@ -1117,6 +1129,7 @@ const { isHome = true } = Astro.props;
                             sessionStorage.setItem("home-loaded", "true");
                         } catch (e) {}
 
+                        document.documentElement.classList.add("intro-reveal");
                         document.documentElement.classList.remove("intro-active");
                         document.documentElement.classList.add("skip-loading-screen");
 
@@ -1127,6 +1140,7 @@ const { isHome = true } = Astro.props;
 
                         // Dissolve blackout curtain to reveal normal home page
                         if (blackoutEl) {
+                            blackoutEl.style.transition = 'opacity 550ms cubic-bezier(0.16, 1, 0.3, 1)';
                             blackoutEl.style.opacity = '0';
                             introHideTimer = setTimeout(() => {
                                 blackoutEl.style.display = 'none';

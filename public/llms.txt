@@ -70,10 +70,10 @@ Management Sciences & Quantitative Methods. Equivalent to a 3 year European BS.
     - Custom physics: O(1) constant-time collisions and gravity unified in a single solver. On top of it, fluids (waves, vortices, buoyancy) and optics (reflections, refraction, caustics, fog) are drawn with lightweight formulas in a single pass instead of heavy render passes. Used for game movement and collisions and for the water and light of the sea and sky (map 13).
 - **[MS Thesis, AI/ML Research](https://github.com/agustindiazcano/msc-thesis-neurosymbolic-llm-rl-navigation) (2026 to present)**: LLM-guided reinforcement learning for legged robot navigation (UTN). Hierarchical neuro-symbolic architecture: an RBF-based perceptual layer generates interpretable concept activations, and an LLM resolves navigation decisions only in ambiguous cases where multiple concepts compete. Currently benchmarking RBF vs. MLP policies (curriculum learning, grid-based navigation) before full integration in MuJoCo.
 - **Astrophysics Data Simulations (2023)**: Robust simulations modeling complex astrophysics systems.
-- **LATAM E-commerce Ecosystem (2022)**: Scalable and localized e-commerce solution handling complex gateways.
+- **LATAM E-commerce (2022)**: Scalable and localized e-commerce solution handling complex gateways.
 - **InsurTech Quoting Engine (2021)**: Real-time insurance premium quoting engine.
 - **Crypto Ethereum Mining Rig (2017)**: Assembled and configured a rig for Ethereum mining in the early adoption era. [View Repository](https://github.com/agustindiazcano/eth-mining-infrastructure-2017)
-- **Game Dev: Modding Ecosystem (2010)**: 220,000+ Downloads across Men of War series (solo creator, no marketing budget, no pre-existing audience).
+- **Game Dev: Modding (2010)**: 220,000+ Downloads across Men of War series (solo creator, no marketing budget, no pre-existing audience).
     - [Men of War Zombie Mod Main (+113k Downloads)](https://www.moddb.com/mods/zombie-mod5)
     - [Men of War Zombie Mod Assault (+84k Downloads)](https://www.moddb.com/mods/men-of-war-zombie-mod)
     - [Men of War HD Mod (20k Downloads)](https://www.moddb.com/mods/hd-mod)

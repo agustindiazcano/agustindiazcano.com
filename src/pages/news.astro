@@ -1,0 +1,51 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageNav from "../components/PageNav.astro";
+import Footer from "../components/Footer.astro";
+import CSSBlackHole from "../components/CSSBlackHole.astro";
+
+import { news } from "../data/news";
+---
+
+<Layout
+  title="News | Agustin Diaz-Cano"
+  description="Latest news and updates from Agustin Diaz-Cano, Software Engineer and MS Candidate, Systems Engineering."
+>
+  <CSSBlackHole />
+  <main class="page-fade-in min-h-screen max-w-[800px] mx-auto px-6 pb-20 relative z-10">
+    <PageNav items={[{ label: "News" }]} backHref="/" />
+
+    <section class="mb-8 md:mb-12">
+      <h2 class="text-3xl font-bold tracking-tight text-white mb-3 text-center md:text-left">News</h2>
+      <p class="text-[#888] text-center md:text-left">Latest updates</p>
+    </section>
+
+    {
+      news.length === 0 ? (
+        <p class="text-[#666] text-sm font-mono text-center md:text-left">No news yet.</p>
+      ) : (
+        <div class="space-y-6">
+          {news.map((item) => (
+            <article class="group relative bg-black/90 backdrop-blur-sm border border-[#222] rounded-2xl p-6 hover:bg-black hover:border-[#444] transition-all duration-300">
+              <div class="flex justify-between items-baseline mb-2">
+                <h2 class="text-xl font-semibold text-white">
+                  {item.href ? (
+                    <a href={item.href} class="absolute inset-0 z-10 focus:outline-none">
+                      <span class="sr-only">Read - {item.title}</span>
+                    </a>
+                  ) : null}
+                  {item.title}
+                </h2>
+                <span class="text-sm font-mono text-[#444]">{item.date}</span>
+              </div>
+              <p class="text-[#666] text-sm leading-relaxed relative z-20 pointer-events-none">{item.description}</p>
+            </article>
+          ))}
+        </div>
+      )
+    }
+    <div class="mt-20">
+      <Footer />
+    </div>
+  </main>
+</Layout>
