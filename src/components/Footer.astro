@@ -11,9 +11,11 @@ const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'short', yea
 const globResult = import.meta.glob('../data/analytics/*.json', { eager: true });
 const analytics = aggregateAnalytics(globResult);
 
-const links = [
+const links: { name: string; href?: string; copy?: string }[] = [
     { name: "GitHub", href: "https://github.com/agustindiazcano" },
     { name: "LinkedIn", href: "https://linkedin.com/in/agustindiazcano" },
+    // Discord has no public profile URL for usernames: clicking copies it
+    { name: "Discord: agusdiazcano4275", copy: "agusdiazcano4275" },
     {
         name: "ResearchGate",
         href: "https://www.researchgate.net/profile/Agustin-Diaz-Cano",
@@ -45,20 +47,32 @@ const textColor = isHome ? "text-white/90" : "text-[#888]";
 >
     <div class="flex gap-4 flex-wrap justify-center max-w-3xl">
         {
-            links.map((link) => (
-                <a
-                    href={link.href}
-                    target={link.href.startsWith("http") ? "_blank" : "_self"}
-                    rel={
-                        link.href.startsWith("http")
-                            ? "noopener noreferrer me"
-                            : ""
-                    }
-                    class="transition-colors hover:text-white"
-                >
-                    {link.name}
-                </a>
-            ))
+            links.map((link) =>
+                link.copy ? (
+                    <button
+                        type="button"
+                        data-copy={link.copy}
+                        data-label={link.name}
+                        class="footer-copy transition-colors hover:text-white cursor-pointer"
+                        title="Click to copy"
+                    >
+                        {link.name}
+                    </button>
+                ) : (
+                    <a
+                        href={link.href}
+                        target={link.href?.startsWith("http") ? "_blank" : "_self"}
+                        rel={
+                            link.href?.startsWith("http")
+                                ? "noopener noreferrer me"
+                                : ""
+                        }
+                        class="transition-colors hover:text-white"
+                    >
+                        {link.name}
+                    </a>
+                )
+            )
         }
     </div>
     <div class="flex flex-col md:flex-row items-center justify-between w-full mt-4 border-t border-[#222] pt-6 gap-5 md:gap-0">
@@ -209,4 +223,26 @@ const textColor = isHome ? "text-white/90" : "text-[#888]";
             observer.observe(rabbitBtn);
         }
     });
+</script>
+
+<script>
+    // Copy the Discord username on click, with a short "Copied" confirmation
+    function bindFooterCopy() {
+        document.querySelectorAll<HTMLButtonElement>('.footer-copy').forEach((btn) => {
+            if (btn.dataset.bound) return;
+            btn.dataset.bound = 'true';
+            btn.addEventListener('click', async () => {
+                const value = btn.dataset.copy ?? '';
+                const label = btn.dataset.label ?? btn.textContent ?? '';
+                try {
+                    await navigator.clipboard.writeText(value);
+                    btn.textContent = 'Copied to clipboard';
+                } catch {
+                    btn.textContent = value;
+                }
+                setTimeout(() => { btn.textContent = label; }, 1600);
+            });
+        });
+    }
+    document.addEventListener('astro:page-load', bindFooterCopy);
 </script>

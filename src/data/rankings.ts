@@ -60,7 +60,7 @@ export const rankingTiers: RankingTier[] = [
     },
     {
         id: "engineering",
-        title: "Engineering and open source rankings",
+        title: "Open source rankings",
         description: "Automated rankings computed from public GitHub activity.",
         entries: [
             {

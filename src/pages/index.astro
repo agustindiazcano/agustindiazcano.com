@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import { featured } from "../data/featured";
 import { news } from "../data/news";
+import { highlights } from "../data/highlights";
 import { posts } from "../data/blog";
 import { projects } from "../data/projects";
 import Footer from "../components/Footer.astro";
@@ -106,6 +107,28 @@ import LoadingScreen from "../components/LoadingScreen.astro";
                     ></button>
                 ))}
             </div>
+        </section>
+
+        {/* Highlights */}
+        <section class="w-full mb-16" aria-labelledby="highlights-title">
+            <div class="flex items-baseline justify-between mb-5">
+                <h2 id="highlights-title" class="font-display text-2xl text-white font-medium">Highlights</h2>
+                <a href="/rankings" class="text-sm text-[#888] hover:text-white transition-colors">View all</a>
+            </div>
+            <ul class="glass-panel divide-y divide-white/10 px-4 md:px-6 py-1">
+                {highlights.map((item) => (
+                    <li>
+                        <a href={item.href} class="flex items-baseline gap-4 py-3 group">
+                            <span class="shrink-0 w-12 md:w-[6.5rem] text-xs font-mono text-[#efd98a]">{item.year}</span>
+                            <span class="min-w-0 flex-1 md:flex md:flex-wrap md:items-baseline md:gap-x-3 text-sm md:text-base">
+                                <span class="block md:inline text-[#ccc] group-hover:text-white transition-colors duration-500">{item.title}</span>
+                                <span aria-hidden="true" class="hidden md:inline text-[#555]">&#9474;</span>
+                                <span class="block md:inline text-[#888] group-hover:text-[#ccc] transition-colors duration-500">{item.result}</span>
+                            </span>
+                        </a>
+                    </li>
+                ))}
+            </ul>
         </section>
 
         {/* News */}
