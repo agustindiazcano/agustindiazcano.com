@@ -30,7 +30,7 @@ const { className = "", compact = false } = Astro.props;
 >
     {/* Author Branding - Top-left on desktop (matching AI Usage on top-right), centered on mobile */}
     <div
-        class="self-start md:self-auto flex flex-col items-start md:items-center min-[1216px]:items-start text-left md:text-center min-[1216px]:text-left min-[1216px]:absolute min-[1216px]:top-2 min-[1216px]:left-0 z-20 mb-3 min-[1216px]:mb-0"
+        class="self-start md:self-auto flex flex-col items-start md:items-center min-[1216px]:items-start text-left md:text-center min-[1216px]:text-left min-[1216px]:absolute min-[1216px]:top-1/2 min-[1216px]:-translate-y-1/2 min-[1216px]:left-0 z-20 mb-3 min-[1216px]:mb-0"
     >
         <a href="/" class="brand-link group relative inline-block pb-1 focus:outline-none">
             <h1
@@ -41,7 +41,7 @@ const { className = "", compact = false } = Astro.props;
         </a>
     </div>
 
-    <div class="mb-3 md:mb-4 w-full flex justify-center min-[1216px]:justify-end">
+    <div class="mb-3 md:max-[1215px]:mb-4 min-[1216px]:mb-0 w-full flex justify-center min-[1216px]:justify-end">
         <Navigation />
     </div>
 </header>
