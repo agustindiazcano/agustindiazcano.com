@@ -179,3 +179,12 @@ pre,
     border-color: rgba(239, 217, 138, 0.4);
     box-shadow: 0 0 12px rgba(239, 217, 138, 0.25);
 }
+
+.card-btn-label {
+    gap: 0.5rem;
+    height: 2.25rem;
+    padding: 0 0.9rem;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+}

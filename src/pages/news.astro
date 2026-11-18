@@ -9,7 +9,7 @@ import ItemsView from "../components/ItemsView.astro";
 import { news } from "../data/news";
 
 const items = news.map((n) => ({
-  href: n.href,
+  href: `/news/${n.slug}`,
   title: n.title,
   label: n.date,
   aside: n.description,

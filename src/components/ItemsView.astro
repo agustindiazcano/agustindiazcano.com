@@ -8,6 +8,7 @@ export interface Item {
     aside?: string;
     image?: string;
     github?: string | null;
+    gitlab?: string | null;
     youtube?: string | null;
     live?: string | null;
 }
@@ -47,7 +48,7 @@ const { items } = Astro.props;
                             <span class="block text-xs md:text-sm lg:text-base font-medium text-white leading-snug line-clamp-2">{item.title}</span>
                             <span class="block mt-1 text-[10px] font-mono text-[#efd98a]">{item.label}</span>
                         </div>
-                        <CardLinks title={item.title} github={item.github} youtube={item.youtube} live={item.live} />
+                        <CardLinks title={item.title} github={item.github} gitlab={item.gitlab} youtube={item.youtube} live={item.live} />
                     </div>
                 </div>
             );

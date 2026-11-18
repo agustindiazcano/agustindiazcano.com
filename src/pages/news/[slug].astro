@@ -1,0 +1,65 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PageNav from "../../components/PageNav.astro";
+import Footer from "../../components/Footer.astro";
+import { news } from "../../data/news";
+
+export async function getStaticPaths() {
+    return news.map((item) => ({
+        params: { slug: item.slug },
+        props: { item },
+    }));
+}
+
+const { item } = Astro.props;
+const external = item.href?.startsWith("http");
+// Label for the related link depending on where it points
+let linkLabel = "Related page";
+if (item.href?.startsWith("/projects/")) linkLabel = "View project";
+else if (item.href?.startsWith("/writing/")) linkLabel = "Read the essay";
+else if (external) linkLabel = "Source";
+---
+
+<Layout
+  title={`${item.title} | Agustin Diaz-Cano`}
+  description={`${item.description} News from Agustin Diaz-Cano.`}
+>
+    <main class="min-h-screen max-w-[1200px] mx-auto px-6 pb-20">
+
+        <PageNav items={[{ label: "News", href: "/news" }, { label: item.title }]} backHref="/news" />
+
+        <header class="mb-10 max-w-3xl">
+            <span class="block text-xs font-mono text-[#efd98a] mb-4">{item.date}</span>
+            <h1 class="text-3xl md:text-5xl font-bold tracking-tight text-white mb-6">{item.title}</h1>
+            <p class="text-lg md:text-xl text-[#aaa] leading-relaxed">{item.description}</p>
+        </header>
+
+        {
+            item.body && item.body.length > 0 && (
+                <article class="max-w-3xl space-y-5 text-[#999] text-base md:text-lg leading-relaxed mb-10">
+                    {item.body.map((paragraph) => (
+                        <p>{paragraph}</p>
+                    ))}
+                </article>
+            )
+        }
+
+        {
+            item.href && (
+                <a
+                    href={item.href}
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
+                    class="card-btn card-btn-text card-btn-label"
+                >
+                    <span>{linkLabel}</span>
+                    <span aria-hidden="true">{external ? "\u2197" : "\u2192"}</span>
+                </a>
+            )
+        }
+
+        <div class="mt-20">
+            <Footer />
+        </div>
+    </main>
+</Layout>

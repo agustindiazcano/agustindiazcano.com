@@ -1,12 +1,17 @@
-export type NewsItem = {
+export type NewsEntry = {
     title: string;
     date: string;
     description: string;
+    /** Related link: a project or page of this site, or an external source. Shown as a button on the news page. */
     href?: string;
+    /** Long text for the news page, one string per paragraph. Write here to extend a news page. */
+    body?: string[];
 };
 
+export type NewsItem = NewsEntry & { slug: string };
+
 // Mock entries. Replace with real news; the home page shows the first 5 and /news lists all of them.
-const newsEntries: NewsItem[] = [
+const newsEntries: NewsEntry[] = [
     {
         title: "Quantum wind farm optimizer takes 1st place Quantum Impact at the Qollab x IonQ hackathon",
         date: "Nov 2026",
@@ -151,5 +156,26 @@ function dateKey(date: string): number {
     return year * 10000 + month * 100 + day;
 }
 
+// URL slug from the title (max 60 chars, cut at a word boundary), unique across all entries
+function slugify(title: string): string {
+    const base = title
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    if (base.length <= 60) return base;
+    const cut = base.slice(0, 60);
+    return cut.slice(0, cut.lastIndexOf("-") > 20 ? cut.lastIndexOf("-") : 60);
+}
+
+const used = new Set<string>();
+const withSlugs: NewsItem[] = newsEntries.map((entry) => {
+    let slug = slugify(entry.title);
+    for (let n = 2; used.has(slug); n++) slug = `${slugify(entry.title)}-${n}`;
+    used.add(slug);
+    return { ...entry, slug };
+});
+
 // Newest first. Array.sort is stable, so entries with the same date keep the order above.
-export const news: NewsItem[] = [...newsEntries].sort((a, b) => dateKey(b.date) - dateKey(a.date));
+export const news: NewsItem[] = [...withSlugs].sort((a, b) => dateKey(b.date) - dateKey(a.date));

@@ -106,7 +106,11 @@ import LoadingScreen from "../components/LoadingScreen.astro";
                         <div class="featured-card group relative shrink-0 snap-start aspect-[316/200] w-[calc((100%-1rem)/2)] md:w-[calc((100%-2rem)/3)] lg:w-[calc((100%-3rem)/4)] rounded-xl overflow-hidden border border-[#222] bg-[#111] hover:border-[#444] transition-colors">
                             {/* Stretched link: the whole card opens the project, the buttons below sit above it */}
                             <a href={item.href} class="absolute inset-0 z-10" aria-label={item.title}></a>
-                            <img src={item.image} alt={item.title} loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                            {item.image ? (
+                                <img src={item.image} alt={item.title} loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                            ) : (
+                                <div class="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-[#111] opacity-60"></div>
+                            )}
                             <div class="absolute inset-0 bg-gradient-to-b from-black/90 via-black/20 to-transparent"></div>
                             <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/85 to-transparent"></div>
                             {/* Title on top, subtitle right below it, buttons pinned to the bottom */}
@@ -115,7 +119,7 @@ import LoadingScreen from "../components/LoadingScreen.astro";
                                     <span class="block text-xs md:text-sm lg:text-base font-medium text-white leading-snug">{item.title}</span>
                                     <span class="block mt-1 text-[10px] font-mono uppercase tracking-wider text-[#999]">{item.label}</span>
                                 </div>
-                                <CardLinks title={item.title} github={item.github} youtube={item.youtube} live={item.live} />
+                                <CardLinks title={item.title} github={item.github} gitlab={item.gitlab} youtube={item.youtube} live={item.live} />
                             </div>
                         </div>
                     ))}
@@ -167,17 +171,10 @@ import LoadingScreen from "../components/LoadingScreen.astro";
             <ul class="glass-panel divide-y divide-white/10 px-4 md:px-6 py-1">
                 {news.slice(0, 5).map((item) => (
                     <li>
-                        {item.href ? (
-                            <a href={item.href} class="flex items-baseline gap-4 py-3 group">
-                                <span class="shrink-0 w-20 text-xs font-mono text-[#efd98a]">{item.date}</span>
-                                <span class="min-w-0 flex-1 truncate text-sm md:text-base text-[#ccc] group-hover:text-white transition-colors">{item.title}</span>
-                            </a>
-                        ) : (
-                            <div class="flex items-baseline gap-4 py-3">
-                                <span class="shrink-0 w-20 text-xs font-mono text-[#efd98a]">{item.date}</span>
-                                <span class="min-w-0 flex-1 truncate text-sm md:text-base text-[#ccc]">{item.title}</span>
-                            </div>
-                        )}
+                        <a href={`/news/${item.slug}`} class="flex items-baseline gap-4 py-3 group">
+                            <span class="shrink-0 w-20 text-xs font-mono text-[#efd98a]">{item.date}</span>
+                            <span class="min-w-0 flex-1 truncate text-sm md:text-base text-[#ccc] group-hover:text-white transition-colors">{item.title}</span>
+                        </a>
                     </li>
                 ))}
             </ul>
@@ -225,7 +222,7 @@ import LoadingScreen from "../components/LoadingScreen.astro";
                                 <span class="block text-xs md:text-sm lg:text-base font-medium text-white leading-snug line-clamp-2">{project.title}</span>
                                 {project.tags[0] && <span class="block mt-1 text-[10px] font-mono uppercase tracking-wider text-[#999]">{project.tags[0]}</span>}
                             </div>
-                            <CardLinks title={project.title} github={project.githubUrl} youtube={project.youtube} live={project.live} />
+                            <CardLinks title={project.title} github={project.githubUrl} gitlab={project.gitlab} youtube={project.youtube} live={project.live} />
                         </div>
                     </div>
                 ))}
