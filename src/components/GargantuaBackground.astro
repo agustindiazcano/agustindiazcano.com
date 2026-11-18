@@ -113,7 +113,7 @@ const { isHome = true } = Astro.props;
         <!-- Orbit -->
         <div class="order-6 lg:order-none basis-full lg:basis-auto flex items-center gap-2 px-3 py-2 lg:py-0">
             <button id="rabbit-btn-autocam" type="button" class="w-16 lg:w-auto shrink-0 px-2 py-1 border border-[#ffa647] text-[#ffa647] cursor-pointer transition-colors" title="Toggle Auto Orbit">AUTO: ON</button>
-            <input id="rabbit-ctrl-camspeed" type="range" min="0.05" max="2.0" step="0.05" value="0.65" class="hud-slider flex-1 min-w-0 lg:flex-none lg:w-16" title="Orbit Speed" aria-label="Orbit speed" />
+            <input id="rabbit-ctrl-camspeed" type="range" min="0.0125" max="2.0" step="0.0125" value="0.1625" class="hud-slider flex-1 min-w-0 lg:flex-none lg:w-16" title="Orbit Speed" aria-label="Orbit speed" />
             <span id="rabbit-val-camspeed" class="text-white w-9 text-right shrink-0">0.65x</span>
         </div>
     </div>
@@ -370,10 +370,10 @@ const { isHome = true } = Astro.props;
             blur: 6.5,
             dim: 0,
             autoCam: true,
-            camSpeed: 0.85,
+            camSpeed: 0.2125,
             exposure: 1.95,
             doppler: 0.0,
-            speed: 0.05
+            speed: 0.0125
         };
 
         const MODE_2 = {
@@ -385,10 +385,10 @@ const { isHome = true } = Astro.props;
             blur: 6.5,
             dim: 16,
             autoCam: true,
-            camSpeed: 0.65,
+            camSpeed: 0.1625,
             exposure: 1.05,
             doppler: 1.5,
-            speed: 0.05
+            speed: 0.0125
         };
 
         // Random mode on site load (50% probability Mode 1, 50% Mode 2) unless manually picked
@@ -765,7 +765,7 @@ const { isHome = true } = Astro.props;
                 dimEl.style.setProperty('background-color', `rgba(0, 0, 0, ${(state.dim / 100).toFixed(2)})`, 'important');
             }
 
-            const seconds = Math.max(6, (8.0 / Math.max(0.05, state.speed))).toFixed(1);
+            const seconds = Math.max(6, (8.0 / Math.max(0.0125, state.speed))).toFixed(1);
             const tiltDeg = (90 - (state.pitch * 180 / Math.PI)).toFixed(2);
             const rollDeg = (state.roll * 180 / Math.PI).toFixed(2);
             const yawDeg = (Math.sin(state.yaw) * 22).toFixed(2);
