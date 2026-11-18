@@ -1,26 +1,30 @@
 ---
-// 3D Black Hole Initial Cosmic Intro
+// First visit of the session: the black hole from far away, a fast approach to its center in 1.5s,
+// a black screen, and only then the home loads. The animation itself lives in GargantuaBackground.astro.
 ---
 
-{/* Intro Blackout Curtain: plunged into total blackness crossing event horizon, then dissolves smoothly into normal site */}
-<div 
-  id="gargantua-intro-blackout" 
-  class="fixed inset-0 bg-black pointer-events-none z-50 opacity-0"
-  style="will-change: opacity;"
+{/* Black curtain: fully black at the end of the approach, then lifts to reveal the home */}
+<div
+  id="gargantua-intro-blackout"
+  class="fixed inset-0 bg-black pointer-events-none z-50"
+  style="display: none; opacity: 0;"
   aria-hidden="true"
 ></div>
 
 <script is:inline>
   function applyIntroState() {
+    var root = document.documentElement;
+    var first = false;
     try {
-      if (sessionStorage.getItem("home-loaded")) {
-        document.documentElement.classList.add("skip-loading-screen");
-        document.documentElement.classList.remove("intro-active");
-      } else {
-        document.documentElement.classList.add("intro-active");
-      }
-    } catch (e) {
-      document.documentElement.classList.add("skip-loading-screen");
+      first = !sessionStorage.getItem("home-loaded");
+    } catch (e) {}
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (first && !reduce) {
+      root.classList.add("intro-active");
+      root.classList.remove("skip-loading-screen");
+    } else {
+      root.classList.remove("intro-active");
+      root.classList.add("skip-loading-screen");
     }
   }
   applyIntroState();
@@ -28,7 +32,7 @@
 </script>
 
 <style is:global>
-  /* During 3D Black Hole Intro: UI waits to render smoothly while cosmic approach flight plays with background blur */
+  /* While the intro runs the content stays hidden (it appears when the curtain lifts) */
   html.intro-active #site-header-container,
   html.intro-active #home-floating-usage,
   html.intro-active #home-main-content,
@@ -37,65 +41,32 @@
     visibility: hidden !important;
     pointer-events: none !important;
   }
-
-  /* Staggered reveal right after the intro: header, usage panel and content fade in together under the lifting curtain */
-  @keyframes introReveal {
-    from { opacity: 0; transform: translateY(14px); }
-    to { opacity: 1; transform: none; }
-  }
-  html.intro-reveal #site-header-container,
-  html.intro-reveal #home-floating-usage,
-  html.intro-reveal #home-main-content {
-    animation: introReveal 900ms cubic-bezier(0.16, 1, 0.3, 1) both !important;
-    transition: none !important;
-  }
-  html.intro-reveal #home-floating-usage { animation-delay: 220ms !important; }
-  html.intro-reveal #home-main-content { animation-delay: 220ms !important; }
 </style>
 
 <script>
-  function setupIntroFallback() {
-    const blackout = document.getElementById('gargantua-intro-blackout');
+  function setupHome() {
+    const root = document.documentElement;
     const mainContent = document.getElementById('home-main-content');
-    let isFirstVisit = false;
-    try {
-      isFirstVisit = !sessionStorage.getItem("home-loaded");
-    } catch (e) {
-      isFirstVisit = false;
-    }
+    const blackout = document.getElementById('gargantua-intro-blackout');
 
-    if (!isFirstVisit) {
-      document.documentElement.classList.remove("intro-active");
-      document.documentElement.classList.add("skip-loading-screen");
+    if (!root.classList.contains('intro-active')) {
+      mainContent?.classList.add('show');
       if (blackout) blackout.style.display = 'none';
-      if (mainContent) {
-        mainContent.classList.add('show');
-      }
       return;
     }
 
-    // Safety fallback: if for any reason engine animation does not complete within 3.5s, force transition
-    const fallbackTimer = setTimeout(() => {
-      if (document.documentElement.classList.contains('intro-active')) {
-        try {
-          sessionStorage.setItem("home-loaded", "true");
-        } catch (e) {}
-        document.documentElement.classList.add("intro-reveal");
-        document.documentElement.classList.remove("intro-active");
-        document.documentElement.classList.add("skip-loading-screen");
-        if (blackout) {
-          blackout.style.transition = 'opacity 550ms cubic-bezier(0.16, 1, 0.3, 1)';
-          blackout.style.opacity = '0';
-          setTimeout(() => { blackout.style.display = 'none'; }, 550);
-        }
-        if (mainContent) {
-          mainContent.classList.add('show');
-        }
-      }
-    }, 3500);
-
-    window.addEventListener('beforeunload', () => clearTimeout(fallbackTimer), { once: true });
+    // Safety net: if the engine never starts the intro (WebGL failed or the page is very slow), load the home anyway
+    setTimeout(() => {
+      if ((window as any).__introStarted) return;
+      if (!root.classList.contains('intro-active')) return;
+      try {
+        sessionStorage.setItem('home-loaded', 'true');
+      } catch (e) {}
+      root.classList.remove('intro-active');
+      root.classList.add('skip-loading-screen');
+      mainContent?.classList.add('show');
+      if (blackout) blackout.style.display = 'none';
+    }, 6000);
   }
-
-  document.addEventListener("astro:page-load", setupIntroFallback);
+  document.addEventListener('astro:page-load', setupHome);
 </script>

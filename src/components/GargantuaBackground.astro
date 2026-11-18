@@ -88,6 +88,14 @@ const { isHome = true } = Astro.props;
             </svg>
         </button>
 
+        <!-- Copy the current background configuration as JSON -->
+        <button id="rabbit-copy-json-btn" type="button" class="order-2 lg:order-last px-3 text-[#888] hover:text-[#efd98a] hover:bg-[#1a1a1a] flex items-center justify-center gap-1.5 cursor-pointer transition-colors" title="Copy the current background configuration as JSON" aria-label="Copy configuration as JSON">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter">
+                <rect x="9" y="9" width="12" height="12"/><path d="M5 15H3V3h12v2"/>
+            </svg>
+            <span id="rabbit-copy-json-label">JSON</span>
+        </button>
+
         <!-- Exit -->
         <button id="rabbit-cinema-exit-btn" type="button" class="order-3 lg:order-last px-3 text-[#ccc] hover:text-white hover:bg-[#1a1a1a] flex items-center justify-center gap-1.5 cursor-pointer transition-colors" title="Exit Cinema Mode (Esc)">
             <span>Exit</span>
@@ -355,6 +363,8 @@ const { isHome = true } = Astro.props;
     // Gargantua Engine & White Rabbit Cinema Controller
     let animationFrameId = null;
     let resizeListener = null;
+    let introHoldTimer: ReturnType<typeof setTimeout> | null = null;
+    let introCurtain: Animation | null = null;
 
     function initGargantuaEngine() {
         const canvas = document.getElementById('gargantua-webgl-canvas') as HTMLCanvasElement | null;
@@ -370,7 +380,7 @@ const { isHome = true } = Astro.props;
             blur: 6.5,
             dim: 0,
             autoCam: true,
-            camSpeed: 0.31875,
+            camSpeed: 0.5938,
             exposure: 1.95,
             doppler: 0.0,
             speed: 0.01875
@@ -391,8 +401,8 @@ const { isHome = true } = Astro.props;
             speed: 0.01875
         };
 
-        // Random mode on site load (50% probability Mode 1, 50% Mode 2) unless manually picked
-        let activeModeId = Math.random() < 0.5 ? 1 : 2;
+        // Mode 1 (Radiant) is the default setup; a mode picked in the white rabbit HUD is kept for the session
+        let activeModeId = 1;
         const savedMode = sessionStorage.getItem('gargantua-chosen-mode');
         if (savedMode === '1' || savedMode === '2') {
             activeModeId = parseInt(savedMode, 10);
@@ -400,14 +410,17 @@ const { isHome = true } = Astro.props;
 
         let currentPreset = activeModeId === 1 ? { ...MODE_1 } : { ...MODE_2 };
 
-        // Check if initial cosmic flight intro is active
-        const isIntroActive = document.documentElement.classList.contains('intro-active');
-        let isIntroFlight = isIntroActive;
-        let introStartTime = performance.now();
-        let introFirstFrame = true;
-        let introDone = false;
-        let introPauseTimer: ReturnType<typeof setTimeout> | null = null;
-        let introHideTimer: ReturnType<typeof setTimeout> | null = null;
+
+        // INTRO (first visit only): the black hole seen from far away, then a fast approach to its center.
+        // Only the shader zoom changes (same cost every frame), the black curtain runs on the compositor.
+        const introActive = document.documentElement.classList.contains('intro-active');
+        const INTRO_MS = 1500;
+        const INTRO_ZOOM_FROM = 0.12;
+        const INTRO_ZOOM_TO = 6.0;
+        let introRunning = introActive;
+        let introStart = 0;
+        let introWarmFrames = 0;
+        let introHoldScheduled = false;
 
         let state = {
             engine: 'webgl',
@@ -418,11 +431,11 @@ const { isHome = true } = Astro.props;
             dim: currentPreset.dim,
             autoCam: currentPreset.autoCam,
             camSpeed: currentPreset.camSpeed,
-            camDist: isIntroFlight ? 28.0 : currentPreset.camDist,
-            zoom: isIntroFlight ? 0.58 : currentPreset.zoom,
-            offsetY: isIntroFlight ? 0.0 : currentPreset.offsetY,
-            pitch: isIntroFlight ? 0.08 : 0.14,
-            roll: isIntroFlight ? -0.10 : -0.21,
+            camDist: currentPreset.camDist,
+            zoom: introActive ? INTRO_ZOOM_FROM : currentPreset.zoom,
+            offsetY: currentPreset.offsetY,
+            pitch: 0.14,
+            roll: -0.21,
             yaw: 0.0,
             isCinema: false
         };
@@ -987,6 +1000,49 @@ const { isHome = true } = Astro.props;
             applyStyles();
         });
 
+        // Copy the current background configuration as JSON (to share a new setup)
+        const btnCopyJson = document.getElementById('rabbit-copy-json-btn');
+        const copyJsonLabel = document.getElementById('rabbit-copy-json-label');
+        btnCopyJson?.addEventListener('click', async () => {
+            const r = (n: number) => Math.round(n * 10000) / 10000;
+            const config = {
+                mode: activeModeId,
+                camDist: r(targetCamDist),
+                zoom: r(targetZoom),
+                offsetY: r(targetOffsetY),
+                pitch: r(state.pitch),
+                roll: r(state.roll),
+                yaw: r(state.yaw),
+                speed: r(state.speed),
+                doppler: r(state.doppler),
+                exposure: r(state.exposure),
+                blur: r(state.blur),
+                dim: r(state.dim),
+                autoCam: state.autoCam,
+                camSpeed: r(state.camSpeed),
+            };
+            const text = JSON.stringify(config, null, 2);
+            let ok = false;
+            try {
+                await navigator.clipboard.writeText(text);
+                ok = true;
+            } catch (e) {
+                // Fallback for browsers/contexts without the async clipboard API
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                try { ok = document.execCommand('copy'); } catch (err) {}
+                ta.remove();
+            }
+            if (copyJsonLabel) {
+                copyJsonLabel.textContent = ok ? 'COPIED' : 'ERROR';
+                setTimeout(() => { copyJsonLabel.textContent = 'JSON'; }, 1500);
+            }
+        });
+
         // Pointer Dragging for Orbiting
         let isDragging = false;
         let lastX = 0;
@@ -1069,88 +1125,22 @@ const { isHome = true } = Astro.props;
             const dt = Math.min(0.1, (now - prevTime) * 0.001);
             prevTime = now;
 
-            if (isIntroFlight) {
-                // Start the clock on the first rendered frame so shader compile / first-frame hitches don't skip the animation
-                if (introFirstFrame) {
-                    introStartTime = now;
-                    introFirstFrame = false;
-                }
-                const elapsed = now - introStartTime;
-                const flightDuration = 2200;
-                const progress = Math.min(1.0, elapsed / flightDuration);
-
-                // Smooth gravitational acceleration (gentler than a hard power curve, no abrupt speed-up)
-                const ease = progress * progress * (3.0 - 2.0 * progress) * 0.35 + Math.pow(progress, 1.8) * 0.65;
-
-                const startCamDist = 28.0;
-                const endCamDist = 2.80;
-                const startZoom = 0.58;
-                const endZoom = 0.65;
-
-                state.camDist = startCamDist + (endCamDist - startCamDist) * ease;
-                state.zoom = startZoom + (endZoom - startZoom) * ease;
-                state.pitch = 0.08 + 0.16 * ease;
-                state.roll = -0.10 - 0.28 * ease;
-                state.yaw = 0.42 * ease;
-                state.offsetY = currentPreset.offsetY * ease;
-
-                const blackoutEl = document.getElementById('gargantua-intro-blackout');
-                if (blackoutEl) {
-                    // Driven per-frame by JS: disable CSS transition so it doesn't lag/flicker behind the value
-                    blackoutEl.style.transition = 'none';
-                    if (progress > 0.78) {
-                        const t = Math.min(1.0, (progress - 0.78) / 0.22);
-                        const blackoutProgress = t * t * (3.0 - 2.0 * t);
-                        blackoutEl.style.opacity = blackoutProgress.toString();
-                    } else {
-                        blackoutEl.style.opacity = '0';
+            if (introRunning) {
+                if (introStart === 0) {
+                    // Warm-up: let the shader compile and a few frames render before the clock starts
+                    introWarmFrames++;
+                    if (introWarmFrames >= 3) {
+                        introStart = now;
+                        startIntroCurtain();
                     }
-                }
-
-                if (progress >= 1.0 && !introDone) {
-                    introDone = true;
-                    isIntroFlight = false;
-                    const blackoutEl = document.getElementById('gargantua-intro-blackout');
-                    if (blackoutEl) blackoutEl.style.opacity = '1';
-
-                    // Pause in pure blackness for 320ms, then reset to normal view and lift curtain
-                    introPauseTimer = setTimeout(() => {
-                        targetPitch = 0.14;
-                        targetRoll = -0.21;
-                        targetYaw = 0.0;
-                        targetZoom = currentPreset.zoom;
-                        targetCamDist = currentPreset.camDist;
-                        targetOffsetY = currentPreset.offsetY;
-                        state.zoom = currentPreset.zoom;
-                        state.camDist = currentPreset.camDist;
-                        state.offsetY = currentPreset.offsetY;
-                        state.pitch = 0.14;
-                        state.roll = -0.21;
-                        state.yaw = 0.0;
-                        camPhase = 0.0;
-
-                        try {
-                            sessionStorage.setItem("home-loaded", "true");
-                        } catch (e) {}
-
-                        document.documentElement.classList.add("intro-reveal");
-                        document.documentElement.classList.remove("intro-active");
-                        document.documentElement.classList.add("skip-loading-screen");
-
-                        const mainContent = document.getElementById('home-main-content');
-                        if (mainContent) {
-                            mainContent.classList.add('show');
-                        }
-
-                        // Dissolve blackout curtain to reveal normal home page
-                        if (blackoutEl) {
-                            blackoutEl.style.transition = 'opacity 550ms cubic-bezier(0.16, 1, 0.3, 1)';
-                            blackoutEl.style.opacity = '0';
-                            introHideTimer = setTimeout(() => {
-                                blackoutEl.style.display = 'none';
-                            }, 550);
-                        }
-                    }, 320);
+                } else {
+                    const p = Math.min(1, (now - introStart) / INTRO_MS);
+                    const ease = p * p * p; // slow at first, then it rushes in
+                    state.zoom = INTRO_ZOOM_FROM * Math.pow(INTRO_ZOOM_TO / INTRO_ZOOM_FROM, ease);
+                    if (p >= 1 && !introHoldScheduled) {
+                        introHoldScheduled = true;
+                        introHoldTimer = setTimeout(revealSite, 200); // a beat of pure black
+                    }
                 }
             } else if (state.autoCam && !isDragging) {
                 camPhase += dt * state.camSpeed * 0.65;
@@ -1192,6 +1182,66 @@ const { isHome = true } = Astro.props;
             animationFrameId = requestAnimationFrame(render);
         }
 
+        function startIntroCurtain() {
+            (window as any).__introStarted = true;
+            const blackoutEl = document.getElementById('gargantua-intro-blackout');
+            if (!blackoutEl) return;
+            blackoutEl.style.display = 'block';
+            introCurtain = blackoutEl.animate(
+                [{ opacity: 0 }, { opacity: 0, offset: 0.5 }, { opacity: 1 }],
+                { duration: INTRO_MS, easing: 'ease-in', fill: 'forwards' }
+            );
+        }
+
+        function revealSite() {
+            introRunning = false;
+            introHoldTimer = null;
+            const blackoutEl = document.getElementById('gargantua-intro-blackout');
+            if (blackoutEl) {
+                blackoutEl.style.display = 'block';
+                blackoutEl.style.opacity = '1';
+            }
+            if (introCurtain) {
+                introCurtain.cancel();
+                introCurtain = null;
+            }
+
+            // Back to the normal camera, hidden under the black curtain
+            targetPitch = 0.14;
+            targetRoll = -0.21;
+            targetYaw = 0.0;
+            targetZoom = currentPreset.zoom;
+            targetCamDist = currentPreset.camDist;
+            targetOffsetY = currentPreset.offsetY;
+            state.zoom = currentPreset.zoom;
+            state.camDist = currentPreset.camDist;
+            state.offsetY = currentPreset.offsetY;
+            state.pitch = 0.14;
+            state.roll = -0.21;
+            state.yaw = 0.0;
+            camPhase = 0.0;
+
+            try {
+                sessionStorage.setItem("home-loaded", "true");
+            } catch (e) {}
+            document.documentElement.classList.remove("intro-active");
+            document.documentElement.classList.add("skip-loading-screen");
+            document.getElementById('home-main-content')?.classList.add('show');
+
+            // Lift the curtain: the home is already there underneath
+            if (blackoutEl) {
+                const out = blackoutEl.animate(
+                    [{ opacity: 1 }, { opacity: 0 }],
+                    { duration: 700, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'forwards' }
+                );
+                out.finished.then(() => {
+                    blackoutEl.style.display = 'none';
+                    blackoutEl.style.opacity = '0';
+                    out.cancel();
+                }).catch(() => {});
+            }
+        }
+
         if (animationFrameId) cancelAnimationFrame(animationFrameId);
         animationFrameId = requestAnimationFrame(render);
     }
@@ -1205,17 +1255,13 @@ const { isHome = true } = Astro.props;
             window.removeEventListener('resize', resizeListener);
             resizeListener = null;
         }
-        if (introPauseTimer) {
-            clearTimeout(introPauseTimer);
-            introPauseTimer = null;
+        if (introHoldTimer) {
+            clearTimeout(introHoldTimer);
+            introHoldTimer = null;
         }
-        if (introHideTimer) {
-            clearTimeout(introHideTimer);
-            introHideTimer = null;
-        }
-        const blackoutEl = document.getElementById('gargantua-intro-blackout');
-        if (blackoutEl) {
-            blackoutEl.style.display = 'none';
+        if (introCurtain) {
+            introCurtain.cancel();
+            introCurtain = null;
         }
         document.documentElement.classList.remove('rabbit-cinema-active');
         const mainContent = document.getElementById('home-main-content');
