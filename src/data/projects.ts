@@ -53,22 +53,6 @@ export const projects: Project[] = [
             githubUrl: "https://github.com/agustindiazcano/algorithmic-trading-engine"
         },
         {
-            title: "AI & ML Research",
-            slug: "ai-ml-research",
-            description: "A collection of academic experiments and proofs of concept focusing on physics simulations, neural networks, and optimization.",
-            tags: ["AI", "ML", "Neural Networks", "Python"],
-            year: "2024",
-            githubUrl: "https://github.com/agustindiazcano/ai-ml-research"
-        },
-        {
-            title: "Astrophysics Data Simulations",
-            slug: "astrophysics-data-simulations",
-            description: "Simulations of astrophysical phenomena and data analysis.",
-            tags: ["Data Science", "Physics", "Python"],
-            year: "2023",
-            githubUrl: "https://github.com/agustindiazcano/astrophysics-data-simulations"
-        },
-        {
             title: "LATAM E-commerce",
             slug: "ecommerce-latam",
             description: "E-commerce platform for the Latin American market.",
@@ -85,6 +69,24 @@ export const projects: Project[] = [
             githubUrl: null
         },
         {
+            title: "Game Dev: Men of War Zombie Mod (200k+ downloads, 3M+ video views)",
+            slug: "game-dev-modding",
+            image: "/images/images-projects/zombie-mod/call-to-arms-zombie-mod-1.png",
+            description: "Men of War Zombie Mod: 200,000+ downloads and 3M+ video views.",
+            tags: ["Game Dev", "3D Modeling"],
+            year: "2011",
+            githubUrl: null
+        },
+        {
+            title: "Game Dev: Men of War HD Mod (20k downloads)",
+            slug: "game-dev-modding",
+            image: "/images/images-projects/hd-mod/men-of-war-hd-mod-1.jpg",
+            description: "Men of War HD Mod: 20,000 downloads.",
+            tags: ["Game Dev", "3D Modeling"],
+            year: "2010",
+            githubUrl: null
+        },
+        {
             title: "Game Dev: Modding",
             slug: "game-dev-modding",
             image: "/images/images-projects/zombie-mod/call-to-arms-zombie-mod-1.png",
@@ -94,9 +96,9 @@ export const projects: Project[] = [
             githubUrl: null
         },
         {
-            title: "Zombie Horde Survivors: Hybrid 3D Squad Shooter & Real-Time Strategy Game",
+            title: "Game Dev: Zombie Horde Survivors",
             slug: "zombie-horde-survivors",
-            description: "3D survival game, RTS",
+            description: "Hybrid 3D squad shooter and real-time strategy game.",
             tags: ["TypeScript", "Three.js", "Vite", "Vitest", "WebGL"],
             year: "2026",
             githubUrl: "https://github.com/agustindiazcano/zombie-horde-survivors"
