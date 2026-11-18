@@ -1,9 +1,11 @@
 ---
 interface Props {
     class?: string;
+    /** Show the Email / LinkedIn / GitHub icon buttons next to AI Usage. The home page hides them. */
+    showContacts?: boolean;
 }
 
-const { class: className = "" } = Astro.props;
+const { class: className = "", showContacts = true } = Astro.props;
 
 const aiUsageActive = Astro.url.pathname.startsWith("/agents-usage");
 const iconClass = "w-4 h-4";
@@ -33,9 +35,9 @@ const socials = [
     <a
         href="/agents-usage"
         aria-current={aiUsageActive ? "page" : undefined}
-        class={`px-2.5 py-1.5 rounded-md border bg-[#111] text-[11px] font-mono transition-colors hover:text-white hover:border-[#ffa647] ${aiUsageActive ? "border-[#444] text-white" : "border-[#222] text-[#999]"}`}
+        class={`px-2.5 py-1.5 rounded-md border bg-[#111] text-[11px] font-mono transition-colors hover:text-white hover:border-[#efd98a] ${aiUsageActive ? "border-[#444] text-white" : "border-[#222] text-[#999]"}`}
     >AI Usage</a>
-    {socials.map((social) => (
+    {showContacts && socials.map((social) => (
         <a
             href={social.href}
             target={social.target}

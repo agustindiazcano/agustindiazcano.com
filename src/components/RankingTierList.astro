@@ -21,13 +21,13 @@ const { tier, label } = Astro.props;
                     href={entry.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="group flex flex-col gap-1 px-4 py-4 transition-colors hover:bg-[#161616] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#ffa647]"
+                    class="group flex flex-col gap-1 px-4 py-4 transition-colors hover:bg-[#161616] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#efd98a]"
                 >
                     <span class="flex items-baseline justify-between gap-4">
-                        <span class="text-sm font-semibold text-white group-hover:text-[#ffa647] transition-colors">{entry.platform}</span>
+                        <span class="text-sm font-semibold text-white group-hover:text-[#efd98a] transition-colors">{entry.platform}</span>
                         <span class="font-mono text-[11px] text-[#555] whitespace-nowrap">{entry.source} <span aria-hidden="true">↗</span></span>
                     </span>
-                    <span class="font-mono text-xs text-[#ffa647]">{entry.metric}</span>
+                    <span class="font-mono text-xs text-[#efd98a]">{entry.metric}</span>
                     <span class="text-sm text-[#888] leading-relaxed">{entry.detail}</span>
                     {entry.method && (
                         <span class="text-xs text-[#666] leading-relaxed border-l border-[#333] pl-3 mt-1">{entry.method}</span>

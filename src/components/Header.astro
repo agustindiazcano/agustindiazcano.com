@@ -11,8 +11,8 @@ const { className = "", compact = false } = Astro.props;
 ---
 
 {compact ? (
-<header class={`w-full grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] items-center gap-3 lg:gap-6 mb-4 md:mb-10 text-center lg:text-left ${className}`}>
-    <div class="flex flex-col items-center lg:items-start text-center lg:text-left">
+<header class={`relative w-full grid grid-cols-1 min-[1216px]:grid-cols-[1fr_auto_1fr] items-center gap-3 min-[1216px]:gap-6 mb-4 md:mb-10 text-center min-[1216px]:text-left ${className}`}>
+    <div class="flex flex-col items-start md:items-center min-[1216px]:items-start text-left md:text-center min-[1216px]:text-left">
         <a href="/" class="brand-link group relative inline-block pb-1 focus:outline-none">
             <span class="brand-text block font-thin font-display tracking-normal leading-tight text-[1.5rem] md:text-[1.85rem]">
                 Agustin Diaz-Cano
@@ -22,15 +22,15 @@ const { className = "", compact = false } = Astro.props;
 
     <Navigation compact />
 
-    <HeaderActions class="hidden lg:flex" />
+    <HeaderActions class="hidden min-[1216px]:flex" />
 </header>
 ) : (
 <header
-    class={`w-full flex flex-col items-center text-center mb-4 md:mb-8 ${className}`}
+    class={`relative w-full flex flex-col items-center text-center mb-4 md:mb-8 ${className}`}
 >
     {/* Author Branding - Top-left on desktop (matching AI Usage on top-right), centered on mobile */}
     <div
-        class="flex flex-col items-center lg:items-start text-center lg:text-left lg:absolute lg:top-2 lg:left-6 z-20 mb-3 lg:mb-0"
+        class="self-start md:self-auto flex flex-col items-start md:items-center min-[1216px]:items-start text-left md:text-center min-[1216px]:text-left min-[1216px]:absolute min-[1216px]:top-2 min-[1216px]:left-6 z-20 mb-3 min-[1216px]:mb-0"
     >
         <a href="/" class="brand-link group relative inline-block pb-1 focus:outline-none">
             <h1
@@ -69,8 +69,8 @@ const { className = "", compact = false } = Astro.props;
     }
     .brand-link:hover .brand-text,
     .brand-link:focus-visible .brand-text {
-        --brand-top: #e3b023;
-        --brand-bottom: #b8860b;
+        --brand-top: #efd98a;
+        --brand-bottom: #d9c070;
     }
     .brand-link::after {
         content: "";
@@ -80,7 +80,7 @@ const { className = "", compact = false } = Astro.props;
         bottom: 0;
         height: 1px;
         border-radius: 1px;
-        background-color: #e3b023;
+        background-color: #efd98a;
         transition: background-color 0.35s ease;
     }
     .brand-link:hover::after,

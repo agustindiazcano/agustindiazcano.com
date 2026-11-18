@@ -6,7 +6,6 @@ import { posts } from "../data/blog";
 import { projects } from "../data/projects";
 import Footer from "../components/Footer.astro";
 import ClaudeUsage from "../components/ClaudeUsage.astro";
-import HeaderActions from "../components/HeaderActions.astro";
 import GargantuaBackground from "../components/GargantuaBackground.astro";
 import LoadingScreen from "../components/LoadingScreen.astro";
 ---
@@ -18,8 +17,7 @@ import LoadingScreen from "../components/LoadingScreen.astro";
     <LoadingScreen />
     <GargantuaBackground isHome={true} />
     {/* Floats to the right of the header from 1024px up (compact below 1300px), stacks above the grid otherwise */}
-    <div id="home-floating-usage" class="w-full max-w-[1200px] mx-auto px-6 mb-3 flex flex-col items-end gap-1.5 relative z-20 lg:absolute lg:top-2 lg:right-6 lg:w-auto lg:max-w-none lg:mx-0 lg:px-0 lg:mb-0 transition-all duration-700">
-        <HeaderActions class="hidden lg:flex" />
+    <div id="home-floating-usage" class="w-full max-w-[1200px] mx-auto px-6 mb-3 flex flex-col items-center min-[1216px]:items-end gap-1.5 relative z-20 min-[1216px]:absolute min-[1216px]:top-2 min-[1216px]:right-6 min-[1216px]:w-auto min-[1216px]:max-w-none min-[1216px]:mx-0 min-[1216px]:px-0 min-[1216px]:mb-0 transition-all duration-700">
         <ClaudeUsage />
     </div>
     <main
@@ -28,9 +26,9 @@ import LoadingScreen from "../components/LoadingScreen.astro";
     >
 
         {/* Hero */}
-        <section class="glass-panel w-full grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 p-6 md:p-10 mt-4 md:mt-10 mb-16 md:mb-24">
-            <div class="md:col-span-3 flex flex-col items-center md:items-start gap-5">
-                <div class="w-32 h-32 md:w-48 md:h-48 rounded-2xl bg-[#111] border border-white/10 overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 shadow-[0_10px_30px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.12)]">
+        <section class="glass-panel w-full grid grid-cols-1 md:grid-cols-[12rem_minmax(0,1fr)] gap-8 md:gap-10 p-6 md:p-10 mt-0 md:mt-1 min-[1216px]:mt-5 mb-16 md:mb-24">
+            <div class="flex flex-row md:flex-col items-start justify-center md:justify-start gap-4 md:gap-5">
+                <div class="w-32 h-32 md:w-48 md:h-48 rounded-[var(--glass-radius)] bg-[#111] border border-white/10 overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 shadow-[0_10px_30px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.12)]">
                     <img
                         src="/images/agustin-diaz-cano-software-engineer-1.png"
                         alt="Agustin Diaz-Cano"
@@ -38,7 +36,7 @@ import LoadingScreen from "../components/LoadingScreen.astro";
                         class="w-full h-full object-cover"
                     />
                 </div>
-                <div class="flex items-center gap-6 text-[#888]">
+                <div class="flex flex-col md:flex-row items-center gap-5 md:gap-6 text-[#888]">
                     <a href="https://github.com/agustindiazcano" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="GitHub">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
                     </a>
@@ -50,7 +48,7 @@ import LoadingScreen from "../components/LoadingScreen.astro";
                     </a>
                 </div>
             </div>
-            <div class="md:col-span-9 flex flex-col justify-center text-center md:text-left">
+            <div class="min-w-0 flex flex-col justify-center text-center md:text-left">
                 <h2 class="font-display text-3xl md:text-5xl font-medium text-white tracking-tight mb-5">Agustin Diaz-Cano</h2>
                 <p class="text-[#aaa] leading-relaxed mb-4">
                     Software Engineer and MS Candidate, Systems Engineering, at UTN, focused on Artificial Intelligence and Data Analysis.
@@ -75,13 +73,13 @@ import LoadingScreen from "../components/LoadingScreen.astro";
                     {featured.map((item) => (
                         <a
                             href={item.href}
-                            class="featured-card group relative shrink-0 snap-start aspect-[316/200] w-[calc((100%-1rem)/2)] md:w-[calc((100%-3rem)/4)] rounded-xl overflow-hidden border border-[#222] bg-[#111] hover:border-[#444] transition-colors"
+                            class="featured-card group relative shrink-0 snap-start aspect-[316/200] w-[calc((100%-1rem)/2)] md:w-[calc((100%-2rem)/3)] lg:w-[calc((100%-3rem)/4)] rounded-xl overflow-hidden border border-[#222] bg-[#111] hover:border-[#444] transition-colors"
                         >
                             <img src={item.image} alt={item.title} loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/55 to-transparent"></div>
                             <div class="absolute bottom-0 left-0 right-0 p-4">
                                 <span class="block text-[10px] font-mono uppercase tracking-wider text-[#999] mb-1">{item.label}</span>
-                                <span class="block text-sm md:text-base font-medium text-white leading-snug">{item.title}</span>
+                                <span class="block text-xs md:text-sm lg:text-base font-medium text-white leading-snug">{item.title}</span>
                             </div>
                         </a>
                     ))}
@@ -108,17 +106,17 @@ import LoadingScreen from "../components/LoadingScreen.astro";
                 <h2 id="news-title" class="font-display text-2xl text-white font-medium">News</h2>
                 <a href="/news" class="text-sm text-[#888] hover:text-white transition-colors">View all</a>
             </div>
-            <ul class="divide-y divide-[#222] border-y border-[#222]">
+            <ul class="glass-panel divide-y divide-white/10 px-4 md:px-6 py-1">
                 {news.slice(0, 5).map((item) => (
                     <li>
                         {item.href ? (
                             <a href={item.href} class="flex items-baseline gap-4 py-3 group">
-                                <span class="shrink-0 w-20 text-xs font-mono text-[#555]">{item.date}</span>
+                                <span class="shrink-0 w-20 text-xs font-mono text-[#efd98a]">{item.date}</span>
                                 <span class="min-w-0 flex-1 truncate text-sm md:text-base text-[#ccc] group-hover:text-white transition-colors">{item.title}</span>
                             </a>
                         ) : (
                             <div class="flex items-baseline gap-4 py-3">
-                                <span class="shrink-0 w-20 text-xs font-mono text-[#555]">{item.date}</span>
+                                <span class="shrink-0 w-20 text-xs font-mono text-[#efd98a]">{item.date}</span>
                                 <span class="min-w-0 flex-1 truncate text-sm md:text-base text-[#ccc]">{item.title}</span>
                             </div>
                         )}
@@ -133,11 +131,11 @@ import LoadingScreen from "../components/LoadingScreen.astro";
                 <h2 id="blog-title" class="font-display text-2xl text-white font-medium">Blog</h2>
                 <a href="/writing" class="text-sm text-[#888] hover:text-white transition-colors">View all</a>
             </div>
-            <ul class="divide-y divide-[#222] border-y border-[#222]">
+            <ul class="glass-panel divide-y divide-white/10 px-4 md:px-6 py-1">
                 {posts.slice(0, 5).map((post) => (
                     <li>
                         <a href={`/writing/${post.slug}`} class="flex items-baseline gap-4 py-3 group">
-                            <span class="shrink-0 w-20 text-xs font-mono text-[#555]">{post.date}</span>
+                            <span class="shrink-0 w-20 text-xs font-mono text-[#efd98a]">{post.date}</span>
                             <span class="min-w-0 flex-1 truncate text-sm md:text-base text-[#ccc] group-hover:text-white transition-colors">{post.title}</span>
                         </a>
                     </li>
@@ -151,7 +149,7 @@ import LoadingScreen from "../components/LoadingScreen.astro";
                 <h2 id="projects-title" class="font-display text-2xl text-white font-medium">Projects</h2>
                 <a href="/projects" class="text-sm text-[#888] hover:text-white transition-colors">View all</a>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {projects.slice(0, 8).map((project) => (
                     <a
                         href={`/projects/${project.slug}`}
@@ -162,9 +160,9 @@ import LoadingScreen from "../components/LoadingScreen.astro";
                         ) : (
                             <div class="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-[#111] opacity-60"></div>
                         )}
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/55 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-4">
-                            <span class="block text-sm md:text-base font-medium text-white leading-snug line-clamp-3">{project.title}</span>
+                            <span class="block text-xs md:text-sm lg:text-base font-medium text-white leading-snug line-clamp-3">{project.title}</span>
                         </div>
                     </a>
                 ))}
@@ -221,7 +219,7 @@ import LoadingScreen from "../components/LoadingScreen.astro";
             /* Profile hero: frosted glass (Apple-style) blended with soft neumorphic depth */
             .glass-panel {
                 position: relative;
-                border-radius: 1.75rem;
+                border-radius: var(--glass-radius);
                 background:
                     linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.015) 50%, rgba(255, 255, 255, 0.035)),
                     rgba(8, 8, 10, 0.78);
@@ -243,7 +241,7 @@ import LoadingScreen from "../components/LoadingScreen.astro";
                 pointer-events: none;
                 background:
                     radial-gradient(120% 70% at 0% 0%, rgba(255, 255, 255, 0.13), transparent 55%),
-                    radial-gradient(80% 60% at 100% 100%, rgba(255, 166, 71, 0.07), transparent 60%);
+                    radial-gradient(80% 60% at 100% 100%, rgba(239, 217, 138, 0.07), transparent 60%);
             }
             .glass-panel > * {
                 position: relative;
@@ -262,7 +260,7 @@ import LoadingScreen from "../components/LoadingScreen.astro";
                 display: none;
             }
             .featured-dot.is-active {
-                background-color: #ffa647;
+                background-color: #efd98a;
                 width: 1.25rem;
             }
             .fade-in {

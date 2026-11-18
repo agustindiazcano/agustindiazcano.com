@@ -29,6 +29,8 @@
    (same effect as browser zoom). Tune the factors here. */
 :root {
   --ui-zoom: 1;
+  /* Corner radius of the glass elements (hero panel, nav buttons, usage panel). 0 = sharp, 0.5rem = slightly rounded, 1rem = soft. */
+  --glass-radius: 0.5rem;
 }
 
 @media (min-width: 1800px) {
@@ -71,10 +73,10 @@ html {
   transition: background 0.2s;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #ffa647, #e0701a);
+  background: linear-gradient(180deg, #efd98a, #d9c070);
 }
 ::-webkit-scrollbar-thumb:active {
-  background: #ffa647;
+  background: #efd98a;
 }
 ::-webkit-scrollbar-corner {
   background: #1a1a1a;
