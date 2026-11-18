@@ -10,7 +10,7 @@
 
 ## About
 
-Software Engineer | Python Developer with 4+ years of experience in software development, specializing in AI/ML and Backend Development (Python).
+6+ years building software and 4+ years shipping production systems across 10+ large-scale platforms used by hundreds of thousands of users across Europe and Latin America. From 2021 to 2025, I worked on full-stack development, insurtech calculation engines, e-commerce platforms, and automated E2E CI/CD pipelines, and reviewed 4,000+ full-stack student projects as a Technical Code Reviewer. Since 2025, I've focused on AI and backend development.
 
 I'm currently an MS Candidate, Systems Engineering, at UTN, focused on Artificial Intelligence and Data Analysis. My thesis investigates LLM-guided reinforcement learning for legged robot navigation, benchmarked in MuJoCo and grid-based environments. My technical focus is building backend architectures that integrate GenAI in production-realistic conditions, not just prototypes. I'm developing projects with Python, Retrieval-Augmented Generation (RAG), and the Model Context Protocol (MCP) to explore LLM orchestration and AI agent design.
 

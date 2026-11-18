@@ -85,14 +85,6 @@ export const projects: Project[] = [
             githubUrl: null
         },
         {
-            title: "Go Async Order Processor",
-            slug: "go-async-order-processor",
-            description: "High-throughput asynchronous order processing engine built with Go.",
-            tags: ["Backend", "Go", "Concurrency"],
-            year: "2021",
-            githubUrl: "https://github.com/agustindiazcano/go-async-order-processor"
-        },
-        {
             title: "Game Dev: Modding",
             slug: "game-dev-modding",
             image: "/images/images-projects/zombie-mod/call-to-arms-zombie-mod-1.png",

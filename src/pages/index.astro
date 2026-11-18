@@ -26,7 +26,7 @@ import LoadingScreen from "../components/LoadingScreen.astro";
     >
 
         {/* Hero */}
-        <section class="glass-panel usage-attached w-full grid grid-cols-1 md:grid-cols-[12rem_minmax(0,1fr)] gap-8 md:gap-10 p-6 md:p-10 mt-0 mb-16 md:mb-24">
+        <section class="glass-panel usage-attached w-full grid grid-cols-1 md:grid-cols-[12rem_minmax(0,1fr)] gap-8 md:gap-10 p-6 md:p-10 mt-0 mb-10 md:mb-16">
             <div class="flex flex-row md:flex-col items-center md:items-start justify-center md:justify-start gap-9 md:gap-5">
                 <div class="w-32 h-32 md:w-48 md:h-48 rounded-[var(--glass-radius)] bg-[#111] border border-white/10 overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 shadow-[0_10px_30px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.12)]">
                     <img
@@ -49,13 +49,21 @@ import LoadingScreen from "../components/LoadingScreen.astro";
                 </div>
             </div>
             <div class="min-w-0 flex flex-col justify-center text-center md:text-left">
-                <h2 class="font-display text-3xl md:text-5xl font-medium text-white tracking-tight mb-5">Agustin Diaz-Cano</h2>
+                <h2 class="hidden md:block font-display text-3xl md:text-[2.875rem] md:leading-tight font-medium text-white tracking-tight mb-5">Agustin Diaz-Cano</h2>
                 <p class="text-[#aaa] leading-relaxed mb-4">
-                    Software Engineer and MS Candidate, Systems Engineering, at UTN, focused on Artificial Intelligence and Data Analysis.
+                    MS Candidate, Systems Engineering, at <a href="https://frba.utn.edu.ar/" target="_blank" rel="noopener noreferrer" class="text-white underline decoration-white/30 underline-offset-4 hover:decoration-white transition-colors duration-500">UTN</a>, focused on AI and full stack development.
                 </p>
-                <p class="text-[#888] leading-relaxed">
-                    I build backend architectures that integrate GenAI in production-realistic conditions, not just prototypes, working with Python, Retrieval-Augmented Generation (RAG) and the Model Context Protocol (MCP) to explore LLM orchestration and AI agent design.
+                <p id="hero-bio" class="hero-bio is-collapsed text-[#888] leading-relaxed">
+                    6+ years building software and 4+ years shipping production systems across 10+ large-scale platforms used by hundreds of thousands of users across Europe and Latin America.
                 </p>
+                {/* Mobile only: the long paragraph is collapsed and toggled */}
+                <button
+                    id="hero-bio-toggle"
+                    type="button"
+                    class="md:hidden mt-3 self-center text-sm text-white/80 hover:text-white underline decoration-white/30 underline-offset-4 transition-colors duration-500 cursor-pointer"
+                    aria-expanded="false"
+                    aria-controls="hero-bio"
+                >Read more</button>
             </div>
         </section>
 
@@ -213,6 +221,19 @@ import LoadingScreen from "../components/LoadingScreen.astro";
                 update();
             }
             document.addEventListener('astro:page-load', setupFeaturedCarousel);
+            function setupHeroBio() {
+                const bio = document.getElementById('hero-bio');
+                const btn = document.getElementById('hero-bio-toggle');
+                if (!bio || !btn || btn.dataset.bound) return;
+                btn.dataset.bound = 'true';
+                btn.addEventListener('click', () => {
+                    const collapsed = bio.classList.toggle('is-collapsed');
+                    btn.textContent = collapsed ? 'Read more' : 'Show less';
+                    btn.setAttribute('aria-expanded', String(!collapsed));
+                });
+            }
+            document.addEventListener('astro:page-load', setupHeroBio);
+
         </script>
 
         <style>
@@ -249,6 +270,15 @@ import LoadingScreen from "../components/LoadingScreen.astro";
             @media (max-width: 767px) {
                 .glass-panel.usage-attached {
                     border-top-right-radius: 0;
+                }
+            }
+            /* Mobile: collapse the long paragraph to 3 lines until toggled */
+            @media (max-width: 767px) {
+                .hero-bio.is-collapsed {
+                    display: -webkit-box;
+                    -webkit-line-clamp: 3;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
                 }
             }
             .featured-track {
