@@ -27,7 +27,8 @@ import LoadingScreen from "../components/LoadingScreen.astro";
     >
 
         {/* Hero */}
-        <section class="glass-panel usage-attached w-full grid grid-cols-1 md:grid-cols-[12rem_minmax(0,1fr)] gap-8 md:gap-10 p-6 md:p-10 mt-0 mb-10 md:mb-16">
+        <div class="w-full grid grid-cols-1 min-[1100px]:grid-cols-[minmax(0,1fr)_15rem] gap-4 mt-0 mb-10 md:mb-16">
+        <section class="glass-panel usage-attached grid grid-cols-1 md:grid-cols-[12rem_minmax(0,1fr)] gap-8 md:gap-10 p-6 md:p-10">
             <div class="flex flex-row md:flex-col items-center md:items-start justify-center md:justify-start gap-9 md:gap-5">
                 <div class="w-32 h-32 md:w-48 md:h-48 rounded-[var(--glass-radius)] bg-[#111] border border-white/10 overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 shadow-[0_10px_30px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.12)]">
                     <img
@@ -68,8 +69,28 @@ import LoadingScreen from "../components/LoadingScreen.astro";
             </div>
         </section>
 
+        {/* Right container: quick buttons to the sections of this page */}
+        <aside class="glass-panel p-5 flex flex-col gap-3" aria-label="Sections of this page">
+            <span class="font-mono text-[10px] uppercase tracking-wider text-[#888]">Sections</span>
+            <nav class="flex flex-row flex-wrap min-[1100px]:flex-col gap-2">
+                {[
+                    ["Featured Projects", "#featured"],
+                    ["Highlights", "#highlights"],
+                    ["News", "#news"],
+                    ["Blog", "#blog"],
+                    ["Projects", "#projects"],
+                ].map(([label, href]) => (
+                    <a href={href} class="section-btn">
+                        <span>{label}</span>
+                        <span aria-hidden="true">&darr;</span>
+                    </a>
+                ))}
+            </nav>
+        </aside>
+        </div>
+
         {/* Featured carousel */}
-        <section class="w-full mb-16 md:mb-24" aria-labelledby="featured-title">
+        <section class="w-full mb-16 md:mb-24 scroll-mt-6" id="featured" aria-labelledby="featured-title">
             <div class="flex items-baseline justify-between mb-5">
                 <h2 id="featured-title" class="font-display text-2xl text-white font-medium">Featured Projects</h2>
                 <a href="/projects" class="text-sm text-[#888] hover:text-white transition-colors">All projects</a>
@@ -110,7 +131,7 @@ import LoadingScreen from "../components/LoadingScreen.astro";
         </section>
 
         {/* Highlights */}
-        <section class="w-full mb-16" aria-labelledby="highlights-title">
+        <section class="w-full mb-16 scroll-mt-6" id="highlights" aria-labelledby="highlights-title">
             <div class="flex items-baseline justify-between mb-5">
                 <h2 id="highlights-title" class="font-display text-2xl text-white font-medium">Highlights</h2>
                 <a href="/rankings" class="text-sm text-[#888] hover:text-white transition-colors">View all</a>
@@ -132,7 +153,7 @@ import LoadingScreen from "../components/LoadingScreen.astro";
         </section>
 
         {/* News */}
-        <section class="w-full mb-16" aria-labelledby="news-title">
+        <section class="w-full mb-16 scroll-mt-6" id="news" aria-labelledby="news-title">
             <div class="flex items-baseline justify-between mb-5">
                 <h2 id="news-title" class="font-display text-2xl text-white font-medium">News</h2>
                 <a href="/news" class="text-sm text-[#888] hover:text-white transition-colors">View all</a>
@@ -157,7 +178,7 @@ import LoadingScreen from "../components/LoadingScreen.astro";
         </section>
 
         {/* Blog */}
-        <section class="w-full mb-16" aria-labelledby="blog-title">
+        <section class="w-full mb-16 scroll-mt-6" id="blog" aria-labelledby="blog-title">
             <div class="flex items-baseline justify-between mb-5">
                 <h2 id="blog-title" class="font-display text-2xl text-white font-medium">Blog</h2>
                 <a href="/writing" class="text-sm text-[#888] hover:text-white transition-colors">View all</a>
@@ -175,7 +196,7 @@ import LoadingScreen from "../components/LoadingScreen.astro";
         </section>
 
         {/* Projects */}
-        <section class="w-full mb-16" aria-labelledby="projects-title">
+        <section class="w-full mb-16 scroll-mt-6" id="projects" aria-labelledby="projects-title">
             <div class="flex items-baseline justify-between mb-5">
                 <h2 id="projects-title" class="font-display text-2xl text-white font-medium">Projects</h2>
                 <a href="/projects" class="text-sm text-[#888] hover:text-white transition-colors">View all</a>
@@ -303,6 +324,29 @@ import LoadingScreen from "../components/LoadingScreen.astro";
                     -webkit-box-orient: vertical;
                     overflow: hidden;
                 }
+            }
+            /* Section buttons in the right hero container */
+            .section-btn {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.75rem;
+                padding: 0.6rem 0.85rem;
+                font-size: 0.875rem;
+                color: #b5b5b5;
+                border-radius: var(--glass-radius);
+                background-image: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.015) 50%, rgba(255, 255, 255, 0.035));
+                background-color: rgba(8, 8, 10, 0.78);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 -1px 0 rgba(0, 0, 0, 0.45), 6px 8px 18px rgba(0, 0, 0, 0.5);
+                transition: color 0.5s ease, background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+            }
+            .section-btn:hover,
+            .section-btn:focus-visible {
+                color: #ffffff;
+                background-color: rgba(52, 52, 60, 0.7);
+                border-color: rgba(255, 255, 255, 0.22);
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.26), inset 0 -1px 0 rgba(0, 0, 0, 0.45), 8px 12px 22px rgba(0, 0, 0, 0.55), 0 0 18px rgba(239, 217, 138, 0.3);
             }
             .featured-track {
                 scrollbar-width: none;

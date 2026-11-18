@@ -51,6 +51,12 @@
   }
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 html {
   zoom: var(--ui-zoom);
   /* Hidden hover popovers can extend past the viewport edge: never show a horizontal scrollbar */
