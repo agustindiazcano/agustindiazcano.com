@@ -1,10 +1,10 @@
 # Agustin Diaz-Cano - Software Engineer
 
 ## AI Agent Usage (Last 30 Days)
-- **Combined Total**: ~8.65 Billion tokens across 401 sessions (2026-10-27 to 2026-11-25).
-- **Per-Agent Breakdown**: Claude Code (~4.95B tokens, 102 sessions) | Antigravity (~2393.3M tokens, 218 sessions) | Codex (~712.1M tokens, 53 sessions) | Meta Muse (~583.6M tokens, 26 sessions) | Grok (~5.4M tokens, 2 sessions) | Cursor (server-side only, 0 local transcript sessions, no local token counters).
+- **Combined Total**: ~8.69 Billion tokens across 410 sessions (2026-10-28 to 2026-11-26).
+- **Per-Agent Breakdown**: Claude Code (~4.99B tokens, 105 sessions) | Antigravity (~2398.1M tokens, 224 sessions) | Codex (~712.1M tokens, 53 sessions) | Meta Muse (~583.6M tokens, 26 sessions) | Grok (~5.4M tokens, 2 sessions) | Cursor (server-side only, 0 local transcript sessions, no local token counters).
 - **Meta Muse API calls**: Direct API usage reported manually adds ~196.2M tokens (190.0M input, 6.2M output) on top of local Muse sessions; the figure lives in scripts/meta-muse-api-usage.json and must be updated when it changes.
-- **Reference Comparisons**: The combined count is approximately 170 months (~14.1 years) at 51M tokens/month, or 23 months (~1.9 years) at 380M tokens/month. It is numerically comparable to one month at the median rate for ~170 developers.
+- **Reference Comparisons**: The combined count is approximately 170 months (~14.2 years) at 51M tokens/month, or 23 months (~1.9 years) at 380M tokens/month. It is numerically comparable to one month at the median rate for ~170 developers.
 - **Dashboard**: [AI Usage dashboard](https://www.agustindiazcano.com/agents-usage) with the per-agent breakdown, Jellyfish token pyramid and AFAW methodology.
 - **Benchmark Source**: [Jellyfish Q1 2026 study](https://jellyfish.co/blog/is-tokenmaxxing-cost-effective-new-data-from-jellyfish-explains/) reported 51M tokens/month at the median and 380M at the 90th percentile among 12,000 developers at 200 companies. These are reference rates, not a global ranking; accounting methods and coverage may differ.
 
