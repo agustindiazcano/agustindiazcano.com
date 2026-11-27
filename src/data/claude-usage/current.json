@@ -1,7 +1,7 @@
 {
   "period": "10-29 to 11-27",
   "favoriteModel": "claude-sonnet-5-5",
-  "totalTokens": "5.11b",
+  "totalTokens": "5.14b",
   "sessions": 106,
   "activeDays": "28/30",
   "longestStreak": "21 days",
@@ -23,10 +23,10 @@
     "outputTokens": 13020490
   },
   "combined": {
-    "totalTokens": "8.81b",
+    "totalTokens": "8.84b",
     "sessions": 411
   },
-  "claudeTotalTokens": 5108889480,
+  "claudeTotalTokens": 5136518058,
   "metamuse": {
     "totalTokens": 583583791,
     "sessions": 26,
