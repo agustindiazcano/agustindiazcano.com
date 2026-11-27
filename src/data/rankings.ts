@@ -32,6 +32,15 @@ export const rankingTiers: RankingTier[] = [
         description: "Results evaluated by juries or platform-wide submission counts.",
         entries: [
             {
+                platform: "NASA Space Apps Challenge 2026 (Buenos Aires, Argentina)",
+                metric: "Impact Category Winner among 450+ participants",
+                detail: "Tango Horizon, a team of AI agents for astronaut EVA and rescue in a Mars simulation built on real NASA and USGS data. Host site: Universidad de Palermo.",
+                url: "https://github.com/agustindiazcano/nasa-mars-tango-horizon",
+                source: "github.com",
+                checked: "2026-11-27",
+                links: [{ label: "Project page", url: "/projects/tango-horizon" }],
+            },
+            {
                 platform: "Qollab x IonQ Global Quantum Hackathon (Argentina)",
                 metric: "1st place Quantum Impact (Industrial Application) and 3rd place overall",
                 detail: "QWind, a quantum optimizer for wind farms that I built and ran on IonQ Forte 1 hardware. Categories: Quantum Impact (Industrial Application), Quantum Unlocked (Educational), Quantum Playground (Games).",

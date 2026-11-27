@@ -13,6 +13,12 @@ export type NewsItem = NewsEntry & { slug: string };
 // Mock entries. Replace with real news; the home page shows the first 5 and /news lists all of them.
 const newsEntries: NewsEntry[] = [
     {
+        title: "Tango Horizon wins the Impact Category at NASA Space Apps Challenge Buenos Aires",
+        date: "Nov 2026",
+        description: "Impact Category Winner among 450+ participants in Buenos Aires, Argentina, for a multi-agent AI system for EVA and Mars exploration.",
+        href: "/projects/tango-horizon",
+    },
+    {
         title: "Quantum wind farm optimizer takes 1st place Quantum Impact at the Qollab x IonQ hackathon",
         date: "Nov 2026",
         description: "QWind, a quantum optimizer for wind farms, wins the Quantum Impact (Industrial Application) track.",

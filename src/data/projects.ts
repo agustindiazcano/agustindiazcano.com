@@ -68,8 +68,12 @@ const projectList: Project[] = [
                 "Rescue operation with rover and rescue robot",
                 "Rover and astronaut on the Martian surface"
             ],
-            description: "Multi-agent AI systems for robotics, vision and voice controls in a Mars simulation for extravehicular activity (EVA).",
-            tags: ["Robotics", "Vision", "Voice Controls", "Multi-Agent AI", "Mars Simulation"],
+            description: "Impact Category Winner at the NASA Space Apps Challenge 2026 (Buenos Aires, Argentina, 450+ participants). Multi-agent AI systems for robotics, vision and voice controls in a Mars simulation for extravehicular activity (EVA).",
+            body: [
+                "Tango Horizon won the Impact Category at the NASA Space Apps Challenge 2026 in Buenos Aires, Argentina, among 450+ participants. The host site was Universidad de Palermo, with support from NASA, CONAE and IBM Argentina.",
+                "It is a real-time 3D simulation of the Gale Crater built on real NASA and USGS terrain data, where astronauts work with a fleet of simulated robots. A team of AI agents understands spoken orders in five languages, coordinates rovers, drones and a rescue robot, monitors suit health, and a safety layer checks every action before it reaches a robot."
+            ],
+            tags: ["NASA Space Apps", "Robotics", "Vision", "Voice Controls", "Multi-Agent AI", "Mars Simulation"],
             year: "2026",
             githubUrl: "https://github.com/agustindiazcano/nasa-mars-tango-horizon",
             live: "https://tangohorizon.vercel.app/"

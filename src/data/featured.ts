@@ -14,7 +14,7 @@ export type FeaturedItem = {
 export const featured: FeaturedItem[] = [
     {
         title: "Multi-Agent AI Systems, Robotics & Mars Simulation",
-        label: "Robotics, Vision & Voice Controls",
+        label: "Impact Category Winner, NASA Space Apps Buenos Aires",
         image: "/images/images-projects/tango-horizon/1-tango-horizon-mars-base.png",
         href: "/projects/tango-horizon",
         github: "https://github.com/agustindiazcano/nasa-mars-tango-horizon",
