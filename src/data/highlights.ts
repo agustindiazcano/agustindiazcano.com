@@ -9,6 +9,12 @@ export type Highlight = {
 export const highlights: Highlight[] = [
     {
         year: "2026",
+        title: "NASA Space Apps Challenge, Buenos Aires",
+        result: "Impact Category Winner among 450+ participants",
+        href: "/competitions#tier-hackathons",
+    },
+    {
+        year: "2026",
         title: "Qollab x IonQ Global Quantum Hackathon",
         result: "1st place in Quantum Impact (industrial application) and 3rd place overall (Argentina)",
         href: "/competitions#tier-hackathons",
