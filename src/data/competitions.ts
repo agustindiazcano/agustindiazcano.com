@@ -1,6 +1,6 @@
 import type { RankingTier } from "./rankings";
 
-export const competitionsLastUpdated = "2026-11-07";
+export const competitionsLastUpdated = "2026-11-27";
 
 export const competitionTiers: RankingTier[] = [
     {
@@ -8,6 +8,22 @@ export const competitionTiers: RankingTier[] = [
         title: "Hackathons",
         description: "One entry per event, with results and verified participation.",
         entries: [
+            {
+                platform: "NASA Space Apps Challenge 2026 (Buenos Aires, Argentina)",
+                metric: "Impact Category Winner among 450+ participants",
+                detail: "Tango Horizon, a team of AI agents for astronaut EVA and rescue in a Mars simulation built on real NASA and USGS data. Host site: Universidad de Palermo.",
+                url: "https://www.spaceappschallenge.org/2026/find-a-team/tango-horizon/?tab=project",
+                source: "spaceappschallenge.org",
+                checked: "2026-11-27",
+                links: [
+                    { label: "Universidad de Palermo host site", url: "https://www.palermo.edu/ingenieria/2026/noviembre/up-sede-nasa-space-apps-challenge.html" },
+                    { label: "Universidad de Palermo video on Facebook", url: "https://www.facebook.com/universidaddepalermo/videos/as%C3%AD-se-vivi%C3%B3-el-nasa-space-apps-challenge-en-la-upla-universidad-de-palermo-fue-/1829309231323121/" },
+                    { label: "Instagram reel", url: "https://www.instagram.com/reels/DgH_go-JCgu/" },
+                    { label: "Post on X", url: "https://x.com/udepalermo/status/2125210609981456661" },
+                    { label: "Certificate", url: "https://github.com/agustindiazcano/nasa-mars-tango-horizon/blob/main/docs/media/impact-winner-certificate.jpeg" },
+                    { label: "Repository", url: "https://github.com/agustindiazcano/nasa-mars-tango-horizon" },
+                ],
+            },
             {
                 platform: "Qollab x IonQ Global Quantum Hackathon (Argentina)",
                 metric: "1st place Quantum Impact (Industrial Application) and 3rd place overall",

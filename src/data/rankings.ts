@@ -16,7 +16,7 @@ export type RankingTier = {
     entries: RankingEntry[];
 };
 
-export const rankingsLastUpdated = "2026-11-07";
+export const rankingsLastUpdated = "2026-11-27";
 
 /**
  * Only entries with a verifiable external source belong here.
@@ -38,7 +38,13 @@ export const rankingTiers: RankingTier[] = [
                 url: "https://github.com/agustindiazcano/nasa-mars-tango-horizon",
                 source: "github.com",
                 checked: "2026-11-27",
-                links: [{ label: "Project page", url: "/projects/tango-horizon" }],
+                links: [
+                    { label: "Project page", url: "/projects/tango-horizon" },
+                    { label: "Universidad de Palermo host site", url: "https://www.palermo.edu/ingenieria/2026/noviembre/up-sede-nasa-space-apps-challenge.html" },
+                    { label: "Instagram reel", url: "https://www.instagram.com/reels/DgH_go-JCgu/" },
+                    { label: "Post on X", url: "https://x.com/udepalermo/status/2125210609981456661" },
+                    { label: "Certificate", url: "https://github.com/agustindiazcano/nasa-mars-tango-horizon/blob/main/docs/media/impact-winner-certificate.jpeg" },
+                ],
             },
             {
                 platform: "Qollab x IonQ Global Quantum Hackathon (Argentina)",
